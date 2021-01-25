@@ -32,11 +32,12 @@ public class TestRNG implements TestInterface{
 	/*
 	not sure what AssertEqual I should test in an RNG case
 	*/
-	@Test
-	public void testInterval() {
-		fail("Not yet implemented");
-		
-	}
+	
+	/*
+	 * @Test public void testInterval() { fail("Not yet implemented");
+	 * 
+	 * }
+	 */
 	
 	@Test
 	public void testNullParamList() {

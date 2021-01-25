@@ -18,8 +18,6 @@ final public class RNG extends Operation{
 		// TODO Auto-generated constructor stub
 	}
 
-	Random rng;
-
 	@Override
 	protected int op(int max, int min) {
 		// TODO Auto-generated method stub
