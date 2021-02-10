@@ -9,8 +9,7 @@ import io.cucumber.java.en.When;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.fail;
+import static junit.framework.TestCase.*;
 
 public class CalculatorSteps {
 
@@ -110,7 +109,23 @@ public class CalculatorSteps {
 		//so we complete its parameter list here:
 		op.addMoreParams(params);
 		assertEquals(val, c.eval(op));
+	}
 
+	@When("I provide {int} and {int} for division")
+	public void whenIProvideAndForDivision(int val1, int val2){
+		params.add(new MyNumber(val1));
+		params.add(new MyNumber(val2));
+	}
+
+	@Then("the operation handles arithmetic error")
+	public void thenTheOperationHandlesArithmeticError(){
+		op.addMoreParams(params);
+		try{
+			c.eval(op);
+		}catch (ArithmeticException e){
+			fail();
+		}
+		assertTrue(true);
 	}
 
 }

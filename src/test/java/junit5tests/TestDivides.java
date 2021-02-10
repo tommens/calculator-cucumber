@@ -8,6 +8,7 @@ import calculator.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class TestDivides {
@@ -31,6 +32,21 @@ public class TestDivides {
 	public void testConstructor1() {
 		// It should not be possible to create an expression without null parameter list
 		assertThrows(IllegalConstruction.class, () -> op = new Divides(null));
+	}
+
+	@Test
+	public void divisionZero(){
+		//It should handle division by zero
+		try {
+			Calculator c = new Calculator();
+			List<Expression> col = new ArrayList<>();
+			Collections.addAll(col, new MyNumber(8), new MyNumber(0));
+			Expression e = new Divides(col, Notation.POSTFIX);
+			assertDoesNotThrow(() -> c.eval(e));
+		}catch (IllegalConstruction e){
+			e.printStackTrace();
+		}
+
 	}
 
 	@SuppressWarnings("AssertBetweenInconvertibleTypes")

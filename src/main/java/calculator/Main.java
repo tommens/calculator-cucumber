@@ -45,7 +45,7 @@ public class Main {
 		c.eval(e);
 
 		List<Expression> params4 = new ArrayList<>();
-		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
+		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(0));
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);

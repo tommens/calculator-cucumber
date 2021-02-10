@@ -53,6 +53,11 @@ Feature: Integer Arithmetic Expressions
     And the difference is 4
     And the quotient is 2
 
+  Scenario: Division By Zero
+    Given an integer operation '/'
+    When I provide 8 and 0 for division
+    Then the operation handles arithmetic error
+
   # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
   # The scenario will be executed with each of the provided inputs.

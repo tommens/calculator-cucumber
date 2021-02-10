@@ -27,7 +27,11 @@ public class Evaluator extends Visitor {
         int temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
-            temp = o.op(temp,evaluatedArgs.get(counter));
+            try{
+                temp = o.op(temp,evaluatedArgs.get(counter));
+            }catch (ArithmeticException e) {
+                System.err.println("There is an arithmetic exception handled");
+            }
         }
         // store the accumulated result
         computedValue = temp;
