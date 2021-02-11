@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.Stringator;
 
 public class Calculator {
 
@@ -13,18 +14,26 @@ public class Calculator {
      public Expression read(String s)
     */
 
-    public void print(Expression e) {
-        System.out.println("The result of evaluating expression " + e);
+    public void print(Expression e, Notation notation) {
+        System.out.println("The result of evaluating expression " + convertToString(e, notation));
         System.out.println("is: " + eval(e) + ".");
         System.out.println();
     }
 
-    public void printExpressionDetails(Expression e) {
-        print(e);
+    public void print(Expression e){
+        print(e, Notation.INFIX);
+    }
+
+    public void printExpressionDetails(Expression e, Notation notation) {
+        print(e,notation);
         System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
         System.out.print(e.countOps() + " operations");
         System.out.println(" and " + e.countNbs() + " numbers.");
         System.out.println();
+    }
+
+    public void printExpressionDetails(Expression e) {
+        printExpressionDetails(e,Notation.INFIX);
     }
 
     public int eval(Expression e) {
@@ -34,6 +43,11 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    public String convertToString(Expression e, Notation notation){
+        Stringator s=new Stringator();
+        return s.getString(e, notation);
     }
 
     /*

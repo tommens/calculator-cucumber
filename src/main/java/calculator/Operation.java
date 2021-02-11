@@ -56,7 +56,7 @@ public abstract class Operation implements Expression
 	return 1 + args.stream()
 			   .mapToInt(Expression::countDepth)
 			   .max()
-			   .getAsInt();  
+			   .getAsInt();
   }
 
   final public Integer countOps() {
@@ -73,29 +73,6 @@ public abstract class Operation implements Expression
 			   .mapToInt(Expression::countNbs)
 			   .reduce(Integer::sum)
 			   .getAsInt();  
-  }
-
-  @Override
-  final public String toString() {
-  	return toString(notation);
-  }
-
-  final public String toString(Notation n) {
-   Stream<String> s = args.stream().map(Object::toString);
-   switch (n) {
-	   case INFIX: return "( " +
-			              s.reduce((s1,s2) -> s1 + " " + symbol + " " + s2).get() +
-			              " )";
-	   case PREFIX: return symbol + " " +
-			               "(" +
-			               s.reduce((s1,s2) -> s1 + ", " + s2).get() +
-			               ")";
-	   case POSTFIX: return "(" +
-			                s.reduce((s1,s2) -> s1 + ", " + s2).get() +
-			                ")" +
-			                " " + symbol;
-	   default: return "This case should never occur.";
-	  }
   }
 
 	//Two Operation expressions are equal if their list of arguments is equal and they are the same operation
@@ -122,4 +99,7 @@ public abstract class Operation implements Expression
 		return result;
 	}
 
+	public String getSymbol() {
+		return symbol;
+	}
 }

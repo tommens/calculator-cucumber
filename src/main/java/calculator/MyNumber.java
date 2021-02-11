@@ -29,11 +29,6 @@ public class MyNumber implements Expression
 	  return 1;
   }
 
-  @Override
-  public String toString() {
-	  return Integer.toString(value);
-  }
-
   //Two MyNumber expressions are equal if the values they contain are equal
   @Override
   public boolean equals(Object o) {
