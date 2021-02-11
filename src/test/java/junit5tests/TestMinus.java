@@ -17,11 +17,11 @@ public class TestMinus {
     private final int value2 = 6;
     private Minus op;
     private List<Expression> params;
-    private Stringator s;
+    private Calculator c;
 
     @BeforeEach
     public void setUp() {
-        s = new Stringator();
+        c = new Calculator();
         params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
         try { op = new Minus(params); }
         catch(IllegalConstruction e) { fail(); }
@@ -96,25 +96,19 @@ public class TestMinus {
     @Test
     public void testPrefix() {
         String prefix = "- (" + value1 + ", " + value2 + ")";
-        assertEquals(prefix, s.getString(op, Notation.PREFIX));
-        op.notation = Notation.PREFIX;
-        assertEquals(prefix, op.toString());
+        assertEquals(prefix, c.convertToString(op, Notation.PREFIX));
     }
 
     @Test
     public void testInfix() {
         String infix = "( " + value1 + " - " + value2 + " )";
-        assertEquals(infix, s.getString(op, Notation.INFIX));
-        op.notation = Notation.INFIX;
-        assertEquals(infix, op.toString());
+        assertEquals(infix, c.convertToString(op, Notation.INFIX));
     }
 
     @Test
     public void testPostfix() {
         String postfix = "(" + value1 + ", " + value2 + ") -";
-        assertEquals(postfix, s.getString(op, Notation.POSTFIX));
-        op.notation = Notation.POSTFIX;
-        assertEquals(postfix, op.toString());
+        assertEquals(postfix, c.convertToString(op, Notation.POSTFIX));
     }
 
 }

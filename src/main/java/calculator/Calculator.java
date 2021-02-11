@@ -40,7 +40,11 @@ public class Calculator {
         // create a new visitor to evaluate expressions
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
-        e.accept(v);
+        try {
+            e.accept(v);
+        }catch (DivisionByZero d){
+            System.err.println("\nDivision by Zero in : \"" + this.convertToString(e, Notation.INFIX) + "\"");
+        }
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }

@@ -44,7 +44,7 @@ public abstract class Operation implements Expression
   	args.addAll(params);
   }
 
-  public void accept(Visitor v) {
+  public void accept(Visitor v) throws DivisionByZero{
   	// ask each of the argument expressions of the current operation to accept the visitor
   	for(Expression a:args) { a.accept(v); }
   	// and then visit the current operation itself

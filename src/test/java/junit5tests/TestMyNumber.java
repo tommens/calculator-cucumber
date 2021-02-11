@@ -53,7 +53,7 @@ public class TestMyNumber {
 
 	@Test
 	public void testToString() {
-		assertEquals(Integer.toString(value), number.toString());
+		assertEquals(Integer.toString(value), number.getValue().toString());
 	}
 
 }
