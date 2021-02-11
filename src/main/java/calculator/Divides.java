@@ -19,6 +19,9 @@ final public class Divides extends Operation
   
   public int op(int l, int r)
     {
+    	if (r==0){
+    		throw new DivisionByZero();
+		}
     	return (l/r);
     }
 }

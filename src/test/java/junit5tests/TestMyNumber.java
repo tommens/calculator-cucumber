@@ -1,20 +1,27 @@
 package junit5tests;
 
 //Import Junit5 libraries for unit testing:
-import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.*;
-import org.junit.jupiter.api.*;
+import calculator.Calculator;
+import calculator.IllegalConstruction;
+import calculator.MyNumber;
+import calculator.Times;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TestMyNumber {
 
-	private final int value =8;
+	private final int value = 8;
 	private MyNumber number;
-	
+	Calculator c;
+
 	@BeforeEach
 	public void setUp() {
+		c = new Calculator();
 		number = new MyNumber(value);
 	}
 
@@ -36,24 +43,24 @@ public class TestMyNumber {
 	@Test
 	public void testCountDepth() {
 		//test whether a number has zero depth (i.e. no nested expressions)
-		assertEquals(Integer.valueOf(0), number.countDepth());
+		assertEquals(Integer.valueOf(0), c.count(number).getCountDepth());
 	}
 
 	@Test
 	public void testCountOps() {
 		//test whether a number contains zero operations
-		assertEquals(Integer.valueOf(0), number.countOps());
+		assertEquals(Integer.valueOf(0), c.count(number).getCountOps());
 	}
 
 	@Test
 	public void testCountNbs() {
 		//test whether a number contains 1 number
-		assertEquals(Integer.valueOf(1), number.countNbs());
+		assertEquals(Integer.valueOf(1), c.count(number).getCountNbs());
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals(Integer.toString(value), number.toString());
+		assertEquals(Integer.toString(value), number.getValue().toString());
 	}
 
 }

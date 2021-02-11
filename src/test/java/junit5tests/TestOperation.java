@@ -14,9 +14,11 @@ public class TestOperation {
 
 	private Operation o;
 	private Operation o2;
+	private Calculator c;
 
 	@BeforeEach
 	public void setUp() throws Exception {
+		c=new Calculator();
 		List<Expression> params1 =
 				new ArrayList<>(Arrays.asList(new MyNumber(3), new MyNumber(4), new MyNumber(5)));
 		List<Expression> params2 =
@@ -34,17 +36,17 @@ public class TestOperation {
 
 	@Test
 	public void testCountDepth() {
-		assertEquals(Integer.valueOf(2), o.countDepth());
+		assertEquals(Integer.valueOf(2), c.count(o).getCountDepth());
 	}
 
 	@Test
 	public void testCountOps() {
-		assertEquals(Integer.valueOf(3), o.countOps());
+		assertEquals(Integer.valueOf(3), c.count(o).getCountOps());
 	}
 
 	@Test
 	public void testCountNbs() {
-		assertEquals(Integer.valueOf(6), o.countNbs());
+		assertEquals(Integer.valueOf(6), c.count(o).getCountNbs());
 	}
 
 }

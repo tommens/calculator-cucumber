@@ -1,8 +1,6 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Operation;
+import calculator.*;
 
 import java.util.ArrayList;
 
@@ -16,7 +14,7 @@ public class Evaluator extends Visitor {
         computedValue = n.getValue();
     }
 
-    public void visit(Operation o) {
+    public void visit(Operation o) throws DivisionByZero{
         ArrayList<Integer> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
@@ -27,11 +25,7 @@ public class Evaluator extends Visitor {
         int temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
-            try{
-                temp = o.op(temp,evaluatedArgs.get(counter));
-            }catch (ArithmeticException e) {
-                System.err.println("There is an arithmetic exception handled");
-            }
+            temp = o.op(temp,evaluatedArgs.get(counter));
         }
         // store the accumulated result
         computedValue = temp;
