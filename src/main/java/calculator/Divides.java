@@ -18,5 +18,7 @@ final public class Divides extends Operation
     }
   
   public int op(int l, int r)
-    { return (l/r); }
+    {
+    	return (l/r);
+    }
 }
