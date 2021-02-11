@@ -9,15 +9,9 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import static calculator.Notation.INFIX;
-
 public class Stringator extends Visitor{
     private String toStringValue;
     private Notation notation;
-
-    public /*constructor*/ Stringator() {
-        this.notation = INFIX;
-    }
 
     public String getString(Expression e, Notation notation){
         this.notation=notation;
