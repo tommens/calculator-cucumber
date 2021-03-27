@@ -7,14 +7,15 @@ import calculator.*;
 import org.junit.jupiter.api.*;
 import visitor.Stringator;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TestTimes {
 
-    private final int value1 = 8;
-    private final int value2 = 6;
+    private final BigInteger value1 = new BigInteger("8");
+    private final BigInteger value2 = new BigInteger("6");
     private Times op;
     private List<Expression> params;
     private Calculator c;

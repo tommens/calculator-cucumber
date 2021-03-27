@@ -1,10 +1,8 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -21,7 +19,12 @@ public class Stringator extends Visitor{
 
     @Override
     public void visit(MyNumber n) {
-        toStringValue=Integer.toString(n.getValue());
+        toStringValue= n.getValue().toString();
+    }
+
+    @Override
+    public void visit(Converter c) {
+        toStringValue= c.getValue().toString();
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import calculator.*;
 import visitor.Evaluator;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class TestEvaluator {
@@ -14,15 +15,15 @@ public class TestEvaluator {
     @SuppressWarnings("unused")
     private Evaluator visitor;
     private Calculator calc;
-    private int value1, value2;
+    private BigInteger value1, value2;
     private Expression op;
 
     @BeforeEach
     public void setUp() {
         visitor = new Evaluator();
         calc = new Calculator();
-        value1 = 8;
-        value2 = 6;
+        value1 = new BigInteger("8");
+        value2 = new BigInteger("6");
     }
 
     @Test
@@ -34,7 +35,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorDivides() {
         try { op = new Divides(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-          assertEquals( value1 / value2,
+          assertEquals( value1.divide(value2),
                         calc.eval(op) );
           }
         catch(IllegalConstruction e) {
@@ -45,7 +46,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorPlus() {
         try { op = new Plus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1 + value2,
+            assertEquals( value1.add(value2),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -56,7 +57,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorMinus() {
         try { op = new Minus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1 - value2,
+            assertEquals( value1.subtract(value2),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -67,7 +68,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorTimes() {
         try { op = new Times(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1 * value2,
+            assertEquals( value1.multiply(value2),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {

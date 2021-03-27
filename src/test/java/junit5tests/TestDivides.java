@@ -8,6 +8,7 @@ import calculator.*;
 import visitor.Stringator;
 import visitor.Visitor;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class TestDivides {
 
-    private final int value1 = 8;
-    private final int value2 = 6;
+    private final BigInteger value1 = new BigInteger("8");
+    private final BigInteger value2 = new BigInteger("6");
     private Divides op;
     private List<Expression> params;
     private Calculator c;
@@ -43,7 +44,7 @@ public class TestDivides {
         //It should handle division by zero
         try {
             List<Expression> col = new ArrayList<>();
-            Collections.addAll(col, new MyNumber(8), new MyNumber(0));
+            Collections.addAll(col, new MyNumber(new BigInteger("8")), new MyNumber(new BigInteger("0")));
             Expression e = new Divides(col, Notation.POSTFIX);
             try {
                 c.eval(e);

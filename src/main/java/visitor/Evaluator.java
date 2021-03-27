@@ -2,27 +2,31 @@ package visitor;
 
 import calculator.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Evaluator extends Visitor {
 
-    private int computedValue;
+    private BigInteger computedValue;
 
-    public Integer getResult() { return computedValue; }
+    public BigInteger getResult() { return computedValue; }
 
     public void visit(MyNumber n) {
         computedValue = n.getValue();
     }
+    public void visit(Converter c) {
+        computedValue = c.getValue();
+    }
 
     public void visit(Operation o) throws DivisionByZero{
-        ArrayList<Integer> evaluatedArgs = new ArrayList<>();
+        ArrayList<BigInteger> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
         //second loop to accummulate all the evaluated subresults
-        int temp = evaluatedArgs.get(0);
+        BigInteger temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             temp = o.op(temp,evaluatedArgs.get(counter));

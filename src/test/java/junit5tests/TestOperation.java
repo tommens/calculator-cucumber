@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import calculator.*;
 import org.junit.jupiter.api.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +21,11 @@ public class TestOperation {
 	public void setUp() throws Exception {
 		c=new Calculator();
 		List<Expression> params1 =
-				new ArrayList<>(Arrays.asList(new MyNumber(3), new MyNumber(4), new MyNumber(5)));
+				new ArrayList<>(Arrays.asList(new MyNumber(new BigInteger("3")), new MyNumber(new BigInteger("4")), new MyNumber(new BigInteger("5"))));
 		List<Expression> params2 =
-				new ArrayList<>(Arrays.asList(new MyNumber(5), new MyNumber(4)));
+				new ArrayList<>(Arrays.asList(new MyNumber(new BigInteger("5")), new MyNumber(new BigInteger("4"))));
 		List<Expression> params3 =
-				new ArrayList<>(Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(7)));
+				new ArrayList<>(Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(new BigInteger("7"))));
 		o = new Divides(params3);
 		o2 = new Divides(params3);
 	}

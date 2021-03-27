@@ -1,15 +1,16 @@
 package calculator;
 
 import visitor.Visitor;
+import java.math.BigInteger;
 
 public class MyNumber implements Expression {
-    private final int value;
+    private final BigInteger value;
 
-    public /*constructor*/ MyNumber(int v) {
+    public /*constructor*/ MyNumber(BigInteger v) {
         value = v;
     }
 
-    public Integer getValue() {
+    public BigInteger getValue() {
         return value;
     }
 
@@ -40,7 +41,7 @@ public class MyNumber implements Expression {
     // The method hashCode() needs to be overridden if the equals method is overridden; otherwise there may be problems when you use your object in hashed collections such as HashMap, HashSet, LinkedHashSet
     @Override
     public int hashCode() {
-        return value;
+        return value.intValue();
     }
 
 }
