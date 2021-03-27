@@ -5,13 +5,30 @@ import java.math.BigInteger;
 
 public class MyNumber implements Expression {
     private final BigInteger value;
+    private final String representation;
+    private final int radix;
 
-    public /*constructor*/ MyNumber(BigInteger v) {
-        value = v;
+    public /*constructor*/ MyNumber(String v) {
+        value = new BigInteger(v);
+        representation = v;
+        radix=10;
+    }
+    public /*constructor*/ MyNumber(String v, int radix) {
+        value = new BigInteger(v,radix);
+        representation = v;
+        this.radix=radix;
     }
 
     public BigInteger getValue() {
         return value;
+    }
+
+    public int getRadix() {
+        return radix;
+    }
+
+    public String getRepresentation() {
+        return representation;
     }
 
     public void accept(Visitor v) {
@@ -33,7 +50,7 @@ public class MyNumber implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value == ((MyNumber) o).value;
+        return this.value.equals(((MyNumber) o).value);
         // I used == above since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }

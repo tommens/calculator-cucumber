@@ -19,12 +19,12 @@ public class Stringator extends Visitor{
 
     @Override
     public void visit(MyNumber n) {
-        toStringValue= n.getValue().toString();
+        toStringValue= n.getRepresentation()+"_{"+n.getRadix()+"}";
     }
 
     @Override
     public void visit(Converter c) {
-        toStringValue= c.getValue().toString();
+        toStringValue= "("+c.getValue().toString()+"_{"+c.getNumber().getRadix()+"})_{"+c.getRadix()+"}";
     }
 
     @Override

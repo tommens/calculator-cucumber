@@ -22,8 +22,17 @@ public class Calculator {
         System.out.println("is: " + eval(e) + ".");
     }
 
+    public void print(Expression e, Notation notation, int radix) {
+        System.out.println("\n\nThe result of evaluating expression " + convertToString(e, notation));
+        System.out.println("is: " + eval(e).toString(radix) + ".");
+    }
+
     public void print(Expression e) {
         print(e, Notation.INFIX);
+    }
+
+    public void print(Expression e, int radix) {
+        print(e, Notation.INFIX, radix);
     }
 
     public void printExpressionDetails(Expression e, Notation notation) {

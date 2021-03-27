@@ -14,8 +14,8 @@ import java.util.List;
 
 public class TestTimes {
 
-    private final BigInteger value1 = new BigInteger("8");
-    private final BigInteger value2 = new BigInteger("6");
+    private final String value1 = "8";
+    private final String value2 = "6";
     private Times op;
     private List<Expression> params;
     private Calculator c;

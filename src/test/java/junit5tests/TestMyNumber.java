@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMyNumber {
 
-	private final BigInteger value = new BigInteger("8");
+	private final String value = "8";
 	private MyNumber number;
 	Calculator c;
 
@@ -31,7 +31,7 @@ public class TestMyNumber {
 		// Two distinct MyNumber, constructed separately (using a different constructor) but containing the same value should be equal
 		assertEquals(new MyNumber(value), number);
 		// Two MyNumbers containing a distinct value should not be equal:
-		BigInteger otherValue = new BigInteger("7");
+		String otherValue = "7";
 		assertNotEquals(new MyNumber(otherValue),number);
 		assertEquals(number, number); // Identity check (for coverage, as this should always be true)
 		assertNotEquals(number, value);
@@ -61,7 +61,7 @@ public class TestMyNumber {
 
 	@Test
 	public void testToString() {
-		assertEquals(value.toString(), number.getValue().toString());
+		assertEquals(value, number.getValue().toString());
 	}
 
 	@Test

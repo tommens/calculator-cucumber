@@ -55,7 +55,7 @@ public class CalculatorSteps {
 		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of the list,
 		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new MyNumber(new BigInteger(n))));
+		numbers.get(0).forEach(n -> params.add(new MyNumber(n)));
 	    params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
@@ -68,8 +68,8 @@ public class CalculatorSteps {
 	public void givenTheSum(String n1, String n2) {
 		try {
 			params = new ArrayList<>();
-		    params.add(new MyNumber(new BigInteger(n1)));
-		    params.add(new MyNumber(new BigInteger(n2)));
+		    params.add(new MyNumber(n1));
+		    params.add(new MyNumber(n2));
 		    op = new Plus(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
@@ -85,7 +85,7 @@ public class CalculatorSteps {
 
 	@When("^I provide a (.*) number (\\d+)$")
 	public void whenIProvideANumber(String s, String val) {
-		params.add(new MyNumber(new BigInteger(val)));
+		params.add(new MyNumber(val));
 	}
 
 	@Then("^the (.*) is (\\d+)$")
@@ -114,8 +114,8 @@ public class CalculatorSteps {
 
 	@When("I provide {int} and {int} for division")
 	public void whenIProvideAndForDivision(String val1, String val2){
-		params.add(new MyNumber(new BigInteger(val1)));
-		params.add(new MyNumber(new BigInteger(val2)));
+		params.add(new MyNumber(val1));
+		params.add(new MyNumber(val2));
 	}
 
 	@Then("the operation handles arithmetic error")

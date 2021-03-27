@@ -15,27 +15,26 @@ public class TestEvaluator {
     @SuppressWarnings("unused")
     private Evaluator visitor;
     private Calculator calc;
-    private BigInteger value1, value2;
+    private String value1, value2;
     private Expression op;
 
     @BeforeEach
     public void setUp() {
         visitor = new Evaluator();
         calc = new Calculator();
-        value1 = new BigInteger("8");
-        value2 = new BigInteger("6");
+        value1 = "8";
+        value2 = "6";
     }
 
     @Test
     public void testEvaluatorMyNumber() {
-        assertEquals( value1,
-                      calc.eval(new MyNumber(value1)));
+        assertEquals( new BigInteger(value1), calc.eval(new MyNumber(value1)));
     }
 
     @Test
     public void testEvaluatorDivides() {
         try { op = new Divides(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-          assertEquals( value1.divide(value2),
+          assertEquals( new BigInteger(value1).divide(new BigInteger(value2)),
                         calc.eval(op) );
           }
         catch(IllegalConstruction e) {
@@ -46,7 +45,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorPlus() {
         try { op = new Plus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1.add(value2),
+            assertEquals( new BigInteger(value1).add(new BigInteger(value2)),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -57,7 +56,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorMinus() {
         try { op = new Minus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1.subtract(value2),
+            assertEquals( new BigInteger(value1).subtract(new BigInteger(value2)),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -68,7 +67,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorTimes() {
         try { op = new Times(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
-            assertEquals( value1.multiply(value2),
+            assertEquals( new BigInteger(value1).multiply(new BigInteger(value2)),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
