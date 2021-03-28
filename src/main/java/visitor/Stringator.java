@@ -23,6 +23,11 @@ public class Stringator extends Visitor{
     }
 
     @Override
+    public void visit(ModularNumber n) {
+        toStringValue= n.getNumber().toString()+"_{"+n.getModulo()+"}";
+    }
+
+    @Override
     public void visit(Converter c) {
         toStringValue= "("+c.getValue().toString()+"_{"+c.getNumber().getRadix()+"})_{"+c.getRadix()+"}";
     }

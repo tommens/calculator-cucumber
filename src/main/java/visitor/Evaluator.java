@@ -14,6 +14,11 @@ public class Evaluator extends Visitor {
     public void visit(MyNumber n) {
         computedValue = n.getValue();
     }
+
+    public void visit(ModularNumber n) {
+        computedValue = n.getValue();
+    }
+
     public void visit(Converter c) {
         computedValue = c.getValue();
     }

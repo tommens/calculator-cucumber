@@ -3,35 +3,52 @@ package calculator;
 import visitor.Visitor;
 import java.math.BigInteger;
 
-public class MyNumber implements Expression {
+public class ModularNumber implements Expression {
     private final BigInteger value;
     private final String representation;
-    private final int radix;
+    private final String moduloRepresentation;
+    private final BigInteger modulo;
 
-    public /*constructor*/ MyNumber(String v) {
+    public /*constructor*/ ModularNumber(String v) {
         value = new BigInteger(v);
         representation = v;
-        radix=10;
-    }
-    public /*constructor*/ MyNumber(String v, int radix) throws InnapropriateBase {
-        if (radix<2 || radix>36 ){
-            throw new InnapropriateBase();
-        }
-        value = new BigInteger(v,radix);
-        representation = v;
-        this.radix=radix;
+        modulo=new BigInteger(v).add(BigInteger.ONE);
+        moduloRepresentation=v;
     }
 
-    public BigInteger getValue() {
+    public /*constructor*/ ModularNumber(String v, String modulo) {
+        value = new BigInteger(v);
+        representation = v;
+        this.modulo=new BigInteger(modulo);
+        moduloRepresentation=modulo;
+    }
+
+    public BigInteger getNumber(){
         return value;
     }
 
-    public int getRadix() {
-        return radix;
+    public BigInteger getValue() {
+        return value.mod(modulo);
     }
 
     public String getRepresentation() {
         return representation;
+    }
+
+    public BigInteger getModulo() {
+        return modulo;
+    }
+
+    public String getModuloRepresentation() {
+        return moduloRepresentation;
+    }
+
+    public BigInteger getModularInverse(String modulo){
+        return value.modInverse(new BigInteger(modulo));
+    }
+
+    public BigInteger getModularInverse(){
+        return value.modInverse(modulo);
     }
 
     public void accept(Visitor v) {
@@ -50,10 +67,10 @@ public class MyNumber implements Expression {
         }
 
         // If the object is of another type then return false
-        if (!(o instanceof MyNumber)) {
+        if (!(o instanceof ModularNumber)) {
             return false;
         }
-        return this.value.equals(((MyNumber) o).value);
+        return this.value.equals(((ModularNumber) o).value);
         // I used == above since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -65,3 +82,4 @@ public class MyNumber implements Expression {
     }
 
 }
+

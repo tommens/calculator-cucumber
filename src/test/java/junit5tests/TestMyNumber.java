@@ -2,10 +2,7 @@ package junit5tests;
 
 //Import Junit5 libraries for unit testing:
 
-import calculator.Calculator;
-import calculator.IllegalConstruction;
-import calculator.MyNumber;
-import calculator.Times;
+import calculator.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +16,7 @@ public class TestMyNumber {
 	private final String value = "8";
 	private MyNumber number;
 	Calculator c;
+	private MyNumber n;
 
 	@BeforeEach
 	public void setUp() {
@@ -74,12 +72,19 @@ public class TestMyNumber {
 	}
 
 	@Test
-	public void testNumberBase2(){
-		// test if BigInteger uses correctly bases
-		BigInteger bn1=new BigInteger("11",2);
-		BigInteger bn2=new BigInteger("f",16);
-		assertEquals(bn1.intValue(),3);
-		assertEquals(bn2.intValue(),15);
+	public void testNumberRadix(){
+		// test if MyNumber uses correctly bases
+		try {
+			MyNumber bn1 = new MyNumber("11", 2);
+			MyNumber bn2 = new MyNumber("f", 16);
+			assertEquals(bn1.getValue().intValue(),3);
+			assertEquals(bn2.getValue().intValue(),15);
+		}catch(InnapropriateBase exception){}
 	}
 
+	@Test
+	public void testInnapropriateBaseException(){
+		assertThrows(InnapropriateBase.class, () -> n = new MyNumber("1",1));
+		assertThrows(InnapropriateBase.class, () -> n = new MyNumber("1",37));
+	}
 }

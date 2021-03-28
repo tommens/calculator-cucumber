@@ -121,19 +121,19 @@ public class TestDivides {
 
     @Test
     public void testPrefix() {
-        String prefix = "/ (" + value1 + ", " + value2 + ")";
+        String prefix = "/ (" + value1 + "_{10}, " + value2 + "_{10})";
         assertEquals(prefix, c.convertToString(op, Notation.PREFIX));
     }
 
     @Test
     public void testInfix() {
-        String infix = "( " + value1 + " / " + value2 + " )";
+        String infix = "( " + value1 + "_{10} / " + value2 + "_{10} )";
         assertEquals(infix, c.convertToString(op, Notation.INFIX));
     }
 
     @Test
     public void testPostfix() {
-        String postfix = "(" + value1 + ", " + value2 + ") /";
+        String postfix = "(" + value1 + "_{10}, " + value2 + "_{10}) /";
         assertEquals(postfix, c.convertToString(op, Notation.POSTFIX));
     }
 

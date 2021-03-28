@@ -1,9 +1,6 @@
 package visitor;
 
-import calculator.Converter;
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Operation;
+import calculator.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +18,12 @@ public class Countator extends Visitor {
 
     @Override
     public void visit(MyNumber n) {
+        countNbs = 1;
+        countDepth = 0;
+    }
+
+    @Override
+    public void visit(ModularNumber n) {
         countNbs = 1;
         countDepth = 0;
     }
