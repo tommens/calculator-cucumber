@@ -57,10 +57,6 @@ public class MyNumber implements Expression {
         positive=true;
     }
 
-    public BigInteger getModularInverse(BigInteger modulo){
-        return value.modInverse(modulo);
-    }
-
     public BigInteger getValue() {
         return value;
     }

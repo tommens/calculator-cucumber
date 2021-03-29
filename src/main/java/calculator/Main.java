@@ -28,7 +28,7 @@ public class Main {
             MyNumber n4 = new MyNumber("2");
             List<Expression>e1=new ArrayList<>();
             Collections.addAll(e1,n1,n2);
-            Divides d1=new Divides(e1,n3);
+            ModularInverse d1=new ModularInverse(e1,n3);
             c.print(d1);
             /*MyNumber number1=new MyNumber("z",37);
             Converter number2=new Converter(new MyNumber("3"), 2);
