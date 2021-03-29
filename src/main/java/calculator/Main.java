@@ -22,13 +22,14 @@ public class Main {
 
         try {
 
-            MyNumber n1 = new MyNumber("92");
-            MyNumber n2 = new MyNumber("10");
-            MyNumber n3 = new MyNumber("7","3");
-            MyNumber n4 = new MyNumber("3");
-            List<Expression> e1=new ArrayList<>();
+            MyNumber n1 = new MyNumber("10");
+            MyNumber n2 = new MyNumber("2");
+            MyNumber n3 = new MyNumber("3");
+            MyNumber n4 = new MyNumber("2");
+            List<Expression>e1=new ArrayList<>();
             Collections.addAll(e1,n1,n2);
-            c.print(new GCD(e1));
+            Divides d1=new Divides(e1,n3);
+            c.print(d1);
             /*MyNumber number1=new MyNumber("z",37);
             Converter number2=new Converter(new MyNumber("3"), 2);
             c.print(number1);
