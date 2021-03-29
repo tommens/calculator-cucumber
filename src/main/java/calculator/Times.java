@@ -9,6 +9,14 @@ final public class Times extends Operation {
         super(elist);
         symbol = "*";
         neutral = BigInteger.ONE;
+        modulo=new BigInteger(Integer.MAX_VALUE+"");
+    }
+
+    public /*constructor*/ Times(List<Expression> elist, MyNumber modulo) throws IllegalConstruction {
+        super(elist);
+        symbol = "*";
+        neutral = BigInteger.ONE;
+        this.modulo=modulo.getValue();
     }
 
     public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
@@ -18,6 +26,6 @@ final public class Times extends Operation {
     }
 
     public BigInteger op(BigInteger l, BigInteger r) {
-        return (l.multiply(r));
+        return (l.multiply(r).mod(modulo));
     }
 }

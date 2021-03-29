@@ -23,13 +23,13 @@ public class Countator extends Visitor {
     }
 
     @Override
-    public void visit(ModularNumber n) {
+    public void visit(Converter c) {
         countNbs = 1;
         countDepth = 0;
     }
 
     @Override
-    public void visit(Converter c) {
+    public void visit(RandomGenerator r) {
         countNbs = 1;
         countDepth = 0;
     }

@@ -3,52 +3,15 @@ package calculator;
 import visitor.Visitor;
 import java.math.BigInteger;
 
-public class ModularNumber implements Expression {
+public class RandomGenerator implements Expression {
     private final BigInteger value;
-    private final String representation;
-    private final String moduloRepresentation;
-    private final BigInteger modulo;
 
-    public /*constructor*/ ModularNumber(String v) {
+    public /*constructor*/ RandomGenerator(String v) {
         value = new BigInteger(v);
-        representation = v;
-        modulo=new BigInteger(v).add(BigInteger.ONE);
-        moduloRepresentation=v;
-    }
-
-    public /*constructor*/ ModularNumber(String v, String modulo) {
-        value = new BigInteger(v);
-        representation = v;
-        this.modulo=new BigInteger(modulo);
-        moduloRepresentation=modulo;
-    }
-
-    public BigInteger getNumber(){
-        return value;
     }
 
     public BigInteger getValue() {
-        return value.mod(modulo);
-    }
-
-    public String getRepresentation() {
-        return representation;
-    }
-
-    public BigInteger getModulo() {
-        return modulo;
-    }
-
-    public String getModuloRepresentation() {
-        return moduloRepresentation;
-    }
-
-    public BigInteger getModularInverse(String modulo){
-        return value.modInverse(new BigInteger(modulo));
-    }
-
-    public BigInteger getModularInverse(){
-        return value.modInverse(modulo);
+        return value;
     }
 
     public void accept(Visitor v) {
@@ -67,10 +30,10 @@ public class ModularNumber implements Expression {
         }
 
         // If the object is of another type then return false
-        if (!(o instanceof ModularNumber)) {
+        if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value.equals(((ModularNumber) o).value);
+        return this.value.equals(((MyNumber) o));
         // I used == above since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -82,4 +45,3 @@ public class ModularNumber implements Expression {
     }
 
 }
-

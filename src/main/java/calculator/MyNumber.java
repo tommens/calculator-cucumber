@@ -4,22 +4,61 @@ import visitor.Visitor;
 import java.math.BigInteger;
 
 public class MyNumber implements Expression {
-    private final BigInteger value;
-    private final String representation;
-    private final int radix;
+    private BigInteger value;
+    private String representation;
+    private int radix;
+    private BigInteger modulo;
+    private boolean positive;
 
-    public /*constructor*/ MyNumber(String v) {
-        value = new BigInteger(v);
+    public /*constructor*/ MyNumber(String v) throws NumberFormatException {
+        modulo=new BigInteger(Integer.MAX_VALUE+"");
+        value = new BigInteger(v).mod(modulo);
         representation = v;
         radix=10;
+        positive=true;
     }
-    public /*constructor*/ MyNumber(String v, int radix) throws InnapropriateBase {
+    public /*constructor*/ MyNumber(String v,boolean positive) throws NumberFormatException {
+        modulo=new BigInteger(Integer.MAX_VALUE+"");
+        if(positive) {
+            value = new BigInteger(v).mod(modulo);
+        }else{
+            value = new BigInteger(v).mod(modulo).negate();
+        }
+        representation = v;
+        radix=10;
+        this.positive=positive;
+    }
+    public /*constructor*/ MyNumber(String v, String modulo) throws NumberFormatException {
+        this.modulo=new BigInteger(modulo);
+        value = new BigInteger(v).mod(this.modulo);
+        representation = v;
+        radix=10;
+        positive=true;
+    }
+    public /*constructor*/ MyNumber(String v, String modulo,boolean positive) throws NumberFormatException {
+        this.modulo=new BigInteger(modulo);
+        if(positive){
+            value = new BigInteger(v).mod(this.modulo);
+        }else{
+            value = new BigInteger(v).mod(this.modulo).negate();
+        }
+        representation = v;
+        radix=10;
+        this.positive=positive;
+    }
+    public /*constructor*/ MyNumber(String v, int radix) throws InnapropriateBase, NumberFormatException{
         if (radix<2 || radix>36 ){
             throw new InnapropriateBase();
         }
-        value = new BigInteger(v,radix);
+        modulo=new BigInteger(Integer.MAX_VALUE+"");
+        value = new BigInteger(v,radix).mod(modulo);
         representation = v;
         this.radix=radix;
+        positive=true;
+    }
+
+    public BigInteger getModularInverse(BigInteger modulo){
+        return value.modInverse(modulo);
     }
 
     public BigInteger getValue() {
@@ -32,6 +71,10 @@ public class MyNumber implements Expression {
 
     public String getRepresentation() {
         return representation;
+    }
+
+    public BigInteger getModulo() {
+        return modulo;
     }
 
     public void accept(Visitor v) {

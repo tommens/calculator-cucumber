@@ -21,15 +21,14 @@ public class Main {
         Calculator c = new Calculator();
 
         try {
-            ModularNumber mn1=new ModularNumber("5","3");
-            ModularNumber mn2=new ModularNumber("5","3");
 
-            List<Expression> params=new ArrayList<>();
-            Collections.addAll(params,mn1,mn2);
-
-            Exponents exp=new Exponents(params);
-
-            c.print(exp);
+            MyNumber n1 = new MyNumber("92");
+            MyNumber n2 = new MyNumber("10");
+            MyNumber n3 = new MyNumber("7","3");
+            MyNumber n4 = new MyNumber("3");
+            List<Expression> e1=new ArrayList<>();
+            Collections.addAll(e1,n1,n2);
+            c.print(new GCD(e1));
             /*MyNumber number1=new MyNumber("z",37);
             Converter number2=new Converter(new MyNumber("3"), 2);
             c.print(number1);
@@ -75,9 +74,9 @@ public class Main {
             c.eval(e);*/
         } catch (IllegalConstruction exception) {
             System.out.println("cannot create operations without parameters");
-        }/*catch (InnapropriateBase exception){
-            System.out.println("cannot create an innapropriate base");
-        }*/
+        }catch (NumberFormatException exception){
+
+        }
     }
 
 }

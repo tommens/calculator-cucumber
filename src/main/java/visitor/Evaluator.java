@@ -15,11 +15,10 @@ public class Evaluator extends Visitor {
         computedValue = n.getValue();
     }
 
-    public void visit(ModularNumber n) {
-        computedValue = n.getValue();
-    }
-
     public void visit(Converter c) {
+        computedValue = c.getValue();
+    }
+    public void visit(RandomGenerator c) {
         computedValue = c.getValue();
     }
 

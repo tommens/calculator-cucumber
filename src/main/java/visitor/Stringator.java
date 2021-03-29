@@ -23,13 +23,13 @@ public class Stringator extends Visitor{
     }
 
     @Override
-    public void visit(ModularNumber n) {
-        toStringValue= n.getNumber().toString()+"_{"+n.getModulo()+"}";
+    public void visit(Converter c) {
+        toStringValue= "("+c.getValue().toString()+"_{"+c.getNumber().getRadix()+"})_{"+c.getRadix()+"}";
     }
 
     @Override
-    public void visit(Converter c) {
-        toStringValue= "("+c.getValue().toString()+"_{"+c.getNumber().getRadix()+"})_{"+c.getRadix()+"}";
+    public void visit(RandomGenerator r) {
+        toStringValue="random_"+r.getValue();
     }
 
     @Override

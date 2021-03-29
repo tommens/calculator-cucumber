@@ -11,6 +11,7 @@ public abstract class Operation implements Expression {
     public Notation notation = Notation.INFIX; //by default, expressions are rendered as strings using infix notation
     protected String symbol;
     protected BigInteger neutral; // the neutral element of the operation (e.g. 1 for *, 0 for +)
+    protected BigInteger modulo;
 
     // It is not allowed to create operation that have a null list of arguments.
     // Note that it is allowed to have an EMPTY list of arguments.

@@ -10,7 +10,15 @@ final public class Divides extends Operation
 	  super(elist);
 	  symbol = "/";
 	  neutral = BigInteger.ONE;
+	  modulo=new BigInteger(Integer.MAX_VALUE+"");
   }
+
+	public /*constructor*/ Divides(List<Expression> elist, MyNumber modulo) throws IllegalConstruction {
+		super(elist);
+		symbol = "/";
+		neutral = BigInteger.ONE;
+		this.modulo=modulo.getValue();
+	}
 
   public Divides(List<Expression> elist, Notation n) throws IllegalConstruction {
 	super(elist,n);
@@ -23,6 +31,6 @@ final public class Divides extends Operation
     	if (r.equals(BigInteger.ZERO)){
     		throw new DivisionByZero();
 		}
-    	return (l.divide(r));
+    	return (l.divide(r).mod(modulo));
     }
 }
