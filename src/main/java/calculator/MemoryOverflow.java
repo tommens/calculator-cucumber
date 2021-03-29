@@ -1,4 +1,4 @@
 package calculator;
 
-public class MemoryOverflow extends Exception{
+public class MemoryOverflow extends Exception {
 }

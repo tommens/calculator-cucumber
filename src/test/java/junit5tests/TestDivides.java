@@ -1,18 +1,18 @@
 package junit5tests;
 
 //Import Junit5 libraries for unit testing:
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
 
 import calculator.*;
-import visitor.Stringator;
-import visitor.Visitor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDivides {
 
@@ -29,8 +29,9 @@ public class TestDivides {
         try {
             op = new Divides(params);
             op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @Test
@@ -40,20 +41,14 @@ public class TestDivides {
     }
 
     @Test
-    public void divisionZero(){
+    public void divisionZero() {
         //It should handle division by zero
         try {
             List<Expression> col = new ArrayList<>();
             Collections.addAll(col, new MyNumber("8"), new MyNumber("0"));
-            Expression e = new Divides(col, Notation.POSTFIX);
-            try {
-                c.eval(e);
-            }catch (DivisionByZero d){
-                fail();
-            }catch (Exception d){
-                d.printStackTrace();
-            }
-        }catch (IllegalConstruction e){
+            Divides de = new Divides(col);
+            assertThrows(DivisionByZero.class, () -> de.op(new BigInteger("10"), new BigInteger("0")));
+        } catch (IllegalConstruction e) {
             e.printStackTrace();
         }
 
@@ -77,8 +72,9 @@ public class TestDivides {
         try {
             Divides d = new Divides(p, Notation.INFIX);
             assertEquals(op, d);
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -94,8 +90,9 @@ public class TestDivides {
         try {
             Divides e = new Divides(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @Test

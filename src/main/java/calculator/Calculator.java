@@ -37,7 +37,7 @@ public class Calculator {
 
     public void printExpressionDetails(Expression e, Notation notation) {
         print(e, notation);
-        Countator c=count(e);
+        Countator c = count(e);
         System.out.print("It contains " + c.getCountDepth() + " levels of nested expressions, ");
         System.out.print(c.getCountOps() + " operations");
         System.out.println(" and " + c.getCountNbs() + " numbers.");
@@ -53,9 +53,9 @@ public class Calculator {
         // and ask the expression to accept this visitor to start the evaluation process
         try {
             e.accept(v);
-        }catch (DivisionByZero d){
+        } catch (DivisionByZero d) {
             System.err.println("\nDivision by Zero in : \"" + this.convertToString(e, Notation.INFIX) + "\"");
-        }catch(ArithmeticException a){
+        } catch (ArithmeticException a) {
             System.err.println("\nNot invertible integer : \"" + this.convertToString(e, Notation.INFIX) + "\"");
         }
         // and return the result of the evaluation at the end of the process

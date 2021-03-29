@@ -1,13 +1,21 @@
 package calculator;
 
 import visitor.Visitor;
+
 import java.math.BigInteger;
+import java.util.Random;
 
 public class RandomGenerator implements Expression {
     private final BigInteger value;
 
-    public /*constructor*/ RandomGenerator(String v) {
-        value = new BigInteger(v);
+    public /*constructor*/ RandomGenerator(String v) throws NumberFormatException {
+        BigInteger upperLimit = new BigInteger(v);
+        BigInteger temp;
+        BigInteger randomNumber;
+        do {
+            temp = new BigInteger(upperLimit.bitLength(), new Random());
+        } while (temp.compareTo(upperLimit) >= 0);
+        value = temp;
     }
 
     public BigInteger getValue() {
@@ -33,7 +41,7 @@ public class RandomGenerator implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value.equals(((MyNumber) o));
+        return this.value.equals(o);
         // I used == above since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }

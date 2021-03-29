@@ -1,4 +1,4 @@
 package calculator;
 
-public class InnapropriateBase extends Exception{
+public class InnapropriateBase extends Exception {
 }

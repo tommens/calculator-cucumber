@@ -9,13 +9,14 @@ final public class Minus extends Operation {
         super(elist);
         symbol = "-";
         neutral = BigInteger.ZERO;
-        modulo=new BigInteger(Integer.MAX_VALUE+"");
+        modulo = new BigInteger(Integer.MAX_VALUE + "");
     }
+
     public /*constructor*/ Minus(List<Expression> elist, MyNumber modulo) throws IllegalConstruction {
         super(elist);
         symbol = "-";
         neutral = BigInteger.ZERO;
-        this.modulo=modulo.getValue();
+        this.modulo = modulo.getValue();
     }
 
     public Minus(List<Expression> elist, Notation n) throws IllegalConstruction {

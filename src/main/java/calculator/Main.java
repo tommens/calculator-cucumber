@@ -1,6 +1,5 @@
 package calculator;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,14 +21,15 @@ public class Main {
 
         try {
 
-            MyNumber n1 = new MyNumber("10");
-            MyNumber n2 = new MyNumber("2");
+            MyNumber n1 = new MyNumber("4");
+            MyNumber n2 = new MyNumber("7");
             MyNumber n3 = new MyNumber("3");
             MyNumber n4 = new MyNumber("2");
-            List<Expression>e1=new ArrayList<>();
-            Collections.addAll(e1,n1,n2);
-            ModularInverse d1=new ModularInverse(e1,n3);
+            List<Expression> e1 = new ArrayList<>();
+            Collections.addAll(e1, n1, n2);
+            Converter d1 = new Converter(n1, 2);
             c.print(d1);
+
             /*MyNumber number1=new MyNumber("z",37);
             Converter number2=new Converter(new MyNumber("3"), 2);
             c.print(number1);
@@ -73,10 +73,9 @@ public class Main {
             e = new Divides(params5);
             c.printExpressionDetails(e, Notation.POSTFIX);
             c.eval(e);*/
-        } catch (IllegalConstruction exception) {
-            System.out.println("cannot create operations without parameters");
-        }catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
 
+        } catch (InnapropriateBase exception) {
         }
     }
 

@@ -1,16 +1,14 @@
 package junit5tests;
 
-import java.math.BigInteger;
+import calculator.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
-
-import calculator.*;
-import org.junit.jupiter.api.*;
-import visitor.Stringator;
 
 
 public class TestPlus {
@@ -24,9 +22,12 @@ public class TestPlus {
     @BeforeEach
     public void setUp() {
         c = new Calculator();
-        params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
-        try { op = new Plus(params); }
-        catch(IllegalConstruction e) { fail(); }
+        params = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        try {
+            op = new Plus(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
     }
 
     @Test
@@ -55,8 +56,9 @@ public class TestPlus {
             assertEquals(op, e);
             assertEquals(e, e);
             assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(new MyNumber("5"), new MyNumber("4"))), Notation.INFIX));
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -72,8 +74,9 @@ public class TestPlus {
         try {
             Plus e = new Plus(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @Test

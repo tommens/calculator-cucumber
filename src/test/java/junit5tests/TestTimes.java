@@ -1,16 +1,16 @@
 package junit5tests;
 
 //Import Junit5 libraries for unit testing:
-import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
-import org.junit.jupiter.api.*;
-import visitor.Stringator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTimes {
 
@@ -23,9 +23,12 @@ public class TestTimes {
     @BeforeEach
     public void setUp() {
         c = new Calculator();
-        params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
-        try { op = new Times(params); }
-        catch(IllegalConstruction e) { fail(); }
+        params = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        try {
+            op = new Times(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
     }
 
     @Test
@@ -52,8 +55,9 @@ public class TestTimes {
         try {
             Times e = new Times(p, Notation.INFIX);
             assertEquals(op, e);
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -69,8 +73,9 @@ public class TestTimes {
         try {
             Times e = new Times(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());
+        } catch (IllegalConstruction e) {
+            fail();
         }
-        catch(IllegalConstruction e) { fail(); }
     }
 
     @Test

@@ -14,14 +14,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TestGCD {
+public class TestMax {
 
-    private final String value1 = "8";
-    private final String value2 = "12";
-    private final String value3 = "4";
-    private List<Expression> params;
-    private Calculator c;
-    private GCD op;
+    Calculator c;
+    Max op;
 
     @Before
     public void setUp() {
@@ -30,14 +26,14 @@ public class TestGCD {
 
     @Test
     public void testConstructor() {
-        assertThrows(IllegalConstruction.class, () -> op = new GCD(null));
+        assertThrows(IllegalConstruction.class, () -> op = new Max(null));
     }
 
     @Test
     public void testCountDepth() {
         try {
             c = new Calculator();
-            op = new GCD(new ArrayList<>(Arrays.asList(new MyNumber("4"), new MyNumber("7"))));
+            op = new Max(new ArrayList<>(Arrays.asList(new MyNumber("4"), new MyNumber("7"))));
             assertEquals(Integer.valueOf(1), c.count(op).getCountDepth());
         } catch (IllegalConstruction exception) {
         }
@@ -47,7 +43,7 @@ public class TestGCD {
     public void testCountOps() {
         try {
             c = new Calculator();
-            op = new GCD(new ArrayList<>(Arrays.asList(new MyNumber("4"), new MyNumber("7"))));
+            op = new Max(new ArrayList<>(Arrays.asList(new MyNumber("4"), new MyNumber("7"))));
             assertEquals(Integer.valueOf(1), c.count(op).getCountOps());
         } catch (IllegalConstruction exception) {
         }
@@ -57,23 +53,23 @@ public class TestGCD {
     public void testCountNbs() {
         try {
             c = new Calculator();
-            op = new GCD(new ArrayList<>(Arrays.asList(new MyNumber("4"), new MyNumber("7"))));
+            op = new Max(new ArrayList<>(Arrays.asList(new MyNumber("4"), new MyNumber("7"))));
             assertEquals(Integer.valueOf(2), c.count(op).getCountNbs());
         } catch (IllegalConstruction exception) {
         }
     }
 
     @Test
-    public void testGCD() {
+    public void testMax() {
         try {
-            MyNumber mn1 = new MyNumber(value1);
-            MyNumber mn2 = new MyNumber(value2);
-            MyNumber mn3 = new MyNumber(value3);
-            params = new ArrayList<>();
-            Collections.addAll(params, mn1, mn2);
-            GCD gcd = new GCD(params);
-            assertEquals(c.eval(gcd), c.eval(mn3));
-        } catch (Exception e) {
+            c = new Calculator();
+            MyNumber mn1 = new MyNumber("1");
+            MyNumber mn2 = new MyNumber("2");
+            List<Expression> e = new ArrayList<>();
+            Collections.addAll(e, mn1, mn2);
+            Max m = new Max(e);
+            assertEquals(c.eval(m), mn2.getValue());
+        } catch (IllegalConstruction exception) {
         }
     }
 }

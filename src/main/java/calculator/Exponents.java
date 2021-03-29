@@ -9,14 +9,14 @@ final public class Exponents extends Operation {
         super(elist);
         symbol = "^";
         neutral = BigInteger.ONE;
-        modulo=new BigInteger(Integer.MAX_VALUE+"");
+        modulo = new BigInteger(Integer.MAX_VALUE + "");
     }
 
     public /*constructor*/ Exponents(List<Expression> elist, MyNumber modulo) throws IllegalConstruction {
         super(elist);
         symbol = "^";
         neutral = BigInteger.ONE;
-        this.modulo=modulo.getValue();
+        this.modulo = modulo.getValue();
     }
 
     public Exponents(List<Expression> elist, Notation n) throws IllegalConstruction {
@@ -26,7 +26,7 @@ final public class Exponents extends Operation {
     }
 
     public BigInteger op(BigInteger l, BigInteger r) {
-        return (l.modPow(r,modulo));
+        return (l.modPow(r, modulo));
     }
 }
 
