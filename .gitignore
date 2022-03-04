@@ -1,3 +1,7 @@
+# Alix's usage ignored files
+.idea
+target
+
 # Default ignored files
 *.iws
 *.iml
