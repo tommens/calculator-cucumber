@@ -117,4 +117,14 @@ public class TestDivides {
 		assertEquals(postfix, op.toString());
 	}
 
+	@Test
+	public void testDivideByZero_throws_exception() {
+		op.op(1, 0);
+	}
+
+	@Test
+	public void testDivideByZero_happy_case() {
+		op.op(1, 2);
+	}
+
 }

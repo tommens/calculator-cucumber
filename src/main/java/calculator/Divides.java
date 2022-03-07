@@ -15,6 +15,15 @@ final public class Divides extends Operation
 	neutral = 1;
   }
   
-  public int op(int l, int r)
-    { return (l/r); }
+  public int op(int l, int r) {
+      int val = 0;
+
+      try {
+          val = l/r;
+      } catch (ArithmeticException e) {
+          System.out.print(e.getMessage());
+      }
+
+      return val;
+  }
 }
