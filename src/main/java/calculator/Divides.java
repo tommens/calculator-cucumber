@@ -16,7 +16,7 @@ final public class Divides extends Operation
   }
   
   public int op(int l, int r) {
-      int val = 0;
+      int val = (int)Double.NaN; // will be zero with Integer
 
       try {
           val = l/r;
