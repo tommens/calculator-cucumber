@@ -47,4 +47,18 @@ public class TestOperation {
 		assertEquals(Integer.valueOf(6), o.countNbs());
 	}
 
+	@Test
+	public void testNotationCoherence() {
+		boolean coherence = true;
+		Notation expected = o.notation;
+		for (Expression e : o.getArgs()) {
+			if (e instanceof Operation) {
+				Operation cur = (Operation)e;
+				if (!expected.equals(cur.notation))
+					coherence = false;
+			}
+		}
+		assertTrue(coherence);
+	}
+
 }
