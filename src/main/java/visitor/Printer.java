@@ -1,16 +1,27 @@
 package visitor;
 
-import calculator.MyNumber;
-import calculator.Operation;
+import calculator.Expression;
 
-public class Printer extends Visitor {
-    @Override
-    public void visit(MyNumber n) {
+public class Printer extends Evaluator {
 
+    final private Expression currentExpression;
+
+    public Printer(Expression e) {
+        this.currentExpression = e;
+        e.accept(this);
     }
 
-    @Override
-    public void visit(Operation o) {
+    public void print() {
+        System.out.println("The result of evaluating expression " + currentExpression);
+        System.out.println("is: " + getResult() + ".");
+        System.out.println();
+    }
 
+    public void detailedPrint() {
+        print();
+        System.out.print("It contains " + currentExpression.countDepth() + " levels of nested expressions, ");
+        System.out.print(currentExpression.countOps() + " operations");
+        System.out.println(" and " + currentExpression.countNbs() + " numbers.");
+        System.out.println();
     }
 }
