@@ -11,16 +11,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <junit.version>5.8.2</junit.version>
         <cucumber.version>7.2.3</cucumber.version>
         <maven.compiler.version>3.10.0</maven.compiler.version>
-        <maven.surefire.version>2.22.2</maven.surefire.version>
+        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
         <jacoco.version>0.8.7</jacoco.version>
         <javadoc.version>2.10.4</javadoc.version>
+        <javafx.version>17.0.1</javafx.version>
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -54,6 +56,17 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
         </dependency>
 
     </dependencies>
@@ -119,6 +132,10 @@
                 <configuration>
                     <!--needed to prevent module problem-->
                     <detectJavaApiLink>false</detectJavaApiLink>
+                    <!-- TODO: Doesn't work (@package goal) to prevent the module.java to be added in javadoc -->
+                    <excludes>
+                        <exclude>${project.basedir}src/main/java/module-info.java</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <!-- Exports JavaDocs to regular HTML files -->
