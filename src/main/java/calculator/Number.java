@@ -25,6 +25,8 @@ public abstract class Number implements Expression
         return 1;
     }
 
+    public abstract Number negate();
+
     public abstract Number add(Number val);
 
     public abstract Number subtract(Number val);

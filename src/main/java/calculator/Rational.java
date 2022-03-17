@@ -16,9 +16,15 @@ public class Rational extends Number implements Expression{
     }
 
     @Override
+    public Number negate() {
+        return new Rational(numerator.negate(), denominator);
+    }
+
+    @Override
     public Number add(Number val) {
         if (val instanceof Rational rat) {
-            return new Rational();
+            return new Rational(numerator.multiply(rat.denominator).add(rat.numerator.multiply(denominator)),
+                                denominator.multiply(rat.denominator));
         }
         return null;
     }
@@ -26,19 +32,29 @@ public class Rational extends Number implements Expression{
     @Override
     public Number subtract(Number val) {
         if (val instanceof Rational rat) {
-            return new Rational();
+            return add(rat.negate());
         }
         return null;
     }
 
     @Override
     public Number multiply(Number val) {
-        return new Rational();
+        if (val instanceof Rational rat) {
+            return new Rational(numerator.multiply(rat.numerator),
+                                denominator.multiply(rat.denominator));
+        }
+        return null;
     }
 
     @Override
     public Number divide(Number val) {
-        return new Rational();
+        if (val instanceof Rational rat) {
+            if (rat.equals(new Rational(0))) {
+                throw new ArithmeticException(); // TODO do it better
+            }
+            return multiply(new Rational(rat.denominator, rat.numerator));
+        }
+        return null;
     }
 
     /**
@@ -79,7 +95,7 @@ public class Rational extends Number implements Expression{
     @Override
     public String toString() {
         String representation = numerator.toString();
-        if (!denominator.equals(BigInteger.ZERO)) {
+        if (!denominator.equals(BigInteger.ONE)) {
             representation += "/" + denominator;
         }
         return representation;

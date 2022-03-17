@@ -19,11 +19,11 @@ public class TestOperation {
 	@BeforeEach
 	public void setUp() throws Exception {
 		List<Expression> params1 =
-				new ArrayList<>(Arrays.asList(new Number(3), new Number(4), new Number(5)));
+				new ArrayList<>(Arrays.asList(new Rational(3), new Rational(4), new Rational(5)));
 		List<Expression> params2 =
-				new ArrayList<>(Arrays.asList(new Number(5), new Number(4)));
+				new ArrayList<>(Arrays.asList(new Rational(5), new Rational(4)));
 		List<Expression> params3 =
-				new ArrayList<>(Arrays.asList(new Plus(params1), new Minus(params2), new Number(7)));
+				new ArrayList<>(Arrays.asList(new Plus(params1), new Minus(params2), new Rational(7)));
 		o = new Divides(params3);
 		o2 = new Divides(params3);
 	}
