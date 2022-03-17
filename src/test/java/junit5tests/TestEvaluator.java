@@ -2,6 +2,8 @@ package junit5tests;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.Number;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
@@ -28,12 +30,12 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorMyNumber() {
         assertEquals( value1,
-                      calc.eval(new MyNumber(value1)));
+                      calc.eval(new Rational(value1)));
     }
 
     @Test
     public void testEvaluatorDivides() {
-        try { op = new Divides(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        try { op = new Divides(Arrays.asList(new Rational(value1), new Rational(value2)));
           assertEquals( value1 / value2,
                         calc.eval(op) );
           }
@@ -44,7 +46,7 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorPlus() {
-        try { op = new Plus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        try { op = new Plus(Arrays.asList(new Rational(value1), new Rational(value2)));
             assertEquals( value1 + value2,
                     calc.eval(op) );
         }
@@ -55,7 +57,7 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorMinus() {
-        try { op = new Minus(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        try { op = new Minus(Arrays.asList(new Rational(value1), new Rational(value2)));
             assertEquals( value1 - value2,
                     calc.eval(op) );
         }
@@ -66,7 +68,7 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorTimes() {
-        try { op = new Times(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        try { op = new Times(Arrays.asList(new Rational(value1), new Rational(value2)));
             assertEquals( value1 * value2,
                     calc.eval(op) );
         }

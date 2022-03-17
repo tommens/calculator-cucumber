@@ -4,6 +4,7 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
+import calculator.Number;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class TestMinus {
 
 	@BeforeEach
 	public void setUp() {
-		  params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
+		  params = new ArrayList<>(Arrays.asList(new Number(value1),new Number(value2)));
 		  try { op = new Minus(params); }
 		  catch(IllegalConstruction e) { fail(); }
 	}
@@ -44,7 +45,7 @@ public class TestMinus {
 	@Test
 	public void testEquals() {
 		// Two similar expressions, constructed separately (and using different constructors) should not be equal
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Number(value1), new Number(value2)));
 		try {
 			Minus e = new Minus(p, Notation.INFIX);
 			assertEquals(op, e);
@@ -61,7 +62,7 @@ public class TestMinus {
 	@Test
 	public void testHashCode() {
 		// Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Number(value1), new Number(value2)));
 		try {
 			Minus e = new Minus(p, Notation.INFIX);
 			assertEquals(e.hashCode(), op.hashCode());

@@ -4,27 +4,28 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
+import calculator.Number;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 
-public class TestMyNumber {
+public class TestRational {
 
 	private final int value =8;
-	private MyNumber number;
+	private Number number;
 	
 	@BeforeEach
 	public void setUp() {
-		number = new MyNumber(value);
+		number = new Rational(value);
 	}
 
 	@Test
 	public void testEquals() {
 		// Two distinct MyNumber, constructed separately (using a different constructor) but containing the same value should be equal
-		assertEquals(new MyNumber(value), number);
+		assertEquals(new Rational(value), number);
 		// Two MyNumbers containing a distinct value should not be equal:
 		int otherValue = 7;
-		assertNotEquals(new MyNumber(otherValue),number);
+		assertNotEquals(new Rational(otherValue),number);
 		assertEquals(number, number); // Identity check (for coverage, as this should always be true)
 		assertNotEquals(number, value);
 		try {

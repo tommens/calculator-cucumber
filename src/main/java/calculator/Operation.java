@@ -36,7 +36,7 @@ public abstract class Operation implements Expression
 	  if (n!=null) notation = n;
   }
   
-  abstract public int op(int l, int r);
+  abstract public Number op(Number l, Number r);
     // the operation itself is specified in the subclasses
 
   // add more arguments to the existing list of arguments args

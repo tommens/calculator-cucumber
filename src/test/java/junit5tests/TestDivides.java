@@ -2,6 +2,8 @@ package junit5tests;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.Number;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
@@ -19,7 +21,7 @@ public class TestDivides {
 
 	@BeforeEach
 	public void setUp() {
-		  params = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		  params = new ArrayList<>(Arrays.asList(new Rational(value1), new Rational(value2)));
 		  try {
 		  	op = new Divides(params);
 			op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
@@ -47,7 +49,7 @@ public class TestDivides {
 	@Test
 	public void testEquals() {
 		// Two similar expressions, constructed separately (and using different constructors) should be equal
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Rational(value1), new Rational(value2)));
 		try {
 			Divides d = new Divides(p, Notation.INFIX);
 			assertEquals(op, d);
@@ -64,7 +66,7 @@ public class TestDivides {
 	@Test
 	public void testHashCode() {
 		// Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Rational(value1), new Rational(value2)));
 		try {
 			Divides e = new Divides(p, Notation.INFIX);
 			assertEquals(e.hashCode(), op.hashCode());
