@@ -1,48 +1,68 @@
 package GUI;
 
+import GUI.component.ModeEnum;
+import GUI.component.ModeVisibilityStrategy;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 
-import static GUI.ModeEnum.mode;
+import static GUI.component.ModeEnum.mode;
 
-public class CalController {
-
-    @FXML
-    Label valueTmpDynamicItem;
+public class CalController implements ModeVisibilityStrategy {
 
     @FXML
-    HBox menuBasic;
+    AnchorPane componentTreeRoot;
+
+
 
     @FXML
-    Label tmpText;
+    Button processResult;
+
+    @FXML
+    TextArea textResult;
 
     @FXML
     ChoiceBox<String> modes;
-
-    @FXML
-    protected void onProcessResult() {
-        tmpText.setText(" Calculator 0.1.0 ");
-    }
-
-    @FXML
-    public void initialize() {
-        valueTmpDynamicItem.setText("Fx 1");
-        initModes();
-    }
 
     private void initModes() {
         for (ModeEnum mode : ModeEnum.values())
             modes.getItems().add(mode.title());
 
-        modes.setValue(ModeEnum.M1.title());
+        modes.setValue(ModeEnum.BASIC.title());
         modes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            int newIndex = mode(newValue).index();
-            String lab = "Fx "+(newIndex+1);
-            valueTmpDynamicItem.setText(lab);
+            deactivateMode(componentTreeRoot, mode(oldValue).index());
+            activateMode(componentTreeRoot, mode(newValue).index());
         });
+    }
+
+    @FXML
+    public void initialize() {
+        initModes();
+    }
+
+    public void addDecimal() {}
+
+    public void clearScreen() {
+        textResult.setText("");
+    }
+
+    public void addSomething(ActionEvent actionEvent) {
+        textResult.setText(getButtonValue(actionEvent));
+    }
+
+    private String getButtonValue(ActionEvent actionEvent) {
+        StringBuilder txtValue = new StringBuilder(textResult.getText());
+        Button b = (Button) actionEvent.getSource();
+        txtValue.append(b.getText());
+        return txtValue.toString();
+    }
+
+    @FXML
+    protected void onProcessResult() {
+        textResult.setText("calculator v0.2.0");
     }
 
 }

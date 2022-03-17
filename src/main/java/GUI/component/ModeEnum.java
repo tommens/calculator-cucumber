@@ -1,4 +1,4 @@
-package GUI;
+package GUI.component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,12 +8,12 @@ import java.util.Map;
  */
 public enum ModeEnum {
 
-    M1 (0, "Mode basic"),
-    M2 (1, "Mode 2"),
-    M3 (2, "Mode 3"),
-    M4 (3, "Mode 4"),
-    M5 (4, "Mode 5"),
-    M6 (5, "Mode 6");
+    BASIC(0, "Mode basic"),
+    M1(1, "Mode 1"),
+    M2(2, "Mode 2"),
+    M3(3, "Mode 3"),
+    M4(4, "Mode 4"),
+    M5(5, "Mode 5");
 
     private final int index;
     private final String title;
