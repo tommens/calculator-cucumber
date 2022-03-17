@@ -132,10 +132,7 @@
                 <configuration>
                     <!--needed to prevent module problem-->
                     <detectJavaApiLink>false</detectJavaApiLink>
-                    <!-- TODO: Doesn't work (@package goal) to prevent the module.java to be added in javadoc -->
-                    <excludes>
-                        <exclude>${project.basedir}src/main/java/module-info.java</exclude>
-                    </excludes>
+                    <sourcepath>${basedir}/src/main/java/calculator;${basedir}/src/main/java/visitor;${basedir}/src/main/java/GUI</sourcepath>
                 </configuration>
                 <executions>
                     <!-- Exports JavaDocs to regular HTML files -->
