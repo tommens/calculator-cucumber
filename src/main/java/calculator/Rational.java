@@ -64,9 +64,9 @@ public class Rational extends Number implements Expression{
      */
     protected Rational(BigInteger numerator, BigInteger denominator) {
         super();
-        //TODO simplify
         this.numerator = numerator;
         this.denominator = denominator;
+        simplify();
     }
 
     /**
