@@ -15,6 +15,12 @@ import static GUI.component.ModeEnum.mode;
 
 public class CalController implements ModeVisibilityStrategy {
 
+    /*TODO: (@tests)
+    * --------------
+    * - check operator need to be char so 2 dim String give first char now
+     */
+
+
     @FXML
     AnchorPane componentTreeRoot;
 
@@ -51,7 +57,11 @@ public class CalController implements ModeVisibilityStrategy {
         textResult.setText("");
     }
 
-    public void addSomething(ActionEvent actionEvent) {
+    public void addNumber(ActionEvent actionEvent) {
+        textResult.setText(getButtonValue(actionEvent));
+    }
+
+    public void addOperation(ActionEvent actionEvent) {
         textResult.setText(getButtonValue(actionEvent));
     }
 
@@ -67,4 +77,7 @@ public class CalController implements ModeVisibilityStrategy {
         textResult.setText("calculator v0.2.0");
     }
 
+    private String processing() {
+        return "calculator v0.3.0";
+    }
 }

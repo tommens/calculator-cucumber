@@ -101,25 +101,25 @@
                   <RowConstraints minHeight="50" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
 
-                <Button text="7" GridPane.columnIndex="1" onAction="#addSomething" />
-                <Button text="8" GridPane.columnIndex="2" onAction="#addSomething" />
-                <Button text="9" GridPane.columnIndex="3" onAction="#addSomething" />
-                <Button text="/" GridPane.columnIndex="4" onAction="#addSomething" />
+                <Button text="7" GridPane.columnIndex="1" onAction="#addNumber" />
+                <Button text="8" GridPane.columnIndex="2" onAction="#addNumber" />
+                <Button text="9" GridPane.columnIndex="3" onAction="#addNumber" />
+                <Button text="/" GridPane.columnIndex="4" onAction="#addOperation" />
 
-                <Button text="4" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#addSomething" />
-                <Button text="5" GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#addSomething" />
-                <Button text="6" GridPane.columnIndex="3" GridPane.rowIndex="1" onAction="#addSomething" />
-                <Button text="*" GridPane.columnIndex="4" GridPane.rowIndex="1" onAction="#addSomething" />
+                <Button text="4" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#addNumber" />
+                <Button text="5" GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#addNumber" />
+                <Button text="6" GridPane.columnIndex="3" GridPane.rowIndex="1" onAction="#addNumber" />
+                <Button text="*" GridPane.columnIndex="4" GridPane.rowIndex="1" onAction="#addOperation" />
 
-                <Button text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#addSomething" />
-                <Button text="2" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#addSomething" />
-                <Button text="3" GridPane.columnIndex="3" GridPane.rowIndex="2" onAction="#addSomething" />
-                <Button text="-" GridPane.columnIndex="4" GridPane.rowIndex="2" onAction="#addSomething" />
+                <Button text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#addNumber" />
+                <Button text="2" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#addNumber" />
+                <Button text="3" GridPane.columnIndex="3" GridPane.rowIndex="2" onAction="#addNumber" />
+                <Button text="-" GridPane.columnIndex="4" GridPane.rowIndex="2" onAction="#addOperation" />
 
-                <Button text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#addSomething" />
+                <Button text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#addNumber" />
                 <Button text="." GridPane.columnIndex="2" GridPane.rowIndex="3" onAction="#addDecimal" />
                 <Button text="CL" GridPane.columnIndex="3" GridPane.rowIndex="3" onAction="#clearScreen" />
-                <Button text="+" GridPane.columnIndex="4" GridPane.rowIndex="3" onAction="#addSomething" />
+                <Button text="+" GridPane.columnIndex="4" GridPane.rowIndex="3" onAction="#addOperation" />
             <Separator orientation="VERTICAL" prefWidth="50" prefHeight="200.0" GridPane.rowIndex="1" />
 
             </GridPane>
