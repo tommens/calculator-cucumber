@@ -36,7 +36,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorDivides() {
         try { op = new Divides(Arrays.asList(new Rational(value1), new Rational(value2)));
-          assertEquals( new Rational(value1 / value2),
+          assertEquals( new Rational(value1, value2),
                         calc.eval(op) );
           }
         catch(IllegalConstruction e) {

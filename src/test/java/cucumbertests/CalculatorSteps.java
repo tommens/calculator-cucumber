@@ -111,7 +111,14 @@ public class CalculatorSteps {
 		//so we complete its parameter list here:
 		op.addMoreParams(params);
 		assertEquals(new Rational(val), c.eval(op));
+	}
 
+	@Then("the operation evaluates to {int} over {int}")
+	public void thenTheOperationEvaluatesToFraction(int num, int denom) {
+		//During previous @When steps, extra parameters may have been added to the operation
+		//so we complete its parameter list here:
+		op.addMoreParams(params);
+		assertEquals(new Rational(num, denom), c.eval(op));
 	}
 
 }
