@@ -7,12 +7,8 @@ public interface ModeVisibilityStrategy {
     String PREFIX = "mode";
     String SUFFIX = "Box";
 
-    default void deactivateMode(AnchorPane components, int index) {
-        components.lookup("#" + PREFIX + index + SUFFIX).setVisible(false);
-    }
-
-    default void activateMode(AnchorPane components, int index) {
-        components.lookup("#" + PREFIX + index + SUFFIX).setVisible(true);
+    default void modeActivation(AnchorPane components, int index, ActivationModeEnum activationModeEnum) {
+        components.lookup("#" + PREFIX + index + SUFFIX).setVisible(activationModeEnum.getStatus());
     }
 
 }

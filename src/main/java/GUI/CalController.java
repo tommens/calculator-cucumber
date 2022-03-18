@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.component.ActivationModeEnum;
 import GUI.component.ModeEnum;
 import GUI.component.ModeVisibilityStrategy;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
+import static GUI.component.ActivationModeEnum.*;
 import static GUI.component.ModeEnum.mode;
 
 public class CalController implements ModeVisibilityStrategy {
@@ -33,8 +35,8 @@ public class CalController implements ModeVisibilityStrategy {
 
         modes.setValue(ModeEnum.BASIC.title());
         modes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            deactivateMode(componentTreeRoot, mode(oldValue).index());
-            activateMode(componentTreeRoot, mode(newValue).index());
+            modeActivation(componentTreeRoot, mode(oldValue).index(), DEACTIVATE);
+            modeActivation(componentTreeRoot, mode(newValue).index(), ACTIVATE);
         });
     }
 
