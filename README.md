@@ -1,5 +1,5 @@
 Code quality: ![Maven Build](https://github.com/AlixDeclerck/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
-[![BCH compliance](https://bettercodehub.com/edge/badge/tommens/calculator-cucumber?branch=master)](https://bettercodehub.com/)
+[![BCH compliance](https://bettercodehub.com/edge/badge/AlixDeclerck/calculator-cucumber?branch=project-configuration-with-gui-for-calculator)](https://bettercodehub.com/)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6856a0f94d25446ca346cbc15a701d43)](https://www.codacy.com/gh/AlixDeclerck/calculator-cucumber/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlixDeclerck/calculator-cucumber&amp;utm_campaign=Badge_Grade)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
@@ -18,7 +18,7 @@ The code is used (for educational purposes at the University of Mons, Belgium) t
 *  All tests can be found in the src\test directory. They serve as executable documentation of the source code.
 *  The source code is accompanied by a set of JUnit 5 unit tests. These tests can be written and run in the usual way. If you are not familiar with unit testing or JUnit 5, please refer to https://junit.org/junit5/.
 *  The source code is accompanied by a set of Cucumber BDD scenarios, also running in Junit. If you are not familiar with Cucumber and BDD, please refer to https://cucumber.io/docs/cucumber/.
-The BDD scenarios are specified as .feature files in the src\test\resources directory. Some classes defined in src\test take care of converting these scenarios to executable JUnit tests.
+   The BDD scenarios are specified as .feature files in the src\test\resources directory. Some classes defined in src\test take care of converting these scenarios to executable JUnit tests.
 
 ### Prerequisites
 
@@ -29,7 +29,7 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 *  Upon first use of the code in this repository, you will need to run "mvn install" to ensure that all required project dependencies (e.g. for Java, JUnit, Cucumber, and Maven) will be downloaded and installed locally.
 *  Assuming you have a sufficiently recent version of Maven installed (the required versions are specified as properties in the POM file), you can compile the source code using "mvn compile"
-*  Once the code is compiled, you can execute the main class of the Java code using "mvn exec:java" 
+*  Once the code is compiled, you can execute the main class of the Java code using "mvn exec:java"
 *  The tests and BDD scenarios are executable with Maven using "mvn test"
 *  Note that the tests are also executed when you do a "mvn install". It is possible to skip those tests by providing an extra parameter. For details of more advanced uses of Maven, please refer to its official documentation https://maven.apache.org/guides/.
 
@@ -47,13 +47,18 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/tommens/calculator-cucumber/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/tommens/calculator-cucumber/tags).
 
 ## Contributors
 
 * Tom Mens
 * Gauvain Devillez @GauvainD
 * Damien Legay @DamienLegay
+* Laurence
+* Guillaume
+* Thomas
+* Sahi
+* Alix
 
 ## Licence
 
