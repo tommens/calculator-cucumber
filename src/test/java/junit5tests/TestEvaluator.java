@@ -16,7 +16,7 @@ public class TestEvaluator {
     @SuppressWarnings("unused")
     private Evaluator visitor;
     private Calculator calc;
-    private int value1, value2;
+    private long value1, value2;
     private Expression op;
 
     @BeforeEach
@@ -29,14 +29,14 @@ public class TestEvaluator {
 
     @Test
     public void testEvaluatorMyNumber() {
-        assertEquals( value1,
+        assertEquals( new Rational(value1),
                       calc.eval(new Rational(value1)));
     }
 
     @Test
     public void testEvaluatorDivides() {
         try { op = new Divides(Arrays.asList(new Rational(value1), new Rational(value2)));
-          assertEquals( value1 / value2,
+          assertEquals( new Rational(value1 / value2),
                         calc.eval(op) );
           }
         catch(IllegalConstruction e) {
@@ -47,7 +47,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorPlus() {
         try { op = new Plus(Arrays.asList(new Rational(value1), new Rational(value2)));
-            assertEquals( value1 + value2,
+            assertEquals( new Rational(value1 + value2),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -58,7 +58,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorMinus() {
         try { op = new Minus(Arrays.asList(new Rational(value1), new Rational(value2)));
-            assertEquals( value1 - value2,
+            assertEquals( new Rational(value1 - value2),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
@@ -69,7 +69,7 @@ public class TestEvaluator {
     @Test
     public void testEvaluatorTimes() {
         try { op = new Times(Arrays.asList(new Rational(value1), new Rational(value2)));
-            assertEquals( value1 * value2,
+            assertEquals( new Rational(value1 * value2),
                     calc.eval(op) );
         }
         catch(IllegalConstruction e) {
