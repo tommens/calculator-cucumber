@@ -69,7 +69,7 @@ public class CalController implements ModeVisibilityStrategy {
     }
 
     private String processing() {
-        return "calculator v0.3.0";
+        return "calculator v0.4.0";
     }
 
     private String getControlValue(ActionEvent actionEvent) {
