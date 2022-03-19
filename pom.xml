@@ -137,7 +137,12 @@
                 <configuration>
                     <!--needed to prevent module problem-->
                     <detectJavaApiLink>false</detectJavaApiLink>
-                    <sourcepath>${basedir}/src/main/java/calculator;${basedir}/src/main/java/visitor;${basedir}/src/main/java/GUI</sourcepath>
+                    <sourcepath>
+                        ${basedir}/src/main/java/calculator;
+                        ${basedir}/src/main/java/visitor;
+                        ${basedir}/src/main/java/GUI;
+                        ${basedir}/src/main/java/common
+                    </sourcepath>
                 </configuration>
                 <executions>
                     <!-- Exports JavaDocs to regular HTML files -->

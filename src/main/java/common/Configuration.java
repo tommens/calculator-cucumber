@@ -1,4 +1,4 @@
-package GUI;
+package common;
 
 /**
  * Project Configuration file that contains useful constants.

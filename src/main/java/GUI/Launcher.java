@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import org.kordamp.bootstrapfx.scene.layout.Panel;
 
-import static GUI.Configuration.*;
+import static common.Configuration.*;
 
 /**
  * The GUI application Launcher

@@ -5,6 +5,4 @@ module gui.calculator {
 
     opens GUI to javafx.fxml;
     exports GUI;
-    exports GUI.component;
-    opens GUI.component to javafx.fxml;
 }
