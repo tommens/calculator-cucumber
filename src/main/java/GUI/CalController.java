@@ -1,30 +1,32 @@
 package GUI;
 
-import GUI.component.ActivationModeEnum;
 import GUI.component.ModeEnum;
 import GUI.component.ModeVisibilityStrategy;
+import GUI.component.UnexpectedStateException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
-import static GUI.component.ActivationModeEnum.*;
+import static GUI.component.ActivationModeEnum.ACTIVATE;
+import static GUI.component.ActivationModeEnum.DEACTIVATE;
 import static GUI.component.ModeEnum.mode;
+import static javafx.scene.control.Alert.AlertType.*;
+import static javafx.scene.control.ButtonType.CLOSE;
 
+/**
+ * This controller handle the main graphical interface's actions.
+ * Read the calculator panel which contains functionalities
+ * Switch mode
+ */
 public class CalController implements ModeVisibilityStrategy {
-
-    /*TODO: (@tests)
-    * --------------
-    * - check operator need to be char so 2 dim String give first char now
-     */
-
 
     @FXML
     AnchorPane componentTreeRoot;
-
-
 
     @FXML
     Button processResult;
@@ -35,49 +37,68 @@ public class CalController implements ModeVisibilityStrategy {
     @FXML
     ChoiceBox<String> modes;
 
-    private void initModes() {
-        for (ModeEnum mode : ModeEnum.values())
-            modes.getItems().add(mode.title());
-
-        modes.setValue(ModeEnum.BASIC.title());
-        modes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            modeActivation(componentTreeRoot, mode(oldValue).index(), DEACTIVATE);
-            modeActivation(componentTreeRoot, mode(newValue).index(), ACTIVATE);
-        });
-    }
-
     @FXML
     public void initialize() {
         initModes();
     }
 
-    public void addDecimal() {}
+    public void addDecimal() {
+        Platform.runLater(() -> {
+            Alert dialog = new Alert(INFORMATION, "Not yes implemented", CLOSE);
+            dialog.show();
+        });
+    }
 
     public void clearScreen() {
         textResult.setText("");
     }
 
     public void addNumber(ActionEvent actionEvent) {
-        textResult.setText(getButtonValue(actionEvent));
+        textResult.setText(getControlValue(actionEvent));
     }
 
     public void addOperation(ActionEvent actionEvent) {
-        textResult.setText(getButtonValue(actionEvent));
+        Button b = (Button) actionEvent.getSource();
+        textResult.setText(textResult.getText()+b.getText().charAt(0));
     }
 
-    private String getButtonValue(ActionEvent actionEvent) {
+    @FXML
+    protected void onProcessResult() {
+        if (!textResult.getText().equals(""))
+            textResult.setText(processing());
+    }
+
+    private String processing() {
+        return "calculator v0.3.0";
+    }
+
+    private String getControlValue(ActionEvent actionEvent) {
         StringBuilder txtValue = new StringBuilder(textResult.getText());
         Button b = (Button) actionEvent.getSource();
         txtValue.append(b.getText());
         return txtValue.toString();
     }
 
-    @FXML
-    protected void onProcessResult() {
-        textResult.setText("calculator v0.2.0");
+    private void initModes() {
+        for (ModeEnum mode : ModeEnum.values())
+            modes.getItems().add(mode.title());
+
+        modes.setValue(ModeEnum.BASIC.title());
+        modes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+            try {
+                modeActivation(componentTreeRoot, mode(oldValue).index(), DEACTIVATE);
+                modeActivation(componentTreeRoot, mode(newValue).index(), ACTIVATE);
+
+            } catch (UnexpectedStateException e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    Alert dialog = new Alert(ERROR, e.getMessage(), CLOSE);
+                    dialog.show();
+                });
+            }
+
+        });
     }
 
-    private String processing() {
-        return "calculator v0.3.0";
-    }
 }

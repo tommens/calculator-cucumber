@@ -1,5 +1,8 @@
 package GUI;
 
+/**
+ * Project Configuration file that contains useful constants.
+ */
 public class Configuration {
 
     public static final int WINDOWS_WIDTH = 420;

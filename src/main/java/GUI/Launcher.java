@@ -12,6 +12,9 @@ import org.kordamp.bootstrapfx.scene.layout.Panel;
 
 import static GUI.Configuration.*;
 
+/**
+ * The GUI application Launcher
+ */
 public class Launcher extends Application {
 
     @Override

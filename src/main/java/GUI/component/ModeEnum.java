@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Calculator modes enumeration
+ * Calculator modes enumeration.
+ * Provide the name and the index for each calculator modes.
  */
 public enum ModeEnum {
 

@@ -2,19 +2,26 @@ package GUI.component;
 
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Define the visibility of a specific component
+ */
 public interface ModeVisibilityStrategy {
-
-    /*TODO: (@tests)
-     * --------------
-     * - check component null
-     * - check is not in component tree
-     */
 
     String PREFIX = "mode";
     String SUFFIX = "Box";
 
-    default void modeActivation(AnchorPane components, int index, ActivationModeEnum activationModeEnum) {
-        components.lookup("#" + PREFIX + index + SUFFIX).setVisible(activationModeEnum.getStatus());
+    /**
+     *
+     * @param components the component Tree
+     * @param index the index of the component to (de)activate
+     * @param activationModeEnum the action defined by Enum
+     */
+    default void modeActivation(AnchorPane components, int index, ActivationModeEnum activationModeEnum) throws UnexpectedStateException {
+        try {
+            components.lookup("#" + PREFIX + index + SUFFIX).setVisible(activationModeEnum.getStatus());
+        } catch (Exception e) {
+            throw new UnexpectedStateException("Invalid component Tree during initialization");
+        }
     }
 
 }
