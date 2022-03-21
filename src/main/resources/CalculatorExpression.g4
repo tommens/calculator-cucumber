@@ -1,6 +1,8 @@
 grammar CalculatorExpression;
 
-INT : '-'?[0-9]+;
+INT      : '-'?[0-9]+;
+DECIMAL  : '-'?[0-9]+'.'[0-9]+;
+IMAGINARY: '-'?[0-9]+'i';
 
 PLUS : '+';
 MINUS: '-';
@@ -9,8 +11,24 @@ DIV  : '/';
 
 expression: term;
 
-term: factor;
+parenthesed_expression: '(' expression ')';
 
-factor: value;
+term: factor
+    | term PLUS factor
+    | term MINUS factor;
 
-value : INT;
+factor: value
+      | factor MULT value
+      | factor DIV value
+      ;
+
+value: number
+     | parenthesed_expression
+     ;
+
+number: INT
+      | DECIMAL
+      | IMAGINARY
+      ;
+
+WS : [ \t\r\n]+ -> skip; // ignore whitespaces

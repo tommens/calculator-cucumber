@@ -1,4 +1,5 @@
 // Generated from /home/thomas/Documents/Projects/calculator-cucumber/src/main/resources/CalculatorExpression.g4 by ANTLR 4.9.2
+package parser;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -16,7 +17,8 @@ public class CalculatorExpressionLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		INT=1, PLUS=2, MINUS=3, MULT=4, DIV=5;
+		T__0=1, T__1=2, INT=3, DECIMAL=4, IMAGINARY=5, PLUS=6, MINUS=7, MULT=8, 
+		DIV=9, WS=10;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -27,20 +29,22 @@ public class CalculatorExpressionLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"INT", "PLUS", "MINUS", "MULT", "DIV"
+			"T__0", "T__1", "INT", "DECIMAL", "IMAGINARY", "PLUS", "MINUS", "MULT", 
+			"DIV", "WS"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, "'+'", "'-'", "'*'", "'/'"
+			null, "'('", "')'", null, null, null, "'+'", "'-'", "'*'", "'/'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "INT", "PLUS", "MINUS", "MULT", "DIV"
+			null, null, null, "INT", "DECIMAL", "IMAGINARY", "PLUS", "MINUS", "MULT", 
+			"DIV", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -102,15 +106,27 @@ public class CalculatorExpressionLexer extends Lexer {
 	public ATN getATN() { return _ATN; }
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\7\35\b\1\4\2\t\2"+
-		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\5\2\17\n\2\3\2\6\2\22\n\2\r\2\16"+
-		"\2\23\3\3\3\3\3\4\3\4\3\5\3\5\3\6\3\6\2\2\7\3\3\5\4\7\5\t\6\13\7\3\2\3"+
-		"\3\2\62;\2\36\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2"+
-		"\2\2\3\16\3\2\2\2\5\25\3\2\2\2\7\27\3\2\2\2\t\31\3\2\2\2\13\33\3\2\2\2"+
-		"\r\17\7/\2\2\16\r\3\2\2\2\16\17\3\2\2\2\17\21\3\2\2\2\20\22\t\2\2\2\21"+
-		"\20\3\2\2\2\22\23\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\4\3\2\2\2\25"+
-		"\26\7-\2\2\26\6\3\2\2\2\27\30\7/\2\2\30\b\3\2\2\2\31\32\7,\2\2\32\n\3"+
-		"\2\2\2\33\34\7\61\2\2\34\f\3\2\2\2\5\2\16\23\2";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\fJ\b\1\4\2\t\2\4"+
+		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
+		"\13\3\2\3\2\3\3\3\3\3\4\5\4\35\n\4\3\4\6\4 \n\4\r\4\16\4!\3\5\5\5%\n\5"+
+		"\3\5\6\5(\n\5\r\5\16\5)\3\5\3\5\6\5.\n\5\r\5\16\5/\3\6\5\6\63\n\6\3\6"+
+		"\6\6\66\n\6\r\6\16\6\67\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3\t\3\n\3\n\3\13\6"+
+		"\13E\n\13\r\13\16\13F\3\13\3\13\2\2\f\3\3\5\4\7\5\t\6\13\7\r\b\17\t\21"+
+		"\n\23\13\25\f\3\2\4\3\2\62;\5\2\13\f\17\17\"\"\2Q\2\3\3\2\2\2\2\5\3\2"+
+		"\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21"+
+		"\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\3\27\3\2\2\2\5\31\3\2\2\2\7\34\3\2"+
+		"\2\2\t$\3\2\2\2\13\62\3\2\2\2\r;\3\2\2\2\17=\3\2\2\2\21?\3\2\2\2\23A\3"+
+		"\2\2\2\25D\3\2\2\2\27\30\7*\2\2\30\4\3\2\2\2\31\32\7+\2\2\32\6\3\2\2\2"+
+		"\33\35\7/\2\2\34\33\3\2\2\2\34\35\3\2\2\2\35\37\3\2\2\2\36 \t\2\2\2\37"+
+		"\36\3\2\2\2 !\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\"\b\3\2\2\2#%\7/\2\2$#\3"+
+		"\2\2\2$%\3\2\2\2%\'\3\2\2\2&(\t\2\2\2\'&\3\2\2\2()\3\2\2\2)\'\3\2\2\2"+
+		")*\3\2\2\2*+\3\2\2\2+-\7\60\2\2,.\t\2\2\2-,\3\2\2\2./\3\2\2\2/-\3\2\2"+
+		"\2/\60\3\2\2\2\60\n\3\2\2\2\61\63\7/\2\2\62\61\3\2\2\2\62\63\3\2\2\2\63"+
+		"\65\3\2\2\2\64\66\t\2\2\2\65\64\3\2\2\2\66\67\3\2\2\2\67\65\3\2\2\2\67"+
+		"8\3\2\2\289\3\2\2\29:\7k\2\2:\f\3\2\2\2;<\7-\2\2<\16\3\2\2\2=>\7/\2\2"+
+		">\20\3\2\2\2?@\7,\2\2@\22\3\2\2\2AB\7\61\2\2B\24\3\2\2\2CE\t\3\2\2DC\3"+
+		"\2\2\2EF\3\2\2\2FD\3\2\2\2FG\3\2\2\2GH\3\2\2\2HI\b\13\2\2I\26\3\2\2\2"+
+		"\13\2\34!$)/\62\67F\3\b\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
