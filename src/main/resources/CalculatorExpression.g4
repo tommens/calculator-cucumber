@@ -6,7 +6,7 @@ IMAGINARY: [0-9]+'i';
 
 PLUS : '+';
 MINUS: '-';
-MULT : '*';
+MULT : '×';
 DIV  : '/';
 
 expression: term;

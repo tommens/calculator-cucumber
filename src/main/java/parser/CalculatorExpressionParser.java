@@ -31,7 +31,7 @@ public class CalculatorExpressionParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'('", "')'", null, null, null, "'+'", "'-'", "'*'", "'/'"
+			null, "'('", "')'", null, null, null, "'+'", "'-'", "'\u00D7'", "'/'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();

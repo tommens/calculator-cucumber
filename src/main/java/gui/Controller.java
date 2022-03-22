@@ -37,7 +37,9 @@ public abstract class Controller {
 
     public void eraseButton() {
         String current = inputField.getText();
-        inputField.setText(current.substring(0, current.length()-1));
+        if (!current.isEmpty()) {
+            inputField.setText(current.substring(0, current.length()-1));
+        }
     }
 
     public void clickValueButton(Event e) {

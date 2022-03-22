@@ -22,12 +22,12 @@ public class Launcher extends Application {
         stage.setMaxHeight(MAX_HEIGHT);
 
         // Charge scene for basic calculator
-        FXMLLoader loaderBasic = new FXMLLoader(getClass().getResource("layouts/basic.fxml"));
+        FXMLLoader loaderBasic = new FXMLLoader(getClass().getResource("/gui/layouts/basic.fxml"));
         Parent parentBasic = loaderBasic.load();
         Scene sceneBasic = new Scene(parentBasic);
 
         // Charge scene for converter
-        FXMLLoader loaderConverter = new FXMLLoader(getClass().getResource("layouts/converter.fxml"));
+        FXMLLoader loaderConverter = new FXMLLoader(getClass().getResource("/gui/layouts/converter.fxml"));
         Parent parentConverter = loaderConverter.load();
         Scene sceneConverter = new Scene(parentConverter);
 
