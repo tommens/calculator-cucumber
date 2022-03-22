@@ -1,0 +1,17 @@
+.button{
+    -fx-font: 25px "Serif";
+}
+
+#calcField{
+    -fx-background-color: #777777;
+    -fx-font-family: Serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
+
+#resultField{
+    -fx-background-color: #777777;
+    -fx-font-family: Serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
