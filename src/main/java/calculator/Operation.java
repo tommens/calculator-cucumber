@@ -39,6 +39,10 @@ public abstract class Operation implements Expression
   abstract public int op(int l, int r);
     // the operation itself is specified in the subclasses
 
+	abstract public boolean op(boolean a, boolean b);
+	abstract public boolean op(boolean a);
+
+
   // add more arguments to the existing list of arguments args
   public void addMoreParams(List<Expression> params) {
   	args.addAll(params);

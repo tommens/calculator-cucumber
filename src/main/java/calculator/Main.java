@@ -49,6 +49,16 @@ public class Main {
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);
+
+		List<Expression> my_params1 = new ArrayList<>();
+		List<Expression> my_params = new ArrayList<>();
+		Collections.addAll(my_params, new MyBoolean(false), new MyBoolean(true));
+		Collections.addAll(my_params1, new MyBoolean(false), new MyBoolean(false));
+		List<Expression> params5 = new ArrayList<>();
+		Collections.addAll(params5, new LogicalAnd(my_params1), new LogicalOr(my_params), new MyBoolean(true));
+		e = new LogicalOr(params5,Notation.INFIX);
+		c.printBool(e);
+		c.evalBool(e);
 	}
 
 	catch(IllegalConstruction exception) {

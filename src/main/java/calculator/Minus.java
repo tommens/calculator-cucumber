@@ -18,4 +18,14 @@ final public class Minus extends Operation
   public int op(int l, int r) {
   	return (l-r);
   }
+
+    @Override
+    public boolean op(boolean a, boolean b) {
+        return false;
+    }
+
+    @Override
+    public boolean op(boolean a) {
+        return false;
+    }
 }

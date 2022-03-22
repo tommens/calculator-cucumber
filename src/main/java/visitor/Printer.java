@@ -17,6 +17,12 @@ public class Printer extends Evaluator {
         System.out.println();
     }
 
+    public void printBool(){
+        System.out.println("The result of evaluating expression " + currentExpression);
+        System.out.println("is: " + getBoolResult() + ".");
+        System.out.println();
+    }
+
     public void detailedPrint() {
         print();
         System.out.print("It contains " + currentExpression.countDepth() + " levels of nested expressions, ");

@@ -19,6 +19,11 @@ public class Calculator {
         p.print();
     }
 
+    public void printBool(Expression e){
+        Printer p = new Printer(e);
+        p.printBool();
+    }
+
     public void printExpressionDetails(Expression e) {
         Printer p = new Printer(e);
         p.detailedPrint();
@@ -31,6 +36,12 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    public boolean evalBool(Expression e){
+        Evaluator v = new Evaluator();
+        e.accept(v);
+        return v.getBoolResult();
     }
 
     /*
