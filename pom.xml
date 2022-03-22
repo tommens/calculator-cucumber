@@ -140,7 +140,7 @@
                     <sourcepath>
                         ${basedir}/src/main/java/calculator;
                         ${basedir}/src/main/java/visitor;
-                        ${basedir}/src/main/java/GUI;
+                        ${basedir}/src/main/java/gui;
                         ${basedir}/src/main/java/common
                     </sourcepath>
                 </configuration>

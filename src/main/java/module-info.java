@@ -3,6 +3,6 @@ module gui.calculator {
     requires javafx.fxml;
     requires org.kordamp.bootstrapfx.core;
 
-    opens GUI to javafx.fxml;
-    exports GUI;
+    opens gui to javafx.fxml;
+    exports gui;
 }
