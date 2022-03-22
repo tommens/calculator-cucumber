@@ -1,7 +1,9 @@
 package gui;
 
+import calculator.Calculator;
+import calculator.Expression;
+import calculator.Parser;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 
 /**
  * This controller handle the main graphical interface's actions.
@@ -10,9 +12,11 @@ import javafx.scene.control.Button;
  */
 public class BasicController extends Controller {
 
+    private Calculator calculator = new Calculator();
+
     public void submitButton() {
-        // Todo evaluate expression and return good result or error
-        this.outputField.setText(this.inputField.getText());
+        Expression expr = Parser.parse(this.inputField.getText());
+        this.outputField.setText(calculator.eval(expr).toString());
         this.setSubmitted(true);
     }
 
@@ -25,7 +29,7 @@ public class BasicController extends Controller {
     }
 
     public void timesButton() {
-        addOperation("x");
+        addOperation("×");
     }
 
     public void dividesButton() {
