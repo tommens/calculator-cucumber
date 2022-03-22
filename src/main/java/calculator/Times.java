@@ -11,7 +11,7 @@ final public class Times extends Operation
 
   public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
   	super(elist,n);
-  	symbol = "*";
+  	symbol = "×";
   	neutral = 1;
   }
 

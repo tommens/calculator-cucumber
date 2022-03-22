@@ -52,7 +52,7 @@ public class TestParser {
 
     @Test
     public void testParseMultiplication() throws Exception {
-        String expr = "1*2";
+        String expr = "1×2";
         assertEquals(
                 new Times(List.of(new Rational(1), new Rational(2))),
                 Parser.parse(expr)
@@ -70,7 +70,7 @@ public class TestParser {
 
     @Test
     public void testParsePriority() throws Exception {
-        String expr = "1 + 2 * 3";
+        String expr = "1 + 2 × 3";
         assertEquals(
                 new Plus(List.of(new Rational(1),
                         new Times(List.of(new Rational(2), new Rational(3))))),
@@ -80,7 +80,7 @@ public class TestParser {
 
     @Test
     public void testParseParentheses() throws Exception {
-        String expr = "(1 + 2) * 3";
+        String expr = "(1 + 2) × 3";
         assertEquals(
                 new Times(List.of(
                     new Plus(List.of(new Rational(1), new Rational(2))),
