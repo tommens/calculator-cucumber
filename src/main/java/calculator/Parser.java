@@ -15,6 +15,7 @@ public class Parser {
      * @param expression the expression to parse
      */
     public static Expression parse(String expression) {
+        // TODO handle exceptions
         // Source: https://github.com/antlr/antlr4/blob/4.6/doc/listeners.md
         CharStream input = new ANTLRInputStream(expression);
         CalculatorExpressionLexer lexer = new CalculatorExpressionLexer(input);

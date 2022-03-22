@@ -16,7 +16,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
 
     @Override
     public Expression visitParenthesed_expression(CalculatorExpressionParser.Parenthesed_expressionContext ctx) {
-        return ctx.getChild(0).accept(this);
+        return ctx.getChild(1).accept(this);
     }
 
     @Override
@@ -75,20 +75,40 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
 
     @Override
     public Expression visitNumber(CalculatorExpressionParser.NumberContext ctx) {
-        assert ctx.getChild(0) instanceof TerminalNodeImpl;
-        TerminalNodeImpl nb = (TerminalNodeImpl) ctx.getChild(0); // A number is a leaf.
 
-        return switch (nb.getSymbol().getType()) {
-            case CalculatorExpressionParser.INT -> new MyNumber(Integer.parseInt(nb.getText()));
-            case CalculatorExpressionParser.DECIMAL -> throw new RuntimeException("Missing implementation for decimal numbers"); // TODO Rational or real
-            case CalculatorExpressionParser.IMAGINARY -> throw new RuntimeException("Missing implementation for imaginary numbers");
-            default -> throw new InvalidSyntax("Invalid number");
+
+
+        return switch (ctx.getChildCount()) {
+            case 1 -> {
+                // The number is the value of the child.
+                assert ctx.getChild(0) instanceof TerminalNodeImpl;
+                TerminalNodeImpl nb = (TerminalNodeImpl) ctx.getChild(0);
+                yield switch (nb.getSymbol().getType()) {
+                    case CalculatorExpressionParser.INT -> new MyNumber(Integer.parseInt(nb.getText()));
+                    case CalculatorExpressionParser.DECIMAL -> throw new RuntimeException("Missing implementation for decimal numbers"); // TODO Rational or real
+                    case CalculatorExpressionParser.IMAGINARY -> throw new RuntimeException("Missing implementation for imaginary numbers");
+                    default -> throw new InvalidSyntax("Invalid number");
+                };
+            }
+            case 2 -> {
+                assert ((TerminalNodeImpl) ctx.getChild(0)).getSymbol().getType() == CalculatorExpressionParser.MINUS;
+                assert ctx.getChild(1) instanceof TerminalNodeImpl;
+                TerminalNodeImpl nb = (TerminalNodeImpl) ctx.getChild(1);
+                yield switch (nb.getSymbol().getType()) {
+                    case CalculatorExpressionParser.INT -> new MyNumber(Integer.parseInt(nb.getText())*-1);
+                    case CalculatorExpressionParser.DECIMAL -> throw new RuntimeException("Missing implementation for decimal numbers"); // TODO Rational or real
+                    case CalculatorExpressionParser.IMAGINARY -> throw new RuntimeException("Missing implementation for imaginary numbers");
+                    default -> throw new InvalidSyntax("Invalid number");
+                };
+            }
+            default -> throw new InvalidSyntax("Unknown number of children.");
         };
+
+
     }
 
     @Override
     public Expression visit(ParseTree parseTree) {
-
         return parseTree.getChild(0).accept(this); // The only child of an expression is a term.
     }
 

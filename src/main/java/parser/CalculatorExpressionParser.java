@@ -426,6 +426,7 @@ public class CalculatorExpressionParser extends Parser {
 			case INT:
 			case DECIMAL:
 			case IMAGINARY:
+			case MINUS:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(46);
@@ -458,6 +459,7 @@ public class CalculatorExpressionParser extends Parser {
 		public TerminalNode INT() { return getToken(CalculatorExpressionParser.INT, 0); }
 		public TerminalNode DECIMAL() { return getToken(CalculatorExpressionParser.DECIMAL, 0); }
 		public TerminalNode IMAGINARY() { return getToken(CalculatorExpressionParser.IMAGINARY, 0); }
+		public TerminalNode MINUS() { return getToken(CalculatorExpressionParser.MINUS, 0); }
 		public NumberContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -484,7 +486,17 @@ public class CalculatorExpressionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(51);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==MINUS) {
+				{
+				setState(50);
+				match(MINUS);
+				}
+			}
+
+			setState(53);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << DECIMAL) | (1L << IMAGINARY))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -536,20 +548,21 @@ public class CalculatorExpressionParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f\67\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\3\3\3\3\3\3\3\3\4\3\4\3"+
-		"\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4\36\n\4\f\4\16\4!\13\4\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\3\5\3\5\7\5,\n\5\f\5\16\5/\13\5\3\6\3\6\5\6\63\n\6\3\7\3\7"+
-		"\3\7\2\4\6\b\b\2\4\6\b\n\f\2\3\3\2\5\7\2\65\2\16\3\2\2\2\4\20\3\2\2\2"+
-		"\6\24\3\2\2\2\b\"\3\2\2\2\n\62\3\2\2\2\f\64\3\2\2\2\16\17\5\6\4\2\17\3"+
-		"\3\2\2\2\20\21\7\3\2\2\21\22\5\2\2\2\22\23\7\4\2\2\23\5\3\2\2\2\24\25"+
-		"\b\4\1\2\25\26\5\b\5\2\26\37\3\2\2\2\27\30\f\4\2\2\30\31\7\b\2\2\31\36"+
-		"\5\b\5\2\32\33\f\3\2\2\33\34\7\t\2\2\34\36\5\b\5\2\35\27\3\2\2\2\35\32"+
-		"\3\2\2\2\36!\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \7\3\2\2\2!\37\3\2\2\2"+
-		"\"#\b\5\1\2#$\5\n\6\2$-\3\2\2\2%&\f\4\2\2&\'\7\n\2\2\',\5\n\6\2()\f\3"+
-		"\2\2)*\7\13\2\2*,\5\n\6\2+%\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3"+
-		"\2\2\2.\t\3\2\2\2/-\3\2\2\2\60\63\5\f\7\2\61\63\5\4\3\2\62\60\3\2\2\2"+
-		"\62\61\3\2\2\2\63\13\3\2\2\2\64\65\t\2\2\2\65\r\3\2\2\2\7\35\37+-\62";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f:\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2\3\3\3\3\3\3\3\3\3\4\3\4\3\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\7\4\36\n\4\f\4\16\4!\13\4\3\5\3\5\3\5\3\5\3\5"+
+		"\3\5\3\5\3\5\3\5\7\5,\n\5\f\5\16\5/\13\5\3\6\3\6\5\6\63\n\6\3\7\5\7\66"+
+		"\n\7\3\7\3\7\3\7\2\4\6\b\b\2\4\6\b\n\f\2\3\3\2\5\7\29\2\16\3\2\2\2\4\20"+
+		"\3\2\2\2\6\24\3\2\2\2\b\"\3\2\2\2\n\62\3\2\2\2\f\65\3\2\2\2\16\17\5\6"+
+		"\4\2\17\3\3\2\2\2\20\21\7\3\2\2\21\22\5\2\2\2\22\23\7\4\2\2\23\5\3\2\2"+
+		"\2\24\25\b\4\1\2\25\26\5\b\5\2\26\37\3\2\2\2\27\30\f\4\2\2\30\31\7\b\2"+
+		"\2\31\36\5\b\5\2\32\33\f\3\2\2\33\34\7\t\2\2\34\36\5\b\5\2\35\27\3\2\2"+
+		"\2\35\32\3\2\2\2\36!\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \7\3\2\2\2!\37"+
+		"\3\2\2\2\"#\b\5\1\2#$\5\n\6\2$-\3\2\2\2%&\f\4\2\2&\'\7\n\2\2\',\5\n\6"+
+		"\2()\f\3\2\2)*\7\13\2\2*,\5\n\6\2+%\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2"+
+		"\2\2-.\3\2\2\2.\t\3\2\2\2/-\3\2\2\2\60\63\5\f\7\2\61\63\5\4\3\2\62\60"+
+		"\3\2\2\2\62\61\3\2\2\2\63\13\3\2\2\2\64\66\7\t\2\2\65\64\3\2\2\2\65\66"+
+		"\3\2\2\2\66\67\3\2\2\2\678\t\2\2\28\r\3\2\2\2\b\35\37+-\62\65";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
