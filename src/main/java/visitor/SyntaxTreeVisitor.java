@@ -84,7 +84,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
                 assert ctx.getChild(0) instanceof TerminalNodeImpl;
                 TerminalNodeImpl nb = (TerminalNodeImpl) ctx.getChild(0);
                 yield switch (nb.getSymbol().getType()) {
-                    case CalculatorExpressionParser.INT -> new MyNumber(Integer.parseInt(nb.getText()));
+                    case CalculatorExpressionParser.INT -> new Rational(Integer.parseInt(nb.getText()));
                     case CalculatorExpressionParser.DECIMAL -> throw new RuntimeException("Missing implementation for decimal numbers"); // TODO Rational or real
                     case CalculatorExpressionParser.IMAGINARY -> throw new RuntimeException("Missing implementation for imaginary numbers");
                     default -> throw new InvalidSyntax("Invalid number");
@@ -95,7 +95,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
                 assert ctx.getChild(1) instanceof TerminalNodeImpl;
                 TerminalNodeImpl nb = (TerminalNodeImpl) ctx.getChild(1);
                 yield switch (nb.getSymbol().getType()) {
-                    case CalculatorExpressionParser.INT -> new MyNumber(Integer.parseInt(nb.getText())*-1);
+                    case CalculatorExpressionParser.INT -> new Rational(Integer.parseInt(nb.getText())).negate();
                     case CalculatorExpressionParser.DECIMAL -> throw new RuntimeException("Missing implementation for decimal numbers"); // TODO Rational or real
                     case CalculatorExpressionParser.IMAGINARY -> throw new RuntimeException("Missing implementation for imaginary numbers");
                     default -> throw new InvalidSyntax("Invalid number");

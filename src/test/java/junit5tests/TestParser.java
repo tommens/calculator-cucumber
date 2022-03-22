@@ -17,7 +17,7 @@ public class TestParser {
     @Test
     public void testParseInteger() {
         String expr = "5";
-        assertEquals(new MyNumber(5), Parser.parse(expr));
+        assertEquals(new Rational(5), Parser.parse(expr));
     }
 
     /*
@@ -36,7 +36,7 @@ public class TestParser {
     public void testParseAddition() throws Exception {
         String expr = "1+2";
         assertEquals(
-                new Plus(List.of(new MyNumber(1), new MyNumber(2))),
+                new Plus(List.of(new Rational(1), new Rational(2))),
                 Parser.parse(expr)
         );
     }
@@ -45,7 +45,7 @@ public class TestParser {
     public void testParseDifference() throws Exception {
         String expr = "1-2";
         assertEquals(
-                new Minus(List.of(new MyNumber(1), new MyNumber(2))),
+                new Minus(List.of(new Rational(1), new Rational(2))),
                 Parser.parse(expr)
         );
     }
@@ -54,7 +54,7 @@ public class TestParser {
     public void testParseMultiplication() throws Exception {
         String expr = "1*2";
         assertEquals(
-                new Times(List.of(new MyNumber(1), new MyNumber(2))),
+                new Times(List.of(new Rational(1), new Rational(2))),
                 Parser.parse(expr)
         );
     }
@@ -63,7 +63,7 @@ public class TestParser {
     public void testParseDivision() throws Exception {
         String expr = "1/2";
         assertEquals(
-                new Divides(List.of(new MyNumber(1), new MyNumber(2))),
+                new Divides(List.of(new Rational(1), new Rational(2))),
                 Parser.parse(expr)
         );
     }
@@ -72,8 +72,8 @@ public class TestParser {
     public void testParsePriority() throws Exception {
         String expr = "1 + 2 * 3";
         assertEquals(
-                new Plus(List.of(new MyNumber(1),
-                        new Times(List.of(new MyNumber(2), new MyNumber(3))))),
+                new Plus(List.of(new Rational(1),
+                        new Times(List.of(new Rational(2), new Rational(3))))),
                 Parser.parse(expr)
         );
     }
@@ -83,8 +83,8 @@ public class TestParser {
         String expr = "(1 + 2) * 3";
         assertEquals(
                 new Times(List.of(
-                    new Plus(List.of(new MyNumber(1), new MyNumber(2))),
-                    new MyNumber(3))),
+                    new Plus(List.of(new Rational(1), new Rational(2))),
+                    new Rational(3))),
                 Parser.parse(expr)
         );
     }
