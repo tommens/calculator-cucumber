@@ -14,8 +14,16 @@ final public class Divides extends Operation
 	symbol = "/";
 	neutral = 1;
   }
-  
-  public int op(int l, int r) {
+
+    @Override
+    public Number op(Number l, Number r) {
+        if (r.equals(new Rational(0))) {
+            throw new ArithmeticException(); // TODO change this to a custom exception
+        }
+        return l.divide(r);
+    }
+
+    public int op(int l, int r) {
       int val = (int)Double.NaN; // will be zero with Integer
 
       try {
