@@ -1,30 +1,30 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.MyNumber;
+import calculator.Number;
 import calculator.Operation;
 
 import java.util.ArrayList;
 
 public class Evaluator extends Visitor {
 
-    private int computedValue;
+    private Number computedValue;
 
-    public Integer getResult() { return computedValue; }
+    public Number getResult() { return computedValue; }
 
-    public void visit(MyNumber n) {
-        computedValue = n.getValue();
+    public void visit(Number n) {
+        computedValue = n;
     }
 
     public void visit(Operation o) {
-        ArrayList<Integer> evaluatedArgs = new ArrayList<>();
+        ArrayList<Number> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
         //second loop to accummulate all the evaluated subresults
-        int temp = evaluatedArgs.get(0);
+        Number temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             temp = o.op(temp,evaluatedArgs.get(counter));

@@ -14,8 +14,11 @@ final public class Minus extends Operation
   	symbol = "-";
   	neutral = 0;
   }
-  
-  public int op(int l, int r) {
-  	return (l-r);
-  }
+
+    @Override
+    public Number op(Number l, Number r) {
+        return l.subtract(r);
+    }
+
+
 }

@@ -14,7 +14,9 @@ final public class Times extends Operation
   	symbol = "*";
   	neutral = 1;
   }
-  
-  public int op(int l, int r)
-    { return (l*r); }
+
+    @Override
+    public Number op(Number l, Number r) {
+        return l.multiply(r);
+    }
 }

@@ -15,7 +15,7 @@ final public class Plus extends Operation
   	neutral = 0;
   }
 
-  public int op(int l, int r) {
-  	return (l+r);
+  public Number op(Number l, Number r) {
+  	return l.add(r);
   }
 }
