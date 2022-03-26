@@ -28,25 +28,23 @@ public class Main {
 
 	    List<Expression> params = new ArrayList<>();
 	    Collections.addAll(params, new Rational(3), new Rational(4), new Rational(5));
-	    e = new Plus(params,Notation.PREFIX);
-		c.printExpressionDetails(e);
+	    e = new Plus(params);
 		c.eval(e);
 	
 		List<Expression> params2 = new ArrayList<>();
 		Collections.addAll(params2, new Rational(5), new Rational(3));
-		e = new Minus(params2, Notation.INFIX);
+		e = new Minus(params2);
 		c.print(e);
 		c.eval(e);
 
 		List<Expression> params3 = new ArrayList<>();
 		Collections.addAll(params3, new Plus(params), new Minus(params2));
 		e = new Times(params3);
-		c.printExpressionDetails(e);
 		c.eval(e);
 
 		List<Expression> params4 = new ArrayList<>();
 		Collections.addAll(params4, new Plus(params), new Minus(params2), new Rational(5));
-		e = new Divides(params4,Notation.POSTFIX);
+		e = new Divides(params4);
 		c.print(e);
 		c.eval(e);
 	}
