@@ -1,6 +1,5 @@
 package calculator;
 
-import org.jetbrains.annotations.NotNull;
 import visitor.InfixPrinter;
 import visitor.Printer;
 import visitor.Visitor;
