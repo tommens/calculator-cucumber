@@ -2,6 +2,8 @@ package calculator;
 
 import java.math.BigInteger;
 
+import static calculator.NumberTypeMapper.numberToRational;
+
 public class Rational extends Number implements Expression, Comparable<Rational> {
 
     protected BigInteger numerator;
@@ -24,6 +26,10 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         super();
         this.numerator = numerator;
         this.denominator = denominator;
+
+        if (denominator.compareTo(BigInteger.ZERO) == 0) {
+            throw new ArithmeticException("rational instanciation null denominator"); // TODO do it better
+        }
 
         if (denominator.compareTo(BigInteger.ZERO) < 0) {
             this.numerator = this.numerator.negate();
@@ -66,39 +72,34 @@ public class Rational extends Number implements Expression, Comparable<Rational>
 
     @Override
     public Number add(Number val) {
-        if (val instanceof Rational rat) {
-            return new Rational(numerator.multiply(rat.denominator).add(rat.numerator.multiply(denominator)),
-                    denominator.multiply(rat.denominator));
-        }
-        return null;
+        Rational rat = numberToRational(val);
+        return new Rational(numerator.multiply(rat.denominator).add(rat.numerator.multiply(denominator)),
+                denominator.multiply(rat.denominator));
     }
 
     @Override
     public Number subtract(Number val) {
-        if (val instanceof Rational rat) {
-            return add(rat.negate());
-        }
-        return null;
+        return add(val.negate());
     }
 
     @Override
     public Number multiply(Number val) {
-        if (val instanceof Rational rat) {
-            return new Rational(numerator.multiply(rat.numerator),
-                    denominator.multiply(rat.denominator));
-        }
-        return null;
+        Rational rat = numberToRational(val);
+        return new Rational(numerator.multiply(rat.numerator), denominator.multiply(rat.denominator));
     }
 
     @Override
     public Number divide(Number val) {
-        if (val instanceof Rational rat) {
-            if (rat.equals(new Rational(0))) {
-                throw new ArithmeticException(); // TODO do it better
-            }
-            return multiply(new Rational(rat.denominator, rat.numerator));
+        Rational rat = numberToRational(val);
+        Number res = null;
+
+        try {
+            res = multiply(new Rational(rat.denominator, rat.numerator));
+        } catch (ArithmeticException e) {
+            e.printStackTrace(); // TODO: perhaps throws the IllegalConstructionException ?
         }
-        return null;
+
+        return res;
     }
 
     @Override
