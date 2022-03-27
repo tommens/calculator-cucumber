@@ -11,7 +11,6 @@ public class LogicalAnd extends Operation{
     public LogicalAnd(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
         symbol = "AND";
-        //neutral = 1;
     }
     @Override
     public int op(int l, int r) {

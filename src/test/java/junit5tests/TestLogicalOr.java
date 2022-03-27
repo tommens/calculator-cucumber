@@ -31,4 +31,32 @@ public class TestLogicalOr {
         // It should not be possible to create an expression without null parameter list
         assertThrows(IllegalConstruction.class, () -> op = new LogicalOr(null));
     }
+
+    @Test
+    public void testEquals() {
+        // Two similar expressions, constructed separately (and using different constructors) should be equal
+        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
+        try {
+            LogicalOr lo = new LogicalOr(p, Notation.INFIX);
+            assertEquals(op, lo);
+        }
+        catch(IllegalConstruction e) { fail(); }
+    }
+
+    @Test
+    public void testHashCode() {
+        // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
+        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
+        try {
+            LogicalOr e = new LogicalOr(p, Notation.INFIX);
+            assertEquals(e.hashCode(), op.hashCode());
+        }
+        catch(IllegalConstruction e) { fail(); }
+    }
+
+    @Test
+    public void testNullParamList() {
+        params = null;
+        assertThrows(IllegalConstruction.class, () -> op = new LogicalOr(params));
+    }
 }

@@ -36,7 +36,7 @@ public class MyBoolean implements Expression{
         return Boolean.toString(value);
     }
 
-    //Two MyNumber expressions are equal if the values they contain are equal
+    //Two MyBoolean expressions are equal if the values they contain are equal
     @Override
     public boolean equals(Object o) {
         // No object should be equal to null (not including this check can result in an exception if a MyNumber is tested against null)

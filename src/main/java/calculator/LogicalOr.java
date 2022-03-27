@@ -11,7 +11,6 @@ public class LogicalOr extends Operation{
     public LogicalOr(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
         symbol = "OR";
-        //neutral = 1;
     }
     @Override
     public int op(int l, int r) {
