@@ -8,8 +8,7 @@ Test coverage: ![Coverage](.github/badges/jacoco.svg)
 
 # Calculator with memory functionality
 
-## Related to
-https://github.com/AlixDeclerck/calculator-cucumber/issues/7
+Related to Issue : https://github.com/AlixDeclerck/calculator-cucumber/issues/7
 
 ## Licence
 
