@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.InfixPrinter;
 import visitor.Printer;
 
 public class Calculator {
@@ -14,15 +15,12 @@ public class Calculator {
      public Expression read(String s)
     */
 
-    public void print(Expression e) {
-        Printer p = new Printer(e);
-        p.print();
+    public String print(Expression e) {
+        Printer p = new InfixPrinter();
+        e.accept(p);
+        return p.getBuffer();
     }
 
-    public void printExpressionDetails(Expression e) {
-        Printer p = new Printer(e);
-        p.detailedPrint();
-    }
 
     public Number eval(Expression e) {
         // create a new visitor to evaluate expressions

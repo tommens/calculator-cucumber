@@ -6,11 +6,7 @@ final public class Times extends Operation
 {
 
   public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
-  	this(elist, null);
-  }
-
-  public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
-  	super(elist,n);
+  	super(elist);
   	symbol = "×";
   	neutral = 1;
   }
