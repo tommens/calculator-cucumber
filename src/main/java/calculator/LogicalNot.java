@@ -11,8 +11,8 @@ public class LogicalNot extends Operation{
     public LogicalNot(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
         symbol = "NOT";
-
     }
+
     @Override
     public int op(int l, int r) {
         return 0;

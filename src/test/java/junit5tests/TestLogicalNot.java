@@ -43,16 +43,16 @@ public class TestLogicalNot {
         catch(IllegalConstruction e) { fail(); }
     }
 
-    //@Test
-    //public void testHashCode() {
+    @Test
+    public void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        //ArrayList<Expression> p = new ArrayList<>(List.of(new MyBoolean(value1)));
-        //try {
-            //LogicalAnd e = new LogicalAnd(p, Notation.INFIX);
-            //assertEquals(e.hashCode(), op.hashCode());
-        //}
-        //catch(IllegalConstruction e) { fail(); }
-    //}
+        ArrayList<Expression> p = new ArrayList<>(List.of(new MyBoolean(value1)));
+        try {
+            LogicalNot ln = new LogicalNot(p, Notation.PREFIX);
+            assertEquals(ln.hashCode(), op.hashCode());
+        }
+        catch(IllegalConstruction e) { fail(); }
+    }
 
     @Test
     public void testNullParamList() {
