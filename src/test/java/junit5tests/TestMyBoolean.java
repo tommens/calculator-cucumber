@@ -24,7 +24,7 @@ public class TestMyBoolean {
         // Two distinct MyBoolean, constructed separately (using a different constructor) but containing the same value should be equal
         assertEquals(new MyBoolean(value), myBoolean);
         // Two MyNumbers containing a distinct value should not be equal:
-        boolean otherValue = true;
+        boolean otherValue = false;
         assertNotEquals(new MyBoolean(otherValue),myBoolean);
         assertEquals(myBoolean, myBoolean); // Identity check (for coverage, as this should always be true)
     }

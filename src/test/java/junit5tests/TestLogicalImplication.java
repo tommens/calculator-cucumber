@@ -14,14 +14,14 @@ public class TestLogicalImplication {
 
     private final boolean value1 = true;
     private final boolean value2 = false;
-    private LogicalEquivalence op;
+    private LogicalImplication op;
     private List<Expression> params;
 
     @BeforeEach
     public void setUp() {
         params = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            op = new LogicalEquivalence(params);
+            op = new LogicalImplication(params);
             op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
         }
         catch(IllegalConstruction e) { fail(); }
@@ -30,7 +30,7 @@ public class TestLogicalImplication {
     @Test
     public void testConstructor1() {
         // It should not be possible to create an expression without null parameter list
-        assertThrows(IllegalConstruction.class, () -> op = new LogicalEquivalence(null));
+        assertThrows(IllegalConstruction.class, () -> op = new LogicalImplication(null));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class TestLogicalImplication {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalEquivalence li = new LogicalEquivalence(p, Notation.INFIX);
+            LogicalImplication li = new LogicalImplication(p, Notation.INFIX);
             assertEquals(op, li);
         }
         catch(IllegalConstruction e) { fail(); }
@@ -58,6 +58,6 @@ public class TestLogicalImplication {
     @Test
     public void testNullParamList() {
         params = null;
-        assertThrows(IllegalConstruction.class, () -> op = new LogicalEquivalence(params));
+        assertThrows(IllegalConstruction.class, () -> op = new LogicalImplication(params));
     }
 }
