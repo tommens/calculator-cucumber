@@ -69,17 +69,22 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         if (val instanceof Rational rat) {
             return new Rational(numerator.multiply(rat.denominator).add(rat.numerator.multiply(denominator)),
                     denominator.multiply(rat.denominator));
+        } else if (val instanceof Real real) {
+            return real.add(this);
         }
         return null;
     }
 
     @Override
-    public Number subtract(Number val) {
-        if (val instanceof Rational rat) {
-            return add(rat.negate());
-        }
+    protected Number add(Rational rat) {
         return null;
     }
+
+    @Override
+    protected Number add(Real r) {
+        return null;
+    }
+
 
     @Override
     public Number multiply(Number val) {
@@ -91,6 +96,16 @@ public class Rational extends Number implements Expression, Comparable<Rational>
     }
 
     @Override
+    protected Number multiply(Rational rat) {
+        return null;
+    }
+
+    @Override
+    protected Number multiply(Real r) {
+        return null;
+    }
+
+    @Override
     public Number divide(Number val) {
         if (val instanceof Rational rat) {
             if (rat.equals(new Rational(0))) {
@@ -98,6 +113,16 @@ public class Rational extends Number implements Expression, Comparable<Rational>
             }
             return multiply(new Rational(rat.denominator, rat.numerator));
         }
+        return null;
+    }
+
+    @Override
+    protected Number divide(Rational rat) {
+        return null;
+    }
+
+    @Override
+    protected Number divide(Real r) {
         return null;
     }
 
