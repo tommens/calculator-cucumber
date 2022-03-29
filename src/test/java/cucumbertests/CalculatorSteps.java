@@ -1,10 +1,15 @@
 package cucumbertests;
 
 import calculator.*;
+import calculator.Number;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import visitor.InfixPrinter;
+import visitor.PostfixPrinter;
+import visitor.PrefixPrinter;
+import visitor.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +60,7 @@ public class CalculatorSteps {
 		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of the list,
 		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+		numbers.get(0).forEach(n -> params.add(new Rational(Integer.parseInt(n))));
 	    params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
@@ -68,24 +73,26 @@ public class CalculatorSteps {
 	public void givenTheSum(int n1, int n2) {
 		try {
 			params = new ArrayList<>();
-		    params.add(new MyNumber(n1));
-		    params.add(new MyNumber(n2));
+		    params.add(new Rational(n1));
+		    params.add(new Rational(n2));
 		    op = new Plus(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
 
 	@Then("^its (.*) notation is (.*)$")
 	public void thenItsNotationIs(String notation, String s) {
-		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
-			op.notation = Notation.valueOf(notation);
-			assertEquals(s, op.toString());
-		}
-		else fail(notation + " is not a correct notation! ");
+		Printer p = switch (notation) {
+			case "PREFIX" -> new PrefixPrinter();
+			case "INFIX" -> new InfixPrinter();
+			case "POSTFIX" -> new PostfixPrinter();
+			default -> {fail(notation + " is not a correct notation! "); yield new InfixPrinter();}
+		};
+		assertEquals(s, op.toString(p));
 	}
 
 	@When("^I provide a (.*) number (\\d+)$")
 	public void whenIProvideANumber(String s, int val) {
-		params.add(new MyNumber(val));
+		params.add(new Rational(val));
 	}
 
 	@Then("^the (.*) is (\\d+)$")
@@ -98,7 +105,7 @@ public class CalculatorSteps {
 				case "difference": { op = new Minus(params); break; }
 				default: fail();
 			}
-			assertEquals(val, c.eval(op));
+			assertEquals(new Rational(val), c.eval(op));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -109,8 +116,15 @@ public class CalculatorSteps {
 		//During previous @When steps, extra parameters may have been added to the operation
 		//so we complete its parameter list here:
 		op.addMoreParams(params);
-		assertEquals(val, c.eval(op));
+		assertEquals(new Rational(val), c.eval(op));
+	}
 
+	@Then("the operation evaluates to {int} over {int}")
+	public void thenTheOperationEvaluatesToFraction(int num, int denom) {
+		//During previous @When steps, extra parameters may have been added to the operation
+		//so we complete its parameter list here:
+		op.addMoreParams(params);
+		assertEquals(new Rational(num, denom), c.eval(op));
 	}
 
 }

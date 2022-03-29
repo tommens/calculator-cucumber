@@ -1,5 +1,6 @@
 Code quality: ![Maven Build](https://github.com/AlixDeclerck/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
-[![BCH compliance](https://bettercodehub.com/edge/badge/AlixDeclerck/calculator-cucumber?branch=master)](https://bettercodehub.com/)
+[![BCH compliance](https://bettercodehub.com/edge/badge/AlixDeclerck/calculator-cucumber?branch=project-configuration-with-gui-for-calculator)](https://bettercodehub.com/)
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6856a0f94d25446ca346cbc15a701d43)](https://www.codacy.com/gh/AlixDeclerck/calculator-cucumber/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlixDeclerck/calculator-cucumber&amp;utm_campaign=Badge_Grade)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
@@ -54,7 +55,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * Tom Mens
 * Gauvain Devillez @GauvainD
 * Damien Legay @DamienLegay
-* Laurence 
+* Laurence
 * Guillaume
 * Thomas
 * Sahi

@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
 import org.junit.jupiter.api.*;
+import visitor.InfixPrinter;
+import visitor.PostfixPrinter;
+import visitor.PrefixPrinter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +22,7 @@ public class TestTimes {
 
 	@BeforeEach
 	public void setUp() {
-		  params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
+		  params = new ArrayList<>(Arrays.asList(new Rational(value1),new Rational(value2)));
 		  try { op = new Times(params); }
 		  catch(IllegalConstruction e) { fail(); }
 	}
@@ -44,9 +47,9 @@ public class TestTimes {
 	@Test
 	public void testEquals() {
 		// Two similar expressions, constructed separately (and using different constructors) should not be equal
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Rational(value1), new Rational(value2)));
 		try {
-			Times e = new Times(p, Notation.INFIX);
+			Times e = new Times(p);
 			assertEquals(op, e);
 		}
 		catch(IllegalConstruction e) { fail(); }
@@ -61,9 +64,9 @@ public class TestTimes {
 	@Test
 	public void testHashCode() {
 		// Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+		ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new Rational(value1), new Rational(value2)));
 		try {
-			Times e = new Times(p, Notation.INFIX);
+			Times e = new Times(p);
 			assertEquals(e.hashCode(), op.hashCode());
 		}
 		catch(IllegalConstruction e) { fail(); }
@@ -92,26 +95,26 @@ public class TestTimes {
 
 	@Test
 	public void testPrefix() {
-		String prefix = "* (" + value1 + ", " + value2 + ")";
-		assertEquals(prefix, op.toString(Notation.PREFIX));
-		op.notation = Notation.PREFIX;
-		assertEquals(prefix, op.toString());
+		String prefix = "× (" + value1 + ", " + value2 + ")";
+		var printer = new PrefixPrinter();
+		printer.visit(op);
+		assertEquals(prefix, printer.getBuffer());
 	}
 
 	@Test
 	public void testInfix() {
-		String infix = "( " + value1 + " * " + value2 + " )";
-		assertEquals(infix, op.toString(Notation.INFIX));
-		op.notation = Notation.INFIX;
-		assertEquals(infix, op.toString());
+		String infix = "( " + value1 + " × " + value2 + " )";
+		var printer = new InfixPrinter();
+		printer.visit(op);
+		assertEquals(infix, printer.getBuffer());
 	}
 
 	@Test
 	public void testPostfix() {
-		String postfix = "(" + value1 + ", " + value2 + ") *";
-		assertEquals(postfix, op.toString(Notation.POSTFIX));
-		op.notation = Notation.POSTFIX;
-		assertEquals(postfix, op.toString());
+		String postfix = "(" + value1 + ", " + value2 + ") ×";
+		var printer = new PostfixPrinter();
+		printer.visit(op);
+		assertEquals(postfix, printer.getBuffer());
 	}
 
 }

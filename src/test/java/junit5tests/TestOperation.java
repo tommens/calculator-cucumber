@@ -4,6 +4,7 @@ package junit5tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.*;
+import calculator.Number;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class TestOperation {
 	@BeforeEach
 	public void setUp() throws Exception {
 		List<Expression> params1 =
-				new ArrayList<>(Arrays.asList(new MyNumber(3), new MyNumber(4), new MyNumber(5)));
+				new ArrayList<>(Arrays.asList(new Rational(3), new Rational(4), new Rational(5)));
 		List<Expression> params2 =
-				new ArrayList<>(Arrays.asList(new MyNumber(5), new MyNumber(4)));
+				new ArrayList<>(Arrays.asList(new Rational(5), new Rational(4)));
 		List<Expression> params3 =
-				new ArrayList<>(Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(7)));
+				new ArrayList<>(Arrays.asList(new Plus(params1), new Minus(params2), new Rational(7)));
 		o = new Divides(params3);
 		o2 = new Divides(params3);
 	}
@@ -45,20 +46,6 @@ public class TestOperation {
 	@Test
 	public void testCountNbs() {
 		assertEquals(Integer.valueOf(6), o.countNbs());
-	}
-
-	@Test
-	public void testNotationCoherence() {
-		boolean coherence = true;
-		Notation expected = o.notation;
-		for (Expression e : o.getArgs()) {
-			if (e instanceof Operation) {
-				Operation cur = (Operation)e;
-				if (!expected.equals(cur.notation))
-					coherence = false;
-			}
-		}
-		assertTrue(coherence);
 	}
 
 }

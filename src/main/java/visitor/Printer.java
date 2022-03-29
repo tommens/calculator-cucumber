@@ -1,27 +1,41 @@
 package visitor;
 
 import calculator.Expression;
+import calculator.Number;
+import calculator.Operation;
 
-public class Printer extends Evaluator {
+import java.util.ArrayList;
 
-    final private Expression currentExpression;
+public abstract class Printer extends Visitor {
 
-    public Printer(Expression e) {
-        this.currentExpression = e;
-        e.accept(this);
+    protected String printBuffer = "";
+
+    public String getBuffer() {
+        return printBuffer;
     }
 
-    public void print() {
-        System.out.println("The result of evaluating expression " + currentExpression);
-        System.out.println("is: " + getResult() + ".");
-        System.out.println();
+    @Override
+    public void visit(Number n) {
+        printBuffer = n.toString();
     }
 
-    public void detailedPrint() {
-        print();
-        System.out.print("It contains " + currentExpression.countDepth() + " levels of nested expressions, ");
-        System.out.print(currentExpression.countOps() + " operations");
-        System.out.println(" and " + currentExpression.countNbs() + " numbers.");
-        System.out.println();
+    @Override
+    public void visit(Operation o) {
+        ArrayList<String> printedStrings = new ArrayList<>();
+        //first loop to recursively evaluate each subexpression
+        for(Expression a:o.args) {
+            a.accept(this);
+            printedStrings.add(printBuffer);
+            printBuffer = "";
+        }
+        int max = o.args.size();
+        String temp = "";
+        for(int counter=1; counter<max; counter++) {
+            temp = writeExpression(o, printedStrings, counter);
+        }
+        printBuffer = temp;
     }
+
+    protected abstract String writeExpression(Operation o, ArrayList<String> strings, int counter);
+
 }
