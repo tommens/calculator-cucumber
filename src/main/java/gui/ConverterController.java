@@ -3,15 +3,12 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
-import calculator.Rational;
 import converter.Unit;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-
 import java.util.ArrayList;
 import java.util.List;
+import static converter.Unit.*;
 
 /**
  * This controller handle the main graphical interface's actions.
@@ -20,78 +17,73 @@ import java.util.List;
  */
 public class ConverterController extends Controller {
 
+    /**
+     * Scrollable list of units types
+     */
     @FXML
     ComboBox<String> typeConv;
+
+    /**
+     * Scrollable list of units from
+     */
     @FXML
     ComboBox<String> fromUnit;
+
+    /**
+     * Scrollable list of units to
+     */
     @FXML
     ComboBox<String> toUnit;
 
+    /**
+     * The calculator object
+     */
     Calculator calculator;
 
+    /**
+     * Initialize the controller
+     */
     public void initialize() {
-        List<String> types = getAllTypes();
-        if (types != null) {
-            typeConv.getItems().addAll(types);
-            typeConv.setValue(types.get(0));
-            updateUnits();
-        }
+        List<String> categories = getUnitCategories();
+        typeConv.getItems().addAll(categories);
+        typeConv.setValue(categories.get(0));
+        updateUnits();
         calculator = new Calculator();
     }
 
+    /**
+     * Convert the value from the first unit to the second unit
+     */
     public void submitButton() {
         Expression input = Parser.parse(this.inputField.getText());
-        String from = getConverterFromName(fromUnit.getValue());
-        String to = getConverterFromName(toUnit.getValue());
-        Expression expr = Parser.parse(input + "/" + from + "×" + to);
+        Unit from = getUnitByName(fromUnit.getValue());
+        Unit to = getUnitByName(toUnit.getValue());
+        if (from == null || to == null) {
+            throw new IllegalArgumentException("Unit not found");
+        }
+        Expression expr = Parser.parse(input + "/" + from.getUnitConversion() + "×" + to.getUnitConversion());
         this.outputField.setText(calculator.eval(expr).toString());
         this.setSubmitted(true);
     }
 
-    public List<String> getAllTypes() {
-        List<String> result = new ArrayList<>();
-        for (Unit unit : Unit.values()) {
-            if (!result.contains(unit.getType())) {
-                result.add(unit.getType());
-            }
-        }
-        return result;
-    }
-
-    public List<String> getAllUnitsFromType(String type) {
-        List<String> result = new ArrayList<>();
-        for (Unit unit : Unit.values()) {
-            if (unit.getType().equals(type)) {
-                if (!result.contains(unit.getName())) {
-                    result.add(unit.getName());
-                }
-            }
-        }
-        return result;
-    }
-
-    public String getConverterFromName(String name) {
-        for (Unit unit : Unit.values()) {
-            if (unit.getName().equals(name)) {
-                return unit.getConverter();
-            }
-        }
-        return null;
-    }
-
-    public void changeType(Event event) {
+    /**
+     * Update the units list if change of category
+     */
+    public void changeType() {
         updateUnits();
     }
 
+    /**
+     * Update the units list
+     */
     public void updateUnits() {
         fromUnit.getItems().clear();
         toUnit.getItems().clear();
-        List<String> names = getAllUnitsFromType(typeConv.getValue());
-        if (names != null) {
-            fromUnit.getItems().addAll(names);
-            fromUnit.setValue(names.get(0));
-            toUnit.getItems().addAll(names);
-            toUnit.setValue(names.get(1));
-        }
+        List<Unit> units = getUnitsByCategory(typeConv.getValue());
+        List<String> unitNames = units.stream().map(Unit::getUnitName).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        fromUnit.getItems().addAll(unitNames);
+        fromUnit.setValue(unitNames.get(0));
+        toUnit.getItems().addAll(unitNames);
+        toUnit.setValue(unitNames.get(1));
     }
 }

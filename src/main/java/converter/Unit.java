@@ -1,6 +1,7 @@
 package converter;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public enum Unit {
     // ******** Area ********
@@ -140,31 +141,56 @@ public enum Unit {
     Milliliter("Volume", "Milliliter", "1e+6"),
     CubicFoot("Volume", "Cubic Foot", "35.3147"),
     CubicInch("Volume", "Cubic Inch", "61023.7"),
-
-
     ;
 
+    private final String unitCategory;
+    private final String unitName;
+    private final String unitConversion;
 
-    private final String type;
-    private final String name;
-    private final String converter;
-
-    Unit(String type, String name, String converter) {
-        this.type = type;
-        this.name = name;
-        this.converter = converter;
+    Unit(String unitCategory, String unitName, String unitConversion) {
+        this.unitCategory = unitCategory;
+        this.unitName = unitName;
+        this.unitConversion = unitConversion;
     }
 
-
-    public String getType() {
-        return type;
+    public String getUnitCategory() {
+        return unitCategory;
     }
 
-    public String getName() {
-        return name;
+    public String getUnitName() {
+        return unitName;
     }
 
-    public String getConverter() {
-        return converter;
+    public String getUnitConversion() {
+        return unitConversion;
+    }
+
+    public static List<Unit> getUnitsByCategory(String unitCategory) {
+        List<Unit> units = new ArrayList<>();
+        for (Unit unit : Unit.values()) {
+            if (unit.getUnitCategory().equals(unitCategory)) {
+                units.add(unit);
+            }
+        }
+        return units;
+    }
+
+    public static Unit getUnitByName(String unitName) {
+        for (Unit unit : Unit.values()) {
+            if (unit.getUnitName().equals(unitName)) {
+                return unit;
+            }
+        }
+        return null;
+    }
+
+    public static List<String> getUnitCategories() {
+        List<String> unitCategories = new ArrayList<>();
+        for (Unit unit : Unit.values()) {
+            if (!unitCategories.contains(unit.getUnitCategory())) {
+                unitCategories.add(unit.getUnitCategory());
+            }
+        }
+        return unitCategories;
     }
 }
