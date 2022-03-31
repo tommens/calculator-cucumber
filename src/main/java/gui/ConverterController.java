@@ -61,7 +61,9 @@ public class ConverterController extends Controller {
         if (from == null || to == null) {
             throw new IllegalArgumentException("Unit not found");
         }
-        Expression expr = Parser.parse(input + "/" + from.getUnitConversion() + "×" + to.getUnitConversion());
+        Expression expr = Parser.parse(
+                "(" + input + "-" + from.getUnitConstant() +")" + "/" + from.getUnitRatio()
+                        + "×" + to.getUnitRatio() + "+" + to.getUnitConstant());
         this.outputField.setText(calculator.eval(expr).toString());
         this.setSubmitted(true);
     }
