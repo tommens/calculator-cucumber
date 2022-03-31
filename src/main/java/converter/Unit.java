@@ -3,6 +3,9 @@ package converter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Unit class represents all units possible
+ */
 public enum Unit {
     // ******** Area ********
     SquareMillimeter("Area", "Square Millimeter", "1000000", "0"),
@@ -153,11 +156,33 @@ public enum Unit {
     Kelvin("Temperature", "Kelvin", "1", "273.15")
     ;
 
+    /**
+     * The category of the unit.
+     */
     private final String unitCategory;
+
+    /**
+     * The name of the unit.
+     */
     private final String unitName;
+
+    /**
+     * The factor to convert unit.
+     */
     private final String unitRatio;
+
+    /**
+     * The offset to convert unit.
+     */
     private final String unitConstant;
 
+    /**
+     * Constructor.
+     * @param unitCategory  The category of the unit.
+     * @param unitName      The name of the unit.
+     * @param unitRatio     The factor to convert unit.
+     * @param unitConstant  The offset to convert unit.
+     */
     Unit(String unitCategory, String unitName, String unitRatio, String unitConstant) {
         this.unitCategory = unitCategory;
         this.unitName = unitName;
@@ -165,22 +190,43 @@ public enum Unit {
         this.unitConstant = unitConstant;
     }
 
+    /**
+     * Get the category of the unit.
+     * @return The category of the unit.
+     */
     public String getUnitCategory() {
         return unitCategory;
     }
 
+    /**
+     * Get the name of the unit.
+     * @return The name of the unit.
+     */
     public String getUnitName() {
         return unitName;
     }
 
+    /**
+     * Get the factor to convert unit.
+     * @return The factor to convert unit.
+     */
     public String getUnitRatio() {
         return unitRatio;
     }
 
+    /**
+     * Get the offset to convert unit.
+     * @return The offset to convert unit.
+     */
     public String getUnitConstant() {
         return unitConstant;
     }
 
+    /**
+     * Get units list from category.
+     * @param unitCategory  The category of the unit.
+     * @return              The units list from category.
+     */
     public static List<Unit> getUnitsByCategory(String unitCategory) {
         List<Unit> units = new ArrayList<>();
         for (Unit unit : Unit.values()) {
@@ -191,6 +237,11 @@ public enum Unit {
         return units;
     }
 
+    /**
+     * Get unit from name.
+     * @param unitName  The name of the unit.
+     * @return          The unit from name.
+     */
     public static Unit getUnitByName(String unitName) {
         for (Unit unit : Unit.values()) {
             if (unit.getUnitName().equals(unitName)) {
@@ -200,6 +251,10 @@ public enum Unit {
         return null;
     }
 
+    /**
+     * Get all categories possible.
+     * @return All categories possible.
+     */
     public static List<String> getUnitCategories() {
         List<String> unitCategories = new ArrayList<>();
         for (Unit unit : Unit.values()) {
