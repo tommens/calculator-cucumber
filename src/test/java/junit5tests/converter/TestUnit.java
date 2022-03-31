@@ -1,11 +1,13 @@
 package junit5tests.converter;
 
+import calculator.Calculator;
 import converter.Unit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static converter.Unit.convert;
 import static converter.Unit.getUnitCategories;
 
 public class TestUnit {
@@ -34,4 +36,46 @@ public class TestUnit {
         Assertions.assertEquals(comparative, unit);
     }
 
+    @Test
+    void testConvertLength() {
+        var actual = convert("1", Unit.Centimeter, Unit.Meter, new Calculator());
+        var expected = "1/100"; //TODO change tp 0.01 when real will be implemented
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertMass() {
+        var actual = convert("1", Unit.Gram, Unit.Kilogram, new Calculator());
+        var expected = "1/1000";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertSpeed() {
+        var actual = convert("1", Unit.KilometerPerHour, Unit.MeterPerSecond, new Calculator());
+        var expected = "1/3.6";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertTime() {
+        var actual = convert("1", Unit.Second, Unit.Minute, new Calculator());
+        var expected = "1/60";
+        System.out.println(actual);
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertTemperature() {
+        var actual = convert("1", Unit.Celsius, Unit.Fahrenheit, new Calculator());
+        var expected = "1/1.8+32";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertVolume() {
+        var actual = convert("1", Unit.Milliliter, Unit.Liter, new Calculator());
+        var expected = "1/1000";
+        assert actual.equals(expected);
+    }
 }

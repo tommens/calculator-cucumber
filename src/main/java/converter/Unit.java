@@ -1,5 +1,9 @@
 package converter;
 
+import calculator.Calculator;
+import calculator.Expression;
+import calculator.Parser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +144,7 @@ public enum Unit {
     Microsecond("Time", "Microsecond", "6e+7", "0"),
     Millisecond("Time", "Millisecond", "60000", "0"),
     Second("Time", "Second", "60", "0"),
-    Minute("Time", "Minute", "60", "0"),
+    Minute("Time", "Minute", "1", "0"),
     Hour("Time", "Hour", "0,0166667", "0"),
 
     // ******** Volume ********
@@ -263,5 +267,21 @@ public enum Unit {
             }
         }
         return unitCategories;
+    }
+
+    /**
+     * Convert the value from the first unit to the second unit
+     * @param input     The value to convert
+     * @param fromUnit  The unit to convert from
+     * @param toUnit    The unit to convert to
+     * @return          The converted value in a string
+     */
+    // Here because of the use of the enum and easier to test
+    public static String convert(String input, Unit fromUnit, Unit toUnit, Calculator calculator) {
+        Expression expr = Parser.parse(
+                "(" + input + "-" + fromUnit.getUnitConstant() +")" + "/" + fromUnit.getUnitRatio()
+                        + "×" + toUnit.getUnitRatio() + "+" + toUnit.getUnitConstant());
+        System.out.println(expr);
+        return calculator.eval(expr).toString();
     }
 }
