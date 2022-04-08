@@ -17,13 +17,6 @@ public class Evaluator extends Visitor {
     public MyBoolean getBoolresult(){return computedBoolvalue;}
 
 
-    public void visit(Operation o) {
-        ArrayList<Integer> evaluatedArgs = new ArrayList<>();
-        ArrayList<Boolean> evaluatedBoolArgs = new ArrayList<>();
-      
-    public void visit(Number n) {
-        computedValue = n;
-    }
 
     public void visit(Operation o) {
         ArrayList<Number> evaluatedArgs = new ArrayList<>();
@@ -43,7 +36,7 @@ public class Evaluator extends Visitor {
         // store the accumulated result
         computedValue = temp;
 
-        boolean tempBool = evaluatedBoolArgs.get(0);
+        MyBoolean tempBool = evaluatedBoolArgs.get(0);
         for (int i=1; i<evaluatedBoolArgs.size(); i++){
             tempBool = o.op(tempBool, evaluatedBoolArgs.get(i));
         }
