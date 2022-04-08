@@ -2,8 +2,8 @@ package calculator;
 
 import java.util.List;
 
-final public class Times extends Operation
-{
+final public class Times extends Operation{ 
+
 
     public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction{
   	    super(elist);
@@ -21,7 +21,7 @@ final public class Times extends Operation
     public boolean op(boolean op){
         return false;
     }
-    
+
     @Override
     public Number op(Number l, Number r){
         return l.multiply(r);
