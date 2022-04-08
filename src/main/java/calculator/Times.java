@@ -20,7 +20,8 @@ final public class Times extends Operation
     @Override
     public boolean op(boolean op){
         return false;
-
+    }
+    
     @Override
     public Number op(Number l, Number r){
         return l.multiply(r);
