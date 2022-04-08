@@ -2,27 +2,32 @@ package visitor;
 
 import calculator.Expression;
 import calculator.MyBoolean;
-import calculator.MyNumber;
+import calculator.Number;
 import calculator.Operation;
 
 import java.util.ArrayList;
 
 public class Evaluator extends Visitor {
 
-    private int computedValue;
-    private boolean computedBoolValue;
+    private MyBoolean computedBoolvalue;
+    private Number computedValue;
 
-    public Integer getResult() { return computedValue; }
+    public Number getResult() { return computedValue; }
 
-    public Boolean getBoolResult(){return computedBoolValue;}
+    public MyBoolean getBoolresult(){return computedBoolvalue;}
 
-    public void visit(MyNumber n) {
-        computedValue = n.getValue();
-    }
 
     public void visit(Operation o) {
         ArrayList<Integer> evaluatedArgs = new ArrayList<>();
         ArrayList<Boolean> evaluatedBoolArgs = new ArrayList<>();
+      
+    public void visit(Number n) {
+        computedValue = n;
+    }
+
+    public void visit(Operation o) {
+        ArrayList<Number> evaluatedArgs = new ArrayList<>();
+        ArrayList<MyBoolean> evaluatedBoolArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
@@ -30,7 +35,7 @@ public class Evaluator extends Visitor {
             evaluatedBoolArgs.add(computedBoolValue);
         }
         //second loop to accummulate all the evaluated subresults
-        int temp = evaluatedArgs.get(0);
+        Number temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             temp = o.op(temp,evaluatedArgs.get(counter));

@@ -5,17 +5,22 @@ import java.util.List;
 final public class Divides extends Operation
 {
 
-  public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
-	this(elist, null);
-  }
 
-  public Divides(List<Expression> elist, Notation n) throws IllegalConstruction {
-	super(elist,n);
+  public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
+	super(elist);
 	symbol = "/";
 	neutral = 1;
   }
-  
-  public int op(int l, int r) {
+
+    @Override
+    public Number op(Number l, Number r) {
+        if (r.equals(new Rational(0))) {
+            throw new ArithmeticException(); // TODO change this to a custom exception
+        }
+        return l.divide(r);
+    }
+
+    public int op(int l, int r) {
       int val = (int)Double.NaN; // will be zero with Integer
 
       try {
