@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 
-public class Real extends Number implements Comparable<BigDecimal>{
+public class Real extends Number implements Expression, Comparable<BigDecimal>{
      private BigDecimal value;
 
     public /*constructor*/ Real(BigDecimal value) {
@@ -16,53 +16,74 @@ public class Real extends Number implements Comparable<BigDecimal>{
         return new Real(value.negate());
     }
 
+
+
+
     @Override
     public Number add(Number val) {
-        return null;
+        BigDecimal A = BigDecimal.valueOf(val);
+        BigDecimal result = new BigDecimal(String.valueOf(value.add(A)));
+        return new Real(result);
     }
 
     @Override
     protected Number add(Rational rat) {
-        return null;
+        BigDecimal A = BigInteger.toBigDecimal(rat);
+        BigDecimal result = new BigDecimal(String.valueOf(value.add(A)));
+        return new Real(result);
     }
 
     @Override
     protected Number add(Real r) {
-        return null;
+        BigDecimal result = new BigDecimal(String.valueOf(value.add(r.value)));
+        return new Real(result);
     }
 
     @Override
     public Number multiply(Number val) {
-        return null;
+        BigDecimal A = BigDecimal.valueOf(val);
+        BigDecimal result = new BigDecimal(String.valueOf(value.multiply(A)));
+        return new Real(result);
+
     }
 
     @Override
     protected Number multiply(Rational rat) {
-        return null;
+        BigDecimal A = BigInteger.toBigDecimal(rat);
+        BigDecimal result = new BigDecimal(String.valueOf(value.multiply(A)));
+        return new Real(result);
     }
 
     @Override
     protected Number multiply(Real r) {
-        return null;
+        BigDecimal result = new BigDecimal(String.valueOf(value.add(r.value)));
+        return new Real(result);
+
     }
 
     @Override
     public Number divide(Number val) {
-        return null;
+
+        BigDecimal A = BigDecimal.valueOf(val);
+        BigDecimal result = new BigDecimal(String.valueOf(value.divide(A)));
+        return new Real(result);
     }
 
     @Override
     protected Number divide(Rational rat) {
-        return null;
+        BigDecimal A = BigInteger.toBigDecimal(rat);
+        BigDecimal result = new BigDecimal(String.valueOf(value.divide(A)));
+        return new Real(result);
     }
 
     @Override
     protected Number divide(Real r) {
-        return null;
+        BigDecimal result = new BigDecimal(String.valueOf(value.divide(r.value)));
+        return new Real(result);
     }
 
     @Override
     public int compareTo(BigDecimal o) {
-        return 0;
+        return value.compareTo(o);
     }
 }
