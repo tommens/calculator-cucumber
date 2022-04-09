@@ -44,8 +44,13 @@ public class BasicController extends Controller {
         inputField.setText(inputField.getText() + operation);
     }
 
-    public void historyButton(ActionEvent actionEvent) {
-        //Todo add code to call history
+    public void historyLeftButton(ActionEvent actionEvent) {
+        //TODO: implementation
+
+    }
+
+    public void historyRightButton(ActionEvent actionEvent) {
+        //TODO: implementation
 
     }
 }

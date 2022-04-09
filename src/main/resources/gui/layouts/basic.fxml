@@ -29,11 +29,18 @@
     </MenuBar>
       <HBox maxHeight="75.0" maxWidth="450.0" minHeight="50.0" minWidth="300.0">
           <TextField id="calcField" fx:id="inputField" editable="false" maxHeight="75.0" maxWidth="375.0" minHeight="50.0" minWidth="250.0" />
-          <Button maxHeight="75.0" maxWidth="75.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#historyButton">
+          <Button maxHeight="75.0" maxWidth="37.0" minHeight="50.0" minWidth="25.0" mnemonicParsing="false" onAction="#historyLeftButton">
               <graphic>
-                 <ImageView fitHeight="48.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@logos/history.png" />
+                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@logos/historyLeft.png" />
                  </ImageView>
+              </graphic>
+          </Button>
+          <Button maxHeight="75.0" maxWidth="37.0" minHeight="50.0" minWidth="25.0" mnemonicParsing="false" onAction="#historyRightButton">
+              <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@logos/historyRight.png" />
+                  </ImageView>
               </graphic>
           </Button>
       </HBox>
