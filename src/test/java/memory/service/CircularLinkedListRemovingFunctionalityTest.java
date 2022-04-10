@@ -1,7 +1,7 @@
-package memories.service;
+package memory.service;
 
-import memories.CircularLinkedList;
-import memories.memento.ScreenMementoDTO;
+import memory.CircularLinkedList;
+import memory.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import static common.Configuration.OPERATION_MEMORY_SIZE;
 import static java.lang.String.valueOf;
-import static memories.service.MemoryMediator.getServiceInstance;
+import static memory.service.MemoryMediator.getServiceInstance;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.Random.class)

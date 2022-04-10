@@ -8,7 +8,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import memories.service.MemoriesCareTaker;
+import memory.service.MemoriesCareTaker;
 
 public abstract class Controller implements MemoriesCareTaker {
     private Scene sceneBasic;

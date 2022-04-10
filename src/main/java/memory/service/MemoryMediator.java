@@ -1,12 +1,12 @@
-package memories.service;
+package memory.service;
 
-import memories.CircularLinkedList;
-import memories.memento.ResultOriginator;
-import memories.memento.ScreenMementoDTO;
+import memory.CircularLinkedList;
+import memory.memento.ResultOriginator;
+import memory.memento.ScreenMementoDTO;
 
 import java.io.*;
 
-import static memories.memento.ScreenMementoDTO.marshaller;
+import static memory.memento.ScreenMementoDTO.marshaller;
 
 /**
  * Provide from static context a circular list with following functionalities :
@@ -27,37 +27,37 @@ public abstract class MemoryMediator {
         mementoOriginator = new ResultOriginator();
     }
 
-    public static CircularLinkedList getCurrent() {
+    static CircularLinkedList getCurrent() {
         if (circularList != null && circularList.getCurrent() != null)
             return circularList.getCurrent();
         return null;
     }
 
-    public static void navigateLeft() {
+    static void navigateLeft() {
         circularList.navigateLeft();
     }
 
-    public static void navigateRight() {
+    static void navigateRight() {
         circularList.navigateRight();
     }
 
-    public static void addItem(ScreenMementoDTO val) {
+    static void addItem(ScreenMementoDTO val) {
         circularList.addNode(val);
         mementoOriginator.keepStatusUpdated(val);
     }
 
-    public static void cleanCircularList() {
+    static void cleanCircularList() {
         circularList.clean();
     }
 
-    public static CircularLinkedList getCircularListFromLastItem() {
+    static CircularLinkedList getCircularListFromLastItem() {
         if (circularList != null)
             return circularList.getTail();
         else
             return null;
     }
 
-    public static void retrieveCircularList(File memorized) throws IOException {
+    static void retrieveCircularList(File memorized) throws IOException {
         cleanCircularList();
         String memorizedLine;
 
@@ -69,7 +69,7 @@ public abstract class MemoryMediator {
         }
     }
 
-    public static void saveHistory(File fileToMemorize) throws FileNotFoundException {
+    static void saveHistory(File fileToMemorize) throws FileNotFoundException {
         mementoOriginator.save(fileToMemorize);
     }
 

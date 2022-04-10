@@ -1,15 +1,15 @@
-package memories.service;
+package memory.service;
 
 import static java.lang.Integer.valueOf;
-import static memories.service.MemoryMediator.*;
+import static memory.service.MemoryMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import memories.CircularLinkedList;
-import memories.memento.ScreenMementoDTO;
+import memory.CircularLinkedList;
+import memory.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class CircularLinkedListTest {
+class CircularLinkedListAddingDatasTest {
 
     private final CircularLinkedListService CL_SERVICE = getServiceInstance();
     private final ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1");

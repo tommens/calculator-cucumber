@@ -5,7 +5,7 @@ import calculator.Expression;
 import calculator.Parser;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
-import memories.CircularLinkedList;
+import memory.CircularLinkedList;
 
 import java.io.File;
 import java.io.FileNotFoundException;

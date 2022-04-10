@@ -1,6 +1,6 @@
-package memories;
+package memory;
 
-import memories.memento.ScreenMementoDTO;
+import memory.memento.ScreenMementoDTO;
 
 /**
  * A double linked list implementation with index and value

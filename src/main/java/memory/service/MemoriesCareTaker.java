@@ -1,14 +1,14 @@
-package memories.service;
+package memory.service;
 
-import memories.CircularLinkedList;
-import memories.memento.ResultOriginator;
-import memories.memento.ScreenMementoDTO;
+import memory.CircularLinkedList;
+import memory.memento.ResultOriginator;
+import memory.memento.ScreenMementoDTO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static memories.service.MemoryMediator.*;
+import static memory.service.MemoryMediator.*;
 
 /**
  * Handle de Mementos.

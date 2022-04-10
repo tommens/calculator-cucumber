@@ -1,11 +1,13 @@
-package memories.memento;
+package memory.memento;
+
+import java.io.Serializable;
 
 import static common.Configuration.EXPRESSION_SEPARATOR;
 
 /**
- * Memento class with marshalling capabilities
+ * Memento DTO (data transfer object) class with marshalling capabilities
  */
-public class ScreenMementoDTO {
+public class ScreenMementoDTO implements Serializable {
 
     private final String expression;
     private final String result;
