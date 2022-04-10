@@ -55,14 +55,14 @@ public class TestUnit {
 
         var actual = convert("1", Unit.KilometerPerHour, Unit.MeterPerSecond, new Calculator());
         System.out.println(actual);
-        var expected = "0,277778";
+        var expected = "0.277778";
         assert actual.equals(expected);
     }
 
     @Test
     void testConvertTime() { //TODO Missing FIX Non-terminating decimal expansion; no exact representable decimal result.
         var actual = convert("1", Unit.Second, Unit.Minute, new Calculator());
-        var expected = "0,0166667";
+        var expected = "0.0166667";
         assert actual.equals(expected);
     }
 
