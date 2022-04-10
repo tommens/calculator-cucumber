@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.Expression;
+import calculator.Function;
 import calculator.Number;
 import calculator.Operation;
 
@@ -36,6 +37,24 @@ public abstract class Printer extends Visitor {
         printBuffer = temp;
     }
 
+    @Override
+    public void visit(Function f) {
+        ArrayList<String> printedStrings = new ArrayList<>();
+        //first loop to recursively evaluate each subexpression
+        for(Expression a:f.args) {
+            a.accept(this);
+            printedStrings.add(printBuffer);
+            printBuffer = "";
+        }
+        int max = f.args.size();
+        String temp = "";
+        for(int counter=1; counter<max; counter++) {
+            temp = writeExpression(f, printedStrings, counter);
+        }
+        printBuffer = temp;
+    }
+
     protected abstract String writeExpression(Operation o, ArrayList<String> strings, int counter);
+    protected abstract String writeExpression(Function f, ArrayList<String> strings, int counter);
 
 }

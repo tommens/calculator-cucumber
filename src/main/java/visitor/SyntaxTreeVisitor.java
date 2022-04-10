@@ -1,6 +1,12 @@
 package visitor;
 
 import calculator.*;
+import calculator.operation.Divides;
+import calculator.operation.Minus;
+import calculator.operation.Plus;
+import calculator.operation.Times;
+import calculator.operation.buildinfunctions.Identity;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
 import parser.CalculatorExpressionParser;
 import parser.CalculatorExpressionVisitor;
@@ -9,18 +15,7 @@ import java.util.List;
 
 public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression> {
 
-    @Override
-    public Expression visitExpression(CalculatorExpressionParser.ExpressionContext ctx) {
-        return ctx.getChild(0).accept(this);
-    }
-
-    @Override
-    public Expression visitParenthesed_expression(CalculatorExpressionParser.Parenthesed_expressionContext ctx) {
-        return ctx.getChild(1).accept(this);
-    }
-
-    @Override
-    public Expression visitTerm(CalculatorExpressionParser.TermContext ctx) {
+    private Expression term(ParserRuleContext ctx) {
         return switch(ctx.getChildCount()) {
             case 1 -> ctx.getChild(0).accept(this);
             case 3 -> {
@@ -43,8 +38,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
         };
     }
 
-    @Override
-    public Expression visitFactor(CalculatorExpressionParser.FactorContext ctx) {
+    private Expression factor(ParserRuleContext ctx) {
         return switch(ctx.getChildCount()) {
             case 1 -> ctx.getChild(0).accept(this);
             case 3 -> {
@@ -68,6 +62,46 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     }
 
     @Override
+    public Expression visitExpression(CalculatorExpressionParser.ExpressionContext ctx) {
+        return ctx.getChild(0).accept(this);
+    }
+
+    @Override
+    public Expression visitParenthesed_expression(CalculatorExpressionParser.Parenthesed_expressionContext ctx) {
+        return ctx.getChild(1).accept(this);
+    }
+
+    @Override
+    public Expression visitFunction_call(CalculatorExpressionParser.Function_callContext ctx) {
+        Expression argument = ctx.getChild(2).accept(this);
+        String functionName = ctx.getChild(0).getText();
+        return switch (functionName) {
+            case "identity" -> {
+                try {
+                    yield new Identity(List.of(argument));
+                } catch (IllegalConstruction e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Could not instantiate Identity function");
+                }
+            }
+            default -> {
+                // There is no built-in function
+                throw new RuntimeException("No function called " + functionName + " exists.");
+            }
+        };
+    }
+
+    @Override
+    public Expression visitTerm(CalculatorExpressionParser.TermContext ctx) {
+        return term(ctx);
+    }
+
+    @Override
+    public Expression visitFactor(CalculatorExpressionParser.FactorContext ctx) {
+        return factor(ctx);
+    }
+
+    @Override
     public Expression visitValue(CalculatorExpressionParser.ValueContext ctx) {
         // Always one child, whether it is a number or an expression
         return ctx.getChild(0).accept(this);
@@ -75,9 +109,6 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
 
     @Override
     public Expression visitNumber(CalculatorExpressionParser.NumberContext ctx) {
-
-
-
         return switch (ctx.getChildCount()) {
             case 1 -> {
                 // The number is the value of the child.
@@ -104,7 +135,42 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
             default -> throw new InvalidSyntax("Unknown number of children.");
         };
 
+    }
 
+    @Override
+    public Expression visitFunction_defintion(CalculatorExpressionParser.Function_defintionContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Expression visitFunction_function_call(CalculatorExpressionParser.Function_function_callContext ctx) {
+        return null;
+    }
+
+    @Override
+    public Expression visitFunction_parenthesed_expression(CalculatorExpressionParser.Function_parenthesed_expressionContext ctx) {
+        return ctx.getChild(1).accept(this);
+    }
+
+    @Override
+    public Expression visitFunction_term(CalculatorExpressionParser.Function_termContext ctx) {
+        return term(ctx);
+    }
+
+    @Override
+    public Expression visitFunction_factor(CalculatorExpressionParser.Function_factorContext ctx) {
+        return factor(ctx);
+    }
+
+    @Override
+    public Expression visitFunction_value(CalculatorExpressionParser.Function_valueContext ctx) {
+        // Always one child, whether it is a number or an expression
+        return ctx.getChild(0).accept(this);
+    }
+
+    @Override
+    public Expression visitVariable(CalculatorExpressionParser.VariableContext ctx) {
+        return new Variable(); //TODO name the variable ?
     }
 
     @Override

@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.Expression;
+import calculator.Function;
 import calculator.Number;
 import calculator.Operation;
 
@@ -31,6 +32,10 @@ public class Evaluator extends Visitor {
         }
         // store the accumulated result
         computedValue = temp;
+    }
+
+    public void visit(Function f) {
+
     }
 
 }

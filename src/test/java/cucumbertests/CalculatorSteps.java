@@ -1,7 +1,10 @@
 package cucumbertests;
 
 import calculator.*;
-import calculator.Number;
+import calculator.operation.Divides;
+import calculator.operation.Minus;
+import calculator.operation.Plus;
+import calculator.operation.Times;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
