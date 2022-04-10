@@ -1,7 +1,7 @@
 package memories.navigation;
 
 import static java.lang.Integer.valueOf;
-import static memories.navigation.CircularListFacade.*;
+import static memories.navigation.CircularListMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import memories.ScreenDisplayDTO;

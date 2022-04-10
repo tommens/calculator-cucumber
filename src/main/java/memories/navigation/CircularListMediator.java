@@ -14,12 +14,12 @@ import static memories.ScreenDisplayDTO.marshaller;
  * - emptyCircularList make a clean
  * - getCircularListFromLastItem give the last saved value
  */
-public abstract class CircularListFacade {
+public abstract class CircularListMediator {
 
     private static CircularLinkedListService circularList;
     private static final ResultOriginator mementoOriginator;
 
-    private CircularListFacade(){}
+    private CircularListMediator(){}
 
     static {
         circularList = getServiceInstance();

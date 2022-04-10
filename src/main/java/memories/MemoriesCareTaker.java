@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static memories.navigation.CircularListFacade.*;
+import static memories.navigation.CircularListMediator.*;
 
 /**
  * Handle de Mementos.
