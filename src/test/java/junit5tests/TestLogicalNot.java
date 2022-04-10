@@ -21,7 +21,6 @@ public class TestLogicalNot {
         params = new ArrayList<>(List.of(new MyBoolean(value1)));
         try {
             op = new LogicalNot(params);
-            op.notation = Notation.PREFIX; // reset the notation to infix (which is the default) before each test
         }
         catch(IllegalConstruction e) { fail(); }
     }
@@ -37,7 +36,7 @@ public class TestLogicalNot {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
         ArrayList<Expression> p = new ArrayList<>(List.of(new MyBoolean(value1)));
         try {
-            LogicalNot ln = new LogicalNot(p, Notation.PREFIX);
+            LogicalNot ln = new LogicalNot(p);
             assertEquals(op, ln);
         }
         catch(IllegalConstruction e) { fail(); }
@@ -48,7 +47,7 @@ public class TestLogicalNot {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
         ArrayList<Expression> p = new ArrayList<>(List.of(new MyBoolean(value1)));
         try {
-            LogicalNot ln = new LogicalNot(p, Notation.PREFIX);
+            LogicalNot ln = new LogicalNot(p);
             assertEquals(ln.hashCode(), op.hashCode());
         }
         catch(IllegalConstruction e) { fail(); }

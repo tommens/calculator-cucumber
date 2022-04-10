@@ -22,7 +22,6 @@ public class TestLogicalImplication {
         params = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
             op = new LogicalImplication(params);
-            op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
         }
         catch(IllegalConstruction e) { fail(); }
     }
@@ -38,7 +37,7 @@ public class TestLogicalImplication {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalImplication li = new LogicalImplication(p, Notation.INFIX);
+            LogicalImplication li = new LogicalImplication(p);
             assertEquals(op, li);
         }
         catch(IllegalConstruction e) { fail(); }
@@ -49,7 +48,7 @@ public class TestLogicalImplication {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalImplication li = new LogicalImplication(p, Notation.INFIX);
+            LogicalImplication li = new LogicalImplication(p);
             assertEquals(li.hashCode(), op.hashCode());
         }
         catch(IllegalConstruction e) { fail(); }
