@@ -1,18 +1,18 @@
 package memories.navigation;
 
-import memories.ScreenDisplayDTO;
+import memories.ScreenMementoDTO;
 
 /**
  * A double linked list implementation with index and value
  */
 public class CircularLinkedList {
 
-    private final ScreenDisplayDTO nodeValue;
+    private final ScreenMementoDTO nodeValue;
     private final int index;
     private CircularLinkedList next;
     private CircularLinkedList previous;
 
-    public CircularLinkedList(ScreenDisplayDTO value, int index) {
+    public CircularLinkedList(ScreenMementoDTO value, int index) {
         this.nodeValue = value;
         this.index = index;
     }
@@ -37,7 +37,7 @@ public class CircularLinkedList {
         return nodeValue.toString();
     }
 
-    public ScreenDisplayDTO getDTO() {
+    public ScreenMementoDTO getDTO() {
         return nodeValue;
     }
 

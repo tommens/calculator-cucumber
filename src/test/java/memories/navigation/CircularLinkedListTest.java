@@ -4,16 +4,16 @@ import static java.lang.Integer.valueOf;
 import static memories.navigation.CircularListMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import memories.ScreenDisplayDTO;
+import memories.ScreenMementoDTO;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CircularLinkedListTest {
 
     private final CircularLinkedListService CL_SERVICE = getServiceInstance();
-    private final ScreenDisplayDTO ONE_FIRST_VALUE = new ScreenDisplayDTO("1","1");
-    private final ScreenDisplayDTO SECOND_VALUE = new ScreenDisplayDTO("2","2");
-    private final ScreenDisplayDTO THIRD_VALUE = new ScreenDisplayDTO("3","3");
+    private final ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1");
+    private final ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2");
+    private final ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3");
 
     @Test
     @Order(1)
@@ -73,7 +73,7 @@ class CircularLinkedListTest {
     @Test
     @Order(5)
     public void add_last_node() {
-        ScreenDisplayDTO LAST_VALUE = new ScreenDisplayDTO("4","4");
+        ScreenMementoDTO LAST_VALUE = new ScreenMementoDTO("4","4");
         assertEquals(CL_SERVICE.getLength(), 3);
         addItem(LAST_VALUE);
         assertEquals(CL_SERVICE.getLength(), 4);

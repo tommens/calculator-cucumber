@@ -1,6 +1,6 @@
 package memories.navigation;
 
-import memories.ScreenDisplayDTO;
+import memories.ScreenMementoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -23,9 +23,9 @@ class CircularListFacadeTest {
     void setUp() {
         // retrieveCircularList();
         cleanCircularList();
-        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenDisplayDTO("1+1", "2"));
-        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenDisplayDTO("2+2", "4"));
-        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenDisplayDTO("4+4", "8"));
+        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("1+1", "2"));
+        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("2+2", "4"));
+        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("4+4", "8"));
     }
 
     @Test

@@ -1,11 +1,11 @@
 package memories.navigation;
 
 import memories.ResultOriginator;
-import memories.ScreenDisplayDTO;
+import memories.ScreenMementoDTO;
 
 import java.io.*;
 
-import static memories.ScreenDisplayDTO.marshaller;
+import static memories.ScreenMementoDTO.marshaller;
 
 /**
  * Provide from static context a circular list with following functionalities :
@@ -40,7 +40,7 @@ public abstract class CircularListMediator {
         circularList.navigateRight();
     }
 
-    public static void addItem(ScreenDisplayDTO val) {
+    public static void addItem(ScreenMementoDTO val) {
         circularList.addNode(val);
         mementoOriginator.keepStatusUpdated(val);
     }

@@ -1,6 +1,6 @@
 package memories.navigation;
 
-import memories.ScreenDisplayDTO;
+import memories.ScreenMementoDTO;
 
 /**
  * A circular list service
@@ -30,7 +30,7 @@ class CircularLinkedListService {
         if (current != null) current = current.getNext();
     }
 
-    void addNode(ScreenDisplayDTO value) {
+    void addNode(ScreenMementoDTO value) {
         if (value == null) return;
         CircularLinkedList newNode;
 

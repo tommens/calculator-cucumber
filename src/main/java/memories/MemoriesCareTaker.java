@@ -17,7 +17,7 @@ public interface MemoriesCareTaker {
     ResultOriginator stringResult = new ResultOriginator();
 
     default void keepComponentValue(String expr, String res) {
-        ScreenDisplayDTO txt = new ScreenDisplayDTO(expr, res);
+        ScreenMementoDTO txt = new ScreenMementoDTO(expr, res);
         stringResult.keepStatusUpdated(txt);
         addItem(txt);
     }
@@ -30,7 +30,7 @@ public interface MemoriesCareTaker {
         cleanCircularList();
     }
 
-    default void add(ScreenDisplayDTO item) {
+    default void add(ScreenMementoDTO item) {
         addItem(item);
     }
 

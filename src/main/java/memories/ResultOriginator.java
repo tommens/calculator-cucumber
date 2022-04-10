@@ -13,14 +13,14 @@ import java.util.List;
  */
 public class ResultOriginator {
 
-    List<ScreenDisplayDTO> mementos = new ArrayList<>();
+    List<ScreenMementoDTO> mementos = new ArrayList<>();
 
-    public void keepStatusUpdated(ScreenDisplayDTO result) { mementos.add(result); }
+    public void keepStatusUpdated(ScreenMementoDTO result) { mementos.add(result); }
 
     public void save(File fileToMemorize) throws FileNotFoundException {
         if (fileToMemorize != null) {
             PrintWriter writer = new PrintWriter(fileToMemorize);
-            for (ScreenDisplayDTO s : mementos)
+            for (ScreenMementoDTO s : mementos)
                 writer.println(s.toString());
 
             writer.close();
