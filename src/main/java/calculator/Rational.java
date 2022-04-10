@@ -59,6 +59,22 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         }
     }
 
+    /**
+     * Returns the value of the numerator.
+     * @return the numerator
+     */
+    /*package*/ BigInteger getNumerator() {
+        return numerator;
+    }
+
+    /**
+     * Returns the value of the denominator.
+     * @return denominator
+     */
+    /*package*/ BigInteger getDenominator() {
+        return denominator;
+    }
+
     @Override
     public Number negate() {
         return new Rational(numerator.negate(), denominator);
