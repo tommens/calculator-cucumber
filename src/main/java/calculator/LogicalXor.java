@@ -4,27 +4,27 @@ import java.util.List;
 
 public class LogicalXor extends Operation {
 
-    public /*constructor*/ LogicalXor(List<Expression> elist) throws IllegalConstruction {
-        this(elist, null);
-    }
 
-    public LogicalXor(List<Expression> elist, Notation n) throws IllegalConstruction {
-        super(elist,n);
+
+    public LogicalXor(List<Expression> elist) throws IllegalConstruction {
+        super(elist);
         symbol = "XOR";
     }
 
     @Override
-    public int op(int l, int r) {
-        return 0;
+    public Number op(Number l, Number r) {
+        return null;
     }
 
     @Override
-    public boolean op(boolean a, boolean b) {
-        return a ^ b;
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return new MyBoolean(a.getValue() ^ b.getValue());
     }
 
     @Override
-    public boolean op(boolean a) {
-        return false;
+    public MyBoolean op(MyBoolean a) {
+        return new MyBoolean(false);
     }
+
+
 }

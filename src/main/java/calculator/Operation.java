@@ -33,8 +33,10 @@ public abstract class Operation implements Expression
   abstract public Number op(Number l, Number r);
     // the operation itself is specified in the subclasses
 
-	abstract public boolean op(boolean a, boolean b);
-	abstract public boolean op(boolean a);
+
+	public abstract MyBoolean op(MyBoolean a, MyBoolean b);
+
+	abstract public MyBoolean op(MyBoolean a);
 
 
   // add more arguments to the existing list of arguments args

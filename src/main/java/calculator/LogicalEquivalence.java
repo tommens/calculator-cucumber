@@ -4,27 +4,26 @@ import java.util.List;
 
 public class LogicalEquivalence extends Operation{
 
-    public /*constructor*/ LogicalEquivalence(List<Expression> elist) throws IllegalConstruction {
-        this(elist, null);
-    }
 
-    public LogicalEquivalence(List<Expression> elist, Notation n) throws IllegalConstruction {
-        super(elist,n);
+
+    public LogicalEquivalence(List<Expression> elist) throws IllegalConstruction {
+        super(elist);
         symbol = "<==>";
     }
 
     @Override
-    public int op(int l, int r) {
-        return 0;
+    public Number op(Number l, Number r) {
+        return null;
+    }
+
+
+    @Override
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return new MyBoolean((!a.getValue() || b.getValue()) && (!b.getValue() || a.getValue()));
     }
 
     @Override
-    public boolean op(boolean a, boolean b) {
-        return (!a || b) && (!b || a);
-    }
-
-    @Override
-    public boolean op(boolean a) {
-        return false;
+    public MyBoolean op(MyBoolean a) {
+        return new MyBoolean(false);
     }
 }

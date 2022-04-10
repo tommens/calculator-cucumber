@@ -4,27 +4,25 @@ import java.util.List;
 
 public class LogicalNot extends Operation{
 
-    public /*constructor*/ LogicalNot(List<Expression> elist) throws IllegalConstruction {
-        this(elist, null);
-    }
-
-    public LogicalNot(List<Expression> elist, Notation n) throws IllegalConstruction {
-        super(elist,n);
+    public LogicalNot(List<Expression> elist) throws IllegalConstruction {
+        super(elist);
         symbol = "NOT";
     }
 
     @Override
-    public int op(int l, int r) {
-        return 0;
+    public Number op(Number l, Number r) {
+        return null;
     }
 
     @Override
-    public boolean op(boolean a, boolean b) {
-        return false;
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return new MyBoolean(false);
     }
 
     @Override
-    public boolean op(boolean a) {
-        return !a;
+    public MyBoolean op(MyBoolean a) {
+        return new MyBoolean(!a.getValue());
     }
+
+
 }

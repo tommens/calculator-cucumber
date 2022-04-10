@@ -4,27 +4,26 @@ import java.util.List;
 
 public class LogicalImplication  extends Operation{
 
-    public /*constructor*/ LogicalImplication(List<Expression> elist) throws IllegalConstruction {
-        this(elist, null);
-    }
 
-    public LogicalImplication(List<Expression> elist, Notation n) throws IllegalConstruction {
-        super(elist,n);
+
+    public LogicalImplication(List<Expression> elist) throws IllegalConstruction {
+        super(elist);
         symbol = "==>";
     }
 
     @Override
-    public int op(int l, int r) {
-        return 0;
+    public Number op(Number l, Number r) {
+        return null;
+    }
+
+
+    @Override
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return new MyBoolean(!a.getValue() || b.getValue());
     }
 
     @Override
-    public boolean op(boolean a, boolean b) {
-        return !a || b;
-    }
-
-    @Override
-    public boolean op(boolean a) {
-        return false;
+    public MyBoolean op(MyBoolean a) {
+        return new MyBoolean(false);
     }
 }

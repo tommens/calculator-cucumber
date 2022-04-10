@@ -13,18 +13,18 @@ final public class Minus extends Operation
 
 
     @Override
-    public boolean op(boolean a, boolean b) {
-        return false;
-    }
-
-    @Override
-    public boolean op(boolean a) {
-        return false;
-    }
-
-    @Override
     public Number op(Number l, Number r) {
         return l.subtract(r);
+    }
+
+    @Override
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return null;
+    }
+
+    @Override
+    public MyBoolean op(MyBoolean a) {
+        return null;
     }
 
 

@@ -9,14 +9,18 @@ import java.util.ArrayList;
 
 public class Evaluator extends Visitor {
 
-    private MyBoolean computedBoolvalue;
+    private MyBoolean computedBoolValue;
     private Number computedValue;
 
     public Number getResult() { return computedValue; }
 
-    public MyBoolean getBoolresult(){return computedBoolvalue;}
+    public MyBoolean getBoolResult(){return computedBoolValue;}
 
 
+    @Override
+    public void visit(Number n) {
+        computedValue = n;
+    }
 
     public void visit(Operation o) {
         ArrayList<Number> evaluatedArgs = new ArrayList<>();
@@ -47,7 +51,7 @@ public class Evaluator extends Visitor {
 
     @Override
     public void visit(MyBoolean b) {
-        computedBoolValue = b.getValue();
+        computedBoolValue = b;
     }
 
 

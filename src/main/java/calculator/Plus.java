@@ -16,12 +16,14 @@ final public class Plus extends Operation
   }
 
     @Override
-    public boolean op(boolean a, boolean b) {
-        return false;
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return null;
     }
 
     @Override
-    public boolean op(boolean a) {
-        return false;
+    public MyBoolean op(MyBoolean a) {
+        return null;
     }
+
+
 }

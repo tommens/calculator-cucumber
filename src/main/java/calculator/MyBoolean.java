@@ -6,7 +6,7 @@ public class MyBoolean implements Expression{
 
     private final boolean value;
 
-    public Boolean getValue() { return value; }
+    public boolean getValue() { return value; }
 
     public /*constructor*/ MyBoolean(boolean v) {
         value=v;
@@ -35,6 +35,7 @@ public class MyBoolean implements Expression{
     public String toString() {
         return Boolean.toString(value);
     }
+
 
     //Two MyBoolean expressions are equal if the values they contain are equal
     @Override

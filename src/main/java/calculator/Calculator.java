@@ -37,6 +37,8 @@ public class Calculator {
         return v.getBoolResult();
     }
 
+
+
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct
      public Boolean validate(Expression e)
