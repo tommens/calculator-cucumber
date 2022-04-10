@@ -2,6 +2,8 @@ package memories.navigation;
 
 import memories.ScreenMementoDTO;
 
+import static common.Configuration.OPERATION_MEMORY_SIZE;
+
 /**
  * A circular list service
  * accessed by CircularListFacade implementation, eventually (package scope)
@@ -38,6 +40,9 @@ class CircularLinkedListService {
             newNode = new CircularLinkedList(value, 1);
             head = newNode;
         } else {
+            if (length == OPERATION_MEMORY_SIZE)
+                removeFormerNode();
+
             newNode = new CircularLinkedList(value, tail.getIndex()+1);
             head.setPrevious(newNode);
             newNode.setPrevious(tail);
@@ -48,6 +53,14 @@ class CircularLinkedListService {
         tail.setNext(head);
         current = tail;
         length += 1;
+    }
+
+    void removeFormerNode() {
+        CircularLinkedList newHead = head.getNext();
+        newHead.setPrevious(tail);
+        tail.setNext(newHead);
+        head = newHead;
+        length -= 1;
     }
 
     boolean containsValue(String value) {

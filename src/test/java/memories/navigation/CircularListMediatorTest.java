@@ -10,7 +10,7 @@ import static memories.navigation.CircularListMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.Random.class)
-class CircularListFacadeTest {
+class CircularListMediatorTest {
 
     private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = getServiceInstance();
 
