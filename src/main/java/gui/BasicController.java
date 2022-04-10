@@ -3,7 +3,14 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
-import javafx.event.ActionEvent;
+import javafx.stage.FileChooser;
+import memories.navigation.CircularLinkedList;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import static common.Configuration.*;
 
 /**
  * This controller handle the main graphical interface's actions.
@@ -12,11 +19,20 @@ import javafx.event.ActionEvent;
  */
 public class BasicController extends Controller {
 
+    private FileChooser fileChooser = new FileChooser();
     private Calculator calculator = new Calculator();
+
+    public BasicController() {
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(FILE_TYPE_DESCRIPTION, FILE_TYPE)
+        );
+    }
 
     public void submitButton() {
         Expression expr = Parser.parse(this.inputField.getText());
-        this.outputField.setText(calculator.eval(expr).toString());
+        String resp = calculator.eval(expr).toString();
+        this.outputField.setText(resp);
+        keepComponentValue(inputField.getText(), resp);
         this.setSubmitted(true);
     }
 
@@ -44,13 +60,31 @@ public class BasicController extends Controller {
         inputField.setText(inputField.getText() + operation);
     }
 
-    public void historyLeftButton(ActionEvent actionEvent) {
-        //TODO: implementation
-
+    public void historyLeftButton() {
+        CircularLinkedList item = getCircularList();
+        left();
+        screenUpdate(item);
     }
 
-    public void historyRightButton(ActionEvent actionEvent) {
-        //TODO: implementation
-
+    public void historyRightButton() {
+        CircularLinkedList item = getCircularList();
+        right();
+        screenUpdate(item);
     }
+
+    private void screenUpdate(CircularLinkedList item) {
+        if (item == null)  return;
+        outputField.setText(item.getDTO().getResult());
+        inputField.setText(item.getDTO().getExpression());
+    }
+
+    public void saveHistory() throws FileNotFoundException {
+        saveToFile(fileChooser.showSaveDialog(stage));
+    }
+
+    public void loadHistory() throws IOException {
+        fileChooser.setInitialDirectory(new File(System.getProperty(DEFAULT_DIRECTORY)));
+        loadCircularList(fileChooser.showOpenDialog(null));
+    }
+
 }

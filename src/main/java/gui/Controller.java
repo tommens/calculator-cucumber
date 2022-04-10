@@ -8,12 +8,14 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import memories.MemoriesCareTaker;
 
-public abstract class Controller {
+public abstract class Controller implements MemoriesCareTaker {
     private Scene sceneBasic;
     private Scene sceneConverter;
+    protected Stage stage;
 
-    private boolean submitted = false;
+    private boolean submitted;
 
     @FXML
     public VBox mainScreen;
@@ -23,6 +25,10 @@ public abstract class Controller {
 
     public void setSceneBasic(Scene sceneBasic) {
         this.sceneBasic = sceneBasic;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public void setSceneConverter(Scene sceneConverter) {

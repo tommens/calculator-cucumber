@@ -15,18 +15,34 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox id="mainScreen" fx:id="mainScreen" maxHeight="750.0" maxWidth="450.0" minHeight="450.0" minWidth="300.0" stylesheets="@../styles/basic.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BasicController">
-    <MenuBar id="bar" fx:id="bar" maxHeight="45.0" maxWidth="450.0" minHeight="30.0" minWidth="300.0">
-        <Menu mnemonicParsing="false">
+    <HBox>
+        <MenuBar id="bar" fx:id="bar" maxHeight="45.0" maxWidth="450.0" minHeight="30.0" minWidth="270.0">
+            <Menu mnemonicParsing="false">
+                <graphic>
+                    <MenuButton maxHeight="29.0" maxWidth="189.0" minHeight="26.0" minWidth="126.0" mnemonicParsing="false" text="Basic mode">
+                        <items>
+                            <MenuItem onAction="#showSceneBasic" text="Basic mode" />
+                            <MenuItem onAction="#showSceneConverter" text="Converter mode" />
+                        </items>
+                    </MenuButton>
+                </graphic>
+            </Menu>
+        </MenuBar>
+        <Button maxHeight="75.0" maxWidth="37.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#saveHistory">
             <graphic>
-                <MenuButton maxHeight="29.0" maxWidth="189.0" minHeight="26.0" minWidth="126.0" mnemonicParsing="false" text="Basic mode">
-                    <items>
-                        <MenuItem onAction="#showSceneBasic" text="Basic mode" />
-                        <MenuItem onAction="#showSceneConverter" text="Converter mode" />
-                    </items>
-                </MenuButton>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/save.png" />
+                </ImageView>
             </graphic>
-        </Menu>
-    </MenuBar>
+        </Button>
+        <Button maxHeight="75.0" maxWidth="37.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#loadHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/load.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
       <HBox maxHeight="75.0" maxWidth="450.0" minHeight="50.0" minWidth="300.0">
           <TextField id="calcField" fx:id="inputField" editable="false" maxHeight="75.0" maxWidth="375.0" minHeight="50.0" minWidth="250.0" />
           <Button maxHeight="75.0" maxWidth="37.0" minHeight="50.0" minWidth="25.0" mnemonicParsing="false" onAction="#historyLeftButton">
