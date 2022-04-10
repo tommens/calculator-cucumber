@@ -37,45 +37,46 @@ public class TestUnit {
     }
 
     @Test
-    void testConvertLength() {
+    void testConvertLength() { //TODO force reals utilisation
         var actual = convert("1", Unit.Centimeter, Unit.Meter, new Calculator());
-        var expected = "1/100"; //TODO change tp 0.01 when real will be implemented
+        var expected = "0.01";
         assert actual.equals(expected);
     }
 
     @Test
     void testConvertMass() {
         var actual = convert("1", Unit.Gram, Unit.Kilogram, new Calculator());
-        var expected = "1/1000";
+        var expected = "0.001";
         assert actual.equals(expected);
     }
 
     @Test
-    void testConvertSpeed() {
+    void testConvertSpeed() { //TODO Missing FIX Non-terminating decimal expansion; no exact representable decimal result.
+
         var actual = convert("1", Unit.KilometerPerHour, Unit.MeterPerSecond, new Calculator());
-        var expected = "1/3.6";
+        System.out.println(actual);
+        var expected = "0,277778";
         assert actual.equals(expected);
     }
 
     @Test
-    void testConvertTime() {
+    void testConvertTime() { //TODO Missing FIX Non-terminating decimal expansion; no exact representable decimal result.
         var actual = convert("1", Unit.Second, Unit.Minute, new Calculator());
-        var expected = "1/60";
-        System.out.println(actual);
+        var expected = "0,0166667";
         assert actual.equals(expected);
     }
 
     @Test
     void testConvertTemperature() {
         var actual = convert("1", Unit.Celsius, Unit.Fahrenheit, new Calculator());
-        var expected = "1/1.8+32";
+        var expected = "33.8";
         assert actual.equals(expected);
     }
 
     @Test
-    void testConvertVolume() {
+    void testConvertVolume() { //TODO force reals utilisation
         var actual = convert("1", Unit.Milliliter, Unit.Liter, new Calculator());
-        var expected = "1/1000";
+        var expected = "0.001";
         assert actual.equals(expected);
     }
 }
