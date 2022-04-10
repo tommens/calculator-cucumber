@@ -9,6 +9,11 @@ public abstract class Number implements Expression
     protected  /*constructor*/ Number() {
     }
 
+    /**
+     * Converts the number to a Real number
+     */
+    public abstract Real toReal();
+
     public void accept(Visitor v) {
         v.visit(this);
     }

@@ -45,6 +45,11 @@ public class Real extends Number implements Expression{
     }
 
     @Override
+    public Real toReal() {
+        return this;
+    }
+
+    @Override
     public Number negate() {
         return new Real(value.negate());
     }
@@ -128,6 +133,11 @@ public class Real extends Number implements Expression{
     protected Number divide(Real r) {
         BigDecimal result = value.divide(r.value);
         return new Real(result);
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 
 

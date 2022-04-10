@@ -6,6 +6,7 @@ import calculator.operation.Minus;
 import calculator.operation.Plus;
 import calculator.operation.Times;
 import calculator.operation.buildinfunctions.Identity;
+import calculator.operation.buildinfunctions.Sin;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
 import parser.CalculatorExpressionParser;
@@ -75,20 +76,19 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     public Expression visitFunction_call(CalculatorExpressionParser.Function_callContext ctx) {
         Expression argument = ctx.getChild(2).accept(this);
         String functionName = ctx.getChild(0).getText();
-        return switch (functionName) {
-            case "identity" -> {
-                try {
-                    yield new Identity(List.of(argument));
-                } catch (IllegalConstruction e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("Could not instantiate Identity function");
+        try {
+            return switch (functionName) {
+                case "identity" -> new Identity(List.of(argument));
+                case "sin"      -> new Sin(List.of(argument));
+                default -> {
+                    // There is no built-in function
+                    throw new RuntimeException("No function called " + functionName + " exists.");
                 }
-            }
-            default -> {
-                // There is no built-in function
-                throw new RuntimeException("No function called " + functionName + " exists.");
-            }
-        };
+            };
+        } catch (IllegalConstruction e) {
+            throw new RuntimeException("Could not instantiate function called " + functionName);
+        }
+
     }
 
     @Override

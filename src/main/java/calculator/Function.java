@@ -35,7 +35,7 @@ public abstract class Function implements Expression
         return name;
     }
 
-    abstract public Number op(Number l);
+    abstract public Real op(Real l);
     // the operation itself is specified in the subclasses
 
     // add more arguments to the existing list of arguments args

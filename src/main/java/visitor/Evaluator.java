@@ -1,9 +1,7 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.Function;
+import calculator.*;
 import calculator.Number;
-import calculator.Operation;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public class Evaluator extends Visitor {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
-        //second loop to accummulate all the evaluated subresults
+        //second loop to accumulate all the evaluated subresults
         Number temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
@@ -35,7 +33,12 @@ public class Evaluator extends Visitor {
     }
 
     public void visit(Function f) {
+        // Evaluate the expression
+        f.getArgs().get(0).accept(this);
 
+        Real argument = getResult().toReal(); // Assume for now that all functions are on reals
+        // store the accumulated result
+        computedValue = f.op(argument); // compute the result
     }
 
 }

@@ -2,7 +2,7 @@ package calculator.operation.buildinfunctions;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
-import calculator.Number;
+import calculator.Real;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Identity extends RealFunction {
     }
 
     @Override
-    public Number op(Number l) {
+    public Real op(Real l) {
         return l;
     }
 }

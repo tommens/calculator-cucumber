@@ -15,6 +15,11 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         denominator = BigInteger.ONE;
     }
 
+    @Override
+    public Real toReal() {
+        return new Real(this);
+    }
+
     /**
      * Creates a Rational number with the numerator and denominator set in parameters.
      * @param numerator the numerator
