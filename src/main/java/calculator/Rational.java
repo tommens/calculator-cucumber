@@ -59,46 +59,63 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         }
     }
 
+    /**
+     * Returns the value of the numerator.
+     * @return the numerator
+     */
+    /*package*/ BigInteger getNumerator() {
+        return numerator;
+    }
+
+    /**
+     * Returns the value of the denominator.
+     * @return denominator
+     */
+    /*package*/ BigInteger getDenominator() {
+        return denominator;
+    }
+
     @Override
     public Number negate() {
         return new Rational(numerator.negate(), denominator);
     }
 
+
     @Override
-    public Number add(Number val) {
-        if (val instanceof Rational rat) {
-            return new Rational(numerator.multiply(rat.denominator).add(rat.numerator.multiply(denominator)),
-                    denominator.multiply(rat.denominator));
-        }
-        return null;
+    protected Number add(Rational rat) {
+        return new Rational(numerator.multiply(rat.denominator).add(rat.numerator.multiply(denominator)),
+                denominator.multiply(rat.denominator));
     }
 
     @Override
-    public Number subtract(Number val) {
-        if (val instanceof Rational rat) {
-            return add(rat.negate());
-        }
-        return null;
+    protected Number add(Real r) {
+        return r.add(this);
+    }
+
+
+    @Override
+    protected Number multiply(Rational rat) {
+        return new Rational(numerator.multiply(rat.numerator),
+                denominator.multiply(rat.denominator));
     }
 
     @Override
-    public Number multiply(Number val) {
-        if (val instanceof Rational rat) {
-            return new Rational(numerator.multiply(rat.numerator),
-                    denominator.multiply(rat.denominator));
-        }
-        return null;
+    protected Number multiply(Real r) {
+        return r.multiply(this);
     }
 
     @Override
-    public Number divide(Number val) {
-        if (val instanceof Rational rat) {
-            if (rat.equals(new Rational(0))) {
-                throw new ArithmeticException(); // TODO do it better
-            }
-            return multiply(new Rational(rat.denominator, rat.numerator));
+    protected Number divide(Rational rat) {
+        if (rat.equals(new Rational(0))) {
+            throw new ArithmeticException(); // TODO do it better
         }
-        return null;
+        return multiply(new Rational(rat.denominator, rat.numerator));
+    }
+
+    @Override
+    protected Number divide(Real r) {
+        Real us = new Real(this);
+        return us.divide(r);
     }
 
     @Override
