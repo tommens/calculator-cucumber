@@ -1,6 +1,7 @@
 package calculator;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 
 public class Real extends Number implements Expression{
@@ -12,6 +13,14 @@ public class Real extends Number implements Expression{
      */
     public /*constructor*/ Real(BigDecimal value) {
         this.value = value;
+    }
+
+    /**
+     * Constructor
+     * @param value the value of the real number
+     */
+    public Real(String value) {
+        this.value = new BigDecimal(value);
     }
 
     /**
@@ -48,8 +57,6 @@ public class Real extends Number implements Expression{
     public Number negate() {
         return new Real(value.negate());
     }
-
-
 
     @Override
     public Number add(Number val) {
@@ -130,5 +137,9 @@ public class Real extends Number implements Expression{
         return new Real(result);
     }
 
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 
 }

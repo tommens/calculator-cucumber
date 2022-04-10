@@ -76,6 +76,8 @@ public class ConverterController extends Controller {
      * Update the units list
      */
     public void updateUnits() {
+        this.inputField.setText("");
+        this.outputField.setText("");
         fromUnit.getItems().clear();
         toUnit.getItems().clear();
         List<Unit> units = getUnitsByCategory(typeConv.getValue());

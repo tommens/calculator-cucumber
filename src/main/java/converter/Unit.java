@@ -281,7 +281,6 @@ public enum Unit {
         Expression expr = Parser.parse(
                 "(" + input + "-" + fromUnit.getUnitConstant() +")" + "/" + fromUnit.getUnitRatio()
                         + "×" + toUnit.getUnitRatio() + "+" + toUnit.getUnitConstant());
-        System.out.println(expr);
         return calculator.eval(expr).toString();
     }
 }

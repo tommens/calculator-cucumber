@@ -146,7 +146,7 @@
       <rowConstraints>
          <RowConstraints vgrow="SOMETIMES" />
       </rowConstraints>
-         <Button maxHeight="75.0" maxWidth="113.0" minHeight="50.0" minWidth="75.0" mnemonicParsing="false" onAction="#clickValueButton" text="," />
+         <Button maxHeight="75.0" maxWidth="113.0" minHeight="50.0" minWidth="75.0" mnemonicParsing="false" onAction="#clickValueButton" text="." />
          <Button maxHeight="75.0" maxWidth="113.0" minHeight="50.0" minWidth="75.0" mnemonicParsing="false" onAction="#clickValueButton" text="0" GridPane.columnIndex="1" />
          <Button maxHeight="75.0" maxWidth="225.0" minHeight="50.0" minWidth="152.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="50.0" prefWidth="156.0" GridPane.columnIndex="2">
              <graphic>
