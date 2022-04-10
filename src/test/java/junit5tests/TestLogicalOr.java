@@ -21,7 +21,6 @@ public class TestLogicalOr {
         params = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
             op = new LogicalOr(params);
-            op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
         }
         catch(IllegalConstruction e) { fail(); }
     }
@@ -37,7 +36,7 @@ public class TestLogicalOr {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalOr lo = new LogicalOr(p, Notation.INFIX);
+            LogicalOr lo = new LogicalOr(p);
             assertEquals(op, lo);
         }
         catch(IllegalConstruction e) { fail(); }
@@ -48,7 +47,7 @@ public class TestLogicalOr {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalOr e = new LogicalOr(p, Notation.INFIX);
+            LogicalOr e = new LogicalOr(p);
             assertEquals(e.hashCode(), op.hashCode());
         }
         catch(IllegalConstruction e) { fail(); }

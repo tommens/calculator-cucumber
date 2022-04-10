@@ -23,7 +23,6 @@ public class TestLogicalXor {
         params = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
             op = new LogicalXor(params);
-            op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
         }
         catch(IllegalConstruction e) { fail(); }
     }
@@ -39,7 +38,7 @@ public class TestLogicalXor {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalXor lx = new LogicalXor(p, Notation.INFIX);
+            LogicalXor lx = new LogicalXor(p);
             assertEquals(op, lx);
         }
         catch(IllegalConstruction e) { fail(); }
@@ -50,7 +49,7 @@ public class TestLogicalXor {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
         ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyBoolean(value1), new MyBoolean(value2)));
         try {
-            LogicalXor lx = new LogicalXor(p, Notation.INFIX);
+            LogicalXor lx = new LogicalXor(p);
             assertEquals(lx.hashCode(), op.hashCode());
         }
         catch(IllegalConstruction e) { fail(); }
