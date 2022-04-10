@@ -90,7 +90,7 @@ public class TestReal {
         assertEquals(new Real(-8).getValue(), neg1.getValue());
 
     }
-    
+
 
 
 }

@@ -15,6 +15,16 @@ public class Real extends Number implements Expression{
     }
 
     /**
+     * Converts a Rational to a Real number
+     * @param rat
+     */
+    public /*constructor*/ Real(Rational rat) {
+        BigDecimal  den= new BigDecimal(rat.getDenominator());
+        BigDecimal num = new BigDecimal(rat.getNumerator());
+        value = num.divide(den);
+    }
+
+    /**
      * Constructor
      * @param value the value of the real number
      */
@@ -53,11 +63,10 @@ public class Real extends Number implements Expression{
 
     @Override
     protected Number add(Rational rat) {
-        BigDecimal den = new BigDecimal(rat.getDenominator());
-        BigDecimal num = new BigDecimal(rat.getNumerator());
-        BigDecimal result = num.divide(den);
-        BigDecimal addit = new BigDecimal(String.valueOf(value.add(result)));
-        return new Real(addit);
+        Real rati = new Real(rat);
+
+        BigDecimal result = value.add(rati.getValue());
+        return new Real(result);
     }
 
     @Override
