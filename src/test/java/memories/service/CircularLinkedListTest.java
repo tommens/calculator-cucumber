@@ -1,10 +1,11 @@
-package memories.navigation;
+package memories.service;
 
 import static java.lang.Integer.valueOf;
-import static memories.navigation.CircularListMediator.*;
+import static memories.service.MemoryMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import memories.ScreenMementoDTO;
+import memories.CircularLinkedList;
+import memories.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

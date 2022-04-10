@@ -1,11 +1,12 @@
-package memories.navigation;
+package memories.service;
 
-import memories.ResultOriginator;
-import memories.ScreenMementoDTO;
+import memories.CircularLinkedList;
+import memories.memento.ResultOriginator;
+import memories.memento.ScreenMementoDTO;
 
 import java.io.*;
 
-import static memories.ScreenMementoDTO.marshaller;
+import static memories.memento.ScreenMementoDTO.marshaller;
 
 /**
  * Provide from static context a circular list with following functionalities :
@@ -14,12 +15,12 @@ import static memories.ScreenMementoDTO.marshaller;
  * - emptyCircularList make a clean
  * - getCircularListFromLastItem give the last saved value
  */
-public abstract class CircularListMediator {
+public abstract class MemoryMediator {
 
     private static CircularLinkedListService circularList;
     private static final ResultOriginator mementoOriginator;
 
-    private CircularListMediator(){}
+    private MemoryMediator(){}
 
     static {
         circularList = getServiceInstance();

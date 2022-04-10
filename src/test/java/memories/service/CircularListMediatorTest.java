@@ -1,12 +1,13 @@
-package memories.navigation;
+package memories.service;
 
-import memories.ScreenMementoDTO;
+import memories.CircularLinkedList;
+import memories.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static memories.navigation.CircularListMediator.*;
+import static memories.service.MemoryMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.Random.class)

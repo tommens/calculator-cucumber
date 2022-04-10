@@ -28,17 +28,24 @@
                 </graphic>
             </Menu>
         </MenuBar>
-        <Button maxHeight="75.0" maxWidth="37.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#saveHistory">
+        <Button maxHeight="75.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#saveHistory">
             <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/save.png" />
                 </ImageView>
             </graphic>
         </Button>
-        <Button maxHeight="75.0" maxWidth="37.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#loadHistory">
+        <Button maxHeight="75.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#loadHistory">
             <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/load.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="75.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#printHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/print.png" />
                 </ImageView>
             </graphic>
         </Button>

@@ -1,6 +1,7 @@
-package memories.navigation;
+package memories.service;
 
-import memories.ScreenMementoDTO;
+import memories.CircularLinkedList;
+import memories.memento.ScreenMementoDTO;
 
 import static common.Configuration.OPERATION_MEMORY_SIZE;
 

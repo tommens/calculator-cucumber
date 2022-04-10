@@ -1,4 +1,4 @@
-package memories;
+package memories.memento;
 
 import java.io.File;
 import java.io.FileNotFoundException;

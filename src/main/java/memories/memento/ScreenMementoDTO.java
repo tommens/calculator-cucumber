@@ -1,4 +1,4 @@
-package memories;
+package memories.memento;
 
 import static common.Configuration.EXPRESSION_SEPARATOR;
 

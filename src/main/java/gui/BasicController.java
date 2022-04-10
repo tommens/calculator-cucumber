@@ -3,8 +3,9 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
+import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
-import memories.navigation.CircularLinkedList;
+import memories.CircularLinkedList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,4 +88,7 @@ public class BasicController extends Controller {
         loadCircularList(fileChooser.showOpenDialog(null));
     }
 
+    public void printHistory(ActionEvent actionEvent) {
+
+    }
 }

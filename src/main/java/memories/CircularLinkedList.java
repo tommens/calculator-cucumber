@@ -1,6 +1,6 @@
-package memories.navigation;
+package memories;
 
-import memories.ScreenMementoDTO;
+import memories.memento.ScreenMementoDTO;
 
 /**
  * A double linked list implementation with index and value

@@ -1,16 +1,18 @@
-package memories;
+package memories.service;
 
-import memories.navigation.CircularLinkedList;
+import memories.CircularLinkedList;
+import memories.memento.ResultOriginator;
+import memories.memento.ScreenMementoDTO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static memories.navigation.CircularListMediator.*;
+import static memories.service.MemoryMediator.*;
 
 /**
  * Handle de Mementos.
- * Give capabilities to navigate through the history
+ * Interface to the Memory mediator
  */
 public interface MemoriesCareTaker {
 
