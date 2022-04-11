@@ -62,15 +62,27 @@ public class BasicController extends Controller {
         inputField.setText(inputField.getText() + operation);
     }
 
-    public void historyLeftButton() {
+    public void historyLeft() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateLeft();
         screenUpdate(item);
     }
 
-    public void historyRightButton() {
+    public void historyRight() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateRight();
+        screenUpdate(item);
+    }
+
+    public void historyLast(ActionEvent actionEvent) {
+        CircularLinkedList item = history().getCurrentPosition();
+        history().navigateLast();
+        screenUpdate(item);
+    }
+
+    public void historyFirst(ActionEvent actionEvent) {
+        CircularLinkedList item = history().getCurrentPosition();
+        history().navigateFirst();
         screenUpdate(item);
     }
 
@@ -92,4 +104,9 @@ public class BasicController extends Controller {
     public void printHistory(ActionEvent actionEvent) {
         // TODO:  implementation
     }
+
+    public void configHistory(ActionEvent actionEvent) {
+        //TODO: implementation
+    }
+
 }

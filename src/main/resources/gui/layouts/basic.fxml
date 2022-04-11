@@ -28,41 +28,62 @@
                 </graphic>
             </Menu>
         </MenuBar>
-        <Button maxHeight="75.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#saveHistory">
+        <Button maxHeight="75.0" maxWidth="30.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#saveHistory">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/save.png" />
                 </ImageView>
             </graphic>
         </Button>
-        <Button maxHeight="75.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#loadHistory">
+        <Button maxHeight="75.0" maxWidth="30.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#loadHistory">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/load.png" />
                 </ImageView>
             </graphic>
         </Button>
-        <Button maxHeight="75.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#printHistory">
+        <Button maxHeight="75.0" maxWidth="30.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#printHistory">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/print.png" />
                 </ImageView>
             </graphic>
         </Button>
+        <Button maxHeight="75.0" maxWidth="30.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#configHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/config.png" />
+                </ImageView>
+            </graphic>
+        </Button>
     </HBox>
       <HBox maxHeight="75.0" maxWidth="450.0" minHeight="50.0" minWidth="300.0">
           <TextField id="calcField" fx:id="inputField" editable="false" maxHeight="75.0" maxWidth="375.0" minHeight="50.0" minWidth="250.0" />
-          <Button maxHeight="75.0" maxWidth="37.0" minHeight="50.0" minWidth="25.0" mnemonicParsing="false" onAction="#historyLeftButton">
+          <Button maxHeight="75.0" maxWidth="30.0" minHeight="50.0" minWidth="30.0" mnemonicParsing="false" onAction="#historyFirst">
+              <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@logos/historyFirst.png" />
+                  </ImageView>
+              </graphic>
+          </Button>
+          <Button maxHeight="75.0" maxWidth="30.0" minHeight="50.0" minWidth="30.0" mnemonicParsing="false" onAction="#historyLeft">
               <graphic>
                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <Image url="@logos/historyLeft.png" />
                  </ImageView>
               </graphic>
           </Button>
-          <Button maxHeight="75.0" maxWidth="37.0" minHeight="50.0" minWidth="25.0" mnemonicParsing="false" onAction="#historyRightButton">
+          <Button maxHeight="75.0" maxWidth="30.0" minHeight="50.0" minWidth="30.0" mnemonicParsing="false" onAction="#historyRight">
               <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@logos/historyRight.png" />
+                  </ImageView>
+              </graphic>
+          </Button>
+          <Button maxHeight="75.0" maxWidth="30.0" minHeight="50.0" minWidth="30.0" mnemonicParsing="false" onAction="#historyLast">
+              <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@logos/historyLast.png" />
                   </ImageView>
               </graphic>
           </Button>

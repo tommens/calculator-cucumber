@@ -33,6 +33,14 @@ class CircularLinkedListService {
         if (current != null) current = current.getNext();
     }
 
+    public void navigateLast() {
+        if (head != null) current = head;
+    }
+
+    public void navigateFirst() {
+        if (tail != null) current = tail;
+    }
+
     void addNode(ScreenMementoDTO value) {
         if (value == null) return;
         CircularLinkedList newNode;
@@ -98,5 +106,4 @@ class CircularLinkedListService {
 
         return false;
     }
-
 }

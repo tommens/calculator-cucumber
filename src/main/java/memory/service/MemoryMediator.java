@@ -34,6 +34,14 @@ public class MemoryMediator {
         circularList.navigateRight();
     }
 
+    public void navigateLast() {
+        circularList.navigateLast();
+    }
+
+    public void navigateFirst() {
+        circularList.navigateFirst();
+    }
+
     public CircularLinkedList getCurrentPosition() { return circularList.getCurrent(); }
 
     void addItem(ScreenMementoDTO val) {
