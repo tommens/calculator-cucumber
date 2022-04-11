@@ -12,8 +12,8 @@ import javafx.event.ActionEvent;
  */
 public class BasicController extends Controller {
 
-    private Calculator calculator = new Calculator();
-    private Parser parser = new Parser(calculator);
+    private final Calculator calculator = new Calculator();
+    private final Parser parser = new Parser(calculator);
 
     public void submitButton() {
         Expression expr = parser.parse(this.inputField.getText());

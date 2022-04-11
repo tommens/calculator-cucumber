@@ -80,6 +80,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
                 case "atanh"     -> new Atanh(argument);
                 case "cos"       -> new Cos(argument);
                 case "cosh"      -> new Cosh(argument);
+                case "exp"       -> new Exp(argument);
                 case "identity"  -> new Identity(argument);
                 case "ln"        -> new Ln(argument);
                 case "log"       -> new Log(argument);
