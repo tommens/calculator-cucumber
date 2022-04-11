@@ -26,6 +26,8 @@ public class Main {
 
 	  var l = new Parser(c).parse("toto:=1");
 	  System.out.println(c.eval(l));
+	  var lr = new Parser(c).parse("sin(2)");
+	  System.out.println(c.eval(lr));
 
 	  /*
 

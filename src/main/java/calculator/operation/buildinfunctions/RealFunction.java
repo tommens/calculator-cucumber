@@ -4,7 +4,6 @@ import calculator.*;
 import visitor.Visitor;
 
 import java.math.MathContext;
-import java.util.List;
 
 
 public abstract class RealFunction extends Function {
@@ -13,6 +12,15 @@ public abstract class RealFunction extends Function {
 
     public RealFunction(String name, Expression expression) {
         super(name, expression);
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        // ask each of the argument expressions of the current operation to accept the visitor
+        expression.accept(v);
+
+        // Evaluate the function
+        v.visit(this);
     }
 
     public abstract Real op(Real l);
