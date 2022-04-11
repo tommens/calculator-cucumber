@@ -1,5 +1,6 @@
 package memory.service;
 
+import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;
@@ -57,7 +58,7 @@ public abstract class MemoryMediator {
             return null;
     }
 
-    static void retrieveCircularList(File memorized) throws IOException {
+    static void retrieveCircularList(File memorized) throws IOException, UnexpectedExpressionException {
         cleanCircularList();
         String memorizedLine;
 

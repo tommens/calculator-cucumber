@@ -33,5 +33,4 @@ public class ResultOriginator {
             writer.close();
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package memory.service;
 
+import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;
@@ -48,7 +49,7 @@ public interface MemoriesCareTaker {
         return getCurrent();
     }
 
-    default void loadCircularList(File memorized) throws IOException {
+    default void loadCircularList(File memorized) throws IOException, UnexpectedExpressionException {
         clean();
         retrieveCircularList(memorized);
     }

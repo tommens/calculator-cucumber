@@ -1,8 +1,8 @@
 package memory.memento;
 
+import common.UnexpectedExpressionException;
 import java.io.Serializable;
-
-import static common.Configuration.EXPRESSION_SEPARATOR;
+import static common.Configuration.*;
 
 /**
  * Memento DTO (data transfer object) class with marshalling capabilities
@@ -17,11 +17,17 @@ public class ScreenMementoDTO implements Serializable {
         result = res;
     }
 
-    public static ScreenMementoDTO marshaller(String res) {
+    public static ScreenMementoDTO marshaller(String res) throws UnexpectedExpressionException {
         String[] tab = res.split(EXPRESSION_SEPARATOR);
-        if (tab[0] != null && tab[1] != null)
-            return new ScreenMementoDTO(tab[0], tab[1]);
-        return null;
+        ScreenMementoDTO dto;
+
+        try {
+            dto = new ScreenMementoDTO(tab[0], tab[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new UnexpectedExpressionException(ERROR_MSG_RESULT_STRUCTURE);
+        }
+
+        return dto;
     }
 
     @Override

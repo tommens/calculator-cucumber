@@ -3,6 +3,7 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
+import common.UnexpectedExpressionException;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import memory.CircularLinkedList;
@@ -83,12 +84,12 @@ public class BasicController extends Controller {
         saveToFile(fileChooser.showSaveDialog(stage));
     }
 
-    public void loadHistory() throws IOException {
+    public void loadHistory() throws IOException, UnexpectedExpressionException {
         fileChooser.setInitialDirectory(new File(System.getProperty(DEFAULT_DIRECTORY)));
         loadCircularList(fileChooser.showOpenDialog(null));
     }
 
     public void printHistory(ActionEvent actionEvent) {
-
+        // TODO:  implementation
     }
 }
