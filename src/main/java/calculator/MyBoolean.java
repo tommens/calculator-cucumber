@@ -31,9 +31,13 @@ public class MyBoolean implements Expression{
         return 1;
     }
 
+    /*
+     * string representation of a MyBoolean
+     * 1 => true and 0 => false
+     */
     @Override
     public String toString() {
-        return Boolean.toString(value);
+        return value?"1":"0";
     }
 
 

@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.Expression;
+import calculator.MyBoolean;
 import calculator.Number;
 import calculator.Operation;
 
@@ -18,6 +19,9 @@ public abstract class Printer extends Visitor {
     public void visit(Number n) {
         printBuffer = n.toString();
     }
+
+    @Override
+    public void visit(MyBoolean b){printBuffer = b.toString();}
 
 
     @Override

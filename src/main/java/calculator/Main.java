@@ -55,6 +55,7 @@ public class Main {
 		List<Expression> params5 = new ArrayList<>();
 		Collections.addAll(params5, new LogicalAnd(my_params1), new LogicalOr(my_params), new MyBoolean(true));
 		e = new LogicalOr(params5);
+		c.print(e);
 		c.evalBool(e);
 
 	}
