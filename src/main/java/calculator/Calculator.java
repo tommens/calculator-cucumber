@@ -1,8 +1,12 @@
 package calculator;
 
+import calculator.operation.buildinfunctions.RealFunction;
 import visitor.Evaluator;
 import visitor.InfixPrinter;
 import visitor.Printer;
+import visitor.Visitor;
+
+import java.util.HashMap;
 
 public class Calculator {
 
@@ -14,6 +18,31 @@ public class Calculator {
      into an arithmetic expression:
      public Expression read(String s)
     */
+
+    /**
+     * This hashmap will contain all functions that are defined by a user
+     */
+    private HashMap<String, RealFunction> userDefinedFunctions;
+
+    public Calculator() {
+        userDefinedFunctions = new HashMap<>();
+    }
+
+
+
+    /**
+     *
+     * @param f The function to store
+     */
+    public void addFunction(RealFunction f) {
+       userDefinedFunctions.put(f.name, f);
+    }
+
+    public Expression apply(String functionName, Expression e) {
+        Visitor v = new Evaluator();
+        // userDefinedFunctions.get(functionName).accept(v); // TODO works?
+        return null;
+    }
 
     public String print(Expression e) {
         Printer p = new InfixPrinter();

@@ -13,7 +13,7 @@ public class InfixPrinter extends Printer {
     }
 
     @Override
-    protected String writeExpression(Function f, ArrayList<String> strings, int counter) {
-        return f.getName() + "( " + strings.get(counter) + " )";
+    protected String writeExpression(Function f, ArrayList<String> strings) {
+        return f.getName() + "( " + strings.get(0) + " )";
     }
 }

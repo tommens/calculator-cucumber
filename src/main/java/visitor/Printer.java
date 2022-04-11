@@ -4,6 +4,7 @@ import calculator.Expression;
 import calculator.Function;
 import calculator.Number;
 import calculator.Operation;
+import calculator.operation.buildinfunctions.RealFunction;
 
 import java.util.ArrayList;
 
@@ -38,23 +39,19 @@ public abstract class Printer extends Visitor {
     }
 
     @Override
-    public void visit(Function f) {
+    public void visit(RealFunction f) {
         ArrayList<String> printedStrings = new ArrayList<>();
-        //first loop to recursively evaluate each subexpression
-        for(Expression a:f.args) {
-            a.accept(this);
-            printedStrings.add(printBuffer);
-            printBuffer = "";
-        }
-        int max = f.args.size();
+        //first evaluate the subexpression
+        f.getExpr().accept(this);
+        printedStrings.add(printBuffer);
+        printBuffer = "";
+
         String temp = "";
-        for(int counter=1; counter<max; counter++) {
-            temp = writeExpression(f, printedStrings, counter);
-        }
+        temp = writeExpression(f, printedStrings);
         printBuffer = temp;
     }
 
     protected abstract String writeExpression(Operation o, ArrayList<String> strings, int counter);
-    protected abstract String writeExpression(Function f, ArrayList<String> strings, int counter);
+    protected abstract String writeExpression(Function f, ArrayList<String> strings);
 
 }

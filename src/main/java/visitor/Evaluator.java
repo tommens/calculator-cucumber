@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.*;
 import calculator.Number;
+import calculator.operation.buildinfunctions.RealFunction;
 
 import java.util.ArrayList;
 
@@ -32,9 +33,9 @@ public class Evaluator extends Visitor {
         computedValue = temp;
     }
 
-    public void visit(Function f) {
+    public void visit(RealFunction f) {
         // Evaluate the expression
-        f.getArgs().get(0).accept(this);
+        f.getExpr().accept(this);
 
         Real argument = getResult().toReal(); // Assume for now that all functions are on reals
         // store the accumulated result

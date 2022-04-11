@@ -6,6 +6,7 @@ import calculator.operation.Minus;
 import calculator.operation.Plus;
 import calculator.operation.Times;
 import calculator.operation.buildinfunctions.Identity;
+import calculator.operation.buildinfunctions.RealFunction;
 import calculator.operation.buildinfunctions.Sin;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
@@ -15,6 +16,12 @@ import parser.CalculatorExpressionVisitor;
 import java.util.List;
 
 public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression> {
+
+    Calculator calculator;
+
+    public SyntaxTreeVisitor(Calculator calc) {
+        calculator = calc;
+    }
 
     private Expression term(ParserRuleContext ctx) {
         return switch(ctx.getChildCount()) {
@@ -62,6 +69,23 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
         };
     }
 
+    private Expression function(ParserRuleContext ctx) {
+        Expression argument = ctx.getChild(2).accept(this);
+        String functionName = ctx.getChild(0).getText();
+        try {
+            return switch (functionName) {
+                case "identity" -> new Identity(argument);
+                case "sin"      -> new Sin(argument);
+                default -> {
+                    // There is no built-in function
+                    throw new RuntimeException("No function called " + functionName + " exists.");
+                }
+            };
+        } catch (IllegalConstruction e) {
+            throw new RuntimeException("Could not instantiate function called " + functionName);
+        }
+    }
+
     @Override
     public Expression visitExpression(CalculatorExpressionParser.ExpressionContext ctx) {
         return ctx.getChild(0).accept(this);
@@ -74,21 +98,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
 
     @Override
     public Expression visitFunction_call(CalculatorExpressionParser.Function_callContext ctx) {
-        Expression argument = ctx.getChild(2).accept(this);
-        String functionName = ctx.getChild(0).getText();
-        try {
-            return switch (functionName) {
-                case "identity" -> new Identity(List.of(argument));
-                case "sin"      -> new Sin(List.of(argument));
-                default -> {
-                    // There is no built-in function
-                    throw new RuntimeException("No function called " + functionName + " exists.");
-                }
-            };
-        } catch (IllegalConstruction e) {
-            throw new RuntimeException("Could not instantiate function called " + functionName);
-        }
-
+        return function(ctx);
     }
 
     @Override
@@ -139,12 +149,21 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
 
     @Override
     public Expression visitFunction_defintion(CalculatorExpressionParser.Function_defintionContext ctx) {
-        return null;
+        String functionName = ctx.getChild(0).getText();
+        Expression subExpr = ctx.getChild(2).accept(this);
+        RealFunction f = new RealFunction(functionName, subExpr) {
+            @Override
+            public Real op(Real l) {
+                return null; // TODO implement
+            }
+        };
+        calculator.addFunction(f);
+        return f;
     }
 
     @Override
     public Expression visitFunction_function_call(CalculatorExpressionParser.Function_function_callContext ctx) {
-        return null;
+        return function(ctx);
     }
 
     @Override

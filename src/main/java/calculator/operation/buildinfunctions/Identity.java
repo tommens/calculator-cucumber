@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Identity extends RealFunction {
 
-    public Identity(List<Expression> elist) throws IllegalConstruction {
-        super("identity", elist);
+    public Identity(Expression e) throws IllegalConstruction {
+        super("identity", e);
     }
 
     @Override

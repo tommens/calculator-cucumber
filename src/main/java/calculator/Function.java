@@ -1,77 +1,50 @@
 package calculator;
 
+import calculator.operation.buildinfunctions.RealFunction;
 import visitor.InfixPrinter;
 import visitor.Printer;
 import visitor.Visitor;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public abstract class Function implements Expression
+public class Function implements Expression
 {
-    public List<Expression> args;
+    protected Expression expression;
     protected String name;
-    protected int neutral; // the neutral element of the operation (e.g. 1 for *, 0 for +)
 
-
-    public List<Expression> getArgs() {
-        return args;
-    }
-
-    // It is not allowed to create operation that have a null list of arguments.
-    // Note that it is allowed to have an EMPTY list of arguments.
-    public /*constructor*/ Function(String name, List<Expression> elist)
-            throws IllegalConstruction
-    {
+    public /*constructor*/ Function(String name, Expression expression) {
         this.name = name;
-        if (elist == null) {
-            throw new IllegalConstruction(); }
-        else {
-            args = new ArrayList<>(elist);
-        }
+        this.expression = expression;
     }
 
     public final String getName() {
         return name;
     }
 
-    abstract public Real op(Real l);
-    // the operation itself is specified in the subclasses
-
-    // add more arguments to the existing list of arguments args
-    public void addMoreParams(List<Expression> params) {
-        args.addAll(params);
+    public final Expression getExpr() {
+        return expression;
     }
+
+//    abstract public Real op(Real l);
+//    // the operation itself is specified in the subclasses
 
     public void accept(Visitor v) {
         // ask each of the argument expressions of the current operation to accept the visitor
-        for(Expression a:args) { a.accept(v); }
-        // and then visit the current operation itself
-        v.visit(this);
+        expression.accept(v);
     }
 
     final public Integer countDepth() {
         // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
-                .mapToInt(Expression::countDepth)
-                .max()
-                .getAsInt();
+        return 1 + expression.countDepth();
     }
 
     final public Integer countOps() {
         // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
-                .mapToInt(Expression::countOps)
-                .reduce(Integer::sum)
-                .getAsInt();
+        return 1 + expression.countOps();
     }
 
     final public Integer countNbs() {
         // use of Java 8 functional programming capabilities
-        return args.stream()
-                .mapToInt(Expression::countNbs)
-                .reduce(Integer::sum)
-                .getAsInt();
+        return expression.countNbs();
     }
 
     @Override
@@ -81,7 +54,7 @@ public abstract class Function implements Expression
     }
 
     final public String toString(Printer p) {
-        p.visit(this);
+        p.visit((RealFunction) this); // TODO casting will fail
         return p.getBuffer();
     }
 
@@ -95,7 +68,7 @@ public abstract class Function implements Expression
         if (getClass() != o.getClass()) return false; // getClass() instead of instanceof() because an addition is not the same as a multiplication
 
         Function other = (Function) o;
-        return this.args.equals(other.getArgs());
+        return this.expression.equals(other.expression);
     }
 
     // The method hashCode also needs to be overridden it the equals method is overridden; otherwise there may be problems when you use your object in hashed collections such as HashMap, HashSet, LinkedHashSet
@@ -103,9 +76,8 @@ public abstract class Function implements Expression
     public int hashCode()
     {
         int result = 5, prime = 31;
-        result = prime * result + neutral;
         result = prime * result + name.hashCode();
-        result = prime * result + args.hashCode();
+        result = prime * result + expression.hashCode();
         return result;
     }
 

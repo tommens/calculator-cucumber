@@ -13,7 +13,7 @@ public class PrefixPrinter extends Printer {
     }
 
     @Override
-    protected String writeExpression(Function f, ArrayList<String> strings, int counter) {
-        return "(" + strings.get(counter - 1) + ", " + strings.get(counter) + ") " + f.getName(); // TODO
+    protected String writeExpression(Function f, ArrayList<String> strings) {
+        return "(" + strings.get(0) + ", " + strings.get(0) + ") " + f.getName(); // TODO
     }
 }

@@ -10,8 +10,8 @@ import java.util.List;
 public class Sin extends RealFunction{
 
 
-    public Sin(List<Expression> elist) throws IllegalConstruction {
-        super("sin", elist);
+    public Sin(Expression e) {
+        super("sin", e);
     }
 
     @Override

@@ -13,9 +13,10 @@ import javafx.event.ActionEvent;
 public class BasicController extends Controller {
 
     private Calculator calculator = new Calculator();
+    private Parser parser = new Parser(calculator);
 
     public void submitButton() {
-        Expression expr = Parser.parse(this.inputField.getText());
+        Expression expr = parser.parse(this.inputField.getText());
         this.outputField.setText(calculator.eval(expr).toString());
         this.setSubmitted(true);
     }
