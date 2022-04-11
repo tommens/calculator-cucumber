@@ -22,7 +22,7 @@ public class Calculator {
     /**
      * This hashmap will contain all functions that are defined by a user
      */
-    private HashMap<String, RealFunction> userDefinedFunctions;
+    private HashMap<String, Function> userDefinedFunctions;
 
     public Calculator() {
         userDefinedFunctions = new HashMap<>();
@@ -34,14 +34,14 @@ public class Calculator {
      *
      * @param f The function to store
      */
-    public void addFunction(RealFunction f) {
+    public void addFunction(Function f) {
        userDefinedFunctions.put(f.name, f);
     }
 
     public Expression apply(String functionName, Expression e) {
-        Visitor v = new Evaluator();
-        // userDefinedFunctions.get(functionName).accept(v); // TODO works?
-        return null;
+        Evaluator v = new Evaluator();
+        userDefinedFunctions.get(functionName).accept(v); // TODO works?
+        return v.getResult();
     }
 
     public String print(Expression e) {

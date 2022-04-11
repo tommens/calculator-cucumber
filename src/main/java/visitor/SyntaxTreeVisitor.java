@@ -76,10 +76,9 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
             return switch (functionName) {
                 case "identity" -> new Identity(argument);
                 case "sin"      -> new Sin(argument);
-                default -> {
-                    // There is no built-in function
-                    throw new RuntimeException("No function called " + functionName + " exists.");
-                }
+                default -> // There is no built-in function
+                        //throw new RuntimeException("No function called " + functionName + " exists.");
+                        calculator.apply(functionName, argument);
             };
         } catch (IllegalConstruction e) {
             throw new RuntimeException("Could not instantiate function called " + functionName);
@@ -151,12 +150,7 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     public Expression visitFunction_defintion(CalculatorExpressionParser.Function_defintionContext ctx) {
         String functionName = ctx.getChild(0).getText();
         Expression subExpr = ctx.getChild(2).accept(this);
-        RealFunction f = new RealFunction(functionName, subExpr) {
-            @Override
-            public Real op(Real l) {
-                return null; // TODO implement
-            }
-        };
+        Function f = new Function(functionName, subExpr);
         calculator.addFunction(f);
         return f;
     }
