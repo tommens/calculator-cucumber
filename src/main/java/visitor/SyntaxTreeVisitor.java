@@ -5,8 +5,7 @@ import calculator.operation.Divides;
 import calculator.operation.Minus;
 import calculator.operation.Plus;
 import calculator.operation.Times;
-import calculator.operation.buildinfunctions.Identity;
-import calculator.operation.buildinfunctions.Sin;
+import calculator.operation.buildinfunctions.*;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
 import parser.CalculatorExpressionParser;
@@ -73,8 +72,21 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
         String functionName = ctx.getChild(0).getText();
         try {
             return switch (functionName) {
-                case "identity" -> new Identity(argument);
-                case "sin"      -> new Sin(argument);
+                case "acos"      -> new Acos(argument);
+                case "asin"      -> new Asin(argument);
+                case "asinh"     -> new Asinh(argument);
+                case "atan"      -> new Atan(argument);
+                case "atanh"     -> new Atanh(argument);
+                case "cos"       -> new Cos(argument);
+                case "cosh"      -> new Cosh(argument);
+                case "identity"  -> new Identity(argument);
+                case "ln"        -> new Ln(argument);
+                case "log"       -> new Log(argument);
+                case "sin"       -> new Sin(argument);
+                case "sinh"      -> new Sinh(argument);
+                case "sqrt"      -> new Sqrt(argument);
+                case "tan"       -> new Tan(argument);
+                case "tanh"      -> new Tanh(argument);
                 default -> {
                     // There is no built-in function
                     if (!calculator.hasFunction(functionName)) {

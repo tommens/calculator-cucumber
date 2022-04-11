@@ -4,14 +4,14 @@ import calculator.Expression;
 import calculator.Real;
 import ch.obermuhlner.math.big.BigDecimalMath;
 
-public class Sin extends RealFunction{
+public class Cosh extends RealFunction {
 
-    public Sin(Expression e) {
-        super("sin", e);
+    public Cosh(Expression e) {
+        super("cosh", e);
     }
 
     @Override
     public Real op(Real l) {
-        return new Real(BigDecimalMath.sin(l.getValue(), mc));
+        return new Real(BigDecimalMath.cosh(l.getValue(), mc));
     }
 }
