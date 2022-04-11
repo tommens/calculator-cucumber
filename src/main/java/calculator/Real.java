@@ -141,4 +141,14 @@ public class Real extends Number implements Expression{
     }
 
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Real r) {
+            return value.equals(r.value);
+        } else {
+            return false;
+        }
+    }
+
+
 }

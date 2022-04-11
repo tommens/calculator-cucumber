@@ -24,6 +24,10 @@ public class Function implements Expression
         return expression;
     }
 
+    public final void changeExpression(Expression expression) {
+        this.expression = expression;
+    }
+
 //    abstract public Real op(Real l);
 //    // the operation itself is specified in the subclasses
 

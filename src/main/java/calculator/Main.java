@@ -24,9 +24,9 @@ public class Main {
   	Expression e;
   	Calculator c = new Calculator();
 
-	  var l = new Parser(c).parse("toto:=x");
+	  var l = new Parser(c).parse("toto:=sin(x)+1");
 	  //System.out.println(c.eval(l));
-	  var lr = new Parser(c).parse("sin(toto(1))");
+	  var lr = new Parser(c).parse("toto(1)");
 	  System.out.println(c.eval(lr));
 
 	  /*

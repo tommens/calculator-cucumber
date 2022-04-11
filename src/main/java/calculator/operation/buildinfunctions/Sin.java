@@ -5,8 +5,6 @@ import calculator.IllegalConstruction;
 import calculator.Real;
 import ch.obermuhlner.math.big.BigDecimalMath;
 
-import java.util.List;
-
 public class Sin extends RealFunction{
 
 
