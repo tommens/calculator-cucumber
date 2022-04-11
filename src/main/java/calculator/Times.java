@@ -7,7 +7,7 @@ final public class Times extends Operation{
 
     public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction{
   	    super(elist);
-  	    symbol = "x";
+  	    symbol = "×";
   	    neutral = 1;
     }
 
