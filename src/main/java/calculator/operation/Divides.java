@@ -1,4 +1,7 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
+import calculator.Number;
 
 import java.util.List;
 
