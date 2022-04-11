@@ -2,12 +2,14 @@ package junit5tests;
 
 //Import Junit5 libraries for unit testing:
 
-import calculator.MyBoolean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import calculator.MyBoolean;
+
 
 public class TestMyBoolean {
 

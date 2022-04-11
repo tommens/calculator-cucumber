@@ -25,11 +25,6 @@ public class TestLogicalAnd {
         catch(IllegalConstruction e) { fail(); }
     }
 
-    @Test
-    public void testConstructor1() {
-        // It should not be possible to create an expression without null parameter list
-        assertThrows(IllegalConstruction.class, () -> op = new LogicalAnd(null));
-    }
 
     @Test
     public void testEquals() {
