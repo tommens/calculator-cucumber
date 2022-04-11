@@ -7,13 +7,12 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static memory.service.MemoryMediator.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.Random.class)
 class CircularListMediatorTest {
-
-    private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = getServiceInstance();
+    private final MemoryMediator memoryMediator = new MemoryMediator();
+    private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = memoryMediator.getServiceInstance();
 
     private static final String EXPECTED_FIRST_SAVED_VALUE = "1+1 = 2";
     private static final String EXPECTED_SECOND_SAVED_VALUE = "2+2 = 4";
@@ -23,7 +22,7 @@ class CircularListMediatorTest {
     @BeforeEach
     void setUp() {
         // retrieveCircularList();
-        cleanCircularList();
+        memoryMediator.cleanCircularList();
         ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("1+1", "2"));
         ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("2+2", "4"));
         ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("4+4", "8"));
@@ -43,7 +42,7 @@ class CircularListMediatorTest {
     @Test
     void navigate_in_tha_list() {
         // retrieve circularList from Facade
-        CircularLinkedList item = getCircularListFromLastItem();
+        CircularLinkedList item = memoryMediator.getCircularListFromLastItem();
         if (item == null) fail();
 
         // navigate like someone doing undo / redo
@@ -61,7 +60,7 @@ class CircularListMediatorTest {
 
     @Test
     void create_new_empty_list() {
-        cleanCircularList();
+        memoryMediator.cleanCircularList();
         assertFalse(ACTUAL_EMBEDDED_VALUE_TO_TEST.containsValue(EXPECTED_FIRST_SAVED_VALUE));
     }
 

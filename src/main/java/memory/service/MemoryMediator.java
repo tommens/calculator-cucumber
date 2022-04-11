@@ -10,55 +10,49 @@ import java.io.*;
 import static memory.memento.ScreenMementoDTO.marshaller;
 
 /**
- * Provide from static context a circular list with following functionalities :
+ * Provide circular list following functionalities :
+ * - Navigation (public scope)
  * - retrieveCircularList read a file to handle it's CircularLinkedList content
  * - saveCircularList save the CircularLinkedList content to a file
- * - emptyCircularList make a clean
- * - getCircularListFromLastItem give the last saved value
+ * - add and clean
  */
-public abstract class MemoryMediator {
+public class MemoryMediator {
 
-    private static CircularLinkedListService circularList;
-    private static final ResultOriginator mementoOriginator;
+    private CircularLinkedListService circularList;
+    private final ResultOriginator mementoOriginator;
 
-    private MemoryMediator(){}
-
-    static {
+    MemoryMediator(){
         circularList = getServiceInstance();
         mementoOriginator = new ResultOriginator();
     }
 
-    static CircularLinkedList getCurrent() {
-        if (circularList != null && circularList.getCurrent() != null)
-            return circularList.getCurrent();
-        return null;
-    }
-
-    static void navigateLeft() {
+    public void navigateLeft() {
         circularList.navigateLeft();
     }
 
-    static void navigateRight() {
+    public void navigateRight() {
         circularList.navigateRight();
     }
 
-    static void addItem(ScreenMementoDTO val) {
+    public CircularLinkedList getCurrentPosition() { return circularList.getCurrent(); }
+
+    void addItem(ScreenMementoDTO val) {
         circularList.addNode(val);
         mementoOriginator.keepStatusUpdated(val);
     }
 
-    static void cleanCircularList() {
+    void cleanCircularList() {
         circularList.clean();
     }
 
-    static CircularLinkedList getCircularListFromLastItem() {
+    CircularLinkedList getCircularListFromLastItem() {
         if (circularList != null)
             return circularList.getTail();
         else
             return null;
     }
 
-    static void retrieveCircularList(File memorized) throws IOException, UnexpectedExpressionException {
+    void retrieveCircularList(File memorized) throws IOException, UnexpectedExpressionException {
         cleanCircularList();
         String memorizedLine;
 
@@ -70,11 +64,11 @@ public abstract class MemoryMediator {
         }
     }
 
-    static void saveHistory(File fileToMemorize) throws FileNotFoundException {
+    void saveHistory(File fileToMemorize) throws FileNotFoundException {
         mementoOriginator.save(fileToMemorize);
     }
 
-    static CircularLinkedListService getServiceInstance() {
+    CircularLinkedListService getServiceInstance() {
         if (circularList == null) circularList = new CircularLinkedListService();
         return circularList;
     }

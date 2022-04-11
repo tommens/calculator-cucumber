@@ -1,6 +1,8 @@
 package memory.memento;
 
 import common.UnexpectedExpressionException;
+
+import java.io.Serial;
 import java.io.Serializable;
 import static common.Configuration.*;
 
@@ -9,6 +11,8 @@ import static common.Configuration.*;
  */
 public class ScreenMementoDTO implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 42L;
     private final String expression;
     private final String result;
 

@@ -9,13 +9,13 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import static common.Configuration.OPERATION_MEMORY_SIZE;
 import static java.lang.String.valueOf;
-import static memory.service.MemoryMediator.getServiceInstance;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.Random.class)
 public class CircularLinkedListRemovingFunctionalityTest {
 
-    private final CircularLinkedListService CL_SERVICE = getServiceInstance();
+    private final MemoryMediator memoryMediator = new MemoryMediator();
+    private final CircularLinkedListService CL_SERVICE = memoryMediator.getServiceInstance();
 
     @BeforeEach
     void setUp() {

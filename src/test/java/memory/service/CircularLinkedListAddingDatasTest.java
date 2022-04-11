@@ -1,17 +1,20 @@
 package memory.service;
 
-import static java.lang.Integer.valueOf;
-import static memory.service.MemoryMediator.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 import memory.CircularLinkedList;
 import memory.memento.ScreenMementoDTO;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import static java.lang.Integer.valueOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CircularLinkedListAddingDatasTest {
 
-    private final CircularLinkedListService CL_SERVICE = getServiceInstance();
+    private final MemoryMediator memoryMediator = new MemoryMediator();
+    private final CircularLinkedListService CL_SERVICE = memoryMediator.getServiceInstance();
     private final ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1");
     private final ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2");
     private final ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3");
@@ -19,14 +22,14 @@ class CircularLinkedListAddingDatasTest {
     @Test
     @Order(1)
     void setUp() {
-        cleanCircularList();
+        memoryMediator.cleanCircularList();
     }
 
     @Test
     @Order(2)
     public void add_first_node() {
         assertEquals(CL_SERVICE.getLength(), 0);
-        addItem(ONE_FIRST_VALUE);
+        memoryMediator.addItem(ONE_FIRST_VALUE);
         assertEquals(CL_SERVICE.getLength(), 1);
 
         CircularLinkedList head = CL_SERVICE.getHead();
@@ -41,7 +44,7 @@ class CircularLinkedListAddingDatasTest {
     @Order(3)
     public void add_second_node() {
         assertEquals(CL_SERVICE.getLength(), 1);
-        addItem(SECOND_VALUE);
+        memoryMediator.addItem(SECOND_VALUE);
         assertEquals(CL_SERVICE.getLength(), 2);
 
         CircularLinkedList head = CL_SERVICE.getHead();
@@ -57,7 +60,7 @@ class CircularLinkedListAddingDatasTest {
     @Order(4)
     public void add_third_node() {
         assertEquals(CL_SERVICE.getLength(), 2);
-        addItem(THIRD_VALUE);
+        memoryMediator.addItem(THIRD_VALUE);
         assertEquals(CL_SERVICE.getLength(), 3);
 
         CircularLinkedList head = CL_SERVICE.getHead();
@@ -76,7 +79,7 @@ class CircularLinkedListAddingDatasTest {
     public void add_last_node() {
         ScreenMementoDTO LAST_VALUE = new ScreenMementoDTO("4","4");
         assertEquals(CL_SERVICE.getLength(), 3);
-        addItem(LAST_VALUE);
+        memoryMediator.addItem(LAST_VALUE);
         assertEquals(CL_SERVICE.getLength(), 4);
 
         CircularLinkedList head = CL_SERVICE.getHead();

@@ -4,6 +4,7 @@ import common.UnexpectedExpressionException;
 import org.junit.jupiter.api.Test;
 
 import static common.Configuration.ERROR_MSG_RESULT_STRUCTURE;
+import static common.Configuration.EXPRESSION_SEPARATOR;
 import static memory.memento.ScreenMementoDTO.marshaller;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +14,7 @@ class ScreenMementoDTOTest {
     void marshaller_happy() {
         ScreenMementoDTO dto = new ScreenMementoDTO("0", "0");
         try {
-            dto = marshaller("1 + 1 = 2");
+            dto = marshaller("1 + 1" + EXPRESSION_SEPARATOR + "2");
         } catch (UnexpectedExpressionException e) {
             fail();
         }

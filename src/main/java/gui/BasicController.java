@@ -63,14 +63,14 @@ public class BasicController extends Controller {
     }
 
     public void historyLeftButton() {
-        CircularLinkedList item = getCircularList();
-        left();
+        CircularLinkedList item = history().getCurrentPosition();
+        history().navigateLeft();
         screenUpdate(item);
     }
 
     public void historyRightButton() {
-        CircularLinkedList item = getCircularList();
-        right();
+        CircularLinkedList item = history().getCurrentPosition();
+        history().navigateRight();
         screenUpdate(item);
     }
 

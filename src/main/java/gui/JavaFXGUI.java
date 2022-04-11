@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import static gui.common.Configuration.*;
+import static common.Configuration.*;
 
 /**
  * The GUI application Launcher
