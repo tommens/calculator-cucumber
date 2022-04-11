@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public abstract class Controller {
     private Scene sceneBasic;
     private Scene sceneConverter;
+    private Scene sceneScientific;
 
     private boolean submitted = false;
 
@@ -27,6 +28,10 @@ public abstract class Controller {
 
     public void setSceneConverter(Scene sceneConverter) {
         this.sceneConverter = sceneConverter;
+    }
+
+    public void setSceneScientific(Scene sceneScientific) {
+        this.sceneScientific = sceneScientific;
     }
 
     public void cancelButton() {
@@ -80,6 +85,14 @@ public abstract class Controller {
         outputField.setText("");
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneConverter);
+    }
+
+    @FXML
+    public void showSceneScientific() {
+        inputField.setText("");
+        outputField.setText("");
+        Stage stage = (Stage) mainScreen.getScene().getWindow();
+        stage.setScene(sceneScientific);
     }
 
 

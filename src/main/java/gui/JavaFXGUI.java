@@ -31,15 +31,28 @@ public class JavaFXGUI extends Application {
         Parent parentConverter = loaderConverter.load();
         Scene sceneConverter = new Scene(parentConverter);
 
+        // Charge scene for scientific
+        FXMLLoader loaderScientific = new FXMLLoader(getClass().getResource("/gui/layouts/scientific.fxml"));
+        Parent parentScientific = loaderScientific.load();
+        Scene sceneScientific = new Scene(parentScientific);
+
         // Add controller to basic loader
         BasicController basicController = loaderBasic.getController();
         basicController.setSceneBasic(sceneBasic);
         basicController.setSceneConverter(sceneConverter);
+        basicController.setSceneScientific(sceneScientific);
 
         // Add controller to converter loader
         ConverterController converterController = loaderConverter.getController();
         converterController.setSceneBasic(sceneBasic);
         converterController.setSceneConverter(sceneConverter);
+        converterController.setSceneScientific(sceneScientific);
+
+        // Add controller to scientific loader
+        ScientificController scientificController = loaderScientific.getController();
+        scientificController.setSceneBasic(sceneBasic);
+        scientificController.setSceneConverter(sceneConverter);
+        scientificController.setSceneScientific(sceneScientific);
 
         stage.setScene(sceneBasic);
         stage.setTitle(TITLE_MAIN);

@@ -23,6 +23,7 @@
                     <items>
                         <MenuItem onAction="#showSceneBasic" text="Basic mode" />
                         <MenuItem onAction="#showSceneConverter" text="Converter mode" />
+                        <MenuItem onAction="#showSceneScientific" text="Scientific mode" />
                     </items>
                 </MenuButton>
             </graphic>
