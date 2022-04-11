@@ -39,6 +39,7 @@ public class ConverterController extends Controller {
      * The calculator object
      */
     Calculator calculator;
+    Parser parser;
 
     /**
      * Initialize the controller
@@ -49,13 +50,14 @@ public class ConverterController extends Controller {
         typeConv.setValue(categories.get(0));
         updateUnits();
         calculator = new Calculator();
+        parser = new Parser(calculator);
     }
 
     /**
      * Convert the value from the first unit to the second unit
      */
     public void submitButton() {
-        Expression input = Parser.parse(this.inputField.getText());
+        Expression input = parser.parse(this.inputField.getText());
         Unit from = getUnitByName(fromUnit.getValue());
         Unit to = getUnitByName(toUnit.getValue());
         if (from == null || to == null) {

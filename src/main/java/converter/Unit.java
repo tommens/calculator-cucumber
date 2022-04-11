@@ -278,7 +278,7 @@ public enum Unit {
      */
     // Here because of the use of the enum and easier to test
     public static String convert(String input, Unit fromUnit, Unit toUnit, Calculator calculator) {
-        Expression expr = Parser.parse(
+        Expression expr = new Parser(calculator).parse(
                 "(" + input + "-" + fromUnit.getUnitConstant() +")" + "/" + fromUnit.getUnitRatio()
                         + "×" + toUnit.getUnitRatio() + "+" + toUnit.getUnitConstant());
         return calculator.eval(expr).toString();

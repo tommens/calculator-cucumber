@@ -54,9 +54,16 @@ public class Real extends Number implements Expression{
     }
 
     @Override
+    public Real toReal() {
+        return this;
+    }
+
+    @Override
     public Number negate() {
         return new Real(value.negate());
     }
+
+
 
     @Override
     public Number add(Number val) {
@@ -140,6 +147,16 @@ public class Real extends Number implements Expression{
     @Override
     public String toString() {
         return value.toString();
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Real r) {
+            return value.equals(r.value);
+        } else {
+            return false;
+        }
     }
 
 }
