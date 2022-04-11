@@ -38,10 +38,18 @@ public class Calculator {
        userDefinedFunctions.put(f.name, f);
     }
 
+    public boolean hasFunction(String functionName) {
+        return userDefinedFunctions.containsKey(functionName);
+    }
+
     public Expression apply(String functionName, Expression e) {
         Evaluator v = new Evaluator();
         userDefinedFunctions.get(functionName).accept(v); // TODO works?
         return v.getResult();
+    }
+
+    public Function getFunction(String functionName) {
+        return userDefinedFunctions.get(functionName);
     }
 
     public String print(Expression e) {

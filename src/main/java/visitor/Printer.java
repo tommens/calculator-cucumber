@@ -1,9 +1,7 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.Function;
+import calculator.*;
 import calculator.Number;
-import calculator.Operation;
 import calculator.operation.buildinfunctions.RealFunction;
 
 import java.util.ArrayList;
@@ -19,6 +17,11 @@ public abstract class Printer extends Visitor {
     @Override
     public void visit(Number n) {
         printBuffer = n.toString();
+    }
+
+    @Override
+    public void visit(Variable v) {
+        printBuffer = v.toString();
     }
 
     @Override

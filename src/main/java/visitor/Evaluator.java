@@ -16,6 +16,16 @@ public class Evaluator extends Visitor {
         computedValue = n;
     }
 
+    @Override
+    public void visit(Variable v) {
+        if (!v.hasValue()) {
+            throw new RuntimeException("Variable has not been assigned");
+        }
+        v.accept(this);
+        //TODO store computer value
+        //computedValue = ;
+    }
+
     public void visit(Operation o) {
         ArrayList<Number> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
