@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.Random.class)
 class CircularListMediatorTest {
     private final MemoryMediator memoryMediator = new MemoryMediator();
-    private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = memoryMediator.getServiceInstance();
+    private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = memoryMediator.getNavigationListService();
 
     private static final String EXPECTED_FIRST_SAVED_VALUE = "1+1 = 2";
     private static final String EXPECTED_SECOND_SAVED_VALUE = "2+2 = 4";

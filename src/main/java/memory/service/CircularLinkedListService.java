@@ -3,42 +3,61 @@ package memory.service;
 import memory.CircularLinkedList;
 import memory.memento.ScreenMementoDTO;
 
-import static common.Configuration.OPERATION_MEMORY_SIZE;
-
 /**
  * A circular list service
  * accessed by CircularListFacade implementation, eventually (package scope)
  * provide some high level functionalities over circular linked node's list
  */
-class CircularLinkedListService {
+public class CircularLinkedListService {
 
+    private final MemoryConfiguration configuration = new MemoryConfiguration();
     private static CircularLinkedList head;
     private static CircularLinkedList current;
     private static CircularLinkedList tail;
     private static int length;
 
     /**
-     * Access point to the linked nodes list
+     * Access point to the current position linked nodes list
      * @return CircularLinkedList
      */
-    CircularLinkedList getCurrent() {
+    public CircularLinkedList getCurrentPosition() {
         return current;
     }
 
-    void navigateLeft() {
+    /**
+     * Move the current linked list's position to the previous element
+     */
+    public void navigateLeft() {
         if (current != null) current = current.getPrevious();
     }
 
-    void navigateRight() {
+    /**
+     * Move the current linked list's position to the next element
+     */
+    public void navigateRight() {
         if (current != null) current = current.getNext();
     }
 
+    /**
+     * Move the current linked list's position to the last element
+     */
     public void navigateLast() {
         if (head != null) current = head;
     }
 
+    /**
+     * Move the current linked list's position to the first element
+     */
     public void navigateFirst() {
         if (tail != null) current = tail;
+    }
+
+    public long getMemorySize() {
+        return configuration.getGetOperationMemorySize();
+    }
+
+    public void setMemorySize(long val) {
+        this.configuration.setGetOperationMemorySize(val);
     }
 
     void addNode(ScreenMementoDTO value) {
@@ -49,7 +68,7 @@ class CircularLinkedListService {
             newNode = new CircularLinkedList(value, 1);
             head = newNode;
         } else {
-            if (length == OPERATION_MEMORY_SIZE)
+            if (length == configuration.getGetOperationMemorySize())
                 removeFormerNode();
 
             newNode = new CircularLinkedList(value, tail.getIndex()+1);

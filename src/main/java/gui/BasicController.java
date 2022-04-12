@@ -5,6 +5,9 @@ import calculator.Expression;
 import calculator.Parser;
 import common.UnexpectedExpressionException;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import memory.CircularLinkedList;
 
@@ -21,8 +24,9 @@ import static common.Configuration.*;
  */
 public class BasicController extends Controller {
 
-    private FileChooser fileChooser = new FileChooser();
-    private Calculator calculator = new Calculator();
+
+    private final FileChooser fileChooser = new FileChooser();
+    private final Calculator calculator = new Calculator();
 
     public BasicController() {
         fileChooser.getExtensionFilters().add(
@@ -74,13 +78,13 @@ public class BasicController extends Controller {
         screenUpdate(item);
     }
 
-    public void historyLast(ActionEvent actionEvent) {
+    public void historyLast() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateLast();
         screenUpdate(item);
     }
 
-    public void historyFirst(ActionEvent actionEvent) {
+    public void historyFirst() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateFirst();
         screenUpdate(item);
@@ -105,8 +109,27 @@ public class BasicController extends Controller {
         // TODO:  implementation
     }
 
-    public void configHistory(ActionEvent actionEvent) {
-        //TODO: implementation
+    public void configHistory() {
+        long currentValue = history().getMemorySize();
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle(CONFIGURATION_TITLE);
+        Slider slider = new Slider(MIN_MEMSIZE, MAX_MEMSIZE, currentValue);
+        Label label = new Label(MEMORY_SIZE_DIALOG_TEXT);
+        Label res = new Label(Long.toString(currentValue));
+        ButtonType buttonOk = new ButtonType(MEMORY_SIZE_DIALOG_BUTTON);
+        HBox content = new HBox(slider, label, res);
+
+        slider.valueProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                long val = Math.round(newValue.doubleValue());
+                res.setText(String.valueOf(val));
+                history().setMemorySize(val);
+            });
+
+        dialog.setGraphic(content);
+        dialog.getDialogPane().getButtonTypes().add(buttonOk);
+        dialog.show();
+
     }
 
 }

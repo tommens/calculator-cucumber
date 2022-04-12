@@ -18,44 +18,30 @@ import static memory.memento.ScreenMementoDTO.marshaller;
  */
 public class MemoryMediator {
 
-    private CircularLinkedListService circularList;
+    private final CircularLinkedListService navigationListService;
     private final ResultOriginator mementoOriginator;
 
     MemoryMediator(){
-        circularList = getServiceInstance();
+        navigationListService = new CircularLinkedListService();
         mementoOriginator = new ResultOriginator();
     }
 
-    public void navigateLeft() {
-        circularList.navigateLeft();
+    public CircularLinkedListService getNavigationListService() {
+        return navigationListService;
     }
-
-    public void navigateRight() {
-        circularList.navigateRight();
-    }
-
-    public void navigateLast() {
-        circularList.navigateLast();
-    }
-
-    public void navigateFirst() {
-        circularList.navigateFirst();
-    }
-
-    public CircularLinkedList getCurrentPosition() { return circularList.getCurrent(); }
 
     void addItem(ScreenMementoDTO val) {
-        circularList.addNode(val);
+        navigationListService.addNode(val);
         mementoOriginator.keepStatusUpdated(val);
     }
 
     void cleanCircularList() {
-        circularList.clean();
+        navigationListService.clean();
     }
 
     CircularLinkedList getCircularListFromLastItem() {
-        if (circularList != null)
-            return circularList.getTail();
+        if (navigationListService != null)
+            return navigationListService.getTail();
         else
             return null;
     }
@@ -74,11 +60,6 @@ public class MemoryMediator {
 
     void saveHistory(File fileToMemorize) throws FileNotFoundException {
         mementoOriginator.save(fileToMemorize);
-    }
-
-    CircularLinkedListService getServiceInstance() {
-        if (circularList == null) circularList = new CircularLinkedListService();
-        return circularList;
     }
 
 }

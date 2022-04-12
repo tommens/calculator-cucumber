@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CircularLinkedListAddingDatasTest {
 
     private final MemoryMediator memoryMediator = new MemoryMediator();
-    private final CircularLinkedListService CL_SERVICE = memoryMediator.getServiceInstance();
+    private final CircularLinkedListService CL_SERVICE = memoryMediator.getNavigationListService();
     private final ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1");
     private final ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2");
     private final ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3");

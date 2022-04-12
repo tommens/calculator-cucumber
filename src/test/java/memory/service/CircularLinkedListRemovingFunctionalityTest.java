@@ -7,7 +7,6 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static common.Configuration.OPERATION_MEMORY_SIZE;
 import static java.lang.String.valueOf;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CircularLinkedListRemovingFunctionalityTest {
 
     private final MemoryMediator memoryMediator = new MemoryMediator();
-    private final CircularLinkedListService CL_SERVICE = memoryMediator.getServiceInstance();
+    private final CircularLinkedListService CL_SERVICE = memoryMediator.getNavigationListService();
+    private final MemoryConfiguration configuration = new MemoryConfiguration();
 
     @BeforeEach
     void setUp() {
@@ -35,7 +35,7 @@ public class CircularLinkedListRemovingFunctionalityTest {
         CL_SERVICE.addNode(SECOND_VALUE);
         CL_SERVICE.addNode(THIRD_VALUE);
 
-        CircularLinkedList current = CL_SERVICE.getCurrent();
+        CircularLinkedList current = CL_SERVICE.getCurrentPosition();
         assertEquals(current.getDTO(), THIRD_VALUE);
         assertEquals(CL_SERVICE.getLength(), OPERATION_MEMORY_SIZE);
 
@@ -59,15 +59,15 @@ public class CircularLinkedListRemovingFunctionalityTest {
 
     @Test
     void addExtraElement() {
-        int extraElementIndex = OPERATION_MEMORY_SIZE+1;
+        long extraElementIndex = configuration.getGetOperationMemorySize()+1;
         ScreenMementoDTO EXPECTED_HEAD_TO_BE_DELETED = new ScreenMementoDTO(valueOf(0),valueOf(0));
         ScreenMementoDTO EXPECTED_HEAD_AFTER_EXTRA_ADD = new ScreenMementoDTO(valueOf(1),valueOf(1));
         ScreenMementoDTO EXPECTED_TAIL_AFTER_EXTRA_ADD = new ScreenMementoDTO(valueOf(extraElementIndex), valueOf(extraElementIndex));
 
-        for (int i=0; i < OPERATION_MEMORY_SIZE; i++)
+        for (int i=0; i < configuration.getGetOperationMemorySize(); i++)
             CL_SERVICE.addNode(new ScreenMementoDTO(valueOf(i), valueOf(i)));
 
-        assertEquals(CL_SERVICE.getLength(), OPERATION_MEMORY_SIZE);
+        assertEquals(CL_SERVICE.getLength(), configuration.getGetOperationMemorySize());
         assertTrue(CL_SERVICE.containsValue(EXPECTED_HEAD_TO_BE_DELETED.toString()));
 
         CL_SERVICE.addNode(EXPECTED_TAIL_AFTER_EXTRA_ADD);
