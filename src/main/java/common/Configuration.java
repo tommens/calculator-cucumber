@@ -25,7 +25,7 @@ public class Configuration {
 
     public static final String PRINTER_DIALOG_BUTTON = "ok";
     public static final String PRINT_TITLE = "Memory printing ..";
-    public static final String PRINTER_WITH_THIS = "Following printer was selected : ";
+    public static final String PRINTER_WITH_THIS = "Following printer was selected to print the memory : ";
     public static final String PRINTER_INITIATE_TASK = "Initiate print task";
     public static final String PRINTER_FAILED = "Print task failed.";
 
