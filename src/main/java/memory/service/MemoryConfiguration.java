@@ -1,8 +1,10 @@
 package memory.service;
 
+import static common.Configuration.DEFAULT_MEM_SIZE;
+
 public class MemoryConfiguration {
 
-    private long getOperationMemorySize = 50;
+    private long getOperationMemorySize = DEFAULT_MEM_SIZE;
 
     long getGetOperationMemorySize() {
         return getOperationMemorySize;
