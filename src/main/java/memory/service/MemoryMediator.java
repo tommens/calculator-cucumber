@@ -10,8 +10,13 @@ import java.io.*;
 import static memory.memento.ScreenMementoDTO.marshaller;
 
 /**
- * Provide circular list following functionalities :
- * - Navigation (public scope)
+ * The MemoryMediator make several third parties work together.
+ *
+ * CircularLinkedListService :
+ * - Provide Navigation and
+ * - memory capacity configuration
+ *
+ * Memento :
  * - retrieveCircularList read a file to handle it's CircularLinkedList content
  * - saveCircularList save the CircularLinkedList content to a file
  * - add and clean
@@ -26,13 +31,12 @@ public class MemoryMediator {
         mementoOriginator = new ResultOriginator();
     }
 
+    /**
+     * Access the service that handle Circular linked list
+     * @return CircularLinkedListService
+     */
     public CircularLinkedListService getNavigationListService() {
         return navigationListService;
-    }
-
-    void addItem(ScreenMementoDTO val) {
-        navigationListService.addNode(val);
-        mementoOriginator.keepStatusUpdated(val);
     }
 
     void cleanCircularList() {
@@ -40,12 +44,20 @@ public class MemoryMediator {
     }
 
     CircularLinkedList getCircularListFromLastItem() {
-        if (navigationListService != null)
-            return navigationListService.getTail();
-        else
-            return null;
+        return navigationListService.getTail();
     }
 
+    void addItem(ScreenMementoDTO val) {
+        navigationListService.addNode(val);
+        mementoOriginator.keepStatusUpdated(val);
+    }
+
+    /**
+     * Load memory from a file
+     * @param memorized
+     * @throws IOException
+     * @throws UnexpectedExpressionException
+     */
     void retrieveCircularList(File memorized) throws IOException, UnexpectedExpressionException {
         cleanCircularList();
         String memorizedLine;
@@ -58,6 +70,11 @@ public class MemoryMediator {
         }
     }
 
+    /**
+     * save memory to a provided file
+     * @param fileToMemorize
+     * @throws FileNotFoundException
+     */
     void saveHistory(File fileToMemorize) throws FileNotFoundException {
         mementoOriginator.save(fileToMemorize);
     }

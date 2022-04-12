@@ -105,10 +105,6 @@ public class BasicController extends Controller {
         loadCircularList(fileChooser.showOpenDialog(null));
     }
 
-    public void printHistory(ActionEvent actionEvent) {
-        // TODO:  implementation
-    }
-
     public void configHistory() {
         long currentValue = history().getMemorySize();
         Dialog<String> dialog = new Dialog<>();
@@ -130,6 +126,10 @@ public class BasicController extends Controller {
         dialog.getDialogPane().getButtonTypes().add(buttonOk);
         dialog.show();
 
+    }
+
+    public void printHistory(ActionEvent actionEvent) {
+        // TODO:  implementation
     }
 
 }
