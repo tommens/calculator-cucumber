@@ -5,7 +5,6 @@ import calculator.Expression;
 import calculator.Parser;
 import common.UnexpectedExpressionException;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -109,7 +108,7 @@ public class BasicController extends Controller {
         long currentValue = history().getMemorySize();
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle(CONFIGURATION_TITLE);
-        Slider slider = new Slider(MIN_MEMSIZE, MAX_MEMSIZE, currentValue);
+        Slider slider = new Slider(MIN_MEM_SIZE, MAX_MEM_SIZE, currentValue);
         Label label = new Label(MEMORY_SIZE_DIALOG_TEXT);
         Label res = new Label(Long.toString(currentValue));
         ButtonType buttonOk = new ButtonType(MEMORY_SIZE_DIALOG_BUTTON);

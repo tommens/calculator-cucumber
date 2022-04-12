@@ -17,8 +17,8 @@ public class Configuration {
     public static String EXPRESSION_SEPARATOR = " = ";
 
     public static final String CONFIGURATION_TITLE = "Configuration";
-    public static final int MIN_MEMSIZE = 0;
-    public static final int MAX_MEMSIZE = 100;
+    public static final int MIN_MEM_SIZE = 0;
+    public static final int MAX_MEM_SIZE = 100;
     public static final String MEMORY_SIZE_DIALOG_TEXT = "Memory size value : ";
     public static final String MEMORY_SIZE_DIALOG_BUTTON = "OK";
 
