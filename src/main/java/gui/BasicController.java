@@ -4,8 +4,12 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
 import common.UnexpectedExpressionException;
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableSet;
+import javafx.event.EventHandler;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.scene.control.*;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import memory.CircularLinkedList;
@@ -13,8 +17,12 @@ import memory.CircularLinkedList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static common.Configuration.*;
+import static javafx.print.Printer.getDefaultPrinter;
+import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
 
 /**
  * This controller handle the main graphical interface's actions.
@@ -22,7 +30,6 @@ import static common.Configuration.*;
  * Switch mode
  */
 public class BasicController extends Controller {
-
 
     private final FileChooser fileChooser = new FileChooser();
     private final Calculator calculator = new Calculator();
@@ -127,8 +134,48 @@ public class BasicController extends Controller {
 
     }
 
-    public void printHistory(ActionEvent actionEvent) {
-        // TODO:  implementation
+    public void printHistory() {
+
+        Dialog<String> dialog = new Dialog<>();
+        ButtonType buttonOk = new ButtonType(PRINTER_DIALOG_BUTTON, OK_DONE);
+        ListView<Printer> printerListView = new ListView<>();
+        TextArea somethingToPrint = new TextArea();
+        Label jobStatus = new Label();
+        ObservableSet<Printer> printers = Printer.getAllPrinters();
+        AtomicReference<Printer> selectedPrinter = new AtomicReference<>(getDefaultPrinter());
+
+        String printContent = loadMemory();
+
+        dialog.setTitle(PRINT_TITLE);
+        somethingToPrint.setEditable(true);
+        somethingToPrint.setText(printContent);
+        printers.forEach(p -> printerListView.getItems().add(p));
+        printerListView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> selectedPrinter.set(newValue));
+
+        HBox content = new HBox(printerListView, somethingToPrint);
+
+        dialog.setGraphic(content);
+        dialog.getDialogPane().getButtonTypes().add(buttonOk);
+        dialog.setOnCloseRequest(event -> {
+            if (selectedPrinter.get() == null) return;
+            PrinterJob job = PrinterJob.createPrinterJob(selectedPrinter.get());
+            System.out.println(PRINTER_WITH_THIS + selectedPrinter);
+            jobStatus.textProperty().unbind();
+            jobStatus.setText(PRINTER_INITIATE_TASK);
+            jobStatus.textProperty().bind(job.jobStatusProperty().asString());
+            boolean printed = job.printPage(somethingToPrint);
+
+            if (printed)
+                job.endJob();
+            else {
+                jobStatus.textProperty().unbind();
+                jobStatus.setText(PRINTER_FAILED);
+            }
+        });
+
+        dialog.show();
+
     }
 
 }

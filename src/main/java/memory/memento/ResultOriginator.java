@@ -34,4 +34,17 @@ public class ResultOriginator {
         }
     }
 
+    /**
+     * Load the memento content
+     * @return StringBuffer
+     */
+    public StringBuffer getMementoContent() {
+        StringBuffer res = new StringBuffer();
+        for (ScreenMementoDTO m : mementos) {
+            res.append(m.toString());
+            res.append("\n");
+        }
+        return res;
+    }
+
 }

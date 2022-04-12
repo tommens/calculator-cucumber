@@ -22,6 +22,12 @@ public class Configuration {
     public static final String MEMORY_SIZE_DIALOG_TEXT = "Memory size value : ";
     public static final String MEMORY_SIZE_DIALOG_BUTTON = "OK";
 
+    public static final String PRINTER_DIALOG_BUTTON = "ok";
+    public static final String PRINT_TITLE = "Memory printing ..";
+    public static final String PRINTER_WITH_THIS = "Following printer was selected : ";
+    public static final String PRINTER_INITIATE_TASK = "Initiate print task";
+    public static final String PRINTER_FAILED = "Print task failed.";
+
     public static String ERROR_MSG_RESULT_STRUCTURE = "invalid String structure to marshall to screen memento";
 
 }

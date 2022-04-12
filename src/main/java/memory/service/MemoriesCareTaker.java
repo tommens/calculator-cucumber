@@ -32,6 +32,10 @@ public interface MemoriesCareTaker {
         memoryMediator.saveHistory(fileToMemorize);
     }
 
+    default String loadMemory() {
+        return memoryMediator.loadHistory();
+    }
+
     default CircularLinkedListService history() {
         return memoryMediator.getNavigationListService();
     }

@@ -79,4 +79,8 @@ public class MemoryMediator {
         mementoOriginator.save(fileToMemorize);
     }
 
+    String loadHistory() {
+        return mementoOriginator.getMementoContent().toString();
+    }
+
 }
