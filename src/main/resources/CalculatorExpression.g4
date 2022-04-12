@@ -8,6 +8,7 @@ PLUS : '+';
 MINUS: '-';
 MULT : '×';
 DIV  : '/';
+POW  : '^';
 
 FUNCTION_IDENTIFIER : [a-z]+;
 
@@ -22,10 +23,14 @@ term: factor
     | term MINUS factor
     ;
 
-factor: value
-      | factor MULT value
-      | factor DIV value
+factor: pow
+      | factor MULT pow
+      | factor DIV pow
       ;
+
+pow: value
+   | pow POW value
+   ;
 
 value: number
      | function_call
@@ -33,9 +38,6 @@ value: number
      ;
 
 number: MINUS?(INT|DECIMAL|IMAGINARY);
-
-
-
 
 function_defintion: FUNCTION_IDENTIFIER ':=' function_term;
 

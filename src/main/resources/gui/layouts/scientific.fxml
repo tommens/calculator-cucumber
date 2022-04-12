@@ -64,6 +64,7 @@
             </graphic>
          </Button>
          <Button onAction="#clickFctButton" prefHeight="65.0" prefWidth="65.0" text="√" />
+         <Button onAction="#clickFctButton" prefHeight="65.0" prefWidth="65.0" text="√" />
          <Button onAction="#clickSquareButton" prefHeight="65.0" prefWidth="65.0" text="x²" GridPane.columnIndex="1" />
          <Button onAction="#clickCubicButton" prefHeight="65.0" prefWidth="65.0" text="x³" GridPane.columnIndex="3" />
       </GridPane>
@@ -123,7 +124,7 @@
          </Button>
          <Button onAction="#clickFctButton" prefHeight="65.0" prefWidth="65.0" text="mod" GridPane.columnIndex="6" />
          <Button onAction="#clickFctButton" prefHeight="65.0" prefWidth="65.0" text="exp" GridPane.columnIndex="5" />
-         <Button onAction="#clickFactButton" prefHeight="65.0" prefWidth="65.0" text="n!" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+         <Button onAction="#clickValueButton" prefHeight="65.0" prefWidth="65.0" text="i" GridPane.columnIndex="5" GridPane.rowIndex="1" />
          <Button onAction="#clickValueButton" prefHeight="65.0" prefWidth="65.0" text=")" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          <Button onAction="#clickValueButton" prefHeight="65.0" prefWidth="65.0" text="(" GridPane.columnIndex="3" GridPane.rowIndex="1" />
          <Button onAction="#clickAbsButton" prefHeight="65.0" prefWidth="65.0" text="|x|" GridPane.columnIndex="4" />

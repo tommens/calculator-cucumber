@@ -11,7 +11,6 @@ import org.antlr.v4.runtime.tree.*;
 import parser.CalculatorExpressionParser;
 import parser.CalculatorExpressionVisitor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression> {
@@ -73,11 +72,13 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
         String functionName = ctx.getChild(0).getText();
         try {
             return switch (functionName) {
+                case "abs"       -> new Abs(argument);
                 case "acos"      -> new Acos(argument);
                 case "asin"      -> new Asin(argument);
                 case "asinh"     -> new Asinh(argument);
                 case "atan"      -> new Atan(argument);
                 case "atanh"     -> new Atanh(argument);
+                case "cbrt"      -> new Cbrt(argument);
                 case "cos"       -> new Cos(argument);
                 case "cosh"      -> new Cosh(argument);
                 case "exp"       -> new Exp(argument);

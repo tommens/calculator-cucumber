@@ -3,21 +3,26 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
+import ch.obermuhlner.math.big.BigDecimalMath;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 public class ScientificController extends Controller {
 
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
+    protected MathContext mc = MathContext.DECIMAL128;
 
     @Override
     public void submitButton() {
         String input = inputField.getText();
-        input = input.replace("є", BigDecimal.valueOf(Math.E).toString());
-        input = input.replace("π", BigDecimal.valueOf(Math.PI).toString());
+        input = input.replace("є", BigDecimalMath.e(mc).toString());
+        input = input.replace("π", BigDecimalMath.pi(mc).toString());
+        input = input.replace("√", "sqrt");
+        input = input.replace("∛", "cbrt");
         Expression expr = parser.parse(input);
         this.outputField.setText(calculator.eval(expr).toString());
         this.setSubmitted(true);
@@ -48,14 +53,9 @@ public class ScientificController extends Controller {
         inputField.setText(inputField.getText() + ((Button)event.getSource()).getText() + "(");
     }
 
-    public void clickFactButton() {
-        clearAfterSubmitted();
-        inputField.setText(inputField.getText() + "!");
-    }
-
     public void clickAbsButton() {
         clearAfterSubmitted();
-        inputField.setText("|" + inputField.getText() + "|");
+        inputField.setText(inputField.getText() + "abs(");
     }
 
     public void clickInverseButton() {

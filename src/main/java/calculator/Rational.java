@@ -1,11 +1,16 @@
 package calculator;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
+
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 
 public class Rational extends Number implements Expression, Comparable<Rational> {
 
     protected BigInteger numerator;
     protected BigInteger denominator;
+    protected MathContext mc = MathContext.DECIMAL128;
 
     /**
      * Constructs a Rational integer representing 1.
@@ -121,6 +126,16 @@ public class Rational extends Number implements Expression, Comparable<Rational>
     protected Number divide(Real r) {
         Real us = new Real(this);
         return us.divide(r);
+    }
+
+    @Override
+    protected Number pow(Rational rat) {
+        return null;
+    }
+
+    @Override
+    protected Number pow(Real r) {
+        return null;
     }
 
     @Override

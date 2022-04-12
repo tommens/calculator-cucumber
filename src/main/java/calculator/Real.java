@@ -145,6 +145,16 @@ public class Real extends Number implements Expression{
     }
 
     @Override
+    protected Number pow(Rational rat) {
+        return null;
+    }
+
+    @Override
+    protected Number pow(Real r) {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return value.toString();
     }
