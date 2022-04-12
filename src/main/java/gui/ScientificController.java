@@ -7,7 +7,6 @@ import ch.obermuhlner.math.big.BigDecimalMath;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 
-import java.math.BigDecimal;
 import java.math.MathContext;
 
 public class ScientificController extends Controller {
@@ -23,8 +22,9 @@ public class ScientificController extends Controller {
         input = input.replace("π", BigDecimalMath.pi(mc).toString());
         input = input.replace("√", "sqrt");
         input = input.replace("∛", "cbrt");
+        input = input.replace("%", "/100");
         Expression expr = parser.parse(input);
-        this.outputField.setText(calculator.eval(expr).toString());
+        this.outputField.setText(calculator.eval(expr).toReal().toString());
         this.setSubmitted(true);
     }
 

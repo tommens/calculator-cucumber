@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
@@ -45,7 +47,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </VBox.margin>
         <HBox>
-            <TextField id="calcField" fx:id="inputField" editable="false" maxWidth="259.0" prefHeight="50.0" prefWidth="253.0">
+            <TextField id="calcField" fx:id="inputField" editable="false" maxWidth="265.0" prefHeight="50.0" prefWidth="258.0">
                 <HBox.margin>
                     <Insets right="5.0" />
                 </HBox.margin>
@@ -61,11 +63,20 @@
             <Insets />
         </VBox.margin>
         </HBox>
-        <TextField id="resultField" fx:id="outputField" alignment="CENTER_RIGHT" editable="false" prefHeight="50.0">
-        <VBox.margin>
-            <Insets top="5.0" />
-        </VBox.margin>
-        </TextField>
+        <HBox>
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+            <VBox alignment="CENTER" minWidth="50.0">
+                <CheckBox id="isRational" fx:id="isRational" />
+                <Label text="Rational">
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                    </VBox.margin>
+                </Label>
+            </VBox>
+            <TextField id="resultField" fx:id="outputField" alignment="CENTER_RIGHT" editable="false" prefHeight="50.0" prefWidth="274.0" />
+        </HBox>
         <GridPane maxWidth="260.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="65.0" />
