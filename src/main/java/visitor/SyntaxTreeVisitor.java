@@ -1,10 +1,7 @@
 package visitor;
 
 import calculator.*;
-import calculator.operation.Divides;
-import calculator.operation.Minus;
-import calculator.operation.Plus;
-import calculator.operation.Times;
+import calculator.operation.*;
 import calculator.operation.buildinfunctions.*;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
@@ -64,6 +61,24 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
 
             }
             default -> throw new InvalidSyntax("Term has an unknown amount of children.");
+        };
+    }
+
+    private Expression pow(ParserRuleContext ctx) {
+        return switch(ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 3 -> {
+                Expression base = ctx.getChild(0).accept(this);
+                Expression power = ctx.getChild(2).accept(this);
+                List<Expression> elist = List.of(base, power);
+                try{
+                    yield new Pow(elist);
+                } catch (IllegalConstruction e) {
+                    throw new InvalidSyntax("Could not create the operator");
+                }
+
+            }
+            default -> throw new InvalidSyntax("Pow has an unknown amount of children.");
         };
     }
 
@@ -133,6 +148,11 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     }
 
     @Override
+    public Expression visitPow(CalculatorExpressionParser.PowContext ctx) {
+        return pow(ctx);
+    }
+
+    @Override
     public Expression visitValue(CalculatorExpressionParser.ValueContext ctx) {
         // Always one child, whether it is a number or an expression
         return ctx.getChild(0).accept(this);
@@ -195,6 +215,11 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     @Override
     public Expression visitFunction_factor(CalculatorExpressionParser.Function_factorContext ctx) {
         return factor(ctx);
+    }
+
+    @Override
+    public Expression visitFunction_pow(CalculatorExpressionParser.Function_powContext ctx) {
+        return pow(ctx);
     }
 
     @Override

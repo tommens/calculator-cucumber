@@ -1,7 +1,10 @@
 package calculator;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 
 
 public class Real extends Number implements Expression{
@@ -146,12 +149,12 @@ public class Real extends Number implements Expression{
 
     @Override
     protected Number pow(Rational rat) {
-        return null;
+        return pow(rat.toReal());
     }
 
     @Override
     protected Number pow(Real r) {
-        return null;
+        return new Real(BigDecimalMath.pow(value, r.value, MathContext.DECIMAL128));
     }
 
     @Override

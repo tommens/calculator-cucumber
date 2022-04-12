@@ -16,6 +16,7 @@ final public class Plus extends Operation
   	neutral = 0;
   }
 
+  @Override
   public Number op(Number l, Number r) {
   	return l.add(r);
   }

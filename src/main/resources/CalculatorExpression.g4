@@ -46,20 +46,24 @@ function_function_call: FUNCTION_IDENTIFIER '(' function_term ')';
 function_parenthesed_expression: '(' function_term ')';
 
 function_term: function_factor
-    | function_term PLUS function_factor
-    | function_term MINUS function_factor
-    ;
+             | function_term PLUS function_factor
+             | function_term MINUS function_factor
+             ;
 
-function_factor: function_value
-      | function_factor MULT function_value
-      | function_factor DIV function_value
-      ;
+function_factor: function_pow
+               | function_factor MULT function_pow
+               | function_factor DIV function_pow
+               ;
+
+function_pow: function_value
+            | function_pow POW function_value
+            ;
 
 function_value: number
-     | variable
-     | function_function_call
-     | function_parenthesed_expression
-     ;
+               | variable
+               | function_function_call
+               | function_parenthesed_expression
+               ;
 
 variable: 'x';
 

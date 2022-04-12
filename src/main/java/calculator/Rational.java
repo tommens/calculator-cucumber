@@ -130,12 +130,12 @@ public class Rational extends Number implements Expression, Comparable<Rational>
 
     @Override
     protected Number pow(Rational rat) {
-        return null;
+        return new Real(BigDecimalMath.pow(toReal().getValue(), rat.toReal().getValue(), MathContext.DECIMAL128)); //TODO Implement while staying in Rationals
     }
 
     @Override
     protected Number pow(Real r) {
-        return null;
+        return new Real(BigDecimalMath.pow(toReal().getValue(), r.getValue(), MathContext.DECIMAL128));
     }
 
     @Override

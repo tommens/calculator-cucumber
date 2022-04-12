@@ -76,6 +76,18 @@ public class CalculatorExpressionBaseListener implements CalculatorExpressionLis
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPow(CalculatorExpressionParser.PowContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPow(CalculatorExpressionParser.PowContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterValue(CalculatorExpressionParser.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -155,6 +167,18 @@ public class CalculatorExpressionBaseListener implements CalculatorExpressionLis
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction_factor(CalculatorExpressionParser.Function_factorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_pow(CalculatorExpressionParser.Function_powContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_pow(CalculatorExpressionParser.Function_powContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
