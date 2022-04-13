@@ -42,6 +42,7 @@ public abstract class Number implements Expression
     }
     protected abstract Number add(Rational rat);
     protected abstract Number add(Real r);
+    protected abstract Number add(Complex c);
 
     public Number subtract(Number val) {
         return add(val.negate());
@@ -57,6 +58,7 @@ public abstract class Number implements Expression
     }
     protected abstract Number multiply(Rational rat);
     protected abstract Number multiply(Real r);
+    protected abstract Number multiply(Complex c);
 
     public Number divide(Number val){
         if(val instanceof Rational rat){
@@ -68,5 +70,6 @@ public abstract class Number implements Expression
     }
     protected abstract Number divide(Rational rat);
     protected abstract Number divide(Real r);
+    protected abstract Number divide(Complex c);
 
 }

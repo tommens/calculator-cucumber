@@ -89,6 +89,10 @@ public class Real extends Number implements Expression{
         return new Real(result);
     }
 
+    @Override
+    protected Number add(Complex c) {
+        return c.add(this);
+    }
 
 
     @Override
@@ -117,6 +121,10 @@ public class Real extends Number implements Expression{
 
     }
 
+    @Override
+    protected Number multiply(Complex c) {
+        return c.multiply(this);
+    }
 
 
     @Override
@@ -142,6 +150,12 @@ public class Real extends Number implements Expression{
     protected Number divide(Real r) {
         BigDecimal result = value.divide(r.value);
         return new Real(result);
+    }
+
+    @Override
+    protected Number divide(Complex c) {
+        Complex c1 = new Complex(this.value);
+        return c1.divide(c);
     }
 
     @Override
