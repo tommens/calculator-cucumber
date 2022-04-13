@@ -37,6 +37,8 @@ public abstract class Number implements Expression
             return add(rat);
         }else if(val instanceof Real r){
             return add(r);
+        }else if(val instanceof Complex c){
+            return add(c);
         }
         return null;
     }
@@ -53,6 +55,8 @@ public abstract class Number implements Expression
             return multiply(rat);
         }else if(val instanceof Real r){
             return multiply(r);
+        }else if(val instanceof Complex c){
+            return multiply(c);
         }
         return null;
     }
@@ -65,6 +69,8 @@ public abstract class Number implements Expression
             return divide(rat);
         }else if(val instanceof Real r){
             return divide(r);
+        }else if(val instanceof Complex c){
+            return divide(c);
         }
         return null;
     }
