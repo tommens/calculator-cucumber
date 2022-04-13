@@ -7,20 +7,37 @@ public class Complex extends Number implements Expression {
     private BigDecimal real;
     private BigDecimal imaginary;
 
+    /**
+     * Constructor for Complex
+     *
+     * @param real a part real of the complex number
+     * @param imaginary a part imaginary of the complex number
+     */
     public Complex(BigDecimal real, BigDecimal imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
 
+    /**
+     * Constructor for Complex
+     *
+     * @param real a part real of the complex number
+     */
     public Complex(BigDecimal real) {
         this.real = real;
         this.imaginary = BigDecimal.ZERO;
     }
 
+    /**
+     * @return the real part of the complex number
+     */
     public BigDecimal getReal() {
         return real;
     }
 
+    /**
+     * @return the imaginary part of the complex number
+     */
     public BigDecimal getImaginary() {
         return imaginary;
     }
@@ -30,6 +47,9 @@ public class Complex extends Number implements Expression {
         return new Real(real);
     }
 
+    /**
+     * @return the conjugate of the complex number
+     */
     public Complex conjugate() {
         return new Complex(real, imaginary.negate());
     }

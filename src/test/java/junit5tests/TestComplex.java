@@ -6,9 +6,6 @@ import calculator.Complex;
 
 import java.math.BigDecimal;
 
-import calculator.Number;
-import calculator.Rational;
-import calculator.Real;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
