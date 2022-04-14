@@ -1,9 +1,8 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyBoolean;
+import calculator.*;
 import calculator.Number;
-import calculator.Operation;
+import calculator.operation.buildinfunctions.RealFunction;
 
 import java.util.ArrayList;
 
@@ -18,6 +17,11 @@ public abstract class Printer extends Visitor {
     @Override
     public void visit(Number n) {
         printBuffer = n.toString();
+    }
+
+    @Override
+    public void visit(Variable v) {
+        printBuffer = v.toString();
     }
 
     @Override
@@ -41,6 +45,20 @@ public abstract class Printer extends Visitor {
         printBuffer = temp;
     }
 
+    @Override
+    public void visit(RealFunction f) {
+        ArrayList<String> printedStrings = new ArrayList<>();
+        //first evaluate the subexpression
+        f.getExpr().accept(this);
+        printedStrings.add(printBuffer);
+        printBuffer = "";
+
+        String temp = "";
+        temp = writeExpression(f, printedStrings);
+        printBuffer = temp;
+    }
+
     protected abstract String writeExpression(Operation o, ArrayList<String> strings, int counter);
+    protected abstract String writeExpression(Function f, ArrayList<String> strings);
 
 }

@@ -1,37 +1,39 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyBoolean;
+import calculator.*;
 import calculator.Number;
-import calculator.Operation;
+import calculator.operation.buildinfunctions.RealFunction;
 
 import java.util.ArrayList;
 
 public class Evaluator extends Visitor {
 
-    private MyBoolean computedBoolValue;
     private Number computedValue;
 
     public Number getResult() { return computedValue; }
 
-    public MyBoolean getBoolResult(){return computedBoolValue;}
-
-
-    @Override
     public void visit(Number n) {
         computedValue = n;
     }
 
+    @Override
+    public void visit(Variable v) {
+        if (!v.hasValue()) {
+            throw new RuntimeException("Variable has not been assigned");
+        }
+        v.accept(this);
+        //TODO store computer value
+        //computedValue = ;
+    }
+
     public void visit(Operation o) {
         ArrayList<Number> evaluatedArgs = new ArrayList<>();
-        ArrayList<MyBoolean> evaluatedBoolArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
-            evaluatedBoolArgs.add(computedBoolValue);
         }
-        //second loop to accummulate all the evaluated subresults
+        //second loop to accumulate all the evaluated subresults
         Number temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
@@ -39,20 +41,15 @@ public class Evaluator extends Visitor {
         }
         // store the accumulated result
         computedValue = temp;
-
-        MyBoolean tempBool = evaluatedBoolArgs.get(0);
-        for (int i=1; i<evaluatedBoolArgs.size(); i++){
-            tempBool = o.op(tempBool, evaluatedBoolArgs.get(i));
-        }
-
-        computedBoolValue = tempBool;
-
     }
 
-    @Override
-    public void visit(MyBoolean b) {
-        computedBoolValue = b;
-    }
+    public void visit(RealFunction f) {
+        // Evaluate the expression
+        f.getExpr().accept(this);
 
+        Real argument = getResult().toReal(); // Assume for now that all functions are on reals
+        // store the accumulated result
+        computedValue = f.op(argument); // compute the result
+    }
 
 }

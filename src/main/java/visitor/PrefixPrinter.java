@@ -1,5 +1,6 @@
 package visitor;
 
+import calculator.Function;
 import calculator.MyBoolean;
 import calculator.Operation;
 
@@ -13,6 +14,9 @@ public class PrefixPrinter extends Printer {
     }
 
     @Override
-    public void visit(MyBoolean b) {
+    protected String writeExpression(Function f, ArrayList<String> strings) {
+        return "(" + strings.get(0) + ", " + strings.get(0) + ") " + f.getName(); // TODO
     }
+
+
 }

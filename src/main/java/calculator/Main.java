@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.operation.Divides;
+import calculator.operation.Minus;
+import calculator.operation.Plus;
+import calculator.operation.Times;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +23,13 @@ public class Main {
 
   	Expression e;
   	Calculator c = new Calculator();
+
+	  var l = new Parser(c).parse("toto:=sin(x)+1");
+	  //System.out.println(c.eval(l));
+	  var lr = new Parser(c).parse("toto(1)");
+	  System.out.println(c.eval(lr));
+
+	  /*
 
 	try{
 		// Here is an example of how to use the calculator:
@@ -63,6 +75,8 @@ public class Main {
 	catch(IllegalConstruction exception) {
 		System.out.println("cannot create operations without parameters");
 		}
+
+	   */
  	}
 
 }

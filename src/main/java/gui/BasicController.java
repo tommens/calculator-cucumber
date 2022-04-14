@@ -13,35 +13,32 @@ import javafx.event.ActionEvent;
 public class BasicController extends Controller {
 
     private Calculator calculator = new Calculator();
+    private Parser parser = new Parser(calculator);
 
     public void submitButton() {
-        Expression expr = Parser.parse(this.inputField.getText());
+        Expression expr = parser.parse(this.inputField.getText());
         this.outputField.setText(calculator.eval(expr).toString());
         this.setSubmitted(true);
     }
 
     public void plusButton() {
-        addOperation("+");
+        clearAfterSubmitted();
+        inputField.setText(inputField.getText() + "+");
     }
 
     public void minusButton() {
-        addOperation("-");
+        clearAfterSubmitted();
+        inputField.setText(inputField.getText() + "-");
     }
 
     public void timesButton() {
-        addOperation("×");
+        clearAfterSubmitted();
+        inputField.setText(inputField.getText() + "×");
     }
 
     public void dividesButton() {
-        addOperation("/");
-    }
-
-    private void addOperation(String operation) {
-        if (isSubmitted()) {
-            setSubmitted(false);
-            inputField.setText("");
-        }
-        inputField.setText(inputField.getText() + operation);
+        clearAfterSubmitted();
+        inputField.setText(inputField.getText() + "/");
     }
 
     public void historyButton(ActionEvent actionEvent) {
