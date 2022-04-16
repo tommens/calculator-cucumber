@@ -15,7 +15,7 @@ Related to Issue : https://github.com/AlixDeclerck/calculator-cucumber/issues/7
 This code is licensed as CC BY-SA 4.0 (Creative Commons Attribution-ShareAlike 4.0 International)
 https://creativecommons.org/licenses/by-sa/4.0/
 
-save and load buttons icons source :https://www.freepik.com
+icons of buttons source : https://www.freepik.com
 
 ## Acknowledgments
 

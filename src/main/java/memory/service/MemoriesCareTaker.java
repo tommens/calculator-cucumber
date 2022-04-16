@@ -3,7 +3,6 @@ package memory.service;
 import common.UnexpectedExpressionException;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,12 +17,14 @@ public interface MemoriesCareTaker {
     MemoryMediator memoryMediator = new MemoryMediator();
 
     default void keepComponentValue(String expr, String res) {
+        if (expr == null || res == null) return;
         ScreenMementoDTO txt = new ScreenMementoDTO(expr, res);
         stringResult.keepStatusUpdated(txt);
         memoryMediator.addItem(txt);
     }
 
     default void loadCircularList(File memorized) throws IOException, UnexpectedExpressionException {
+        if (memorized == null) return;
         memoryMediator.cleanCircularList();
         memoryMediator.retrieveCircularList(memorized);
     }

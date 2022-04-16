@@ -11,12 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import memory.CircularLinkedList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
-
 import static common.Configuration.*;
 import static javafx.print.Printer.getDefaultPrinter;
 import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
@@ -69,24 +67,36 @@ public class BasicController extends Controller {
         inputField.setText(inputField.getText() + operation);
     }
 
+    /**
+     * Memory navigation button : going left
+     */
     public void historyLeft() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateLeft();
         screenUpdate(item);
     }
 
+    /**
+     * Memory navigation button : going right
+     */
     public void historyRight() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateRight();
         screenUpdate(item);
     }
 
+    /**
+     * Memory navigation button : going to the last processed expression
+     */
     public void historyLast() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateLast();
         screenUpdate(item);
     }
 
+    /**
+     * Memory navigation button : going to the oldest processed expression
+     */
     public void historyFirst() {
         CircularLinkedList item = history().getCurrentPosition();
         history().navigateFirst();
@@ -99,15 +109,24 @@ public class BasicController extends Controller {
         inputField.setText(item.getDTO().getExpression());
     }
 
+    /**
+     * Open a dialog panel to save the memory status to a txt file
+     */
     public void saveHistory() throws FileNotFoundException {
         saveToFile(fileChooser.showSaveDialog(stage));
     }
 
+    /**
+     * Open a dialog panel to load the memory status from a txt file
+     */
     public void loadHistory() throws IOException, UnexpectedExpressionException {
         fileChooser.setInitialDirectory(new File(System.getProperty(DEFAULT_DIRECTORY)));
         loadCircularList(fileChooser.showOpenDialog(null));
     }
 
+    /**
+     * Open a dialog panel to configurate the memory size
+     */
     public void configHistory() {
         long currentValue = history().getMemorySize();
         Dialog<String> dialog = new Dialog<>();
@@ -131,6 +150,9 @@ public class BasicController extends Controller {
 
     }
 
+    /**
+     * Open a dialog panel to select a printer and print the memory
+     */
     public void printHistory() {
 
         Dialog<String> dialog = new Dialog<>();
@@ -140,7 +162,6 @@ public class BasicController extends Controller {
         Label jobStatus = new Label();
         ObservableSet<Printer> printers = Printer.getAllPrinters();
         AtomicReference<Printer> selectedPrinter = new AtomicReference<>(getDefaultPrinter());
-
         String printContent = loadMemory();
 
         dialog.setTitle(PRINT_TITLE);

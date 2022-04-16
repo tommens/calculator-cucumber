@@ -4,9 +4,7 @@ import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;
-
 import java.io.*;
-
 import static memory.memento.ScreenMementoDTO.marshaller;
 
 /**
@@ -45,6 +43,10 @@ public class MemoryMediator {
 
     CircularLinkedList getCircularListFromLastItem() {
         return navigationListService.getTail();
+    }
+
+    ResultOriginator getMementoOriginator() {
+        return mementoOriginator;
     }
 
     void addItem(ScreenMementoDTO val) {

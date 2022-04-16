@@ -1,16 +1,14 @@
 package memory.service;
 
+import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ScreenMementoDTO;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-
+import org.junit.jupiter.api.*;
+import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.Random.class)
-class CircularListMediatorTest {
+class MemoryMediatorTest {
     private final MemoryMediator memoryMediator = new MemoryMediator();
     private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = memoryMediator.getNavigationListService();
 
@@ -62,6 +60,20 @@ class CircularListMediatorTest {
     void create_new_empty_list() {
         memoryMediator.cleanCircularList();
         assertFalse(ACTUAL_EMBEDDED_VALUE_TO_TEST.containsValue(EXPECTED_FIRST_SAVED_VALUE));
+    }
+
+    @Test
+    void retrieve_from_null_file() {
+        try {
+            assertEquals(memoryMediator.getNavigationListService().getLength(), 3);
+            memoryMediator.retrieveCircularList(null);
+            assertEquals(memoryMediator.getNavigationListService().getLength(), 0);
+        } catch (IOException e) {
+            Assertions.fail("IOException");
+        } catch (UnexpectedExpressionException e) {
+            Assertions.fail("UnexpectedExpressionException");
+        }
+
     }
 
 }

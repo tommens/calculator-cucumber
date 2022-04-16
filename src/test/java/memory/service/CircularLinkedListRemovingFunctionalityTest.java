@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
 import static java.lang.String.valueOf;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -80,6 +79,14 @@ public class CircularLinkedListRemovingFunctionalityTest {
         assertEquals(head.getDTO().toString(), EXPECTED_HEAD_AFTER_EXTRA_ADD.toString());
         assertEquals(tail.getDTO(), EXPECTED_TAIL_AFTER_EXTRA_ADD);
 
+    }
+
+    @Test
+    void resizeMemory() {
+        long definedMemorySize = 10;
+        configuration.setGetOperationMemorySize(definedMemorySize);
+        long extraElementIndex = configuration.getGetOperationMemorySize()+1;
+        assertEquals(extraElementIndex, definedMemorySize+1);
     }
 
 }

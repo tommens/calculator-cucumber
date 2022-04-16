@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ResultOriginator {
 
-    List<ScreenMementoDTO> mementos = new ArrayList<>();
+    private final List<ScreenMementoDTO> mementos = new ArrayList<>();
 
     /**
      * Keep the memory ready to be saved
@@ -47,4 +47,11 @@ public class ResultOriginator {
         return res;
     }
 
+    public List<ScreenMementoDTO> getMementos() {
+        return mementos;
+    }
+
+    public void cleanMemento() {
+        mementos.clear();
+    }
 }
