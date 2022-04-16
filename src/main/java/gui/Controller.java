@@ -36,12 +36,14 @@ public abstract class Controller implements MemoriesCareTaker {
     }
 
     public void cancelButton() {
+        clearAfterSubmitted();
         setSubmitted(false);
         inputField.setText("");
         outputField.setText("");
     }
 
     public void eraseButton() {
+        clearAfterSubmitted();
         String current = inputField.getText();
         if (!current.isEmpty()) {
             inputField.setText(current.substring(0, current.length()-1));
@@ -49,13 +51,25 @@ public abstract class Controller implements MemoriesCareTaker {
     }
 
     public void clickValueButton(Event e) {
+        clearAfterSubmitted();
+        String val = ((Button) e.getSource()).getText();
+        inputField.setText(inputField.getText() + val);
+    }
+
+    public boolean isSubmitted() {
+        return submitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        this.submitted = submitted;
+    }
+
+    public void clearAfterSubmitted() {
         if (isSubmitted()) {
             setSubmitted(false);
             inputField.setText("");
             outputField.setText("");
         }
-        String val = ((Button) e.getSource()).getText();
-        inputField.setText(inputField.getText() + val);
     }
 
     @FXML
@@ -74,13 +88,6 @@ public abstract class Controller implements MemoriesCareTaker {
         stage.setScene(sceneConverter);
     }
 
-    public boolean isSubmitted() {
-        return submitted;
-    }
-
-    public void setSubmitted(boolean submitted) {
-        this.submitted = submitted;
-    }
 
     public abstract void submitButton();
 }
