@@ -1,7 +1,6 @@
 package visitor;
 
 import calculator.Function;
-import calculator.MyBoolean;
 import calculator.Operation;
 
 import java.util.ArrayList;

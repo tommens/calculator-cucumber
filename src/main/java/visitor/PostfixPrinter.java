@@ -1,6 +1,6 @@
 package visitor;
 
-import calculator.MyBoolean;
+
 import calculator.Function;
 import calculator.Operation;
 
@@ -18,8 +18,4 @@ public class PostfixPrinter extends Printer{
         return "(" + strings.get(0) + ", " + strings.get(0) + ") " + f.getName(); // TODO
     }
 
-    @Override
-    public void visit(MyBoolean b) {
-
-    }
 }

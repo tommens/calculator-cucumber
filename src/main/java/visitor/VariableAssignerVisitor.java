@@ -1,9 +1,7 @@
 package visitor;
 
-import calculator.Expression;
+import calculator.*;
 import calculator.Number;
-import calculator.Operation;
-import calculator.Variable;
 import calculator.operation.buildinfunctions.RealFunction;
 
 public class VariableAssignerVisitor extends Visitor{
@@ -30,6 +28,11 @@ public class VariableAssignerVisitor extends Visitor{
         for (Expression e: o.args) {
             e.accept(this);
         }
+    }
+
+    @Override
+    public void visit(MyBoolean b) {
+
     }
 
     @Override
