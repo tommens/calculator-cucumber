@@ -1,10 +1,8 @@
 package calculator;
 
-import calculator.operation.buildinfunctions.RealFunction;
 import visitor.Evaluator;
 import visitor.InfixPrinter;
 import visitor.Printer;
-import visitor.Visitor;
 
 import java.util.HashMap;
 
@@ -67,6 +65,14 @@ public class Calculator {
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }
+
+    public MyBoolean evalBool(Expression e){
+        Evaluator v = new Evaluator();
+        e.accept(v);
+        return v.getBoolResult();
+    }
+
+
 
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct
