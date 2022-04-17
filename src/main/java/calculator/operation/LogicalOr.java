@@ -5,29 +5,29 @@ import calculator.Number;
 
 import java.util.List;
 
-final public class Minus extends Operation
-{
-
-  public /*constructor*/ Minus(List<Expression> elist) throws IllegalConstruction {
-  	super(elist);
-  	symbol = "-";
-  	neutral = 0;
-  }
+public class LogicalOr extends Operation {
 
 
-    @Override
-    public Number op(Number l, Number r) {
-        return l.subtract(r);
+
+    public LogicalOr(List<Expression> elist) throws IllegalConstruction {
+        super(elist);
+        symbol = "OR";
     }
 
     @Override
-    public MyBoolean op(MyBoolean a, MyBoolean b) {
+    public Number op(Number l, Number r) {
         return null;
+    }
+
+
+    @Override
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return new MyBoolean(a.getValue() || b.getValue());
     }
 
     @Override
     public MyBoolean op(MyBoolean a) {
-        return null;
+        return new MyBoolean(false);
     }
 
 
