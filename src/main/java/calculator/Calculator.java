@@ -1,10 +1,8 @@
 package calculator;
 
-import calculator.operation.buildinfunctions.RealFunction;
 import visitor.Evaluator;
 import visitor.InfixPrinter;
 import visitor.Printer;
-import visitor.Visitor;
 
 import java.util.HashMap;
 
