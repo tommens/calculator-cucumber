@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import static gui.common.Configuration.*;
+import static common.Configuration.*;
 
 /**
  * The GUI application Launcher
@@ -35,6 +35,7 @@ public class JavaFXGUI extends Application {
         BasicController basicController = loaderBasic.getController();
         basicController.setSceneBasic(sceneBasic);
         basicController.setSceneConverter(sceneConverter);
+        basicController.setStage(stage);
 
         // Add controller to converter loader
         ConverterController converterController = loaderConverter.getController();
