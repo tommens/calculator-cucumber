@@ -1,14 +1,17 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
+import calculator.Number;
 
 import java.util.List;
 
-public class LogicalImplication  extends Operation{
+public class LogicalOr extends Operation {
 
 
 
-    public LogicalImplication(List<Expression> elist) throws IllegalConstruction {
+    public LogicalOr(List<Expression> elist) throws IllegalConstruction {
         super(elist);
-        symbol = "==>";
+        symbol = "OR";
     }
 
     @Override
@@ -19,11 +22,13 @@ public class LogicalImplication  extends Operation{
 
     @Override
     public MyBoolean op(MyBoolean a, MyBoolean b) {
-        return new MyBoolean(!a.getValue() || b.getValue());
+        return new MyBoolean(a.getValue() || b.getValue());
     }
 
     @Override
     public MyBoolean op(MyBoolean a) {
         return new MyBoolean(false);
     }
+
+
 }

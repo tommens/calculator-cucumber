@@ -1,8 +1,11 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
+import calculator.Number;
 
 import java.util.List;
 
-public class LogicalNot extends Operation{
+public class LogicalNot extends Operation {
 
     public LogicalNot(List<Expression> elist) throws IllegalConstruction {
         super(elist);

@@ -1,6 +1,7 @@
 package junit5tests;
 
 import calculator.*;
+import calculator.operation.LogicalNot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

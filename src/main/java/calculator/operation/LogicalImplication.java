@@ -1,14 +1,17 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
+import calculator.Number;
 
 import java.util.List;
 
-public class LogicalEquivalence extends Operation{
+public class LogicalImplication  extends Operation {
 
 
 
-    public LogicalEquivalence(List<Expression> elist) throws IllegalConstruction {
+    public LogicalImplication(List<Expression> elist) throws IllegalConstruction {
         super(elist);
-        symbol = "<==>";
+        symbol = "==>";
     }
 
     @Override
@@ -19,7 +22,7 @@ public class LogicalEquivalence extends Operation{
 
     @Override
     public MyBoolean op(MyBoolean a, MyBoolean b) {
-        return new MyBoolean((!a.getValue() || b.getValue()) && (!b.getValue() || a.getValue()));
+        return new MyBoolean(!a.getValue() || b.getValue());
     }
 
     @Override

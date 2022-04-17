@@ -1,9 +1,7 @@
 package calculator.operation;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
+import calculator.*;
 import calculator.Number;
-import calculator.Operation;
 
 import java.util.List;
 

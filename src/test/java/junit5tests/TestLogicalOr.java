@@ -1,6 +1,8 @@
 package junit5tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.operation.LogicalOr;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
