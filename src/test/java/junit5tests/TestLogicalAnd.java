@@ -1,6 +1,8 @@
 package junit5tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.operation.LogicalAnd;
 import org.junit.jupiter.api.*;
 
 import calculator.*;
