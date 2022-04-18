@@ -20,12 +20,16 @@ public class BasicController extends Controller {
     public void submitButton() {
         String input = inputField.getText().replace("%", "/100");
         Expression expr = parser.parse(input);
-        if (isRational.isSelected()) {
-            this.outputField.setText(calculator.eval(expr).toString());
-        } else {
-            this.outputField.setText(calculator.eval(expr).toReal().toString());
+        try {
+            if (isRational.isSelected()) {
+                this.outputField.setText(calculator.eval(expr).toString());
+            } else {
+                this.outputField.setText(calculator.eval(expr).toReal().toString());
+            }
+        } catch (Exception e) {
+            this.showAlertMessage(e.getMessage());
         }
-         this.setSubmitted(true);
+        this.setSubmitted(true);
     }
 
     public void plusButton() {

@@ -23,8 +23,12 @@ public class ScientificController extends Controller {
         input = input.replace("√", "sqrt");
         input = input.replace("∛", "cbrt");
         input = input.replace("%", "/100");
-        Expression expr = parser.parse(input);
-        this.outputField.setText(calculator.eval(expr).toReal().toString());
+        try {
+            Expression expr = parser.parse(input);
+            this.outputField.setText(calculator.eval(expr).toReal().toString());
+        } catch (Exception e) {
+            this.showAlertMessage(e.getMessage());
+        }
         this.setSubmitted(true);
     }
 

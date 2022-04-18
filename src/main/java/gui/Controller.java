@@ -95,6 +95,9 @@ public abstract class Controller {
         stage.setScene(sceneScientific);
     }
 
+    public void showAlertMessage(String message) {
+        outputField.setText(message);
+    }
 
     public abstract void submitButton();
 }
