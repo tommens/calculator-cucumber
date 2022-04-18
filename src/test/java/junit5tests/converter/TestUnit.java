@@ -36,12 +36,12 @@ public class TestUnit {
         Assertions.assertEquals(comparative, unit);
     }
 
-//    @Test
-//    void testConvertLength() { //TODO force reals utilisation
-//        var actual = convert("1", Unit.Centimeter, Unit.Meter, new Calculator());
-//        var expected = "0.01";
-//        assert actual.equals(expected);
-//    }
+    @Test
+    void testConvertLength() {
+        var actual = convert("1", Unit.Centimeter, Unit.Meter, new Calculator());
+        var expected = "0.01";
+        assert actual.equals(expected);
+    }
 
     @Test
     void testConvertMass() {
@@ -50,21 +50,20 @@ public class TestUnit {
         assert actual.equals(expected);
     }
 
-//    @Test
-//    void testConvertSpeed() { //TODO Missing FIX Non-terminating decimal expansion; no exact representable decimal result.
-//
-//        var actual = convert("1", Unit.KilometerPerHour, Unit.MeterPerSecond, new Calculator());
-//        System.out.println(actual);
-//        var expected = "0.277778";
-//        assert actual.equals(expected);
-//    }
+    @Test
+    void testConvertSpeed() {
+        var actual = convert("1", Unit.KilometerPerHour, Unit.MeterPerSecond, new Calculator());
+        var expected = "0.2777777778";
+        assert actual.equals(expected);
+    }
 
-//    @Test
-//    void testConvertTime() { //TODO Missing FIX Non-terminating decimal expansion; no exact representable decimal result.
-//        var actual = convert("1", Unit.Second, Unit.Minute, new Calculator());
-//        var expected = "0.0166667";
-//        assert actual.equals(expected);
-//    }
+    @Test
+    void testConvertTime() {
+        var actual = convert("1", Unit.Second, Unit.Minute, new Calculator());
+        System.out.println(actual);
+        var expected = "0.01666666667";
+        assert actual.equals(expected);
+    }
 
     @Test
     void testConvertTemperature() {
@@ -73,10 +72,11 @@ public class TestUnit {
         assert actual.equals(expected);
     }
 
-//    @Test
-//    void testConvertVolume() { //TODO force reals utilisation
-//        var actual = convert("1", Unit.Milliliter, Unit.Liter, new Calculator());
-//        var expected = "0.001";
-//        assert actual.equals(expected);
-//    }
+    @Test
+    void testConvertVolume() {
+        var actual = convert("1", Unit.Milliliter, Unit.Liter, new Calculator());
+        System.out.println(actual);
+        var expected = "0.001";
+        assert actual.equals(expected);
+    }
 }

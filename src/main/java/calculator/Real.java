@@ -4,10 +4,12 @@ import ch.obermuhlner.math.big.BigDecimalMath;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 
 public class Real extends Number implements Expression{
-    private BigDecimal value;
+    private final BigDecimal value;
+    protected MathContext mc = new MathContext(10, RoundingMode.HALF_UP);
 
     /**
      * Constructor
@@ -32,7 +34,7 @@ public class Real extends Number implements Expression{
     public /*constructor*/ Real(Rational rat) {
         BigDecimal  den= new BigDecimal(rat.getDenominator());
         BigDecimal num = new BigDecimal(rat.getNumerator());
-        value = num.divide(den);
+        value = num.divide(den, mc);
     }
 
     /**
@@ -81,13 +83,13 @@ public class Real extends Number implements Expression{
     protected Number add(Rational rat) {
         Real rati = new Real(rat);
 
-        BigDecimal result = value.add(rati.getValue());
+        BigDecimal result = value.add(rati.getValue(), mc);
         return new Real(result);
     }
 
     @Override
     protected Number add(Real r) {
-        BigDecimal result = value.add(r.value);
+        BigDecimal result = value.add(r.value, mc);
         return new Real(result);
     }
 
@@ -107,19 +109,16 @@ public class Real extends Number implements Expression{
     protected Number multiply(Rational rat) {
         BigDecimal  den= new BigDecimal(rat.getDenominator());
         BigDecimal num = new BigDecimal(rat.getNumerator());
-        BigDecimal result = num.divide(den);
+        BigDecimal result = num.divide(den, mc);
         BigDecimal multi = value.multiply(result);
         return new Real(multi);
     }
 
     @Override
     protected Number multiply(Real r) {
-        BigDecimal result = value.multiply(r.value);
+        BigDecimal result = value.multiply(r.value, mc);
         return new Real(result);
-
     }
-
-
 
     @Override
     public Number divide(Number val) {
@@ -135,14 +134,14 @@ public class Real extends Number implements Expression{
     protected Number divide(Rational rat) {
         BigDecimal  den= new BigDecimal(rat.getDenominator());
         BigDecimal num = new BigDecimal(rat.getNumerator());
-        BigDecimal result = num.divide(den);
-        BigDecimal divi = value.divide(result);
+        BigDecimal result = num.divide(den, mc);
+        BigDecimal divi = value.divide(result, mc);
         return new Real(divi);
     }
 
     @Override
     protected Number divide(Real r) {
-        BigDecimal result = value.divide(r.value);
+        BigDecimal result = value.divide(r.value, mc);
         return new Real(result);
     }
 
@@ -153,7 +152,7 @@ public class Real extends Number implements Expression{
 
     @Override
     protected Number pow(Real r) {
-        return new Real(BigDecimalMath.pow(value, r.value, MathContext.DECIMAL128));
+        return new Real(BigDecimalMath.pow(value, r.value, mc));
     }
 
     @Override

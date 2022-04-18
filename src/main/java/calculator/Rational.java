@@ -2,15 +2,15 @@ package calculator;
 
 import ch.obermuhlner.math.big.BigDecimalMath;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class Rational extends Number implements Expression, Comparable<Rational> {
 
     protected BigInteger numerator;
     protected BigInteger denominator;
-    protected MathContext mc = MathContext.DECIMAL128;
+    protected MathContext mc = new MathContext(10, RoundingMode.HALF_UP);
 
     /**
      * Constructs a Rational integer representing 1.
