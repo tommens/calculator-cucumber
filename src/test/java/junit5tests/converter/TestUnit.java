@@ -21,7 +21,7 @@ public class TestUnit {
     }
 
     @Test
-    void getCategoriesTest() {
+    void getUnitCategoriesTest() {
         List<String> comparatives = List.of("Area", "Data Transfer Rate", "Data Storage", "Energy", "Frequency",
                 "Length", "Mass", "Plane Angle", "Pressure", "Speed", "Time", "Volume", "Temperature");
         List<String> categories = getUnitCategories();
@@ -37,16 +37,65 @@ public class TestUnit {
     }
 
     @Test
+    void testConvertArea() {
+        var actual = convert("1", Unit.SquareMeter, Unit.SquareFoot, new Calculator());
+        var expected = "10.76385025";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertDataTransferRate() {
+        var actual = convert("1", Unit.BitPerSecond, Unit.MebibitPerSecond, new Calculator());
+        var expected = "9.5367E-7";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertDataStorage() {
+        var actual = convert("1", Unit.Bit, Unit.Petabit, new Calculator());
+        var expected = "1E-15";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertEnergy() {
+        var actual = convert("1", Unit.Joule, Unit.Kilojoule, new Calculator());
+        var expected = "0.001";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertFrequency() {
+        var actual = convert("1", Unit.Hertz, Unit.Kilohertz, new Calculator());
+        var expected = "0.001";
+        assert actual.equals(expected);
+    }
+
+    @Test
     void testConvertLength() {
-        var actual = convert("1", Unit.Centimeter, Unit.Meter, new Calculator());
-        var expected = "0.01";
+        var actual = convert("1", Unit.Meter, Unit.Inch, new Calculator());
+        var expected = "39.37008";
         assert actual.equals(expected);
     }
 
     @Test
     void testConvertMass() {
-        var actual = convert("1", Unit.Gram, Unit.Kilogram, new Calculator());
-        var expected = "0.001";
+        var actual = convert("1", Unit.Kilogram, Unit.Gram, new Calculator());
+        var expected = "1000";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertPlaneAngle() {
+        var actual = convert("1", Unit.Radian, Unit.Degree, new Calculator());
+        var expected = "57.29575496";
+        assert actual.equals(expected);
+    }
+
+    @Test
+    void testConvertPressure() {
+        var actual = convert("1", Unit.Pascal, Unit.Bar, new Calculator());
+        var expected = "0.00001";
         assert actual.equals(expected);
     }
 
@@ -60,7 +109,6 @@ public class TestUnit {
     @Test
     void testConvertTime() {
         var actual = convert("1", Unit.Second, Unit.Minute, new Calculator());
-        System.out.println(actual);
         var expected = "0.01666666667";
         assert actual.equals(expected);
     }
@@ -75,7 +123,6 @@ public class TestUnit {
     @Test
     void testConvertVolume() {
         var actual = convert("1", Unit.Milliliter, Unit.Liter, new Calculator());
-        System.out.println(actual);
         var expected = "0.001";
         assert actual.equals(expected);
     }
