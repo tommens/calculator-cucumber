@@ -1,17 +1,11 @@
 package gui;
 
-import calculator.Calculator;
-import calculator.Expression;
-import calculator.Parser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 
 /**
- * This controller handle the main graphical interface's actions.
- * Read the calculator panel which contains functionalities
- * Switch mode
+ * Controller for the functions view.
  */
 public class FunctionsController extends Controller {
     @FXML

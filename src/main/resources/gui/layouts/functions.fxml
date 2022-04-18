@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="mainScreen" fx:id="mainScreen" stylesheets="@../styles/basic.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FunctionsController">
+<VBox id="mainScreen" fx:id="mainScreen" stylesheets="@../styles/functions.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FunctionsController">
     <MenuBar id="bar" fx:id="bar">
         <Menu mnemonicParsing="false">
             <graphic>
@@ -42,33 +42,31 @@
       </Pane>
         <GridPane>
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
             <VBox.margin>
-                <Insets top="5.0"/>
+                <Insets top="5.0" />
             </VBox.margin>
-            <TextField id="calcField" fx:id="inputField" prefHeight="75.0" GridPane.columnIndex="2"/>
-            <Button mnemonicParsing="false" onAction="#zoomin" prefHeight="75.0" prefWidth="75.0"
-                    GridPane.columnIndex="3">
-                <graphic>
-                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@logos/zoomin.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
+            <TextField id="calcField" fx:id="inputField" prefHeight="75.0" GridPane.columnIndex="2" />
             <Button mnemonicParsing="false" onAction="#up" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="1">
                 <graphic>
                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@logos/up.png"/>
+                        <Image url="@logos/up.png" />
                     </ImageView>
                 </graphic>
             </Button>
+         <Button mnemonicParsing="false" onAction="#cancel" prefHeight="75.0" prefWidth="75.0">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/cancel.png" />
+                </ImageView>
+            </graphic>
+         </Button>
         </GridPane>
         <GridPane maxWidth="400.0">
             <columnConstraints>
@@ -85,42 +83,42 @@
          <Button mnemonicParsing="false" onAction="#left" prefHeight="75.0" prefWidth="75.0">
             <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@logos/left.png"/>
+                    <Image url="@logos/left.png" />
                 </ImageView>
             </graphic>
          </Button>
          <Button mnemonicParsing="false" onAction="#down" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="1">
             <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@logos/down.png"/>
+                    <Image url="@logos/down.png" />
                 </ImageView>
             </graphic>
          </Button>
          <Button mnemonicParsing="false" onAction="#right" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="2">
             <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@logos/right.png"/>
+                    <Image url="@logos/right.png" />
                 </ImageView>
             </graphic>
          </Button>
-         <Button mnemonicParsing="false" onAction="#zoomout" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="5">
+         <Button mnemonicParsing="false" onAction="#zoomout" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="4">
             <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@logos/zoomout.png"/>
+                    <Image url="@logos/zoomout.png" />
                 </ImageView>
             </graphic>
          </Button>
-         <Button mnemonicParsing="false" onAction="#cancel" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="3">
+            <Button mnemonicParsing="false" onAction="#zoomin" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="3">
+                <graphic>
+                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@logos/zoomin.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+         <Button mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="5">
             <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@logos/cancel.png"/>
-                </ImageView>
-            </graphic>
-         </Button>
-         <Button mnemonicParsing="false" onAction="#submitButton" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="4">
-            <graphic>
-                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@logos/submit.png"/>
+                    <Image url="@logos/submit.png" />
                 </ImageView>
             </graphic>
          </Button>

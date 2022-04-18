@@ -40,24 +40,28 @@ public class JavaFXGUI extends Application {
         basicController.setSceneBasic(sceneBasic);
         basicController.setSceneConverter(sceneConverter);
         basicController.setSceneScientific(sceneScientific);
+        basicController.setSceneFunctions(sceneFunctions);
 
         // Add controller to converter loader
         ConverterController converterController = loaderConverter.getController();
         converterController.setSceneBasic(sceneBasic);
         converterController.setSceneConverter(sceneConverter);
         converterController.setSceneScientific(sceneScientific);
+        converterController.setSceneFunctions(sceneFunctions);
 
         // Add controller to scientific loader
         ScientificController scientificController = loaderScientific.getController();
         scientificController.setSceneBasic(sceneBasic);
         scientificController.setSceneConverter(sceneConverter);
         scientificController.setSceneScientific(sceneScientific);
+        scientificController.setSceneFunctions(sceneFunctions);
 
         // Add controller to functions loader
         FunctionsController functionsController = loaderFunctions.getController();
         functionsController.setSceneBasic(sceneBasic);
         functionsController.setSceneConverter(sceneConverter);
         functionsController.setSceneScientific(sceneScientific);
+        functionsController.setSceneFunctions(sceneFunctions);
 
         stage.setScene(sceneBasic);
         stage.setTitle(TITLE_MAIN);
