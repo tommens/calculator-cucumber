@@ -15,12 +15,6 @@ public class JavaFXGUI extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Define bounds for screen
-        stage.setMinWidth(MIN_WIDTH);
-        stage.setMinHeight(MIN_HEIGHT);
-        stage.setMaxWidth(MAX_WIDTH);
-        stage.setMaxHeight(MAX_HEIGHT);
-
         // Charge scene for basic calculator
         FXMLLoader loaderBasic = new FXMLLoader(getClass().getResource("/gui/layouts/basic.fxml"));
         Parent parentBasic = loaderBasic.load();
@@ -35,6 +29,11 @@ public class JavaFXGUI extends Application {
         FXMLLoader loaderScientific = new FXMLLoader(getClass().getResource("/gui/layouts/scientific.fxml"));
         Parent parentScientific = loaderScientific.load();
         Scene sceneScientific = new Scene(parentScientific);
+
+        // Charge scene for functions
+        FXMLLoader loaderFunctions = new FXMLLoader(getClass().getResource("/gui/layouts/functions.fxml"));
+        Parent parentFunctions = loaderFunctions.load();
+        Scene sceneFunctions = new Scene(parentFunctions);
 
         // Add controller to basic loader
         BasicController basicController = loaderBasic.getController();
@@ -53,6 +52,12 @@ public class JavaFXGUI extends Application {
         scientificController.setSceneBasic(sceneBasic);
         scientificController.setSceneConverter(sceneConverter);
         scientificController.setSceneScientific(sceneScientific);
+
+        // Add controller to functions loader
+        FunctionsController functionsController = loaderFunctions.getController();
+        functionsController.setSceneBasic(sceneBasic);
+        functionsController.setSceneConverter(sceneConverter);
+        functionsController.setSceneScientific(sceneScientific);
 
         stage.setScene(sceneBasic);
         stage.setTitle(TITLE_MAIN);

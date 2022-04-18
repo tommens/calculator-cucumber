@@ -13,6 +13,7 @@ public abstract class Controller {
     private Scene sceneBasic;
     private Scene sceneConverter;
     private Scene sceneScientific;
+    private Scene sceneFunctions;
 
     private boolean submitted = false;
 
@@ -34,8 +35,11 @@ public abstract class Controller {
         this.sceneScientific = sceneScientific;
     }
 
+    public void setSceneFunctions(Scene sceneFunctions) {
+        this.sceneFunctions = sceneFunctions;
+    }
+
     public void cancelButton() {
-        clearAfterSubmitted();
         setSubmitted(false);
         inputField.setText("");
         outputField.setText("");
@@ -95,8 +99,16 @@ public abstract class Controller {
         stage.setScene(sceneScientific);
     }
 
+    @FXML
+    public void showSceneFunctions() {
+        inputField.setText("");
+        outputField.setText("");
+        Stage stage = (Stage) mainScreen.getScene().getWindow();
+        stage.setScene(sceneFunctions);
+    }
+
     public void showAlertMessage(String message) {
-        outputField.setText(message);
+        inputField.setText(inputField.getText() + " !! " + message);
     }
 
     public abstract void submitButton();
