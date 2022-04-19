@@ -1,4 +1,4 @@
-// Generated from /home/thomas/Documents/Projects/calculator-cucumber/src/main/resources/CalculatorExpression.g4 by ANTLR 4.9.2
+// Generated from /home/thomas/Desktop/calc/src/main/resources/CalculatorExpression.g4 by ANTLR 4.9.2
 package parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -35,6 +35,18 @@ public class CalculatorExpressionBaseListener implements CalculatorExpressionLis
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParenthesed_expression(CalculatorExpressionParser.Parenthesed_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_call(CalculatorExpressionParser.Function_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_call(CalculatorExpressionParser.Function_callContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -83,6 +95,90 @@ public class CalculatorExpressionBaseListener implements CalculatorExpressionLis
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNumber(CalculatorExpressionParser.NumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_defintion(CalculatorExpressionParser.Function_defintionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_defintion(CalculatorExpressionParser.Function_defintionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_function_call(CalculatorExpressionParser.Function_function_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_function_call(CalculatorExpressionParser.Function_function_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_parenthesed_expression(CalculatorExpressionParser.Function_parenthesed_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_parenthesed_expression(CalculatorExpressionParser.Function_parenthesed_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_term(CalculatorExpressionParser.Function_termContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_term(CalculatorExpressionParser.Function_termContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_factor(CalculatorExpressionParser.Function_factorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_factor(CalculatorExpressionParser.Function_factorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_value(CalculatorExpressionParser.Function_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_value(CalculatorExpressionParser.Function_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable(CalculatorExpressionParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable(CalculatorExpressionParser.VariableContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

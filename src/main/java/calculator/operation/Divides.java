@@ -1,4 +1,7 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
+import calculator.Number;
 
 import java.util.List;
 
@@ -20,6 +23,16 @@ final public class Divides extends Operation
         return l.divide(r);
     }
 
+    @Override
+    public MyBoolean op(MyBoolean a, MyBoolean b) {
+        return null;
+    }
+
+    @Override
+    public MyBoolean op(MyBoolean a) {
+        return null;
+    }
+
     public int op(int l, int r) {
       int val = (int)Double.NaN; // will be zero with Integer
 
@@ -31,4 +44,6 @@ final public class Divides extends Operation
 
       return val;
   }
+
+
 }
