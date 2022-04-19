@@ -101,14 +101,14 @@
                 </ImageView>
             </graphic>
          </Button>
-         <Button mnemonicParsing="false" onAction="#zoomout" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="4">
+         <Button mnemonicParsing="false" onAction="#zoomOut" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="4">
             <graphic>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/zoomout.png" />
                 </ImageView>
             </graphic>
          </Button>
-            <Button mnemonicParsing="false" onAction="#zoomin" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="3">
+            <Button mnemonicParsing="false" onAction="#zoomIn" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="3">
                 <graphic>
                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@logos/zoomin.png" />

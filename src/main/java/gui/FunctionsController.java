@@ -3,14 +3,11 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-
 import java.util.List;
-
-import static converter.Unit.getUnitCategories;
 
 /**
  * Controller for the functions view.
@@ -23,7 +20,6 @@ public class FunctionsController extends Controller {
     private Parser parser;
     private double xCenter = 0;
     private double yCenter = 0;
-    private double step = 0.1;
     private double pixelSize = 0.05;
     private final List<String> acceptedFunctions = List.of("abs", "acos", "acosh", "asin", "asinh", "atan", "atanh", "cbrt", "cos", "cosh", "exp", "ln", "log", "sin", "sinh", "sqrt", "tan", "tanh");
 
@@ -38,48 +34,58 @@ public class FunctionsController extends Controller {
             showAlertMessage("Please enter a function");
         } else if (!function.contains("x")) {
             showAlertMessage("Please enter a function with x");
-        } else if (!acceptedFunctions.contains(function.split("\\(")[0])) {
+        } else if (!acceptedFunctions.contains(function.split("\\(")[0]) && !function.contains("^")) {
             showAlertMessage("Please enter a valid function");
         } else {
-            drawCanvas();
+            drawFunction();
         }
     }
 
-    public void zoomin(ActionEvent actionEvent) {
-
+    public void up() {
+        yCenter += (5. * pixelSize);
+        drawFunction();
     }
 
-    public void up(ActionEvent actionEvent) {
-
+    public void down() {
+        yCenter -= (5. * pixelSize);
+        drawFunction();
     }
 
-    public void left(ActionEvent actionEvent) {
-
+    public void left() {
+        xCenter -= (5. * pixelSize);
+        drawFunction();
     }
 
-    public void down(ActionEvent actionEvent) {
-
+    public void right() {
+        xCenter += (5. * pixelSize);
+        drawFunction();
     }
 
-    public void right(ActionEvent actionEvent) {
-
+    public void zoomIn() {
+        pixelSize -= 0.01;
+        if (pixelSize < 0.01) pixelSize = 0.01;
+        drawFunction();
     }
 
-    public void zoomout(ActionEvent actionEvent) {
-
+    public void zoomOut() {
+        pixelSize += 0.01;
+        drawFunction();
     }
 
-    public void cancel(ActionEvent actionEvent) {
-
+    public void cancel() {
+        pane.getChildren().clear();
+        inputField.clear();
     }
 
-    private void drawCanvas() {
+    private void drawFunction() {
         pane.getChildren().clear();
         Path path = new Path();
+        path.setStrokeWidth(1);
+        path.setStroke(Color.GREEN);
         String function = inputField.getText();
 
-        int xCenterPixel = (int) (pane.getWidth() / 2);
-        int yCenterPixel = (int) (pane.getHeight() / 2);
+        double xCenterPixel = (pane.getWidth()/2)-(xCenter/pixelSize);
+        double yCenterPixel = (pane.getHeight()/2)-(yCenter/pixelSize);
 
         Line axisX = new Line(0, yCenterPixel, pane.getWidth(), yCenterPixel);
         Line axisY = new Line(xCenterPixel, 0, xCenterPixel, pane.getHeight());
@@ -94,16 +100,14 @@ public class FunctionsController extends Controller {
             try {
                 Expression expression = parser.parse(function.replace("x", Double.toString(xValue)));
                 double yValue = calculator.eval(expression).toReal().getValue().doubleValue();
-                int y = yCenterPixel + doubleToPixel(yValue + yCenter);
+                int y = (int) (yCenterPixel + doubleToPixel(yValue + yCenter));
                 if (isFirstPoint) {
                     path.getElements().add(new MoveTo(x, y));
                     isFirstPoint = false;
                 } else {
                     path.getElements().add(new LineTo(x, y));
                 }
-            } catch (Exception ignored) {
-
-            }
+            } catch (Exception ignored) { }
         }
         pane.getChildren().add(path);
     }
