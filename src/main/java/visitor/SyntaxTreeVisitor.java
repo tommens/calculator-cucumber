@@ -1,17 +1,13 @@
 package visitor;
 
 import calculator.*;
-import calculator.operation.Divides;
-import calculator.operation.Minus;
-import calculator.operation.Plus;
-import calculator.operation.Times;
+import calculator.operation.*;
 import calculator.operation.buildinfunctions.*;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.*;
 import parser.CalculatorExpressionParser;
 import parser.CalculatorExpressionVisitor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression> {
@@ -68,18 +64,39 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
         };
     }
 
+    private Expression pow(ParserRuleContext ctx) {
+        return switch(ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 3 -> {
+                Expression base = ctx.getChild(0).accept(this);
+                Expression power = ctx.getChild(2).accept(this);
+                List<Expression> elist = List.of(base, power);
+                try{
+                    yield new Pow(elist);
+                } catch (IllegalConstruction e) {
+                    throw new InvalidSyntax("Could not create the operator");
+                }
+
+            }
+            default -> throw new InvalidSyntax("Pow has an unknown amount of children.");
+        };
+    }
+
     private Expression function(ParserRuleContext ctx) {
         Expression argument = ctx.getChild(2).accept(this);
         String functionName = ctx.getChild(0).getText();
         try {
             return switch (functionName) {
+                case "abs"       -> new Abs(argument);
                 case "acos"      -> new Acos(argument);
                 case "asin"      -> new Asin(argument);
                 case "asinh"     -> new Asinh(argument);
                 case "atan"      -> new Atan(argument);
                 case "atanh"     -> new Atanh(argument);
+                case "cbrt"      -> new Cbrt(argument);
                 case "cos"       -> new Cos(argument);
                 case "cosh"      -> new Cosh(argument);
+                case "exp"       -> new Exp(argument);
                 case "identity"  -> new Identity(argument);
                 case "ln"        -> new Ln(argument);
                 case "log"       -> new Log(argument);
@@ -128,6 +145,11 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     @Override
     public Expression visitFactor(CalculatorExpressionParser.FactorContext ctx) {
         return factor(ctx);
+    }
+
+    @Override
+    public Expression visitPow(CalculatorExpressionParser.PowContext ctx) {
+        return pow(ctx);
     }
 
     @Override
@@ -193,6 +215,11 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     @Override
     public Expression visitFunction_factor(CalculatorExpressionParser.Function_factorContext ctx) {
         return factor(ctx);
+    }
+
+    @Override
+    public Expression visitFunction_pow(CalculatorExpressionParser.Function_powContext ctx) {
+        return pow(ctx);
     }
 
     @Override

@@ -8,7 +8,6 @@ import java.util.List;
 final public class Divides extends Operation
 {
 
-
   public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
 	super(elist);
 	symbol = "/";

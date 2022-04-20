@@ -78,4 +78,15 @@ public abstract class Number implements Expression
     protected abstract Number divide(Real r);
     protected abstract Number divide(Complex c);
 
+    public Number pow(Number val) {
+        if(val instanceof Rational rat){
+            return pow(rat);
+        } else if(val instanceof Real r){
+            return pow(r);
+        }
+        return null;
+    }
+
+    protected abstract Number pow(Rational rat);
+    protected abstract Number pow(Real r);
 }

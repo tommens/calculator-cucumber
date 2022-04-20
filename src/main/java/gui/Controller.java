@@ -13,6 +13,8 @@ import memory.service.MemoriesCareTaker;
 public abstract class Controller implements MemoriesCareTaker {
     private Scene sceneBasic;
     private Scene sceneConverter;
+    private Scene sceneScientific;
+    private Scene sceneFunctions;
     protected Stage stage;
 
     private boolean submitted;
@@ -35,8 +37,15 @@ public abstract class Controller implements MemoriesCareTaker {
         this.sceneConverter = sceneConverter;
     }
 
+    public void setSceneScientific(Scene sceneScientific) {
+        this.sceneScientific = sceneScientific;
+    }
+
+    public void setSceneFunctions(Scene sceneFunctions) {
+        this.sceneFunctions = sceneFunctions;
+    }
+
     public void cancelButton() {
-        clearAfterSubmitted();
         setSubmitted(false);
         inputField.setText("");
         outputField.setText("");
@@ -67,27 +76,45 @@ public abstract class Controller implements MemoriesCareTaker {
     public void clearAfterSubmitted() {
         if (isSubmitted()) {
             setSubmitted(false);
-            inputField.setText("");
-            outputField.setText("");
+            resetFields();
         }
     }
 
     @FXML
     public void showSceneBasic() {
-        inputField.setText("");
-        outputField.setText("");
+        resetFields();
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneBasic);
     }
 
     @FXML
     public void showSceneConverter() {
-        inputField.setText("");
-        outputField.setText("");
+        resetFields();
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneConverter);
     }
 
+    @FXML
+    public void showSceneScientific() {
+        resetFields();
+        Stage stage = (Stage) mainScreen.getScene().getWindow();
+        stage.setScene(sceneScientific);
+    }
+
+    @FXML
+    public void showSceneFunctions() {
+        resetFields();
+        Stage stage = (Stage) mainScreen.getScene().getWindow();
+        stage.setScene(sceneFunctions);
+    }
+
+    private void resetFields() {
+        inputField.setText("");
+        if (outputField != null) outputField.setText("");
+    }
+    public void showAlertMessage(String message) {
+        inputField.setText(inputField.getText() + " !! " + message);
+    }
 
     public abstract void submitButton();
 }

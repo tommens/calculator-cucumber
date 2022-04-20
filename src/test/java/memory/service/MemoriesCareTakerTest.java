@@ -1,6 +1,6 @@
 package memory.service;
 
-import common.UnexpectedExpressionException;
+import gui.common.UnexpectedExpressionException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static common.Configuration.EXPRESSION_SEPARATOR;
+import static gui.common.Configuration.EXPRESSION_SEPARATOR;
 import static java.nio.file.Files.delete;
 import static java.nio.file.Files.newBufferedReader;
 import static java.nio.file.Path.of;

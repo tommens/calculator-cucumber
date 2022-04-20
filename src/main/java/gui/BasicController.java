@@ -3,7 +3,8 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
-import common.UnexpectedExpressionException;
+import javafx.scene.control.CheckBox;
+import gui.common.UnexpectedExpressionException;
 import javafx.collections.ObservableSet;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
@@ -15,7 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
-import static common.Configuration.*;
+import static gui.common.Configuration.*;
 import static javafx.print.Printer.getDefaultPrinter;
 import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
 
@@ -26,9 +27,10 @@ import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
  */
 public class BasicController extends Controller {
 
+    private final Calculator calculator = new Calculator();
+    private final Parser parser = new Parser(calculator);
+    public CheckBox isRational;
     private final FileChooser fileChooser = new FileChooser();
-    private Calculator calculator = new Calculator();
-    private Parser parser = new Parser(calculator);
 
     public BasicController() {
         fileChooser.getExtensionFilters().add(
@@ -37,10 +39,21 @@ public class BasicController extends Controller {
     }
 
     public void submitButton() {
-        Expression expr = parser.parse(this.inputField.getText());
-        String resp = calculator.eval(expr).toString();
-        this.outputField.setText(calculator.eval(expr).toString());
-        keepComponentValue(inputField.getText(), resp);
+        String input = inputField.getText().replace("%", "/100");
+        Expression expr = parser.parse(input);
+        try {
+            if (isRational.isSelected()) {
+                String result = calculator.eval(expr).toString();
+                this.outputField.setText(result);
+                keepComponentValue(inputField.getText(), result);
+            } else {
+                String result = calculator.eval(expr).toReal().toString();
+                this.outputField.setText(result);
+                keepComponentValue(inputField.getText(), result);
+            }
+        } catch (Exception e) {
+            this.showAlertMessage(e.getMessage());
+        }
         this.setSubmitted(true);
     }
 
