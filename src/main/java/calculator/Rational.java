@@ -102,6 +102,11 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         return r.add(this);
     }
 
+    @Override
+    protected Number add(Complex c) {
+        return c.add(this);
+    }
+
 
     @Override
     protected Number multiply(Rational rat) {
@@ -112,6 +117,11 @@ public class Rational extends Number implements Expression, Comparable<Rational>
     @Override
     protected Number multiply(Real r) {
         return r.multiply(this);
+    }
+
+    @Override
+    protected Number multiply(Complex c) {
+        return c.multiply(this);
     }
 
     @Override
@@ -126,6 +136,12 @@ public class Rational extends Number implements Expression, Comparable<Rational>
     protected Number divide(Real r) {
         Real us = new Real(this);
         return us.divide(r);
+    }
+
+    @Override
+    protected Number divide(Complex c) {
+        Complex us = new Complex(this.toReal().getValue());
+        return us.divide(c);
     }
 
     @Override

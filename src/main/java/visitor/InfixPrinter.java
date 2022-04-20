@@ -14,6 +14,7 @@ public class InfixPrinter extends Printer {
 
     @Override
     protected String writeExpression(Function f, ArrayList<String> strings) {
-        return f.getName() + "( " + strings.get(0) + " )";
+        return "(" + strings.get(0) + ", " + strings.get(0) + ") " + f.getName(); // TODO
+
     }
 }

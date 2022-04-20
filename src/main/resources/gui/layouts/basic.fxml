@@ -31,7 +31,7 @@
                 </MenuButton>
             </graphic>
         </Menu>
-      <Menu mnemonicParsing="false">
+        <Menu mnemonicParsing="false">
          <graphic>
             <MenuButton mnemonicParsing="false" prefWidth="125.0" text="Notation type">
               <items>
@@ -43,27 +43,73 @@
          </graphic>
       </Menu>
     </MenuBar>
+    <HBox>
+        <Button maxHeight="38.0" maxWidth="45.0" minHeight="38.0" minWidth="45.0" mnemonicParsing="false" onAction="#saveHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/save.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="45.0" minHeight="38.0" minWidth="45.0" mnemonicParsing="false" onAction="#loadHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/load.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="45.0" minHeight="38.0" minWidth="45.0" mnemonicParsing="false" onAction="#printHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/print.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="45.0" minHeight="38.0" minWidth="45.0" mnemonicParsing="false" onAction="#configHistory">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/config.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyFirst">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/historyFirst.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyLeft">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/historyLeft.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyRight">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/historyRight.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyLast">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@logos/historyLast.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
     <VBox>
         <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </VBox.margin>
-        <HBox>
             <TextField id="calcField" fx:id="inputField" editable="false" maxWidth="265.0" prefHeight="50.0" prefWidth="258.0">
                 <HBox.margin>
                     <Insets right="5.0" />
                 </HBox.margin>
         </TextField>
-            <Button mnemonicParsing="false" onAction="#historyButton">
-                <graphic>
-                    <ImageView fitHeight="48.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@logos/history.png" />
-                    </ImageView>
-                </graphic>
-            </Button>
-        <VBox.margin>
-            <Insets />
-        </VBox.margin>
-        </HBox>
         <HBox>
             <VBox.margin>
                 <Insets top="5.0" />

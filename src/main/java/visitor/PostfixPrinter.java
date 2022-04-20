@@ -1,5 +1,6 @@
 package visitor;
 
+
 import calculator.Function;
 import calculator.Operation;
 
@@ -16,4 +17,5 @@ public class PostfixPrinter extends Printer{
     protected String writeExpression(Function f, ArrayList<String> strings) {
         return "(" + strings.get(0) + ", " + strings.get(0) + ") " + f.getName(); // TODO
     }
+
 }
