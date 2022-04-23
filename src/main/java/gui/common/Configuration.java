@@ -5,16 +5,12 @@ package gui.common;
  */
 public class Configuration {
 
-    public static final double MIN_WIDTH = 300;
-    public static final double MAX_WIDTH = 450;
-    public static final double MIN_HEIGHT = 500;
-    public static final double MAX_HEIGHT = 750;
     public static final String TITLE_MAIN = "Calculator";
 
-    public static String DEFAULT_DIRECTORY = "user.home";
-    public static String FILE_TYPE = "*.txt";
-    public static String FILE_TYPE_DESCRIPTION = "text file";
-    public static String EXPRESSION_SEPARATOR = " = ";
+    public static final String DEFAULT_DIRECTORY = "user.home";
+    public static final String FILE_TYPE = "*.txt";
+    public static final String FILE_TYPE_DESCRIPTION = "text file";
+    public static final String EXPRESSION_SEPARATOR = " = ";
 
     public static final String CONFIGURATION_TITLE = "Configuration";
     public static final int DEFAULT_MEM_SIZE = 50;

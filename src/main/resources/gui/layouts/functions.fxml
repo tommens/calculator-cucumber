@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.HBox?>
 <VBox id="mainScreen" fx:id="mainScreen" stylesheets="@../styles/functions.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FunctionsController">
     <MenuBar id="bar" fx:id="bar">
         <Menu mnemonicParsing="false">
