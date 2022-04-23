@@ -19,6 +19,10 @@ import static gui.common.Configuration.*;
 import static javafx.print.Printer.getDefaultPrinter;
 import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
 
+/**
+ * This class Handle the Memory with the Controller system
+ * Extends this one instead Controller to add MemoriesCareTaker functionality
+ */
 public class ControllerWithMemory extends Controller implements MemoriesCareTaker {
 
     private final FileChooser fileChooser = new FileChooser();
