@@ -10,6 +10,13 @@ MULT : '×';
 DIV  : '/';
 POW  : '^';
 
+LOGICAL_NOT: 'NOT';
+LOGICAL_OR: 'OR';
+LOGICAL_AND: 'AND';
+LOGICAL_XOR: 'XOR';
+LOGICAL_IMPLICATION:'==>';
+LOGICAL_EQUIVALENCE:'<==>';
+
 FUNCTION_IDENTIFIER : [a-z]+;
 
 expression: term | function_defintion;
