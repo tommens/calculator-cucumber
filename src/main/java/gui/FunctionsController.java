@@ -39,7 +39,7 @@ public class FunctionsController extends ControllerWithMemory {
         } else {
             drawFunction();
         }
-        keepComponentValue(inputField.getText(), "");
+        // keepComponentValue(inputField.getText(), "");
     }
 
     public void up() {
