@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 
 import java.math.MathContext;
 
-public class ScientificController extends Controller {
+public class ScientificController extends ControllerWithMemory {
 
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
@@ -25,7 +25,9 @@ public class ScientificController extends Controller {
         input = input.replace("%", "/100");
         try {
             Expression expr = parser.parse(input);
-            this.outputField.setText(calculator.eval(expr).toReal().toString());
+            String result = calculator.eval(expr).toReal().toString();
+            this.outputField.setText(result);
+            keepComponentValue(inputField.getText(), result);
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
         }

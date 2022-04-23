@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import memory.service.MemoriesCareTaker;
 
-public abstract class Controller implements MemoriesCareTaker {
+public abstract class Controller  {
     private Scene sceneBasic;
     private Scene sceneConverter;
     private Scene sceneScientific;

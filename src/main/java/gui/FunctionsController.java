@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Controller for the functions view.
  */
-public class FunctionsController extends Controller {
+public class FunctionsController extends ControllerWithMemory {
     @FXML
     public Pane pane;
 
@@ -39,6 +39,7 @@ public class FunctionsController extends Controller {
         } else {
             drawFunction();
         }
+        keepComponentValue(inputField.getText(), "");
     }
 
     public void up() {
