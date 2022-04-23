@@ -1,10 +1,10 @@
 package memory.memento;
 
-import common.UnexpectedExpressionException;
+import gui.common.UnexpectedExpressionException;
 
 import java.io.Serial;
 import java.io.Serializable;
-import static common.Configuration.*;
+import static gui.common.Configuration.*;
 
 /**
  * Memento DTO (data transfer object) class with marshalling capabilities

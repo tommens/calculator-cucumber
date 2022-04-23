@@ -1,4 +1,4 @@
-package common;
+package gui.common;
 
 /**
  * Project Configuration file that contains useful constants.

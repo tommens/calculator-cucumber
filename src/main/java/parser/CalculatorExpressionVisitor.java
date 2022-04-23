@@ -41,6 +41,12 @@ public interface CalculatorExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFactor(CalculatorExpressionParser.FactorContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#pow}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPow(CalculatorExpressionParser.PowContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CalculatorExpressionParser#value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -82,6 +88,12 @@ public interface CalculatorExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction_factor(CalculatorExpressionParser.Function_factorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#function_pow}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction_pow(CalculatorExpressionParser.Function_powContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CalculatorExpressionParser#function_value}.
 	 * @param ctx the parse tree
