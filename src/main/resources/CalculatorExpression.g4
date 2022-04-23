@@ -42,14 +42,14 @@ factor: value
       | factor DIV value
       ;
 
-pow: value
-   | pow POW value
-   ;
-
 value: number boolean
      | function_call
      | parenthesed_expression
      ;
+
+pow: value
+   | pow POW value
+   ;
 
 number: MINUS?(INT|DECIMAL|IMAGINARY);
 boolean: BOOLEAN;
