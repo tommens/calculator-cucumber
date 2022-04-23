@@ -9,13 +9,14 @@ PLUS : '+';
 MINUS: '-';
 MULT : '×';
 DIV  : '/';
+POW  : '^';
+
 LOGICAL_NOT: 'NOT';
 LOGICAL_OR: 'OR';
 LOGICAL_AND: 'AND';
 LOGICAL_XOR: 'XOR';
 LOGICAL_IMPLICATION:'==>';
 LOGICAL_EQUIVALENCE:'<==>';
-
 
 FUNCTION_IDENTIFIER : [a-z]+;
 
@@ -41,16 +42,17 @@ factor: value
       | factor DIV value
       ;
 
+pow: value
+   | pow POW value
+   ;
+
 value: number boolean
+     | function_call
      | parenthesed_expression
      ;
 
-
 number: MINUS?(INT|DECIMAL|IMAGINARY);
 boolean: BOOLEAN;
-
-
-
 
 function_defintion: FUNCTION_IDENTIFIER ':=' function_term;
 
