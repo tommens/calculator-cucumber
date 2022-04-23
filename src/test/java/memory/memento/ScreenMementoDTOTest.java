@@ -1,9 +1,9 @@
 package memory.memento;
 
-import common.UnexpectedExpressionException;
+import gui.common.UnexpectedExpressionException;
 import org.junit.jupiter.api.Test;
-import static common.Configuration.ERROR_MSG_RESULT_STRUCTURE;
-import static common.Configuration.EXPRESSION_SEPARATOR;
+import static gui.common.Configuration.ERROR_MSG_RESULT_STRUCTURE;
+import static gui.common.Configuration.EXPRESSION_SEPARATOR;
 import static memory.memento.ScreenMementoDTO.marshaller;
 import static org.junit.jupiter.api.Assertions.*;
 

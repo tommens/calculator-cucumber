@@ -63,7 +63,11 @@ public class ConverterController extends Controller {
         if (from == null || to == null) {
             throw new IllegalArgumentException("Unit not found");
         }
-        this.outputField.setText(convert(input.toString(), from, to, calculator));
+        try {
+            this.outputField.setText(convert(input.toString(), from, to, calculator));
+        } catch (Exception e) {
+            this.showAlertMessage(e.getMessage());
+        }
         this.setSubmitted(true);
     }
 

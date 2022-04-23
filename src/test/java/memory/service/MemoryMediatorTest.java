@@ -1,6 +1,6 @@
 package memory.service;
 
-import common.UnexpectedExpressionException;
+import gui.common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.*;

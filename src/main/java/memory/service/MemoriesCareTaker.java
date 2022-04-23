@@ -1,6 +1,6 @@
 package memory.service;
 
-import common.UnexpectedExpressionException;
+import gui.common.UnexpectedExpressionException;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;
 import java.io.File;
