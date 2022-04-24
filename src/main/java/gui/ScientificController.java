@@ -4,13 +4,13 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
 import ch.obermuhlner.math.big.BigDecimalMath;
-import gui.navigation.ModeEnum;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 
 import java.math.MathContext;
 
 import static gui.navigation.ModeEnum.SCIENTIFIC_MODE;
+import static java.lang.String.valueOf;
 import static java.math.MathContext.DECIMAL128;
 
 public class ScientificController extends ControllerWithMemory {
@@ -22,6 +22,10 @@ public class ScientificController extends ControllerWithMemory {
     @Override
     public void submitButton() {
         String input = inputField.getText();
+
+        if (!valueOf(input.charAt(0)).matches("[0-9]"))
+            input = "0"+input;
+
         input = input.replace("є", BigDecimalMath.e(mc).toString());
         input = input.replace("π", BigDecimalMath.pi(mc).toString());
         input = input.replace("√", "sqrt");

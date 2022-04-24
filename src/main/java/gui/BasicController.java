@@ -3,10 +3,10 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
-import gui.navigation.ModeEnum;
 import javafx.scene.control.CheckBox;
 
 import static gui.navigation.ModeEnum.BASIC_MODE;
+import static java.lang.String.valueOf;
 
 /**
  * This controller handle the main graphical interface's actions.
@@ -26,6 +26,10 @@ public class BasicController extends ControllerWithMemory {
     public void submitButton() {
         if (inputField == null) return;
         String input = inputField.getText().replace("%", "/100");
+
+        if (!valueOf(input.charAt(0)).matches("[0-9]"))
+            input = "0"+input;
+
         Expression expr = parser.parse(input);
         String result;
         try {
