@@ -4,11 +4,13 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
 import ch.obermuhlner.math.big.BigDecimalMath;
+import gui.navigation.ModeEnum;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 
 import java.math.MathContext;
 
+import static gui.navigation.ModeEnum.SCIENTIFIC_MODE;
 import static java.math.MathContext.DECIMAL128;
 
 public class ScientificController extends ControllerWithMemory {
@@ -29,7 +31,7 @@ public class ScientificController extends ControllerWithMemory {
             Expression expr = parser.parse(input);
             String result = calculator.eval(expr).toReal().toString();
             this.outputField.setText(result);
-            keepComponentValue(inputField.getText(), result, getSelectedMode());
+            keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.title());
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
         }

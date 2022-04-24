@@ -3,6 +3,7 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
+import gui.navigation.ModeEnum;
 import javafx.scene.control.CheckBox;
 
 import static gui.navigation.ModeEnum.BASIC_MODE;
@@ -34,7 +35,7 @@ public class BasicController extends ControllerWithMemory {
                 result = calculator.eval(expr).toReal().toString();
 
             this.outputField.setText(result);
-            keepComponentValue(inputField.getText(), result, getSelectedMode());
+            keepComponentValue(inputField.getText(), result, BASIC_MODE.title());
 
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());

@@ -6,8 +6,14 @@ import calculator.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+
 import java.util.List;
+
+import static gui.navigation.ModeEnum.FUNCTION_MODE;
 
 /**
  * Controller for the functions view.
@@ -39,7 +45,7 @@ public class FunctionsController extends ControllerWithMemory {
         } else {
             drawFunction();
         }
-        keepComponentValue(inputField.getText(), "", getSelectedMode());
+        keepComponentValue(inputField.getText(), "", FUNCTION_MODE.title());
     }
 
     public void up() {
