@@ -39,7 +39,7 @@ public class FunctionsController extends ControllerWithMemory {
         } else {
             drawFunction();
         }
-        // keepComponentValue(inputField.getText(), "");
+        keepComponentValue(inputField.getText(), "", getSelectedMode());
     }
 
     public void up() {
@@ -120,4 +120,5 @@ public class FunctionsController extends ControllerWithMemory {
     private int doubleToPixel(double value) {
         return -(int) (value / pixelSize);
     }
+
 }

@@ -1,6 +1,6 @@
 package memory.service;
 
-import gui.common.UnexpectedExpressionException;
+import common.UnexpectedExpressionException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static gui.common.Configuration.EXPRESSION_SEPARATOR;
+import static common.Configuration.EXPRESSION_SEPARATOR;
+import static common.Configuration.EXPRESSION_TYPE_SEPARATOR;
 import static java.nio.file.Files.delete;
 import static java.nio.file.Files.newBufferedReader;
 import static java.nio.file.Path.of;
@@ -20,22 +21,25 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MemoriesCareTakerTest implements MemoriesCareTaker {
 
+    private final String SELECTED_MODE = "dummy mode";
+
     private final String PROVIDED_EXP_1 = "1+1";
     private final String PROVIDED_RES_1 = "2";
-    private final String EXPECTED_EXPRESSION_1 = PROVIDED_EXP_1 +EXPRESSION_SEPARATOR+ PROVIDED_RES_1;
+    private final String EXPECTED_EXPRESSION_1 = PROVIDED_EXP_1 +EXPRESSION_SEPARATOR+ PROVIDED_RES_1 +EXPRESSION_TYPE_SEPARATOR+ SELECTED_MODE;
 
     private final String PROVIDED_EXP_2 = "2+2";
     private final String PROVIDED_RES_2 = "4";
-    private final String EXPECTED_EXPRESSION_2 = PROVIDED_EXP_2 +EXPRESSION_SEPARATOR+ PROVIDED_RES_2;
+    private final String EXPECTED_EXPRESSION_2 = PROVIDED_EXP_2 +EXPRESSION_SEPARATOR+ PROVIDED_RES_2 +EXPRESSION_TYPE_SEPARATOR+ SELECTED_MODE;
 
     private final String EXPECTED_LN = "\n";
     private final String PATH_TO_SAVE = "src/test/resources/file_to_save.txt";
+
 
     @Test
     @Order(1)
     void keepComponent_happy_case_1() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 0);
-        keepComponentValue(PROVIDED_EXP_1, PROVIDED_RES_1);
+        keepComponentValue(PROVIDED_EXP_1, PROVIDED_RES_1, SELECTED_MODE);
         assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
         assertEquals(memoryMediator.getCircularListFromLastItem().getValue(), EXPECTED_EXPRESSION_1);
@@ -45,7 +49,7 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     @Order(2)
     void keepComponent_nullExp() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
-        keepComponentValue(null, PROVIDED_RES_2);
+        keepComponentValue(null, PROVIDED_RES_2, SELECTED_MODE);
         assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
     }
@@ -54,7 +58,7 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     @Order(3)
     void keepComponent_nullRes() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
-        keepComponentValue(PROVIDED_EXP_2, null);
+        keepComponentValue(PROVIDED_EXP_2, null, SELECTED_MODE);
         assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
     }
@@ -63,7 +67,7 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     @Order(4)
     void keepComponent_happy_case_2() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
-        keepComponentValue(PROVIDED_EXP_2, PROVIDED_RES_2);
+        keepComponentValue(PROVIDED_EXP_2, PROVIDED_RES_2, SELECTED_MODE);
         assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1+EXPECTED_LN+EXPECTED_EXPRESSION_2+EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 2);
         assertEquals(memoryMediator.getCircularListFromLastItem().getValue(), EXPECTED_EXPRESSION_2);

@@ -4,10 +4,8 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
 import javafx.scene.control.CheckBox;
-import javafx.stage.FileChooser;
 
-import static gui.common.Configuration.FILE_TYPE;
-import static gui.common.Configuration.FILE_TYPE_DESCRIPTION;
+import static gui.navigation.ModeEnum.BASIC_MODE;
 
 /**
  * This controller handle the main graphical interface's actions.
@@ -19,12 +17,9 @@ public class BasicController extends ControllerWithMemory {
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
     public CheckBox isRational;
-    private final FileChooser fileChooser = new FileChooser();
 
     public BasicController() {
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter(FILE_TYPE_DESCRIPTION, FILE_TYPE)
-        );
+        setSelectedMode(BASIC_MODE);
     }
 
     public void submitButton() {
@@ -39,7 +34,7 @@ public class BasicController extends ControllerWithMemory {
                 result = calculator.eval(expr).toReal().toString();
 
             this.outputField.setText(result);
-            keepComponentValue(inputField.getText(), result);
+            keepComponentValue(inputField.getText(), result, getSelectedMode());
 
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
@@ -66,7 +61,5 @@ public class BasicController extends ControllerWithMemory {
         clearAfterSubmitted();
         inputField.setText(inputField.getText() + "/");
     }
-
-
 
 }

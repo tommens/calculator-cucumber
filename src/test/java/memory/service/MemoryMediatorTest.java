@@ -1,6 +1,6 @@
 package memory.service;
 
-import gui.common.UnexpectedExpressionException;
+import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.*;
@@ -12,18 +12,20 @@ class MemoryMediatorTest {
     private final MemoryMediator memoryMediator = new MemoryMediator();
     private final CircularLinkedListService ACTUAL_EMBEDDED_VALUE_TO_TEST = memoryMediator.getNavigationListService();
 
-    private static final String EXPECTED_FIRST_SAVED_VALUE = "1+1 = 2";
-    private static final String EXPECTED_SECOND_SAVED_VALUE = "2+2 = 4";
-    private static final String EXPECTED_LAST_SAVED_VALUE = "4+4 = 8";
-    private static final String EXPECTED_NOT_EXISTING_VALUE = "1+1 = 3";
+    private static final String SELECTED_MODE = "dummy mode";
+    private static final String EXPECTED_FIRST_SAVED_VALUE = "1+1 = 2 : "+SELECTED_MODE;
+    private static final String EXPECTED_SECOND_SAVED_VALUE = "2+2 = 4 : "+SELECTED_MODE;
+    private static final String EXPECTED_LAST_SAVED_VALUE = "4+4 = 8 : "+SELECTED_MODE;
+    private static final String EXPECTED_NOT_EXISTING_VALUE = "1+1 = 3 : "+SELECTED_MODE;
 
     @BeforeEach
     void setUp() {
         // retrieveCircularList();
+
         memoryMediator.cleanCircularList();
-        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("1+1", "2"));
-        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("2+2", "4"));
-        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("4+4", "8"));
+        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("1+1", "2", SELECTED_MODE));
+        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("2+2", "4", SELECTED_MODE));
+        ACTUAL_EMBEDDED_VALUE_TO_TEST.addNode(new ScreenMementoDTO("4+4", "8", SELECTED_MODE));
     }
 
     @Test

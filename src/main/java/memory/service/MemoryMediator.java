@@ -1,6 +1,6 @@
 package memory.service;
 
-import gui.common.UnexpectedExpressionException;
+import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;

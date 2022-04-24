@@ -1,6 +1,6 @@
 package gui;
 
-import gui.common.UnexpectedExpressionException;
+import common.UnexpectedExpressionException;
 import javafx.collections.ObservableSet;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static gui.common.Configuration.*;
+import static common.Configuration.*;
 import static javafx.print.Printer.getDefaultPrinter;
 import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
 
@@ -23,7 +23,7 @@ import static javafx.scene.control.ButtonBar.ButtonData.OK_DONE;
  * This class Handle the Memory with the Controller system
  * Extends this one instead Controller to add MemoriesCareTaker functionality
  */
-public class ControllerWithMemory extends Controller implements MemoriesCareTaker {
+public abstract class ControllerWithMemory extends Controller implements MemoriesCareTaker {
 
     private final FileChooser fileChooser = new FileChooser();
 
@@ -77,6 +77,8 @@ public class ControllerWithMemory extends Controller implements MemoriesCareTake
 
         if (inputField != null)
             inputField.setText(item.getDTO().getExpression());
+
+
     }
 
     /**
@@ -166,8 +168,4 @@ public class ControllerWithMemory extends Controller implements MemoriesCareTake
 
     }
 
-    @Override
-    public void submitButton() {
-
-    }
 }

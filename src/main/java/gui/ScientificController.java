@@ -9,11 +9,13 @@ import javafx.scene.control.Button;
 
 import java.math.MathContext;
 
+import static java.math.MathContext.DECIMAL128;
+
 public class ScientificController extends ControllerWithMemory {
 
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
-    protected MathContext mc = MathContext.DECIMAL128;
+    protected MathContext mc = DECIMAL128;
 
     @Override
     public void submitButton() {
@@ -27,7 +29,7 @@ public class ScientificController extends ControllerWithMemory {
             Expression expr = parser.parse(input);
             String result = calculator.eval(expr).toReal().toString();
             this.outputField.setText(result);
-            keepComponentValue(inputField.getText(), result);
+            keepComponentValue(inputField.getText(), result, getSelectedMode());
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
         }
@@ -85,4 +87,5 @@ public class ScientificController extends ControllerWithMemory {
         clearAfterSubmitted();
         inputField.setText(inputField.getText() + "^3");
     }
+
 }

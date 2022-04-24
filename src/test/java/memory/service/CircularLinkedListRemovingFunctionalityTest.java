@@ -15,6 +15,7 @@ public class CircularLinkedListRemovingFunctionalityTest {
     private final MemoryMediator memoryMediator = new MemoryMediator();
     private final CircularLinkedListService CL_SERVICE = memoryMediator.getNavigationListService();
     private final MemoryConfiguration configuration = new MemoryConfiguration();
+    private final String SELECTED_MODE = "dummy mode";
 
     @BeforeEach
     void setUp() {
@@ -25,10 +26,10 @@ public class CircularLinkedListRemovingFunctionalityTest {
     void removeElement() {
 
         int OPERATION_MEMORY_SIZE = 3; //CONFIGURATION
-        ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1");
-        ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2");
-        ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3");
-        ScreenMementoDTO LAST_VALUE = new ScreenMementoDTO("4","4");
+        ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1", SELECTED_MODE);
+        ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2", SELECTED_MODE);
+        ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3", SELECTED_MODE);
+        ScreenMementoDTO LAST_VALUE = new ScreenMementoDTO("4","4", SELECTED_MODE);
 
         CL_SERVICE.addNode(ONE_FIRST_VALUE);
         CL_SERVICE.addNode(SECOND_VALUE);
@@ -59,12 +60,12 @@ public class CircularLinkedListRemovingFunctionalityTest {
     @Test
     void addExtraElement() {
         long extraElementIndex = configuration.getGetOperationMemorySize()+1;
-        ScreenMementoDTO EXPECTED_HEAD_TO_BE_DELETED = new ScreenMementoDTO(valueOf(0),valueOf(0));
-        ScreenMementoDTO EXPECTED_HEAD_AFTER_EXTRA_ADD = new ScreenMementoDTO(valueOf(1),valueOf(1));
-        ScreenMementoDTO EXPECTED_TAIL_AFTER_EXTRA_ADD = new ScreenMementoDTO(valueOf(extraElementIndex), valueOf(extraElementIndex));
+        ScreenMementoDTO EXPECTED_HEAD_TO_BE_DELETED = new ScreenMementoDTO(valueOf(0),valueOf(0), SELECTED_MODE);
+        ScreenMementoDTO EXPECTED_HEAD_AFTER_EXTRA_ADD = new ScreenMementoDTO(valueOf(1),valueOf(1), SELECTED_MODE);
+        ScreenMementoDTO EXPECTED_TAIL_AFTER_EXTRA_ADD = new ScreenMementoDTO(valueOf(extraElementIndex), valueOf(extraElementIndex), SELECTED_MODE);
 
         for (int i=0; i < configuration.getGetOperationMemorySize(); i++)
-            CL_SERVICE.addNode(new ScreenMementoDTO(valueOf(i), valueOf(i)));
+            CL_SERVICE.addNode(new ScreenMementoDTO(valueOf(i), valueOf(i), SELECTED_MODE));
 
         assertEquals(CL_SERVICE.getLength(), configuration.getGetOperationMemorySize());
         assertTrue(CL_SERVICE.containsValue(EXPECTED_HEAD_TO_BE_DELETED.toString()));
