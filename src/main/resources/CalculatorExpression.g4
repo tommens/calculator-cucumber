@@ -52,23 +52,24 @@ term: factor
     | term MINUS factor
     ;
 
-factor: value
-      | factor MULT value
-      | factor DIV value
+factor: pow
+      | factor MULT pow
+      | factor DIV pow
       ;
-
-value: number
-     | boolean
-     | function_call
-     | parenthesed_expression
-     ;
 
 pow: value
    | pow POW value
    ;
 
+value: number
+     | BOOLEAN
+     | function_call
+     | parenthesed_expression
+     ;
+
+
+
 number: MINUS?(INT|DECIMAL|IMAGINARY);
-boolean: BOOLEAN;
 
 function_defintion: FUNCTION_IDENTIFIER ':=' function_term;
 
@@ -81,10 +82,14 @@ function_term: function_factor
     | function_term MINUS function_factor
     ;
 
-function_factor: function_value
-      | function_factor MULT function_value
-      | function_factor DIV function_value
+function_factor: function_pow
+      | function_factor MULT function_pow
+      | function_factor DIV function_pow
       ;
+
+function_pow: function_value
+            | function_pow POW function_value
+            ;
 
 function_value: number
      | variable
