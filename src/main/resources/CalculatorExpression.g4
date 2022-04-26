@@ -3,7 +3,7 @@ grammar CalculatorExpression;
 INT      : [0-9]+;
 DECIMAL  : [0-9]+'.'[0-9]+;
 IMAGINARY: [0-9]+'i';
-BOOLEAN  : '0' '1';
+BOOLEAN  : 'TRUE' | 'FALSE';
 
 PLUS : '+';
 MINUS: '-';
@@ -20,21 +20,36 @@ LOGICAL_EQUIVALENCE:'<==>';
 
 FUNCTION_IDENTIFIER : [a-z]+;
 
-expression: term | function_defintion;
+expression: equivalence | function_defintion;
 
 parenthesed_expression: '(' expression ')';
 
 function_call: FUNCTION_IDENTIFIER '(' term ')';
 
+equivalence: implication
+           | equivalence LOGICAL_EQUIVALENCE implication
+           ;
+
+implication: disjunction
+           | implication LOGICAL_IMPLICATION disjunction
+           ;
+
+disjunction: conjunction
+           | disjunction LOGICAL_OR conjunction
+           | disjunction LOGICAL_XOR conjunction
+           ;
+
+conjunction: negation
+           | conjunction LOGICAL_AND negation
+           ;
+
+negation: term
+        | LOGICAL_NOT term
+        ;
+
 term: factor
     | term PLUS factor
     | term MINUS factor
-    | term LOGICAL_OR factor
-    | term LOGICAL_AND factor
-    | term LOGICAL_IMPLICATION factor
-    | term LOGICAL_EQUIVALENCE factor
-    | term LOGICAL_XOR factor
-    | LOGICAL_NOT term
     ;
 
 factor: value
@@ -42,7 +57,8 @@ factor: value
       | factor DIV value
       ;
 
-value: number boolean
+value: number
+     | boolean
      | function_call
      | parenthesed_expression
      ;
