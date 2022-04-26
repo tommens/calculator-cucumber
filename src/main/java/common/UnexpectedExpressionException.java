@@ -1,4 +1,4 @@
-package gui.common;
+package common;
 
 public class UnexpectedExpressionException extends Exception {
 

@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import static gui.common.Configuration.*;
+import static common.Configuration.*;
 
 /**
  * The GUI application Launcher
@@ -66,7 +66,7 @@ public class JavaFXGUI extends Application {
 
         stage.setScene(sceneBasic);
         stage.setTitle(TITLE_MAIN);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 

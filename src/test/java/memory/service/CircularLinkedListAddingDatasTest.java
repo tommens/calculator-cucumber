@@ -14,9 +14,10 @@ class CircularLinkedListAddingDatasTest {
 
     private final MemoryMediator memoryMediator = new MemoryMediator();
     private final CircularLinkedListService CL_SERVICE = memoryMediator.getNavigationListService();
-    private final ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1");
-    private final ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2");
-    private final ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3");
+    private final String SELECTED_MODE = "dummy mode";
+    private final ScreenMementoDTO ONE_FIRST_VALUE = new ScreenMementoDTO("1","1", SELECTED_MODE);
+    private final ScreenMementoDTO SECOND_VALUE = new ScreenMementoDTO("2","2", SELECTED_MODE);
+    private final ScreenMementoDTO THIRD_VALUE = new ScreenMementoDTO("3","3", SELECTED_MODE);
 
     @Test
     @Order(1)
@@ -76,7 +77,7 @@ class CircularLinkedListAddingDatasTest {
     @Test
     @Order(5)
     public void add_last_node() {
-        ScreenMementoDTO LAST_VALUE = new ScreenMementoDTO("4","4");
+        ScreenMementoDTO LAST_VALUE = new ScreenMementoDTO("4","4", SELECTED_MODE);
         assertEquals(CL_SERVICE.getLength(), 3);
         memoryMediator.addItem(LAST_VALUE);
         assertEquals(CL_SERVICE.getLength(), 4);
