@@ -30,10 +30,12 @@ public class Evaluator extends Visitor {
 
     public void visit(Operation o) {
         ArrayList<Number> evaluatedArgs = new ArrayList<>();
+        ArrayList<MyBoolean> evaluatedBoolArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
+            evaluatedBoolArgs.add(computedBoolValue);
         }
         //second loop to accumulate all the evaluated subresults
         Number temp = evaluatedArgs.get(0);
@@ -43,6 +45,14 @@ public class Evaluator extends Visitor {
         }
         // store the accumulated result
         computedValue = temp;
+
+        MyBoolean boolTemp = evaluatedBoolArgs.get(0);
+        int maxInd = evaluatedBoolArgs.size();
+        for (int cpt=1; cpt<maxInd; cpt++){
+            boolTemp = o.op(boolTemp,evaluatedBoolArgs.get(cpt));
+        }
+
+        computedBoolValue = boolTemp;
     }
 
     @Override
