@@ -8,31 +8,29 @@ import java.util.Map;
  */
 public enum ModeEnum {
 
-    BASIC_MODE(0, "Basic mode"),
-    CONVERTER_MODE(1, "Converter mode"),
-    SCIENTIFIC_MODE(2, "Scientific mode"),
-    FUNCTION_MODE(3, "Functions mode"),
-    LOGICAL_MODE(4, "Logical mode");
+    BASIC_MODE(0, "BasicMode"),
+    CONVERTER_MODE(1, "ConverterMode"),
+    SCIENTIFIC_MODE(2, "ScientificMode"),
+    FUNCTION_MODE(3, "FunctionMode"),
+    LOGICAL_MODE(4, "LogicalMode");
 
     private final int index;
-    private final String title;
+    private final String id;
 
     private static final Map<String, ModeEnum> lookup = new HashMap();
 
     static {
         for(ModeEnum h : ModeEnum.values())
-            lookup.put(h.title(), h);
+            lookup.put(h.id(), h);
     }
 
-    ModeEnum(int index, String title){
+    ModeEnum(int index, String id){
         this.index = index;
-        this.title = title;
+        this.id = id;
     }
 
-    public int index() { return index; }
-
-    public String title(){
-        return title;
+    public String id(){
+        return id;
     }
 
     public static ModeEnum mode(String title) {

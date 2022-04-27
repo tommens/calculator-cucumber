@@ -45,7 +45,7 @@ public class FunctionsController extends ControllerWithMemory {
         } else {
             drawFunction();
         }
-        keepComponentValue(inputField.getText(), "", FUNCTION_MODE.title());
+        keepComponentValue(inputField.getText(), "[graphical result]", FUNCTION_MODE.id());
     }
 
     public void up() {

@@ -6,16 +6,25 @@ import calculator.Parser;
 import converter.Unit;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.HBox;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static converter.Unit.*;
+import static gui.navigation.ModeEnum.CONVERTER_MODE;
 
 /**
  * This controller handle the main graphical interface's actions.
  * Read the converter panel which contains functionalities
  * Switch mode
  */
-public class ConverterController extends Controller {
+public class ConverterController extends ControllerWithMemory {
+
+    /**
+     * Index for memory usage
+     */
+    public HBox ConverterMode;
 
     /**
      * Scrollable list of units types
@@ -60,11 +69,14 @@ public class ConverterController extends Controller {
         Expression input = parser.parse(this.inputField.getText());
         Unit from = getUnitByName(fromUnit.getValue());
         Unit to = getUnitByName(toUnit.getValue());
+        String result;
         if (from == null || to == null) {
             throw new IllegalArgumentException("Unit not found");
         }
         try {
-            this.outputField.setText(convert(input.toString(), from, to, calculator));
+            result = convert(input.toString(), from, to, calculator);
+            this.outputField.setText(result);
+            keepComponentValue(inputField.getText(), result, CONVERTER_MODE.id());
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
         }

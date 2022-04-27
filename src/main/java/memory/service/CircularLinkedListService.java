@@ -3,6 +3,9 @@ package memory.service;
 import memory.CircularLinkedList;
 import memory.memento.ScreenMementoDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A circular list service
  * accessed by CircularListFacade implementation, eventually (package scope)
@@ -27,29 +30,35 @@ public class CircularLinkedListService {
     /**
      * Move the current linked list's position to the previous element
      */
-    public void navigateLeft() {
-        if (current != null) current = current.getPrevious();
+    public CircularLinkedList navigateLeft() {
+        if (current != null)
+            current = current.getPrevious();
+        return current;
     }
 
     /**
      * Move the current linked list's position to the next element
      */
-    public void navigateRight() {
-        if (current != null) current = current.getNext();
+    public CircularLinkedList navigateRight() {
+        if (current != null)
+            current = current.getNext();
+        return current;
     }
 
     /**
      * Move the current linked list's position to the last element
      */
-    public void navigateLast() {
+    public CircularLinkedList navigateLast() {
         if (head != null) current = head;
+        return current;
     }
 
     /**
      * Move the current linked list's position to the first element
      */
-    public void navigateFirst() {
+    public CircularLinkedList navigateFirst() {
         if (tail != null) current = tail;
+        return current;
     }
 
     public long getMemorySize() {
@@ -62,6 +71,7 @@ public class CircularLinkedListService {
 
     void addNode(ScreenMementoDTO value) {
         if (value == null) return;
+        if (value.getExpression() == null || value.getResult() == null || value.getMode() == null) return;
         CircularLinkedList newNode;
 
         if (head == null) {
@@ -70,6 +80,8 @@ public class CircularLinkedListService {
         } else {
             if (length == configuration.getGetOperationMemorySize())
                 removeFormerNode();
+            else if (length > configuration.getGetOperationMemorySize())
+                shrinkCircularList();
 
             newNode = new CircularLinkedList(value, tail.getIndex()+1);
             head.setPrevious(newNode);
@@ -81,6 +93,13 @@ public class CircularLinkedListService {
         tail.setNext(head);
         current = tail;
         length += 1;
+    }
+
+    private void shrinkCircularList() {
+        CircularLinkedList item = tail.clone();
+        for (int i=0; i<length+1; i++)
+            item = item.getPrevious();
+        head = item;
     }
 
     void removeFormerNode() {
@@ -113,6 +132,17 @@ public class CircularLinkedListService {
 
     CircularLinkedList getHead() {
         return head;
+    }
+
+    public List<ScreenMementoDTO> getItems() {
+        List<ScreenMementoDTO> items = new ArrayList<>();
+        CircularLinkedList item = head.clone();
+        items.add(item.getDTO());
+        while (item.getIndex() != tail.getIndex()) {
+            item = item.getNext();
+            items.add(item.getDTO());
+        }
+        return items;
     }
 
     private boolean search(String value, CircularLinkedList nodeCursor) {
