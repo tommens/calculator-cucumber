@@ -19,15 +19,15 @@ public abstract class Number implements Expression
     }
 
     public Integer countDepth() {
-        return 0;
+        return new Integer(0);
     }
 
     public Integer countOps() {
-        return 0;
+        return new Integer(0);
     }
 
     public Integer countNbs() {
-        return 1;
+        return new Integer(1);
     }
 
     public abstract Number negate();
