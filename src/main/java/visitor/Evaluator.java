@@ -9,8 +9,10 @@ import java.util.ArrayList;
 public class Evaluator extends Visitor {
 
     private Number computedValue;
+    private MyBoolean computedBoolValue;
 
     public Number getResult() { return computedValue; }
+    public MyBoolean getBoolResult(){return computedBoolValue;}
 
     public void visit(Number n) {
         computedValue = n;
@@ -41,6 +43,11 @@ public class Evaluator extends Visitor {
         }
         // store the accumulated result
         computedValue = temp;
+    }
+
+    @Override
+    public void visit(MyBoolean myBoolean) {
+        computedBoolValue = myBoolean;
     }
 
     public void visit(RealFunction f) {

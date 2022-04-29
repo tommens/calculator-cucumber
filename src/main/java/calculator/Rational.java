@@ -1,11 +1,16 @@
 package calculator;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
+
 import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class Rational extends Number implements Expression, Comparable<Rational> {
 
     protected BigInteger numerator;
     protected BigInteger denominator;
+    protected MathContext mc = new MathContext(10, RoundingMode.HALF_UP);
 
     /**
      * Constructs a Rational integer representing 1.
@@ -97,6 +102,11 @@ public class Rational extends Number implements Expression, Comparable<Rational>
         return r.add(this);
     }
 
+    @Override
+    protected Number add(Complex c) {
+        return c.add(this);
+    }
+
 
     @Override
     protected Number multiply(Rational rat) {
@@ -107,6 +117,11 @@ public class Rational extends Number implements Expression, Comparable<Rational>
     @Override
     protected Number multiply(Real r) {
         return r.multiply(this);
+    }
+
+    @Override
+    protected Number multiply(Complex c) {
+        return c.multiply(this);
     }
 
     @Override
@@ -121,6 +136,22 @@ public class Rational extends Number implements Expression, Comparable<Rational>
     protected Number divide(Real r) {
         Real us = new Real(this);
         return us.divide(r);
+    }
+
+    @Override
+    protected Number divide(Complex c) {
+        Complex us = new Complex(this.toReal().getValue());
+        return us.divide(c);
+    }
+
+    @Override
+    protected Number pow(Rational rat) {
+        return new Real(BigDecimalMath.pow(toReal().getValue(), rat.toReal().getValue(), MathContext.DECIMAL128)); //TODO Implement while staying in Rationals
+    }
+
+    @Override
+    protected Number pow(Real r) {
+        return new Real(BigDecimalMath.pow(toReal().getValue(), r.getValue(), MathContext.DECIMAL128));
     }
 
     @Override

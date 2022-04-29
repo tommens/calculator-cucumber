@@ -25,6 +25,10 @@ public abstract class Printer extends Visitor {
     }
 
     @Override
+    public void visit(MyBoolean b){printBuffer = b.toString();}
+
+
+    @Override
     public void visit(Operation o) {
         ArrayList<String> printedStrings = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
