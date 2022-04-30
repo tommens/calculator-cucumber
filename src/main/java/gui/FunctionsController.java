@@ -6,13 +6,19 @@ import calculator.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+
 import java.util.List;
+
+import static gui.navigation.ModeEnum.FUNCTION_MODE;
 
 /**
  * Controller for the functions view.
  */
-public class FunctionsController extends Controller {
+public class FunctionsController extends ControllerWithMemory {
     @FXML
     public Pane pane;
 
@@ -39,6 +45,7 @@ public class FunctionsController extends Controller {
         } else {
             drawFunction();
         }
+        keepComponentValue(inputField.getText(), "[graphical result]", FUNCTION_MODE.id());
     }
 
     public void up() {
@@ -119,4 +126,5 @@ public class FunctionsController extends Controller {
     private int doubleToPixel(double value) {
         return -(int) (value / pixelSize);
     }
+
 }

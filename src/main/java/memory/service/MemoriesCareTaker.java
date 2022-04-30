@@ -1,8 +1,8 @@
 package memory.service;
 
-import gui.common.UnexpectedExpressionException;
-import memory.memento.ResultOriginator;
+import common.UnexpectedExpressionException;
 import memory.memento.ScreenMementoDTO;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,13 +13,11 @@ import java.io.IOException;
  */
 public interface MemoriesCareTaker {
 
-    ResultOriginator stringResult = new ResultOriginator();
     MemoryMediator memoryMediator = new MemoryMediator();
 
-    default void keepComponentValue(String expr, String res) {
+    default void keepComponentValue(String expr, String res, String mode) {
         if (expr == null || res == null) return;
-        ScreenMementoDTO txt = new ScreenMementoDTO(expr, res);
-        stringResult.keepStatusUpdated(txt);
+        ScreenMementoDTO txt = new ScreenMementoDTO(expr, res, mode);
         memoryMediator.addItem(txt);
     }
 

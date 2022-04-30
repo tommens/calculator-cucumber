@@ -1,9 +1,9 @@
 package memory.memento;
 
-import gui.common.UnexpectedExpressionException;
+import common.UnexpectedExpressionException;
 import org.junit.jupiter.api.Test;
-import static gui.common.Configuration.ERROR_MSG_RESULT_STRUCTURE;
-import static gui.common.Configuration.EXPRESSION_SEPARATOR;
+
+import static common.Configuration.*;
 import static memory.memento.ScreenMementoDTO.marshaller;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,15 +11,16 @@ class ScreenMementoDTOTest {
 
     @Test
     void marshaller_happy_case() {
-        ScreenMementoDTO dto = new ScreenMementoDTO("0", "0");
+        ScreenMementoDTO dto = new ScreenMementoDTO("0", "0", "mode");
         try {
-            dto = marshaller("1 + 1" + EXPRESSION_SEPARATOR + "2");
+            dto = marshaller("1 + 1" + EXPRESSION_SEPARATOR + "2" + EXPRESSION_TYPE_SEPARATOR + "mode");
         } catch (UnexpectedExpressionException e) {
             fail();
         }
 
         assertEquals(dto.getExpression(), "1 + 1");
         assertEquals(dto.getResult(), "2");
+        assertEquals(dto.getMode(), "mode");
     }
 
     @Test

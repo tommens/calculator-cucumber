@@ -5,7 +5,7 @@ import memory.memento.ScreenMementoDTO;
 /**
  * A double linked list implementation with index and value
  */
-public class CircularLinkedList {
+public class CircularLinkedList implements Cloneable {
 
     private final ScreenMementoDTO nodeValue;
     private final int index;
@@ -43,4 +43,12 @@ public class CircularLinkedList {
 
     public int getIndex() { return index; }
 
+    @Override
+    public CircularLinkedList clone() {
+        try {
+            return (CircularLinkedList) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

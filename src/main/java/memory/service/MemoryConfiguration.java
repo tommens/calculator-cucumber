@@ -1,6 +1,6 @@
 package memory.service;
 
-import static gui.common.Configuration.DEFAULT_MEM_SIZE;
+import static common.Configuration.DEFAULT_MEM_SIZE;
 
 /**
  * Dynamic configuration

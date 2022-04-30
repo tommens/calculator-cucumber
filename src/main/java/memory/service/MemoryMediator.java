@@ -1,6 +1,6 @@
 package memory.service;
 
-import gui.common.UnexpectedExpressionException;
+import common.UnexpectedExpressionException;
 import memory.CircularLinkedList;
 import memory.memento.ResultOriginator;
 import memory.memento.ScreenMementoDTO;
@@ -51,7 +51,7 @@ public class MemoryMediator {
 
     void addItem(ScreenMementoDTO val) {
         navigationListService.addNode(val);
-        mementoOriginator.keepStatusUpdated(val);
+        mementoOriginator.keepStatusUpdated(navigationListService.getItems());
     }
 
     /**

@@ -6,18 +6,28 @@ import calculator.Parser;
 import ch.obermuhlner.math.big.BigDecimalMath;
 import javafx.event.Event;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 import java.math.MathContext;
 
-public class ScientificController extends Controller {
+import static gui.navigation.ModeEnum.SCIENTIFIC_MODE;
+import static java.lang.String.valueOf;
+import static java.math.MathContext.DECIMAL128;
+
+public class ScientificController extends ControllerWithMemory {
 
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
-    protected MathContext mc = MathContext.DECIMAL128;
+    public HBox ScientificMode;
+    protected MathContext mc = DECIMAL128;
 
     @Override
     public void submitButton() {
         String input = inputField.getText();
+
+        if (!valueOf(input.charAt(0)).matches("[0-9]"))
+            input = "0"+input;
+
         input = input.replace("є", BigDecimalMath.e(mc).toString());
         input = input.replace("π", BigDecimalMath.pi(mc).toString());
         input = input.replace("√", "sqrt");
@@ -25,7 +35,9 @@ public class ScientificController extends Controller {
         input = input.replace("%", "/100");
         try {
             Expression expr = parser.parse(input);
-            this.outputField.setText(calculator.eval(expr).toReal().toString());
+            String result = calculator.eval(expr).toReal().toString();
+            this.outputField.setText(result);
+            keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.id());
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
         }
@@ -83,4 +95,5 @@ public class ScientificController extends Controller {
         clearAfterSubmitted();
         inputField.setText(inputField.getText() + "^3");
     }
+
 }
