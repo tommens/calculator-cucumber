@@ -51,7 +51,7 @@ public class MemoryMediator {
 
     void addItem(ScreenMementoDTO val) {
         navigationListService.addNode(val);
-        mementoOriginator.keepStatusUpdated(val);
+        mementoOriginator.keepStatusUpdated(navigationListService.getItems());
     }
 
     /**

@@ -6,6 +6,7 @@ import calculator.Parser;
 import ch.obermuhlner.math.big.BigDecimalMath;
 import javafx.event.Event;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 import java.math.MathContext;
 
@@ -17,6 +18,7 @@ public class ScientificController extends ControllerWithMemory {
 
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
+    public HBox ScientificMode;
     protected MathContext mc = DECIMAL128;
 
     @Override
@@ -35,7 +37,7 @@ public class ScientificController extends ControllerWithMemory {
             Expression expr = parser.parse(input);
             String result = calculator.eval(expr).toReal().toString();
             this.outputField.setText(result);
-            keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.title());
+            keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.id());
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());
         }

@@ -1,6 +1,7 @@
 package memory.service;
 
 import common.UnexpectedExpressionException;
+import memory.memento.ScreenMementoDTO;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -32,15 +33,16 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     private final String EXPECTED_EXPRESSION_2 = PROVIDED_EXP_2 +EXPRESSION_SEPARATOR+ PROVIDED_RES_2 +EXPRESSION_TYPE_SEPARATOR+ SELECTED_MODE;
 
     private final String EXPECTED_LN = "\n";
-    private final String PATH_TO_SAVE = "src/test/resources/file_to_save.txt";
-
+    private final String PATH_TO_SAVE = "src/test/resources/file_to_save_care_taker.txt";
 
     @Test
     @Order(1)
     void keepComponent_happy_case_1() {
+        memoryMediator.cleanCircularList();
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 0);
-        keepComponentValue(PROVIDED_EXP_1, PROVIDED_RES_1, SELECTED_MODE);
-        assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
+        ScreenMementoDTO toAdd = new ScreenMementoDTO(PROVIDED_EXP_1, PROVIDED_RES_1, SELECTED_MODE);
+        memoryMediator.addItem(toAdd);
+        assertEquals(memoryMediator.getMementoOriginator().getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
         assertEquals(memoryMediator.getCircularListFromLastItem().getValue(), EXPECTED_EXPRESSION_1);
     }
@@ -49,8 +51,9 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     @Order(2)
     void keepComponent_nullExp() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
-        keepComponentValue(null, PROVIDED_RES_2, SELECTED_MODE);
-        assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
+        ScreenMementoDTO toAdd = new ScreenMementoDTO(null, PROVIDED_RES_2, SELECTED_MODE);
+        memoryMediator.addItem(toAdd);
+        assertEquals(memoryMediator.getMementoOriginator().getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
     }
 
@@ -58,8 +61,9 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     @Order(3)
     void keepComponent_nullRes() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
-        keepComponentValue(PROVIDED_EXP_2, null, SELECTED_MODE);
-        assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
+        ScreenMementoDTO toAdd = new ScreenMementoDTO(PROVIDED_EXP_2, null, SELECTED_MODE);
+        memoryMediator.addItem(toAdd);
+        assertEquals(memoryMediator.getMementoOriginator().getMementoContent().toString(), EXPECTED_EXPRESSION_1 +EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
     }
 
@@ -67,8 +71,9 @@ class MemoriesCareTakerTest implements MemoriesCareTaker {
     @Order(4)
     void keepComponent_happy_case_2() {
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 1);
-        keepComponentValue(PROVIDED_EXP_2, PROVIDED_RES_2, SELECTED_MODE);
-        assertEquals(stringResult.getMementoContent().toString(), EXPECTED_EXPRESSION_1+EXPECTED_LN+EXPECTED_EXPRESSION_2+EXPECTED_LN);
+        ScreenMementoDTO toAdd = new ScreenMementoDTO(PROVIDED_EXP_2, PROVIDED_RES_2, SELECTED_MODE);
+        memoryMediator.addItem(toAdd);
+        assertEquals(memoryMediator.getMementoOriginator().getMementoContent().toString(), EXPECTED_EXPRESSION_1+EXPECTED_LN+EXPECTED_EXPRESSION_2+EXPECTED_LN);
         assertEquals(memoryMediator.getMementoOriginator().getMementos().size(), 2);
         assertEquals(memoryMediator.getCircularListFromLastItem().getValue(), EXPECTED_EXPRESSION_2);
     }

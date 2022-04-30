@@ -43,7 +43,7 @@
             </graphic>
         </Menu>
     </MenuBar>
-    <HBox>
+    <HBox fx:id="BasicMode">
         <Button maxHeight="38.0" maxWidth="45.0" minHeight="38.0" minWidth="45.0" mnemonicParsing="false" onAction="#saveHistory">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -72,7 +72,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyFirst">
+        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyLast">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/historyFirst.png" />
@@ -93,7 +93,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyLast">
+        <Button maxHeight="38.0" maxWidth="38.0" minHeight="38.0" minWidth="38.0" mnemonicParsing="false" onAction="#historyFirst">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@logos/historyLast.png" />
