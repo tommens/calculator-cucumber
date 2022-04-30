@@ -138,6 +138,97 @@ public class SyntaxTreeVisitor implements CalculatorExpressionVisitor<Expression
     }
 
     @Override
+    public Expression visitEquivalence(CalculatorExpressionParser.EquivalenceContext ctx) {
+        return switch (ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 3 -> {
+                Expression equivalence = ctx.getChild(0).accept(this);
+                Expression implication = ctx.getChild(2).accept(this);
+                try {
+                    yield new LogicalEquivalence(List.of(equivalence, implication));
+                } catch (IllegalConstruction e) {
+                    throw new RuntimeException("Could not create LogicalEquivalence");
+                }
+            }
+            default -> throw new RuntimeException("Illegal amount of children in visitEquivalence");
+        };
+    }
+
+    @Override
+    public Expression visitImplication(CalculatorExpressionParser.ImplicationContext ctx) {
+        return switch (ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 3 -> {
+                Expression implication = ctx.getChild(0).accept(this);
+                Expression disjunction = ctx.getChild(2).accept(this);
+                try {
+                    yield new LogicalImplication(List.of(implication, disjunction));
+                } catch (IllegalConstruction e) {
+                    throw new RuntimeException("Could not create LogicalEquivalence");
+                }
+            }
+            default -> throw new RuntimeException("Illegal amount of children in visitEquivalence");
+        };
+    }
+
+    @Override
+    public Expression visitDisjunction(CalculatorExpressionParser.DisjunctionContext ctx) {
+        return switch (ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 3 -> {
+                Expression disjunction = ctx.getChild(0).accept(this);
+                Expression conjunction = ctx.getChild(2).accept(this);
+                TerminalNodeImpl operator = (TerminalNodeImpl) ctx.getChild(1);
+                List<Expression> elist = List.of(disjunction, conjunction);
+
+                try {
+                    yield switch (operator.getSymbol().getType()) {
+                        case CalculatorExpressionParser.LOGICAL_OR -> new LogicalOr(elist);
+                        case CalculatorExpressionParser.LOGICAL_XOR -> new LogicalXor(elist);
+                        default -> throw new RuntimeException("Should be a OR or XOR operation");
+                    };
+                } catch (IllegalConstruction e) {
+                    throw new RuntimeException("Could not create LogicalEquivalence");
+                }
+            }
+            default -> throw new RuntimeException("Illegal amount of children in visitEquivalence");
+        };
+    }
+
+    @Override
+    public Expression visitConjunction(CalculatorExpressionParser.ConjunctionContext ctx) {
+        return switch (ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 3 -> {
+                Expression conjunction = ctx.getChild(0).accept(this);
+                Expression negation = ctx.getChild(2).accept(this);
+                try {
+                    yield new LogicalAnd(List.of(conjunction, negation));
+                } catch (IllegalConstruction e) {
+                    throw new RuntimeException("Could not create LogicalAnd");
+                }
+            }
+            default -> throw new RuntimeException("Illegal amount of children in visitEquivalence");
+        };
+    }
+
+    @Override
+    public Expression visitNegation(CalculatorExpressionParser.NegationContext ctx) {
+        return switch (ctx.getChildCount()) {
+            case 1 -> ctx.getChild(0).accept(this);
+            case 2 -> {
+                Expression term = ctx.getChild(1).accept(this);
+                try {
+                    yield new LogicalNot(List.of(term));
+                } catch (IllegalConstruction e) {
+                    throw new RuntimeException("Could not create LogicalNot");
+                }
+            }
+            default -> throw new RuntimeException("Illegal amount of children in visitEquivalence");
+        };
+    }
+
+    @Override
     public Expression visitTerm(CalculatorExpressionParser.TermContext ctx) {
         return term(ctx);
     }

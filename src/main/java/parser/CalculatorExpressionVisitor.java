@@ -29,6 +29,36 @@ public interface CalculatorExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunction_call(CalculatorExpressionParser.Function_callContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#equivalence}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEquivalence(CalculatorExpressionParser.EquivalenceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#implication}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImplication(CalculatorExpressionParser.ImplicationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#disjunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDisjunction(CalculatorExpressionParser.DisjunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#conjunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConjunction(CalculatorExpressionParser.ConjunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorExpressionParser#negation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegation(CalculatorExpressionParser.NegationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CalculatorExpressionParser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
