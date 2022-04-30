@@ -33,7 +33,7 @@ public class ScientificController extends ControllerWithMemory {
         input = input.replace("%", "/100");
         try {
             Expression expr = parser.parse(input);
-            String result = calculator.eval(expr).toReal().toString();
+            String result = calculator.eval(expr).toString();
             this.outputField.setText(result);
             keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.title());
         } catch (Exception e) {

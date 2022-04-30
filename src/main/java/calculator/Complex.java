@@ -66,7 +66,7 @@ public class Complex extends Number implements Expression {
 
     @Override
     protected Number add(Integ i) {
-        return i.add(this);
+        return new Complex(real.add(i.toReal().getValue()), imaginary);
     }
 
     @Override
