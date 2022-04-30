@@ -3,11 +3,15 @@ package gui;
 import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
+import converter.IntegerEnum;
 import converter.Unit;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static converter.IntegerEnum.*;
 import static converter.Unit.*;
 
 /**
@@ -46,6 +50,7 @@ public class ConverterController extends Controller {
      */
     public void initialize() {
         List<String> categories = getUnitCategories();
+        categories.add("Integer");
         typeConv.getItems().addAll(categories);
         typeConv.setValue(categories.get(0));
         updateUnits();
@@ -58,15 +63,25 @@ public class ConverterController extends Controller {
      */
     public void submitButton() {
         Expression input = parser.parse(this.inputField.getText());
-        Unit from = getUnitByName(fromUnit.getValue());
-        Unit to = getUnitByName(toUnit.getValue());
-        if (from == null || to == null) {
-            throw new IllegalArgumentException("Unit not found");
-        }
-        try {
-            this.outputField.setText(convert(input.toString(), from, to, calculator));
-        } catch (Exception e) {
-            this.showAlertMessage(e.getMessage());
+        if (Objects.equals(typeConv.getValue(), "Integer")) {
+            IntegerEnum from = getIntegerUnit(fromUnit.getValue());
+            IntegerEnum to = getIntegerUnit(toUnit.getValue());
+            try {
+                this.outputField.setText(convertInt(input.toString(), from, to));
+            } catch (Exception e) {
+                this.showAlertMessage(e.getMessage());
+            }
+        } else {
+            Unit from = getUnitByName(fromUnit.getValue());
+            Unit to = getUnitByName(toUnit.getValue());
+            if (from == null || to == null) {
+                throw new IllegalArgumentException("Unit not found");
+            }
+            try {
+                this.outputField.setText(convert(input.toString(), from, to, calculator));
+            } catch (Exception e) {
+                this.showAlertMessage(e.getMessage());
+            }
         }
         this.setSubmitted(true);
     }
@@ -86,11 +101,21 @@ public class ConverterController extends Controller {
         this.outputField.setText("");
         fromUnit.getItems().clear();
         toUnit.getItems().clear();
-        List<Unit> units = getUnitsByCategory(typeConv.getValue());
-        List<String> unitNames = units.stream().map(Unit::getUnitName).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        fromUnit.getItems().addAll(unitNames);
-        fromUnit.setValue(unitNames.get(0));
-        toUnit.getItems().addAll(unitNames);
-        toUnit.setValue(unitNames.get(1));
+        if (Objects.equals(typeConv.getValue(), "Integer")) {
+            var units = getIntegerUnits();
+            List<String> names = units.stream().map(IntegerEnum::getName).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+            fromUnit.getItems().addAll(names);
+            fromUnit.setValue(names.get(0));
+            toUnit.getItems().addAll(names);
+            toUnit.setValue(names.get(1));
+
+        } else {
+            var units = getUnitsByCategory(typeConv.getValue());
+            List<String> names = units.stream().map(Unit::getUnitName).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+            fromUnit.getItems().addAll(names);
+            fromUnit.setValue(names.get(0));
+            toUnit.getItems().addAll(names);
+            toUnit.setValue(names.get(1));
+        }
     }
 }

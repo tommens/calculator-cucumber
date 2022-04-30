@@ -128,15 +128,12 @@ public class Integ extends Number{
     /**
      * @param init the value of the initial base
      * @param end the value of the final base
-     * @return fin the string with the value of the base's conversion
+     * @return fin the string with the value of the base's -sion
      */
     public String conversion(int init, int end) {
         final String depart = this.toString();
-        final int n = init;
-        final int dec = Integer.parseInt(depart, n);
-        final int m = end;
-        final String fin = Integer.toString(dec, m);
-        return fin;
+        final int dec = Integer.parseInt(depart, init);
+        return Integer.toString(dec, end);
     }
 
     /**
