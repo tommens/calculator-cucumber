@@ -13,7 +13,6 @@ import java.math.BigInteger;
 import java.math.MathContext;
 
 import static gui.navigation.ModeEnum.SCIENTIFIC_MODE;
-import static java.lang.String.valueOf;
 import static java.math.MathContext.DECIMAL128;
 
 public class ScientificController extends ControllerWithMemory {
@@ -37,7 +36,7 @@ public class ScientificController extends ControllerWithMemory {
                     Integ val1 = new Integ(new BigInteger(temp2[0]));
                     var result = val1.gcd(new Integ(new BigInteger(temp2[1]))).toString();
                     this.outputField.setText(result);
-                    keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.title());
+                    keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.id());
                 } catch (Exception e) {
                     this.showAlertMessage(e.getMessage());
                 }
@@ -51,14 +50,11 @@ public class ScientificController extends ControllerWithMemory {
                     Integ val1 = new Integ(new BigInteger(temp2[0]));
                     var result = val1.modulo(new Integ(new BigInteger(temp2[1]))).toString();
                     this.outputField.setText(result);
-                    keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.title());
+                    keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.id());
                 } catch (Exception e) {
                     this.showAlertMessage(e.getMessage());
                 }
             } else {
-                if (!valueOf(input.charAt(0)).matches("[0-9]"))
-                    input = "0" + input;
-
                 input = input.replace("є", BigDecimalMath.e(mc).toString());
                 input = input.replace("π", BigDecimalMath.pi(mc).toString());
                 input = input.replace("√", "sqrt");
@@ -69,7 +65,7 @@ public class ScientificController extends ControllerWithMemory {
                     Expression expr = parser.parse(input);
                     String result = calculator.eval(expr).toString();
                     this.outputField.setText(result);
-                    keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.title());
+                    keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.id());
                 } catch (Exception e) {
                     this.showAlertMessage(e.getMessage());
                 }
