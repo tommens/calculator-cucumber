@@ -63,7 +63,7 @@ public class ScientificController extends ControllerWithMemory {
 
                 try {
                     Expression expr = parser.parse(input);
-                    String result = calculator.eval(expr).toString();
+                    String result = input.contains(":=") ? "function stored" : calculator.eval(expr).toString();
                     this.outputField.setText(result);
                     keepComponentValue(inputField.getText(), result, SCIENTIFIC_MODE.id());
                 } catch (Exception e) {
