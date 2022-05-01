@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class ResultOriginator {
 
-    private final List<ScreenMementoDTO> mementos = new ArrayList<>();
+    private List<ScreenMementoDTO> mementos = new ArrayList<>();
 
     /**
      * Keep the memory ready to be saved
      */
-    public void keepStatusUpdated(ScreenMementoDTO result) { mementos.add(result); }
+    public void keepStatusUpdated(List<ScreenMementoDTO> result) { mementos = result; }
 
     /**
      * Save a file from mementos using PrintWriter

@@ -4,6 +4,7 @@ import calculator.Calculator;
 import calculator.Expression;
 import calculator.Parser;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.HBox;
 
 import static gui.navigation.ModeEnum.BASIC_MODE;
 import static java.lang.String.valueOf;
@@ -18,10 +19,7 @@ public class BasicController extends ControllerWithMemory {
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
     public CheckBox isRational;
-
-    public BasicController() {
-        setSelectedMode(BASIC_MODE);
-    }
+    public HBox BasicMode;
 
     public void submitButton() {
         if (inputField == null) return;
@@ -39,7 +37,7 @@ public class BasicController extends ControllerWithMemory {
                 result = calculator.eval(expr).toReal().toString();
 
             this.outputField.setText(result);
-            keepComponentValue(inputField.getText(), result, BASIC_MODE.title());
+            keepComponentValue(inputField.getText(), result, BASIC_MODE.id());
 
         } catch (Exception e) {
             this.showAlertMessage(e.getMessage());

@@ -68,7 +68,11 @@ public class Calculator {
 
     public MyBoolean evalBool(Expression e){
         Evaluator v = new Evaluator();
-        e.accept(v);
+        try{
+            e.accept(v);
+        } catch (NullPointerException ex){
+            System.out.println("expression cannot be null");
+        }
         return v.getBoolResult();
     }
 

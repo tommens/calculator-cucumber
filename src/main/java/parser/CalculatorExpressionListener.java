@@ -38,6 +38,56 @@ public interface CalculatorExpressionListener extends ParseTreeListener {
 	 */
 	void exitFunction_call(CalculatorExpressionParser.Function_callContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalculatorExpressionParser#equivalence}.
+	 * @param ctx the parse tree
+	 */
+	void enterEquivalence(CalculatorExpressionParser.EquivalenceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorExpressionParser#equivalence}.
+	 * @param ctx the parse tree
+	 */
+	void exitEquivalence(CalculatorExpressionParser.EquivalenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorExpressionParser#implication}.
+	 * @param ctx the parse tree
+	 */
+	void enterImplication(CalculatorExpressionParser.ImplicationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorExpressionParser#implication}.
+	 * @param ctx the parse tree
+	 */
+	void exitImplication(CalculatorExpressionParser.ImplicationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorExpressionParser#disjunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterDisjunction(CalculatorExpressionParser.DisjunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorExpressionParser#disjunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitDisjunction(CalculatorExpressionParser.DisjunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorExpressionParser#conjunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterConjunction(CalculatorExpressionParser.ConjunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorExpressionParser#conjunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitConjunction(CalculatorExpressionParser.ConjunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorExpressionParser#negation}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegation(CalculatorExpressionParser.NegationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorExpressionParser#negation}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegation(CalculatorExpressionParser.NegationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalculatorExpressionParser#term}.
 	 * @param ctx the parse tree
 	 */

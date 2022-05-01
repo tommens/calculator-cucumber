@@ -7,6 +7,7 @@ import calculator.Parser;
 import ch.obermuhlner.math.big.BigDecimalMath;
 import javafx.event.Event;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -19,6 +20,7 @@ public class ScientificController extends ControllerWithMemory {
 
     private final Calculator calculator = new Calculator();
     private final Parser parser = new Parser(calculator);
+    public HBox ScientificMode;
     protected MathContext mc = DECIMAL128;
 
     @Override

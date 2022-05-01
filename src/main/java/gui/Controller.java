@@ -1,7 +1,5 @@
 package gui;
 
-import gui.navigation.ModeEnum;
-import gui.navigation.ModesContext;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -11,8 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import static gui.navigation.ModeEnum.*;
-
 public abstract class Controller  {
     private Scene sceneBasic;
     private Scene sceneConverter;
@@ -21,21 +17,12 @@ public abstract class Controller  {
     protected Stage stage;
 
     private boolean submitted;
-    private final ModesContext selectedMode = new ModesContext();
 
     @FXML
     public VBox mainScreen;
     public MenuBar bar;
     public TextField inputField;
     public TextField outputField;
-
-    protected String getSelectedMode() {
-        return selectedMode.getMode();
-    }
-
-    protected void setSelectedMode(ModeEnum mode) {
-        selectedMode.updateCurrentState(mode);
-    }
 
     public void setSceneBasic(Scene sceneBasic) {
         this.sceneBasic = sceneBasic;
@@ -97,7 +84,6 @@ public abstract class Controller  {
         resetFields();
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneBasic);
-        setSelectedMode(BASIC_MODE);
     }
 
     @FXML
@@ -105,7 +91,6 @@ public abstract class Controller  {
         resetFields();
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneConverter);
-        setSelectedMode(CONVERTER_MODE);
     }
 
     @FXML
@@ -113,7 +98,6 @@ public abstract class Controller  {
         resetFields();
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneScientific);
-        setSelectedMode(SCIENTIFIC_MODE);
     }
 
     @FXML
@@ -121,7 +105,6 @@ public abstract class Controller  {
         resetFields();
         Stage stage = (Stage) mainScreen.getScene().getWindow();
         stage.setScene(sceneFunctions);
-        setSelectedMode(FUNCTION_MODE);
     }
 
     private void resetFields() {

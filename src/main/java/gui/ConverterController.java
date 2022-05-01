@@ -7,19 +7,28 @@ import converter.IntegerEnum;
 import converter.Unit;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.HBox;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+import java.util.Objects;
 import static converter.IntegerEnum.*;
+
 import static converter.Unit.*;
+import static gui.navigation.ModeEnum.CONVERTER_MODE;
 
 /**
  * This controller handle the main graphical interface's actions.
  * Read the converter panel which contains functionalities
  * Switch mode
  */
-public class ConverterController extends Controller {
+public class ConverterController extends ControllerWithMemory {
+
+    /**
+     * Index for memory usage
+     */
+    public HBox ConverterMode;
 
     /**
      * Scrollable list of units types
@@ -63,6 +72,7 @@ public class ConverterController extends Controller {
      */
     public void submitButton() {
         Expression input = parser.parse(this.inputField.getText());
+      
         if (Objects.equals(typeConv.getValue(), "Integer")) {
             IntegerEnum from = getIntegerUnit(fromUnit.getValue());
             IntegerEnum to = getIntegerUnit(toUnit.getValue());

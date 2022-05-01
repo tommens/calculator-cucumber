@@ -2,6 +2,7 @@ package gui;
 
 import common.UnexpectedExpressionException;
 import javafx.collections.ObservableSet;
+import javafx.event.ActionEvent;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
@@ -36,49 +37,31 @@ public abstract class ControllerWithMemory extends Controller implements Memorie
     /**
      * Memory navigation button : going left
      */
-    public void historyLeft() {
-        CircularLinkedList item = history().getCurrentPosition();
-        history().navigateLeft();
-        screenUpdate(item);
+    public void historyLeft(ActionEvent e) {
+        navigateLeft(history().getCurrentPosition().getIndex(), getPage(e));
     }
 
     /**
      * Memory navigation button : going right
      */
-    public void historyRight() {
-        CircularLinkedList item = history().getCurrentPosition();
-        history().navigateRight();
-        screenUpdate(item);
+    public void historyRight(ActionEvent e) {
+        navigateRight(history().getCurrentPosition().getIndex(), getPage(e));
     }
 
     /**
      * Memory navigation button : going to the last processed expression
      */
-    public void historyLast() {
-        CircularLinkedList item = history().getCurrentPosition();
-        history().navigateLast();
-        screenUpdate(item);
+    public void historyLast(ActionEvent e) {
+        int currentIndex = history().getCurrentPosition().getIndex();
+        navigateLast(history().navigateLast(), getPage(e), currentIndex);
     }
 
     /**
      * Memory navigation button : going to the oldest processed expression
      */
-    public void historyFirst() {
-        CircularLinkedList item = history().getCurrentPosition();
-        history().navigateFirst();
-        screenUpdate(item);
-    }
-
-    private void screenUpdate(CircularLinkedList item) {
-        if (item == null)  return;
-
-        if (outputField != null)
-            outputField.setText(item.getDTO().getResult());
-
-        if (inputField != null)
-            inputField.setText(item.getDTO().getExpression());
-
-
+    public void historyFirst(ActionEvent e) {
+        int currentIndex = history().getCurrentPosition().getIndex();
+        navigateFirst(history().navigateFirst(), getPage(e), currentIndex);
     }
 
     /**
@@ -119,7 +102,6 @@ public abstract class ControllerWithMemory extends Controller implements Memorie
         dialog.setGraphic(content);
         dialog.getDialogPane().getButtonTypes().add(buttonOk);
         dialog.show();
-
     }
 
     /**
@@ -165,7 +147,50 @@ public abstract class ControllerWithMemory extends Controller implements Memorie
         });
 
         dialog.show();
-
     }
 
+    private void screenUpdate(CircularLinkedList item) {
+        if (item == null)  return;
+
+        if (outputField != null)
+            outputField.setText(item.getDTO().getResult());
+
+        if (inputField != null)
+            inputField.setText(item.getDTO().getExpression());
+    }
+
+    private void navigateLeft(int index, String page) {
+        String mode = history().navigateLeft().getDTO().getMode();
+        if (page.equals(mode))
+            screenUpdate(history().getCurrentPosition());
+        else if (index != history().getCurrentPosition().getIndex())
+            navigateLeft(index, page);
+    }
+
+    private void navigateRight(int index, String page) {
+        String mode = history().navigateRight().getDTO().getMode();
+        if (page.equals(mode))
+            screenUpdate(history().getCurrentPosition());
+        else if (index != history().getCurrentPosition().getIndex())
+            navigateRight(index, page);
+    }
+
+    private String getPage(ActionEvent e) {
+        Button source = (Button) e.getSource();
+        return source.getParent().getId();
+    }
+
+    private void navigateLast(CircularLinkedList currentItem, String page, int startIndex) {
+        if (page.equals(currentItem.getDTO().getMode()))
+            screenUpdate(history().getCurrentPosition());
+        else if (startIndex != history().getCurrentPosition().getIndex())
+            navigateLast(history().navigateRight(), page, startIndex);
+    }
+
+    private void navigateFirst(CircularLinkedList currentItem, String page, int startIndex) {
+        if (page.equals(currentItem.getDTO().getMode()))
+            screenUpdate(history().getCurrentPosition());
+        else if (startIndex != history().getCurrentPosition().getIndex())
+            navigateFirst(history().navigateLeft(), page, startIndex);
+    }
 }
