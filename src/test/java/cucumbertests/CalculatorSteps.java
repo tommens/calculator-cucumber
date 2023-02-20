@@ -74,6 +74,43 @@ public class CalculatorSteps {
 		catch(IllegalConstruction e) { fail(); }
 	}
 
+
+	@Given("^the difference of two numbers (\\d+) and (\\d+)$")
+	// The alternative, and in this case simpler, notation would be:
+	// @Given("the sum of two numbers {int} and {int}")
+	public void givenTheDiffernce(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Minus(params);}
+		catch(IllegalConstruction e) { fail(); }
+	}
+
+	@Given("^the product of two numbers (\\d+) and (\\d+)$")
+	// The alternative, and in this case simpler, notation would be:
+	// @Given("the sum of two numbers {int} and {int}")
+	public void givenTheProduct(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Times(params);}
+		catch(IllegalConstruction e) { fail(); }
+	}
+
+	@Given("^the quotient of two numbers (\\d+) and (\\d+)$")
+	// The alternative, and in this case simpler, notation would be:
+	// @Given("the sum of two numbers {int} and {int}")
+	public void givenTheQuotient(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Divides(params);}
+		catch(IllegalConstruction e) { fail(); }
+	}
+
 	@Then("^its (.*) notation is (.*)$")
 	public void thenItsNotationIs(String notation, String s) {
 		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
