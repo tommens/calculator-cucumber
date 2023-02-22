@@ -36,11 +36,20 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 5
     Then the operation evaluates to 1
 
-  Scenario: Printing the sum of two integer numbers
-    Given the sum of two numbers 8 and 6
-    Then its INFIX notation is ( 8 + 6 )
-    And its PREFIX notation is + (8, 6)
-    And its POSTFIX notation is (8, 6) +
+  Scenario Outline: Printing the sum of two integer numbers
+    Given an integer operation <op>
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then its INFIX notation is ( <n1> <op2> <n2> )
+    And its PREFIX notation is <op2> (<n1>, <n2>)
+    And its POSTFIX notation is (<n1>, <n2>) <op2>
+
+    Examples:
+      | op  | op2 | n1 | n2 |
+      | '+' | +   | 8  | 6  |
+      | '-' | -   | 8  | 6  |
+      | '*' | *   | 8  | 6  |
+      | '/' | /   | 8  | 6  |
 
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
