@@ -4,8 +4,6 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
-import calculator.*;
-
 import java.util.ArrayList;
 
 class TestMyNumber {
