@@ -19,7 +19,7 @@
         <junit-platform-suite.version>1.9.2</junit-platform-suite.version>
         <cucumber.version>7.11.1</cucumber.version>
         <jacoco.version>0.8.8</jacoco.version>
-        <javadoc.version>3.4.1</javadoc.version>
+        <javadoc.version>3.5.0</javadoc.version>
         <sonar.organization>tommens</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
