@@ -12,7 +12,7 @@ public class Main
 
     public static void printMenu()
     {
-        System.out.println("Please enter an expression to evaluate: ");
+        System.out.println("Please enter an expression to evaluate or .quit to exit ");
     }
 
     public static void get_input()
