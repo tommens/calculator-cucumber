@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * A very simple calculator in Java
  * University of Mons - UMONS
- * Département d'Informatique
- * Faculté des Sciences
+ * Software Engineering Lab
+ * Faculty of Sciences
  *
  * @author tommens
  */

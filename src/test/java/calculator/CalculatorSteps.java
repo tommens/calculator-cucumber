@@ -1,6 +1,7 @@
-package cucumbertests;
+package calculator;
 
-import calculator.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,10 +10,9 @@ import io.cucumber.java.en.When;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.fail;
-
 public class CalculatorSteps {
+
+//	static final Logger log = getLogger(lookup().lookupClass());
 
 	private ArrayList<Expression> params;
 	private Operation op;
