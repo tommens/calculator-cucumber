@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class Main
 {
     protected static boolean isRunning = true;
+
+    protected static String listOperators = "+-*/";
+    protected static String listNumbers = "0123456789";
+
     public static void helloWord()
     {
         System.out.print("Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
@@ -27,6 +31,19 @@ public class Main
         else
         {
             System.out.println("You entered: " + inputUser);
+            for (String s : inputUser.split(""))
+            {
+                if (!s.equals(" "))
+                {
+                    if (listNumbers.contains(s))
+                        System.out.println("Number: " + s);
+                    else if (listOperators.contains(s))
+                        System.out.println("Operator: " + s);
+                    else
+                        System.out.println("Unknown: " + s);
+
+                }
+            }
         }
     }
 
