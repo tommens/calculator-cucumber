@@ -1,18 +1,15 @@
-package junit5tests;
+package calculator;
 
 //Import Junit5 libraries for unit testing:
-
-import calculator.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.TestCase.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestCounting {
 
