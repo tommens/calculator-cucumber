@@ -3,38 +3,40 @@ package calculator;
 import java.math.BigDecimal;
 
 /**
- * This class represent an integer number
+ * This class represent a real number
  * The class extends an abstract class MyNumber
  */
-public class MyInteger extends MyNumber{
+public class MyRealNumber extends MyNumber{
 
-    private final int value;
+    private final BigDecimal value;
+
 
     /**
      * Constructor method
-     * @param v The integer value to be contained in the object
+     * @param v The real number to be contained in the object
      */
-    public MyInteger(int v){
-        value = v;
+    public MyRealNumber(String v){
+        value = new BigDecimal(v);
     }
 
     /**
-     * getter method to obtain the integer value contained in the object
-     * @return the integer number contained in the object
+     * getter method to obtain the value contained in the object as an integer
+     * @return The value contained in the object as an integer
      */
     @Override
     public Integer getInteger() {
-        return value;
+        return value.intValue();
     }
 
     /**
-     * getter method to obtain the value as a real number
-     * @return The value as a real number
+     * getter method to obtain the real number contained in the object
+     * @return The real number contained in the object
      */
     @Override
     public BigDecimal getRealNumber() {
-        return new BigDecimal(value);
+        return value;
     }
+
 
     /**
      * Convert a number into a String to allow it to be printed.
@@ -42,14 +44,14 @@ public class MyInteger extends MyNumber{
      */
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return value.toString();
     }
 
 
-    /** Two MyInteger expressions are equal if the values they contain are equal
-     *
+    /**
+     * Two MyRealNumber expressions are equal if the values they contain are equal
      * @param o The object to compare to
-     * @return  A boolean representing the result of the equality test
+     * @return A boolean representing the result of the equality test
      */
     @Override
     public boolean equals(Object o) {
@@ -62,9 +64,9 @@ public class MyInteger extends MyNumber{
         }
 
         // If the object is of another type then return false
-        if (!(o instanceof MyInteger)) {
+        if (!(o instanceof MyRealNumber)) {
             return false;
         }
-        return this.value == ((MyInteger)o).value;
+        return this.value.equals(((MyRealNumber)o).value);
     }
 }

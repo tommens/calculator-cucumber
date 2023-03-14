@@ -2,6 +2,8 @@ package calculator;
 
 import visitor.Visitor;
 
+import java.math.BigDecimal;
+
 /**
  * MyNumber is an abstract class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
@@ -17,6 +19,12 @@ public abstract class MyNumber implements Expression
      * @return The integer number contain in the object
      */
     public abstract Integer getInteger();
+
+    /**
+     * abstract method to obtain the real number contain in the object
+     * @return The real number contained in the object
+     */
+    public abstract BigDecimal getRealNumber();
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.

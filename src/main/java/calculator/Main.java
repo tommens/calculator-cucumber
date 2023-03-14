@@ -54,6 +54,23 @@ public class Main {
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);
+
+		// real numbers
+		e = new MyRealNumber("3.14159");
+		c.printReal(e);
+		c.evalReal(e);
+
+		List<Expression> params_real = new ArrayList<>();
+		Collections.addAll(params_real, new MyRealNumber("3.14"), new MyRealNumber("3"), new MyRealNumber("3.33"));
+		e = new Plus(params_real,Notation.PREFIX);
+		c.printReal(e);
+		c.evalReal(e);
+
+		List<Expression> params2_real = new ArrayList<>();
+		Collections.addAll(params2_real, new MyRealNumber("3.14"), new MyInteger(3));
+		e = new Minus(params2_real, Notation.INFIX);
+		c.printReal(e);
+		c.evalReal(e);
 	}
 
 	catch(IllegalConstruction exception) {

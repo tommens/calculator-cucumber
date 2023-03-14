@@ -1,6 +1,9 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.RealNumberEvaluator;
+
+import java.math.BigDecimal;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -55,6 +58,30 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    /**
+     * Evaluates an arithmetic expression and returns its result
+     * @param e the arithmetic Expression to be evaluated
+     * @return The result of the evaluation
+     */
+    public BigDecimal evalReal(Expression e){
+        // create a new visitor to evaluate expressions
+        RealNumberEvaluator v = new RealNumberEvaluator();
+        // and ask the expression to accept this visitor to start the evaluation process
+        e.accept(v);
+        // and return the result of the evaluation at the end of the process
+        return v.getResult();
+    }
+
+    /**
+     * Prints an arithmetic expression provided as input parameter.
+     * @param e the arithmetic Expression to be printed
+     */
+    public void printReal(Expression e){
+        System.out.println("The result of evaluating expression " + e);
+        System.out.println("is: " + evalReal(e) + ".");
+        System.out.println();
     }
 
     /*
