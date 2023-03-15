@@ -69,7 +69,7 @@ public class Main
             else
             {
                 inputUser_instance.setUserInput(listInput);
-                inputUser_instance.compute(verbose);
+                System.out.println("$> " + inputUser_instance.compute(verbose));
             }
         }
         else

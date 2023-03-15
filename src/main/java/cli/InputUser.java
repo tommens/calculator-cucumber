@@ -158,7 +158,7 @@ public class InputUser
      * Compute the input of user
      * @param isVerbose : boolean to display the expression
      */
-    public void compute(boolean isVerbose)
+    public int compute(boolean isVerbose)
     {
         String operator = null;
         for (String s : user_input_list)
@@ -173,7 +173,8 @@ public class InputUser
             Expression e = getOperator(operator, list_of_expression, this.notation);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
-            System.out.println("$> " + new Calculator().eval(e));
+            return  new Calculator().eval(e);
         }
+        return 0;
     }
 }
