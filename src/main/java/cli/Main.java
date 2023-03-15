@@ -1,15 +1,7 @@
 package cli;
 
-import calculator.Divides;
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Minus;
-import calculator.MyNumber;
 import calculator.Notation;
-import calculator.Operation;
-import calculator.Plus;
-import calculator.Times;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,6 +33,7 @@ public class Main
         System.out.print("$>>> ");
         Scanner scanner = new Scanner(System.in);
         String inputUser = scanner.nextLine();
+        InputUser inputUser_instance = new InputUser(Notation.INFIX);
         listInput = InputUser.cleanInput(inputUser);
         if (listInput.size() != 0)
         {
@@ -51,7 +44,10 @@ public class Main
             else if (listInput.get(0).equals(".help"))
                 printHelp();
             else
-                System.out.println("$> You entered: " + inputUser);
+            {
+                inputUser_instance.setUserInput(listInput);
+                inputUser_instance.compute();
+            }
         }
         else
             System.out.println("$> Please enter a valid expression !");

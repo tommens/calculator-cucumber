@@ -1,10 +1,15 @@
 package cli;
 
+import calculator.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class InputUser
 {
+
+    //--------------------STATIC--------------------//
     protected static String listOperators = "+-*/";
     protected static String listNumbers = "0123456789";
 
@@ -20,42 +25,18 @@ public class InputUser
         }
         return listInput;
     }
-}
 
+    public static boolean isNumber(String input)
+    {
+        return listNumbers.contains(input);
+    }
 
-/*
-if (inputUser.equals(".quit"))
-        {
-            isRunning = false;
-        }
-        else
-        {
-            System.out.println("You entered: " + inputUser);
-            Operation operation = null;
-            for (String s : inputUser.split(""))
-            {
-                if (!s.equals(" "))
-                {
-                    if (listNumbers.contains(s))
-                        System.out.println("Number: " + s);
-                    else if (listOperators.contains(s))
-                    {
-                        System.out.println("Operator: " + s);
-                       try {
-                           List<Expression> params = Arrays.asList(new MyNumber(4),new MyNumber(4));
-                           operation = new Plus(params);
-                       }catch (IllegalConstruction e){
-                           e.printStackTrace();
-                       }
-                    }
-                }
-            }
-            if (operation != null)
-                printNotaion(inputUser, operation);
-        }
+    public static boolean isOperator(String input)
+    {
+        return listOperators.contains(input);
+    }
 
-
-            public static Expression getOperator(String inputUser, List<Expression> params)
+    public static Expression getOperator(String inputUser, List<Expression> params)
     {
         Expression e = null;
         try {
@@ -68,12 +49,49 @@ if (inputUser.equals(".quit"))
                 case "/"	->	e = new Divides(params);
                 default		->	System.out.println("Error"); //TODO : handle exception
             }
-        } catch (IllegalConstruction exception) {
-            //TODO : handle exception
-        }
+        } catch (IllegalConstruction ignored){}//TODO : handle exception
         return e;
     }
 
+    //--------------------INSTANCE--------------------//
+
+    private List<Expression> list_of_expression = new ArrayList<>();
+    private Notation notation;
+    private List<String> user_input_list;
+
+    public InputUser(Notation notation) //TODO : add mode
+    {
+        this.notation = notation;
+    }
+
+    public void setNotation(Notation notation)
+    {
+        this.notation = notation;
+    }
+
+    public void setUserInput(List<String> inputUser)
+    {
+        this.user_input_list = inputUser;
+    }
+
+    public void compute()
+    {
+        String operator = null;
+        for (String s : user_input_list)
+        {
+            if (isNumber(s))
+                list_of_expression.add(new MyNumber(Integer.parseInt(s)));
+            else if (isOperator(s))
+                operator = s;
+        }
+        if (operator != null)
+            getOperator(operator, list_of_expression);
+        System.out.println(list_of_expression.toString());
+    }
+}
+
+
+/*
     private static void printNotaion(String input, Operation op)
     {
         if (input.equals(op.toString(Notation.INFIX)))
