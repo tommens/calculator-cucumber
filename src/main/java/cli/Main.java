@@ -1,20 +1,25 @@
 package cli;
 
 import calculator.Notation;
-
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Main
 {
+    /**While loop to continue*/
     private static boolean isRunning = true;
+    /**List of input*/
     private static List<String> listInput;
+    /**Notation actual*/
     private static Notation notation = Notation.INFIX;
+    /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
 
 
-
+    /**
+     * Print the help
+     */
     public static void printHelp()
     {
         System.out.println("=== HELP START===");
@@ -25,6 +30,9 @@ public class Main
     }
 
 
+    /**
+     * Print the menu
+     */
     public static void printMenu()
     {
         System.out.println("$> Please enter an expression to evaluate or .quit to exit ");
@@ -33,7 +41,9 @@ public class Main
     }
 
 
-
+    /**
+     * Get the input of the user or wait the command
+     */
     public static void get_input()
     {
         System.out.print("$>>> ");
@@ -66,6 +76,10 @@ public class Main
             System.out.println("$> Please enter a valid expression !");
     }
 
+    /**
+     * Main
+     * @param args is empty
+     */
     public static void main(String[] args)
     {
         System.out.print("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
