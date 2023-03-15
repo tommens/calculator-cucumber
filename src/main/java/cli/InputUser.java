@@ -66,6 +66,11 @@ public class InputUser
         return e;
     }
 
+    public static boolean isABoolean(String input)
+    {
+        return input.equalsIgnoreCase("true");
+    }
+
     //--------------------INSTANCE--------------------//
 
     private List<Expression> list_of_expression = new ArrayList<>();
@@ -87,7 +92,7 @@ public class InputUser
         this.user_input_list = inputUser;
     }
 
-    public void compute()
+    public void compute(boolean isVerbose)
     {
         String operator = null;
         for (String s : user_input_list)
@@ -98,19 +103,11 @@ public class InputUser
                 operator = s;
         }
         if (operator != null)
-            System.out.println("$> " + getOperator(operator, list_of_expression).toString());
+        {
+            Expression e = getOperator(operator, list_of_expression);
+            if (isVerbose)
+                System.out.println("$> " + e.toString());
+            System.out.println("$> " + new Calculator().eval(e));
+        }
     }
 }
-
-
-/*
-    private static void printNotaion(String input, Operation op)
-    {
-        if (input.equals(op.toString(Notation.INFIX)))
-            System.out.println("Infix notation");
-        else if (input.equals(op.toString(Notation.PREFIX)))
-            System.out.println("Prefix notation");
-        else if (input.equals(op.toString(Notation.POSTFIX)))
-            System.out.println("Postfix notation");
-    }
-* */

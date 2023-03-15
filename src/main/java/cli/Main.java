@@ -11,15 +11,17 @@ public class Main
     private static boolean isRunning = true;
     private static List<String> listInput;
     private static Notation notation = Notation.INFIX;
+    private static boolean verbose = false;
 
 
 
     public static void printHelp()
     {
-        System.out.print("=== HELP START===\n");
-        System.out.print("$> Quit program : .quit\n");
+        System.out.println("=== HELP START===");
+        System.out.println("$> Quit program : .quit");
+        System.out.println("$> Verbose mode : .verbose <true|false> ");
         printMenu();
-        System.out.print("=== HELP END===\n");
+        System.out.println("=== HELP END===\n");
     }
 
 
@@ -50,12 +52,14 @@ public class Main
                 notation = InputUser.getNotation(listInput.get(1));
                 System.out.println("$> Notation : " + notation.toString());
             }
+            else if (listInput.get(0).equals(".verbose") && listInput.size() == 2)
+                verbose = InputUser.isABoolean(listInput.get(1));
             else if (listInput.get(0).equals(".help"))
                 printHelp();
             else
             {
                 inputUser_instance.setUserInput(listInput);
-                inputUser_instance.compute();
+                inputUser_instance.compute(verbose);
             }
         }
         else
