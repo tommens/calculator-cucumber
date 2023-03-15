@@ -7,14 +7,16 @@ import org.junit.jupiter.api.*;
 
 public class TestMyRealNumber {
 
-    private final String value = "0.0000000314";
-    private final String scienceValue = "3.14E-8";
+    private final String value = "0.0000000314159";
+    private final String scienceValue = "3.14159E-8";
+    private final int precision = 3;
 
-    private MyRealNumber number;
+    private MyRealNumber number , number2;
 
     @BeforeEach
     void setup(){
         number = new MyRealNumber(value);
+        number2 = new MyRealNumber(value,precision);
     }
 
     @Test
@@ -39,6 +41,17 @@ public class TestMyRealNumber {
     }
 
 
+    @Test
+    void testPrecision(){
+        String s = "3.14E-8";
+        assertEquals(s,number2.toString());
+    }
+
+    @Test
+    void testPrecisionDecimal(){
+        String s = "0.0000000314";
+        assertEquals(s,number2.toDecimalString());
+    }
 
 
 }

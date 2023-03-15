@@ -20,6 +20,16 @@ public class MyRealNumber extends MyNumber{
         value = new BigDecimal(v);
     }
 
+
+    /**
+     * Constructor method
+     * @param v The real number to be contained in the object
+     * @param precision The precision of the number (number of digits encoded)
+     */
+    public MyRealNumber(String v, int precision){
+        value = new BigDecimal(v,new MathContext(precision));
+    }
+
     /**
      * getter method to obtain the value contained in the object as an integer
      * @return The value contained in the object as an integer
