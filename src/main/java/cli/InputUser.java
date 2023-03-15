@@ -49,17 +49,17 @@ public class InputUser
     }
 
 
-    public static Expression getOperator(String inputUser, List<Expression> params)
+    public static Expression getOperator(String inputUser, List<Expression> params, Notation notation)
     {
-        Expression e = null;
+        Operation e = null;
         try {
             //construct another type of operation depending on the input value
             //of the parameterised test
             switch (inputUser){
-                case "+"	->	e = new Plus(params);
-                case "-"	->	e = new Minus(params);
-                case "*"	->	e = new Times(params);
-                case "/"	->	e = new Divides(params);
+                case "+"	->	e = new Plus(params, notation);
+                case "-"	->	e = new Minus(params, notation);
+                case "*"	->	e = new Times(params, notation);
+                case "/"	->	e = new Divides(params, notation);
                 default		->	System.out.println("Error"); //TODO : handle exception
             }
         } catch (IllegalConstruction ignored){}//TODO : handle exception
@@ -104,7 +104,7 @@ public class InputUser
         }
         if (operator != null)
         {
-            Expression e = getOperator(operator, list_of_expression);
+            Expression e = getOperator(operator, list_of_expression, this.notation);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
             System.out.println("$> " + new Calculator().eval(e));
