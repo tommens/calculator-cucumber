@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import calculator.Notation;
+
+import calculator.*;
 import cli.InputUser;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class TestInputUser
 {
@@ -41,7 +44,7 @@ public class TestInputUser
     }
 
     @Test
-    void testGetOperator()
+    void testIsOperator()
     {
         String input = "+ - * /";
         for (String ss : InputUser.cleanInput(input))
@@ -50,7 +53,16 @@ public class TestInputUser
         assertFalse(InputUser.isOperator(input2));
     }
 
-    //TODO: testGetOperator
+    @Test
+    void testGetOperator() throws IllegalConstruction {
+        ArrayList<Expression> lst = new ArrayList<>();
+        lst.add(new MyNumber(1)); lst.add(new MyNumber(2));
+        assertEquals(InputUser.getOperator("+", lst, Notation.INFIX), new Plus(lst));
+        assertEquals(InputUser.getOperator("-", lst, Notation.INFIX), new Minus(lst));
+        assertEquals(InputUser.getOperator("/", lst, Notation.INFIX), new Divides(lst));
+        assertEquals(InputUser.getOperator("*", lst, Notation.INFIX), new Times(lst));
+
+    }
 
     @Test
     void testInstance()
