@@ -36,6 +36,19 @@ public class InputUser
         return listOperators.contains(input);
     }
 
+    public static Notation getNotation(String input)
+    {
+        Notation notation;
+        switch (input.toLowerCase())
+        {
+            case "prefix"		->	notation = Notation.PREFIX;
+            case "postfix"		->	notation = Notation.POSTFIX;
+            default				->	notation = Notation.INFIX;
+        }
+        return notation;
+    }
+
+
     public static Expression getOperator(String inputUser, List<Expression> params)
     {
         Expression e = null;
@@ -85,8 +98,7 @@ public class InputUser
                 operator = s;
         }
         if (operator != null)
-            getOperator(operator, list_of_expression);
-        System.out.println(list_of_expression.toString());
+            System.out.println("$> " + getOperator(operator, list_of_expression).toString());
     }
 }
 
