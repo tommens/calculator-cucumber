@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.RationalNumberEvaluator;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -55,6 +56,18 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    public MyRationalNumber evalRational(Expression e){
+        RationalNumberEvaluator v = new RationalNumberEvaluator();
+        e.accept(v);
+        return v.getResult();
+    }
+
+    public void printRational(Expression e){
+        System.out.println("The result of evaluating expression " + e);
+        System.out.println("is: " + evalRational(e) + ".");
+        System.out.println();
     }
 
     /*

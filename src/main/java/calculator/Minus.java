@@ -49,4 +49,9 @@ public final class Minus extends Operation
   public int op(int l, int r) {
   	return (l-r);
   }
+
+     @Override
+     public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+         return l.subtract(r);
+     }
 }

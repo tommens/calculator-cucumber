@@ -47,4 +47,9 @@ public final class Times extends Operation
    */
   public int op(int l, int r)
     { return (l*r); }
+
+     @Override
+     public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+         return l.multiply(r);
+     }
 }

@@ -26,6 +26,15 @@ public class MyInteger extends MyNumber{
     }
 
     /**
+     * getter method to obtain the rational number contained in the object
+     * @return the rational number contained in the object
+     */
+    @Override
+    public MyRationalNumber getRational() {
+        return MyRationalNumber.create(value, 1);
+    }
+
+    /**
      * Convert a number into a String to allow it to be printed.
      * @return	The String that is the result of the conversion.
      */
@@ -56,4 +65,6 @@ public class MyInteger extends MyNumber{
         }
         return this.value == ((MyInteger)o).value;
     }
+
+
 }
