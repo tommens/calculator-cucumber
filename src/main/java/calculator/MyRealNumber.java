@@ -1,6 +1,7 @@
 package calculator;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * This class represent a real number
@@ -68,5 +69,14 @@ public class MyRealNumber extends MyNumber{
             return false;
         }
         return this.value.equals(((MyRealNumber)o).value);
+    }
+
+
+    /**
+     * Return the value as a string in the classic decimal notation
+     * @return A String representing the value in classic decimal notation
+     */
+    public String toDecimalString(){
+        return value.toPlainString();
     }
 }
