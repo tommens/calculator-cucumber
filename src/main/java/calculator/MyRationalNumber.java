@@ -51,6 +51,10 @@ public class MyRationalNumber extends MyNumber {
         return nominator / denominator;
     }
 
+    /**
+     * Method to return the rational number itself
+     * @return The rational number itself
+     */
     @Override
     public MyRationalNumber getRational() {
         return create(nominator, denominator);
@@ -93,24 +97,48 @@ public class MyRationalNumber extends MyNumber {
         return "(" + nominator + "_/" + denominator + ")";
     }
 
+    /**
+     * Method that adds two rational numbers
+     *
+     * @param other The rational number to be added
+     * @return The result of the addition
+     */
     public MyRationalNumber add(MyRationalNumber other) {
         int newNominator = this.nominator * other.denominator + other.nominator * this.denominator;
         int newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
+    /**
+     * Method that subtracts two rational numbers
+     *
+     * @param other The rational number to subtract
+     * @return The result of the subtraction
+     */
     public MyRationalNumber subtract(MyRationalNumber other) {
         int newNominator = this.nominator * other.denominator - other.nominator * this.denominator;
         int newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
+    /**
+     * Method that multiplies two rational numbers
+     *
+     * @param other The rational number which will multiply the first one
+     * @return The result of the multiplication
+     */
     public MyRationalNumber multiply(MyRationalNumber other) {
         int newNominator = this.nominator * other.nominator;
         int newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
+    /**
+     * Method that divides two rational numbers
+     *
+     * @param other The rational number which will divide the first one
+     * @return The result of the division
+     */
     public MyRationalNumber divide(MyRationalNumber other) throws IllegalArgumentException {
 
         int newNominator = this.nominator * other.denominator;

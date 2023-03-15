@@ -86,7 +86,7 @@ public abstract class Operation implements Expression
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to compute between two rational numbers
-	 * @param l	 first rational numlber of the binary operation
+	 * @param l	 first rational number of the binary operation
 	 * @param r	second rational number of the binary operation
 	 * @return	result of computing the binary operation
 	 */

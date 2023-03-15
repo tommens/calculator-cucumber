@@ -58,12 +58,21 @@ public class Calculator {
         return v.getResult();
     }
 
+    /**
+     * Evaluates an arithmetic expression and returns its result as a rational number
+     * @param e the arithmetic Expression to be evaluated
+     * @return  The result of the evaluation as a rational number
+     */
     public MyRationalNumber evalRational(Expression e){
         RationalNumberEvaluator v = new RationalNumberEvaluator();
         e.accept(v);
         return v.getResult();
     }
 
+    /**
+     * Prints an arithmetic expression provided as input parameter using rational numbers
+     * @param e the arithmetic Expression to be printed
+     */
     public void printRational(Expression e){
         System.out.println("The result of evaluating expression " + e);
         System.out.println("is: " + evalRational(e) + ".");

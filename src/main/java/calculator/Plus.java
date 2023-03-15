@@ -49,6 +49,14 @@ public final class Plus extends Operation {
     public int op(int l, int r) {
         return (l + r);
     }
+
+    /**
+     * The actual computation of the (binary) arithmetic addition of two rational numbers
+     *
+     * @param l The first rational number
+     * @param r The second rational number that should be added to the first
+     * @return The rational number that is the result of the addition
+     */
     @Override
     public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
         return l.add(r);
