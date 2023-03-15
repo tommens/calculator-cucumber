@@ -51,4 +51,31 @@ public class TestInputUser
     }
 
     //TODO: testGetOperator
+
+    @Test
+    void testInstance()
+    {
+        InputUser inputUser = new InputUser(Notation.PREFIX);
+        assertTrue(inputUser instanceof InputUser);
+    }
+
+    @Test
+    void testCompute()
+    {
+        InputUser user = new InputUser(Notation.INFIX);
+        user.setUserInput(InputUser.cleanInput("1 + 2"));
+        assertEquals(user.compute(false), 3);
+
+        user = new InputUser(Notation.INFIX);
+        user.setUserInput(InputUser.cleanInput("1"));
+        assertEquals(user.compute(false), 0);
+
+        user = new InputUser(Notation.INFIX);
+        user.setUserInput(InputUser.cleanInput("1 +"));
+        assertEquals(user.compute(false), 1);
+
+        user = new InputUser(Notation.INFIX);
+        user.setUserInput(InputUser.cleanInput("1 + 2 + 3"));
+        assertEquals(user.compute(false), 6);
+    }
 }
