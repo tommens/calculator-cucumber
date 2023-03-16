@@ -3,6 +3,7 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -36,6 +37,12 @@ public abstract class Operation implements Expression
    * By default, the infix notation will be used.
    */
   public Notation notation = Notation.INFIX;
+
+	/**
+	 * MathContext object contain the precision and the rounding method to be used for real numbers
+	 * By default, the precision is unlimited and the rounding mode is HALF_UP
+	 */
+	protected MathContext mathContext = MathContext.UNLIMITED;
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
@@ -218,4 +225,11 @@ public abstract class Operation implements Expression
 		return result;
 	}
 
+	/**
+	 * Set the MathContext to used to perform operation on real numbers
+	 * @param mc the MathContext to used to perform operation on real numbers
+	 */
+	public void setMathContext(MathContext mc) {
+		mathContext = mc;
+	}
 }

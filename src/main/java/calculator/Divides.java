@@ -59,6 +59,6 @@ public final class Divides extends Operation
      */
     @Override
     public BigDecimal op(BigDecimal l, BigDecimal r) {
-        return l.divide(r);
+        return l.divide(r,mathContext);
     }
 }

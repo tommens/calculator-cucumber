@@ -60,6 +60,6 @@ public final class Minus extends Operation
       */
      @Override
      public BigDecimal op(BigDecimal l, BigDecimal r) {
-         return l.subtract(r);
+         return l.subtract(r,mathContext);
      }
  }

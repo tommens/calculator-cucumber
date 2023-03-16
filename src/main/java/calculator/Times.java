@@ -58,6 +58,6 @@ public final class Times extends Operation
       */
      @Override
      public BigDecimal op(BigDecimal l, BigDecimal r) {
-         return l.multiply(r);
+         return l.multiply(r,mathContext);
      }
  }

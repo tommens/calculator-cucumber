@@ -4,19 +4,21 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import java.math.MathContext;
+
 
 public class TestMyRealNumber {
 
     private final String value = "0.0000000314159";
     private final String scienceValue = "3.14159E-8";
-    private final int precision = 3;
+    private final MathContext mc = new MathContext(3);
 
     private MyRealNumber number , number2;
 
     @BeforeEach
     void setup(){
         number = new MyRealNumber(value);
-        number2 = new MyRealNumber(value,precision);
+        number2 = new MyRealNumber(value,mc);
     }
 
     @Test

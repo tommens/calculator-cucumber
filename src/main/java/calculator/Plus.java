@@ -60,6 +60,6 @@ public final class Plus extends Operation
       */
      @Override
      public BigDecimal op(BigDecimal l, BigDecimal r) {
-         return l.add(r);
+         return l.add(r,mathContext);
      }
  }

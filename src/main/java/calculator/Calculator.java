@@ -4,6 +4,8 @@ import visitor.Evaluator;
 import visitor.RealNumberEvaluator;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -21,6 +23,23 @@ public class Calculator {
      into an arithmetic expression:
      public Expression read(String s)
     */
+
+    private int precision;
+    private MathContext mathContext = MathContext.UNLIMITED;
+
+    private RoundingMode roundingMode = RoundingMode.HALF_UP;
+
+
+    /**
+     * Convert an input string into an arithmetic expression
+     * @param s a string representing an arithmetic expression
+     * @return the result of the conversion
+     */
+    public Expression read(String s){
+        // use a parser to read s
+        // for operation use the method setMathContext(mathContext)
+        return null;
+    }
 
     /**
      * Prints an arithmetic expression provided as input parameter.
@@ -83,6 +102,29 @@ public class Calculator {
         System.out.println("is: " + evalReal(e) + ".");
         System.out.println();
     }
+
+    /**
+     * Set the precision of real number (the number of digits encoded)
+     * @param p A positive integer representing the precision of the real numbers
+     */
+    public void setPrecision(int p){
+        if (p > 0){
+            precision = p;
+            mathContext = new MathContext(precision,roundingMode);
+        }
+    }
+
+
+    /**
+     * Set the rounding mode of real numbers
+     * @param rd the rounding mode to be considered
+     */
+    public void setRoundingMode(RoundingMode rd){
+        roundingMode = rd;
+        mathContext = new MathContext(precision,roundingMode);
+    }
+
+
 
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct

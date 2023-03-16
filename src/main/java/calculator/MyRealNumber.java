@@ -24,10 +24,10 @@ public class MyRealNumber extends MyNumber{
     /**
      * Constructor method
      * @param v The real number to be contained in the object
-     * @param precision The precision of the number (number of digits encoded)
+     * @param mc The MathContext containing the precision and the rounding mode to be used
      */
-    public MyRealNumber(String v, int precision){
-        value = new BigDecimal(v,new MathContext(precision));
+    public MyRealNumber(String v, MathContext mc){
+        value = new BigDecimal(v,mc);
     }
 
     /**
