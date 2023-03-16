@@ -35,7 +35,7 @@ public class Ppcm extends Operation
     {
         super(elist, notation);
         symbol = "ppcm";
-        neutral = 1;
+        neutral = 0;
     }
 
 
@@ -55,6 +55,8 @@ public class Ppcm extends Operation
     @Override
     public int op(int l, int r)
     {
+        if (l == 0 || r == 0)
+            return 0;
         try
         {
             return ppcm(l, r);
