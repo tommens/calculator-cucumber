@@ -39,6 +39,12 @@ public class Ppcm extends Operation
     }
 
 
+    public int ppcm(int a, int b) throws IllegalConstruction
+    {
+        return (a * b) / new Pgcd(args).op(a,b);
+    }
+
+
     /**
      * Abstract method representing the actual binary arithmetic operation to compute
      *
@@ -49,6 +55,14 @@ public class Ppcm extends Operation
     @Override
     public int op(int l, int r)
     {
-        return 0;
+        try
+        {
+            return ppcm(l, r);
+        }
+        catch (IllegalConstruction e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
