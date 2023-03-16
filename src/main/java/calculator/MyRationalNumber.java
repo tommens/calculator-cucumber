@@ -103,7 +103,7 @@ public class MyRationalNumber extends MyNumber {
 
     @Override
     public String toString() {
-        return "(" + nominator + "_/" + denominator + ")";
+        return nominator + "_/" + denominator;
     }
 
     /**

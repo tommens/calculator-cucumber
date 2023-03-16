@@ -38,7 +38,7 @@ class TestMyRationalNumber {
 
 	@Test
 	void testToString() {
-		assertEquals("("+reducedNominator + "/" + reducedDenominator+")", number.toString());
+		assertEquals(reducedNominator + "_/" + reducedDenominator, number.toString());
 	}
 
 	@Test
