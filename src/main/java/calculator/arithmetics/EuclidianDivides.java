@@ -36,6 +36,14 @@ public class EuclidianDivides extends Operation
         neutral = 1;
     }
 
+    public int[] euclidian(int a, int b)
+    {
+        int lst[]=new int[2];
+        lst[0]=b/a;
+        lst[1]=a%b;
+        return lst;
+    }
+
 
     /**
      * Abstract method representing the actual binary arithmetic operation to compute
@@ -47,6 +55,6 @@ public class EuclidianDivides extends Operation
     @Override
     public int op(int l, int r)
     {
-        return 0;
+        return euclidian(l, r)[1];
     }
 }
