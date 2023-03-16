@@ -17,7 +17,7 @@ public class Pgcd extends Operation
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected Pgcd(List<Expression> elist) throws IllegalConstruction
+    public Pgcd(List<Expression> elist) throws IllegalConstruction
     {
         this(elist, null);
     }
@@ -30,11 +30,19 @@ public class Pgcd extends Operation
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected Pgcd(List<Expression> elist, Notation notation) throws IllegalConstruction
+    public Pgcd(List<Expression> elist, Notation notation) throws IllegalConstruction
     {
         super(elist, notation);
         symbol = "pgcd";
         neutral = 1;
+    }
+
+
+    private int pgcd(int a, int b)
+    {
+        if (a == 0)
+            return b;
+        return pgcd(b % a, a);
     }
 
 
@@ -48,6 +56,6 @@ public class Pgcd extends Operation
     @Override
     public int op(int l, int r)
     {
-        return 0;
+        return pgcd(l, r);
     }
 }
