@@ -17,7 +17,7 @@ public class Modulo extends Operation
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected Modulo(List<Expression> elist) throws IllegalConstruction
+    public Modulo(List<Expression> elist) throws IllegalConstruction
     {
         this(elist, null);
     }
@@ -30,7 +30,7 @@ public class Modulo extends Operation
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected Modulo(List<Expression> elist, Notation notation) throws IllegalConstruction
+    public Modulo(List<Expression> elist, Notation notation) throws IllegalConstruction
     {
         super(elist, notation);
         symbol = "%";
@@ -47,6 +47,8 @@ public class Modulo extends Operation
     @Override
     public int op(int l, int r)
     {
+        if (r == 0)
+            return -1;
         return l % r;
     }
 }
