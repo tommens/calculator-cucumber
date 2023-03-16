@@ -5,6 +5,8 @@ package calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestMyRationalNumber {
@@ -79,6 +81,16 @@ class TestMyRationalNumber {
 	@Test
 	void testGetInteger(){
 		assertEquals(1, number.getInteger());
+	}
+
+	@Test
+	void testGetRational(){
+		assertEquals(number, number.getRational());
+	}
+
+	@Test
+	void testGetRealNumber(){
+		assertEquals(new BigDecimal("1.4"), MyRationalNumber.create(7,5).getRealNumber());
 	}
 
 

@@ -2,6 +2,7 @@ package calculator;
 
 import visitor.Visitor;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class MyRationalNumber extends MyNumber {
@@ -14,7 +15,7 @@ public class MyRationalNumber extends MyNumber {
      * @param nominator   The integer value of the nominator
      * @param denominator The integer value of the denominator
      */
-    private MyRationalNumber(int nominator, int denominator) {
+    private MyRationalNumber(int nominator, int denominator) throws  IllegalArgumentException{
         if (denominator == 0) throw new IllegalArgumentException("Denominator cannot be 0");
         this.nominator = nominator;
         this.denominator = denominator;
@@ -29,7 +30,7 @@ public class MyRationalNumber extends MyNumber {
      * @param denominator The integer value of the denominator
      * @return The rational number created
      */
-    public static MyRationalNumber create(int nominator, int denominator) {
+    public static MyRationalNumber create(int nominator, int denominator) throws IllegalArgumentException {
         return new MyRationalNumber(nominator, denominator).reduce();
     }
 
@@ -58,6 +59,14 @@ public class MyRationalNumber extends MyNumber {
     @Override
     public MyRationalNumber getRational() {
         return create(nominator, denominator);
+    }
+
+    /**
+     * Method to convert the rational number to a BigDecimal
+     * @return The BigDecimal value of the rational number
+     */
+    public BigDecimal getRealNumber() {
+        return new BigDecimal(nominator).divide(new BigDecimal(denominator));
     }
 
     @Override
@@ -151,7 +160,7 @@ public class MyRationalNumber extends MyNumber {
      *
      * @return The rational number in its simplest form
      */
-    private MyRationalNumber reduce() {
+    private MyRationalNumber reduce() throws IllegalArgumentException{
         int sign = nominator * denominator < 0 ? -1 : 1;
         int absNominator = Math.abs(nominator);
         int absDenominator = Math.abs(denominator);
