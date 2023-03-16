@@ -30,6 +30,21 @@ public class PrimeNumber extends Operation
         neutral = 1;
     }
 
+    /**
+     * Two number is prime between
+     */
+    public int calculate(int a, int b)
+    {
+        try
+        {
+            return new Pgcd(args).op(a, b);
+        }
+        catch (IllegalConstruction e)
+        {
+            return -1;
+        }
+    }
+
 
     /**
      * Abstract method representing the actual binary arithmetic operation to compute
@@ -41,6 +56,6 @@ public class PrimeNumber extends Operation
     @Override
     public int op(int l, int r)
     {
-        return 0;
+       return calculate(l, r) == 1 ? 1 : 0;
     }
 }
