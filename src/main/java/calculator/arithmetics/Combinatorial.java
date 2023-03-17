@@ -43,12 +43,14 @@ public class Combinatorial extends Operation
     {
         int numerator = 1;
         int denominator = 1;
+
         for (int i = 0; i < b; i++)
         {
             numerator *= (a-i);
             denominator *= (i+1);
         }
-        return numerator / denominator;
+        return Math.floorDiv(numerator, denominator);
+        //return numerator / denominator;
     }
 
 
