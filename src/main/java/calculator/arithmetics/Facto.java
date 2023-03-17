@@ -59,4 +59,9 @@ public class Facto extends Operation
     {
         return facto(l);
     }
+
+    public int op(int l)
+    {
+        return op(l, 0);
+    }
 }

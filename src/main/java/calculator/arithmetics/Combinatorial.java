@@ -64,6 +64,6 @@ public class Combinatorial extends Operation
     @Override
     public int op(int l, int r)
     {
-        return 0;
+        return comb(l, r);
     }
 }

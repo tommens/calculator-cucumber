@@ -35,5 +35,9 @@ public class TestFacto
         assertEquals(120, op.op(5, 0));
         assertEquals(1, op.op(1, 0));
         assertEquals(1, op.op(0, 0));
+
+        assertEquals(120, op.op(5));
+        assertEquals(1, op.op(1));
+        assertEquals(1, op.op(0));
     }
 }
