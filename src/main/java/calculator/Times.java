@@ -45,6 +45,8 @@ public final class Times extends Operation
    * @param r The second integer that should be multiplied with the first
    * @return The integer that is the result of the multiplication
    */
-  public int op(int l, int r)
-    { return (l*r); }
+
+  public int op(int l, int r) { return (l*r); }
+
+  public Double op(Double l, Double r) { return (l*r); }
 }

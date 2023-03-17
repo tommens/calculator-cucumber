@@ -1,15 +1,7 @@
 package cli;
 
-import calculator.Calculator;
-import calculator.Divides;
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Minus;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
-import calculator.Plus;
-import calculator.Times;
+import calculator.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +17,7 @@ public class InputUser
     protected static String listOperators = "+-*/";
     /**List of number*/
     protected static String listNumbers = "0123456789";
+    //protected static String listRealNumbers = "0123456789.";
 
 
     /**
@@ -53,6 +46,28 @@ public class InputUser
     {
         return listNumbers.contains(input);
     }
+
+    public static boolean isRealNumber(String input)
+    {
+        double d = Double.parseDouble(input);
+        return !Double.isNaN(d);
+    }
+
+    /*public static boolean isRealNumber(String input)
+    {
+        if (listNumbers.contains(input.substring(0,1)))
+        {
+            if (listRealNumbers.contains(input)){
+                for (int j = 0; j < input.length();j++){
+                    if (input.substring(j,j+1)=="."){
+
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    */
 
 
     /**
@@ -158,7 +173,7 @@ public class InputUser
      * Compute the input of user
      * @param isVerbose : boolean to display the expression
      */
-    public int compute(boolean isVerbose)
+    public double compute(boolean isVerbose)
     {
         String operator = null;
         for (String s : user_input_list)
@@ -167,6 +182,8 @@ public class InputUser
                 list_of_expression.add(new MyNumber(Integer.parseInt(s)));
             else if (isOperator(s))
                 operator = s;
+            else if (isRealNumber(s))
+                list_of_expression.add(new MyRealNumber(Double.parseDouble(s)));
         }
         if (operator != null)
         {

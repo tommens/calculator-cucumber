@@ -46,7 +46,11 @@ public final class Plus extends Operation
    * @param r The second integer that should be added to the first
    * @return The integer that is the result of the addition
    */
-  public int op(int l, int r) {
+  public Double op(Double l, Double r) {
   	return (l+r);
   }
+
+  public int op(int l, int r) {
+        return (l+r);
+    }
 }

@@ -27,19 +27,31 @@ public class Main {
 
 	try{
 
-		e = new MyNumber(8);
+		e = new MyRealNumber(-8.5);
 		c.print(e);
 		c.eval(e);
 
 	    List<Expression> params = new ArrayList<>();
-	    Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
+	    Collections.addAll(params, new MyRealNumber(-3.5), new MyNumber(-4), new MyNumber(5));
 	    e = new Plus(params,Notation.PREFIX);
 		c.printExpressionDetails(e);
 		c.eval(e);
 	
 		List<Expression> params2 = new ArrayList<>();
-		Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
+		Collections.addAll(params2, new MyNumber(-5), new MyNumber(3));
 		e = new Minus(params2, Notation.INFIX);
+		c.print(e);
+		c.eval(e);
+
+		List<Expression> params5 = new ArrayList<>();
+		Collections.addAll(params5, new MyNumber(-5), new MyNumber(-3));
+		e = new Minus(params5, Notation.INFIX);
+		c.print(e);
+		c.eval(e);
+
+		List<Expression> params6 = new ArrayList<>();
+		Collections.addAll(params6, new MyRealNumber(-5.5), new MyNumber(2));
+		e = new Divides(params6, Notation.INFIX);
 		c.print(e);
 		c.eval(e);
 
@@ -54,6 +66,8 @@ public class Main {
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);
+
+
 	}
 
 	catch(IllegalConstruction exception) {
