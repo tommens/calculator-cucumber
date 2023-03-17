@@ -32,13 +32,12 @@ public class TestEucledian
     }
 
     @Test
-    void testCalculatePpcm() throws IllegalConstruction
+    void testCalculateEuclidian() throws IllegalConstruction
     {
         Eucledian op = new Eucledian(new ArrayList<Expression>());
-        assertEquals(1, op.op(1, 1));
-        assertEquals(5, op.op(25, 5));
-        assertEquals(0, op.op(0, 0));
-        assertEquals(1, op.op(40, 3));
-        assertEquals(1, op.op(13, 7));
+        assertEquals(8, op.op(24, 16));
+        assertEquals(27, op.op(81, 27));
+        assertEquals(5, op.op(50, 15));
+        assertEquals(12, op.op(144, 60));
     }
 }

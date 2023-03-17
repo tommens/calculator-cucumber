@@ -32,10 +32,17 @@ public class Eucledian extends Operation
     public Eucledian(List<Expression> elist, Notation notation) throws IllegalConstruction
     {
         super(elist, notation);
-        symbol = "eucledian";
-        neutral = 1;
+        symbol = "gcd";
+        neutral = 0;
     }
 
+
+    private int eucledianAlgo(int a, int b)
+    {
+        if (b == 0)
+            return a;
+        return eucledianAlgo(b, a % b);
+    }
 
 
     /**
@@ -48,15 +55,6 @@ public class Eucledian extends Operation
     @Override
     public int op(int l, int r)
     {
-        int a = l;
-        int b = r;
-        int c = 0;
-        while (b != 0)
-        {
-            c = a % b;
-            a = b;
-            b = c;
-        }
-        return a;
+        return eucledianAlgo(l, r);
     }
 }
