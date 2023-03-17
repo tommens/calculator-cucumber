@@ -4,15 +4,22 @@ import calculator.Expression;
 import calculator.IllegalConstruction;
 import calculator.Notation;
 import calculator.Operation;
-
 import java.util.List;
 
+/**
+ * Class to implement : factorial
+ * @author Randi-Dcht
+ * @param : elist The list of expressions passed as argument to the arithmetic operation
+ * @param : notation The notation used to display the operation
+ * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
+ */
 public class Facto extends Operation
 {
+
+
     /**
      * It is not allowed to construct an operation with a null list of expressions.
      * Note that it is allowed to have an EMPTY list of arguments.
-     *
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
@@ -21,11 +28,12 @@ public class Facto extends Operation
         this(elist, null);
     }
 
+
     /**
      * It is not allowed to construct an operation with a null list of expressions.
      * Note that it is allowed to have an EMPTY list of arguments.
-     *
      * @param elist The list of expressions passed as argument to the arithmetic operation
+     * @param notation The notation used to display the operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
     public Facto(List<Expression> elist, Notation notation) throws IllegalConstruction
@@ -36,6 +44,11 @@ public class Facto extends Operation
     }
 
 
+    /**
+     * Allows to compute the factorial of a number
+     * @param a : integer
+     * @return a factorial (integer)
+     */
     private int facto(int a)
     {
         int result = 1;
@@ -60,6 +73,11 @@ public class Facto extends Operation
         return facto(l);
     }
 
+
+    /**
+     * Surcharge of op
+     * @param l : integer
+     */
     public int op(int l)
     {
         return op(l, 0);
