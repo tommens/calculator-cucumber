@@ -16,7 +16,7 @@ public class EuclidianDivides extends Operation
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected EuclidianDivides(List<Expression> elist) throws IllegalConstruction
+    public EuclidianDivides(List<Expression> elist) throws IllegalConstruction
     {
         this(elist, null);
     }
@@ -29,19 +29,28 @@ public class EuclidianDivides extends Operation
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected EuclidianDivides(List<Expression> elist, Notation notation) throws IllegalConstruction
+    public EuclidianDivides(List<Expression> elist, Notation notation) throws IllegalConstruction
     {
         super(elist, notation);
         symbol = "euclidian";
         neutral = 1;
     }
 
-    public int[] euclidian(int a, int b)
+    public int[] euclidianDivision(int a, int b)
     {
-        int lst[]=new int[2];
-        lst[0]=b/a;
-        lst[1]=a%b;
-        return lst;
+        if (b == 0)
+            return new int[]{-1, -1};
+
+         int q = 0;
+         int r = a;
+
+         while (r >= b)
+         {
+             r -= b;
+             q++;
+         }
+
+            return new int[]{q, r};
     }
 
 
@@ -50,11 +59,11 @@ public class EuclidianDivides extends Operation
      *
      * @param l first argument of the binary operation
      * @param r second argument of the binary operation
-     * @return result of computing the binary operation
+     * @return result of computing the binary operation (remainder)
      */
     @Override
     public int op(int l, int r)
     {
-        return euclidian(l, r)[1];
+        return euclidianDivision(l, r)[1];
     }
 }
