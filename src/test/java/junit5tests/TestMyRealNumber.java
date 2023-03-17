@@ -19,13 +19,13 @@ class TestMyRealNumber {
 
     @Test
     void testEquals() {
-        // Two distinct MyNumber, constructed separately (using a different constructor) but containing the same value should be equal
+        // Two distinct MyRealNumber, constructed separately (using a different constructor) but containing the same value should be equal
         assertEquals(new MyRealNumber(value), number);
-        // Two MyNumbers containing a distinct value should not be equal:
+        // Two MyRealNumbers containing a distinct value should not be equal:
         Double otherValue = 7.7;
         assertNotEquals(new MyRealNumber(otherValue),number);
         assertEquals(number, number); // Identity check (for coverage, as this should always be true)
-        assertNotEquals(number, value); // number is of type MyNumber, while value is of type int, so not equal
+        assertNotEquals(number, value); // number is of type MyRealNumber, while value is of type double, so not equal
         try {
             assertNotEquals(new Times(new ArrayList<>()), number);
         }
