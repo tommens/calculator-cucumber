@@ -50,7 +50,7 @@ public class Main {
 		c.eval(e);
 
 		List<Expression> params6 = new ArrayList<>();
-		Collections.addAll(params6, new MyRealNumber(-5.5), new MyNumber(2));
+		Collections.addAll(params6, new MyNumber(7), new MyNumber(2));
 		e = new Divides(params6, Notation.INFIX);
 		c.print(e);
 		c.eval(e);

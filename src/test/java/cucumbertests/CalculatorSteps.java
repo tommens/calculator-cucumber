@@ -129,7 +129,7 @@ public class CalculatorSteps {
 	}
 
 	@Then("^the (.*) is (\\d+)$")
-	public void thenTheOperationIs(String s, int val) {
+	public void thenTheOperationIs(String s, Double val) {
 		try {
 			switch (s) {
 				case "sum"			->	op = new Plus(params);
@@ -144,9 +144,9 @@ public class CalculatorSteps {
 		}
 	}
 
-	@Then("the operation evaluates to {int}")
-	public void thenTheOperationEvaluatesTo(int val) {
-		assertEquals(val, c.eval(op));
+	@Then("the operation evaluates to {double}")
+	public void thenTheOperationEvaluatesTo(Double val) {
+		assertEquals(val, c.eval(op)); //val => expected
 	}
 
 }

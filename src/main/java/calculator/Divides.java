@@ -1,5 +1,7 @@
 package calculator;
 
+import com.sun.jdi.DoubleValue;
+
 import java.util.List;
 
 /** This class represents the arithmetic division operation "/".
@@ -46,6 +48,8 @@ public final class Divides extends Operation
      * @param r The second integer that should divide the first
      * @return The integer that is the result of the division
      */
-  public int op(int l, int r) { return (l/r); }
+  public Double op(int l, int r) {
+      Double res = (double) l / (double) r;
+      return res; }
   public Double op(Double l, Double r) { return (l/r); }
 }

@@ -17,9 +17,9 @@ Given I initialise a calculator
 
   Scenario: Adding two integer numbers
     Given an integer operation '/'
-    When I provide a first number 8
+    When I provide a first number 3
     And I provide a second number 6
-    Then the operation evaluates to 1
+    Then the operation evaluates to 0.5
 
   Scenario: Adding two integer numbers
     Given an integer operation '*'
