@@ -50,10 +50,9 @@ public final class Times extends Operation
       int b = n1.getImaginary();
       int c = n2.getValue();
       int d = n2.getImaginary();
-      
+
       int r = (a * c) - (b* d);
       int i = (a * d) + (b * c);
-      MyNumber sol = new MyNumber(r,i);
-      return sol;
+      return new MyNumber(r,i);
   }
 }

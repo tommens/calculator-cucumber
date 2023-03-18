@@ -49,7 +49,6 @@ public final class Plus extends Operation
   public MyNumber op(MyNumber n1, MyNumber n2) {
       int r = n1.getValue() + n2 .getValue();
       int i = n1.getImaginary() + n2.getImaginary();
-      MyNumber sol = new MyNumber(r,i);
-      return sol;
+      return new MyNumber(r,i);
   }
 }
