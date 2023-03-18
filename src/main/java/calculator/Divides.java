@@ -54,7 +54,7 @@ public final class Divides extends Operation
 
         int den = (c * c) + (d * d);
 
-        int r = ((a * c) + (b* d)) / den;
+        int r = ((a * c) + (b * d)) / den;
         int i = ((b * c) - (a * d)) / den;
         return new MyNumber(r,i);
     }

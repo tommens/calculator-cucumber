@@ -51,7 +51,7 @@ public final class Times extends Operation
       int c = n2.getValue();
       int d = n2.getImaginary();
 
-      int r = (a * c) - (b* d);
+      int r = (a * c) - (b * d);
       int i = (a * d) + (b * c);
       return new MyNumber(r,i);
   }
