@@ -42,11 +42,14 @@ public final class Plus extends Operation
 
   /**
    * The actual computation of the (binary) arithmetic addition of two integers
-   * @param l The first integer
-   * @param r The second integer that should be added to the first
-   * @return The integer that is the result of the addition
+   * @param n1 The first number
+   * @param n2 The second number that should be added to the first
+   * @return The number that is the result of the addition
    */
-  public int op(int l, int r) {
-  	return (l+r);
+  public MyNumber op(MyNumber n1, MyNumber n2) {
+      int r = n1.getValue() + n2 .getValue();
+      int i = n1.getImaginary() + n2.getImaginary();
+      MyNumber sol = new MyNumber(r,i);
+      return sol;
   }
 }

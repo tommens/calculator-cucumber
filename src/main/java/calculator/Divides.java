@@ -42,10 +42,21 @@ public final class Divides extends Operation
 
     /**
      * The actual computation of the (binary) arithmetic division of two integers
-     * @param l The first integer
-     * @param r The second integer that should divide the first
-     * @return The integer that is the result of the division
+     * @param n1 The first number
+     * @param n2 The second number that should divide the first
+     * @return The number that is the result of the division
      */
-  public int op(int l, int r)
-    { return (l/r); }
+    public MyNumber op(MyNumber n1, MyNumber n2) {
+        int a = n1.getValue();
+        int b = n1.getImaginary();
+        int c = n2.getValue();
+        int d = n2.getImaginary();
+
+        int den = (c * c) + (d * d);
+
+        int r = ((a * c) + (b* d)) / den;
+        int i = ((b * c) - (a * d)) / den;
+        MyNumber sol = new MyNumber(r,i);
+        return sol;
+    }
 }

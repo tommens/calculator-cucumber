@@ -41,10 +41,19 @@ public final class Times extends Operation
 
   /**
    * The actual computation of the (binary) arithmetic multiplication of two integers
-   * @param l The first integer
-   * @param r The second integer that should be multiplied with the first
-   * @return The integer that is the result of the multiplication
+   * @param n1 The first number
+   * @param n2 The second integer that should be multiplied with the first
+   * @return The number that is the result of the multiplication
    */
-  public int op(int l, int r)
-    { return (l*r); }
+  public MyNumber op(MyNumber n1, MyNumber n2) {
+      int a = n1.getValue();
+      int b = n1.getImaginary();
+      int c = n2.getValue();
+      int d = n2.getImaginary();
+      
+      int r = (a * c) - (b* d);
+      int i = (a * d) + (b * c);
+      MyNumber sol = new MyNumber(r,i);
+      return sol;
+  }
 }

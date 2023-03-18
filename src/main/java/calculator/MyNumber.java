@@ -13,11 +13,16 @@ public class MyNumber implements Expression
 {
   private final int value;
 
+
+  private final int imaginary;
+
     /** getter method to obtain the value contained in the object
      *
      * @return The integer number contained in the object
      */
   public Integer getValue() { return value; }
+
+    public Integer getImaginary() { return imaginary; }
 
     /**
      * Constructor method
@@ -26,7 +31,13 @@ public class MyNumber implements Expression
      */
     public /*constructor*/ MyNumber(int v) {
 	  value=v;
+      imaginary=0;
 	  }
+
+    public /*constructor*/ MyNumber(int v, int i) {
+        value=v;
+        imaginary=i;
+    }
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -70,7 +81,13 @@ public class MyNumber implements Expression
      */
   @Override
   public String toString() {
-	  return Integer.toString(value);
+      if(imaginary == 0)
+          return Integer.toString(value);
+      else if(value == 0)
+          return Integer.toString(imaginary)+"i";
+      else if(imaginary < 0)
+          return Integer.toString(value) + Integer.toString(imaginary)+"i";
+      return Integer.toString(value) + "+" + Integer.toString(imaginary)+"i";
   }
 
   /** Two MyNumber expressions are equal if the values they contain are equal
@@ -92,7 +109,7 @@ public class MyNumber implements Expression
       if (!(o instanceof MyNumber)) {
             return false;
       }
-      return this.value == ((MyNumber)o).value;
+      return this.value == ((MyNumber)o).value && this.imaginary == ((MyNumber)o).imaginary;
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }
