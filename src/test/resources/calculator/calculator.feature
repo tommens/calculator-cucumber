@@ -53,6 +53,13 @@ Feature: Integer Arithmetic Expressions
     And the difference is 4
     And the quotient is 2
 
+
+  Scenario: Evaluation arithmetic operations over a list of complex numbers
+    Given the following list of complex numbers
+      | 8+2i | 6-2i |
+    Then the sum with complex number is 14+0i
+    And the difference with complex number is 2+4i
+
   # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
   # The scenario will be executed with each of the provided inputs.
