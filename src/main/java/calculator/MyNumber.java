@@ -22,21 +22,31 @@ public class MyNumber implements Expression
      */
   public Integer getValue() { return value; }
 
-    public Integer getImaginary() { return imaginary; }
+  public Integer getImaginary() { return imaginary; }
 
     /**
      * Constructor method
      *
      * @param v The integer value to be contained in the object
      */
-    public /*constructor*/ MyNumber(int v) {
-	  value=v;
+  public /*constructor*/ MyNumber(int v) {
+      value=v;
       imaginary=0;
-	  }
+  }
 
     public /*constructor*/ MyNumber(int v, int i) {
         value=v;
         imaginary=i;
+    }
+
+    public /*constructor*/ MyNumber(String number) {
+        String[] parts = number.split("[\\+\\-]");
+        value = Integer.parseInt(parts[0]);
+        if(number.contains("-"))
+            imaginary = Integer.parseInt(parts[1].replace("i","")) * -1;
+        else
+            imaginary = Integer.parseInt(parts[1].replace("i",""));
+
     }
 
     /**
