@@ -85,13 +85,11 @@ public class MyNumber implements Expression
     }
   @Override
   public String toString() {
-      if(imaginary == 0)
+      if(!this.isComplex())
           return Integer.toString(value);
       else if(value == 0)
           return Integer.toString(imaginary)+"i";
-      else if(imaginary < 0)
-          return Integer.toString(value) + Integer.toString(imaginary)+"i";
-      return Integer.toString(value) + "+" + Integer.toString(imaginary)+"i";
+      return String.format("%d%+di", value, imaginary);
   }
 
   /** Two MyNumber expressions are equal if the values they contain are equal
