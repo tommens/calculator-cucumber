@@ -40,12 +40,12 @@ public class MyNumber implements Expression
     }
 
     public /*constructor*/ MyNumber(String number) {
-        String[] parts = number.split("[\\+\\-]");
+        String[] parts = number.split("(?=[-+i])|(?<=[-+i])");
         value = Integer.parseInt(parts[0]);
-        if(number.contains("-"))
-            imaginary = Integer.parseInt(parts[1].replace("i","")) * -1;
+        if(parts[1].equals("-"))
+            imaginary = Integer.parseInt(parts[2]) * -1;
         else
-            imaginary = Integer.parseInt(parts[1].replace("i",""));
+            imaginary = Integer.parseInt(parts[2]);
 
     }
 
