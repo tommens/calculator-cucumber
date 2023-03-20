@@ -56,10 +56,11 @@ Feature: Integer Arithmetic Expressions
 
   Scenario: Evaluation arithmetic operations over a list of complex numbers
     Given the following list of complex numbers
-      | 8+2i | 6-2i |
-    Then the sum with complex number is 14+0i
-    And the difference with complex number is 2+4i
-
+      | 8+3i | 2-1i |
+    Then the sum with complex number is 10+2i
+    And the difference with complex number is 6+4i
+    And the product with complex number is 19-2i
+    And the quotient with complex number is 2+2i
   # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
   # The scenario will be executed with each of the provided inputs.
@@ -73,6 +74,28 @@ Feature: Integer Arithmetic Expressions
       |n1|n2|result|
       |4|5|9|
       |5|3|8|
+
+  Scenario Outline: Square root of one integer numbers
+    Given an integer operation 'sqrt'
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then the operation evaluates to <result>
+
+    Examples:
+      |n1  |n2 |result|
+      |4   |5  |2     |
+      |25  |3  |5     |
+
+  Scenario Outline: Modulus of one integer numbers
+    Given an integer operation 'modulus'
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then the operation evaluates to <result>
+
+    Examples:
+      |n1  |n2 |result|
+      |14  |5  |14    |
+      |2   |3  |2     |
 
   Scenario Outline: Dividing two integer numbers
     Given an integer operation '/'
