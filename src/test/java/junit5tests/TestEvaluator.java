@@ -40,7 +40,7 @@ class TestEvaluator {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"*", "+", "/", "-"})
+    @ValueSource(strings = {"*", "+", "/", "-", "sqrt", "||"})
     void testEvaluateOperations(String symbol) {
         List<Expression> params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
         try {
@@ -51,6 +51,8 @@ class TestEvaluator {
                 case "-"	->	assertEquals( new MyNumber(value1 - value2), calc.eval(new Minus(params)));
                 case "*"	->	assertEquals( new MyNumber(value1 * value2), calc.eval(new Times(params)));
                 case "/"	->	assertEquals( new MyNumber(value1 / value2), calc.eval(new Divides(params)));
+                case "sqrt"	->	assertEquals( new MyNumber((int) Math.sqrt(value1)), calc.eval(new Sqrt(params)));
+                case "||"	->	assertEquals( new MyNumber(value1), calc.eval(new Modulus(params)));
                 default		->	fail();
             }
         } catch (IllegalConstruction e) {

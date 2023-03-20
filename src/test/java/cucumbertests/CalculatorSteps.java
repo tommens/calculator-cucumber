@@ -35,11 +35,13 @@ public class CalculatorSteps {
 		params = new ArrayList<>(); // create an empty set of parameters to be filled in
 		try {
 			switch (s) {
-				case "+"	->	op = new Plus(params);
-				case "-"	->	op = new Minus(params);
-				case "*"	->	op = new Times(params);
-				case "/"	->	op = new Divides(params);
-				default		->	fail();
+				case "+"	    ->	op = new Plus(params);
+				case "-"	    ->	op = new Minus(params);
+				case "*"	    ->	op = new Times(params);
+				case "/"	    ->	op = new Divides(params);
+				case "modulus"	->	op = new Modulus(params);
+				case "sqrt"	    ->	op = new Sqrt(params);
+				default		    ->	fail();
 			}
 		} catch (IllegalConstruction e) {
 			fail();
@@ -57,6 +59,16 @@ public class CalculatorSteps {
 		// which is a list of strings, that we will manually convert to integers:
 		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
 	    params.forEach(n -> System.out.println("value ="+ n));
+		op = null;
+	}
+
+	@Given("the following list of complex numbers")
+	public void givenTheFollowingListOfComplexNumbers(List<List<String>> numbers) {
+		params = new ArrayList<>();
+		// Since we only use one line of input, we use get(0) to take the first line of the list,
+		// which is a list of strings, that we will manually convert to integers:
+		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+		params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
 
@@ -136,6 +148,8 @@ public class CalculatorSteps {
 				case "product"		->	op = new Times(params);
 				case "quotient"		->	op = new Divides(params);
 				case "difference"	->	op = new Minus(params);
+				case "modulus"		->	op = new Modulus(params);
+				case "sqrt"	        ->	op = new Sqrt(params);
 				default -> fail();
 			}
 			assertEquals(new MyNumber(val), c.eval(op));

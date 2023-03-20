@@ -86,8 +86,10 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to <result>
 
     Examples:
-      | op  |n1|n2|result|
-      | "+" | 4| 5|     9|
-      | "-" | 8| 5|     3|
-      | "*" | 7| 2|    14|
-      | "/" | 6| 2|     3|
+      | op        |n1|n2|result|
+      | "+"       | 4 | 5|     9|
+      | "-"       | 8 | 5|     3|
+      | "*"       | 7 | 2|    14|
+      | "/"       | 6 | 2|     3|
+      | "sqrt"    | 16| 5|     4|
+      | "modulus" | 10| 7|    10|
