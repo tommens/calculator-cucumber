@@ -30,6 +30,9 @@ class TestOperation {
 	}
 
 	@Test
+	void testNotEquals(){ assertNotEquals(o,null);}
+
+	@Test
 	void testCountDepth() {
 		assertEquals(2, o.countDepth());
 	}
