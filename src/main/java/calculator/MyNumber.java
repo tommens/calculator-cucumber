@@ -79,6 +79,10 @@ public class MyNumber implements Expression
      *
      * @return	The String that is the result of the conversion.
      */
+
+    public boolean isComplex(){
+        return imaginary!=0;
+    }
   @Override
   public String toString() {
       if(imaginary == 0)
