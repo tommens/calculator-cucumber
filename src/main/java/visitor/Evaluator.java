@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.MyNumber;
+import calculator.Numbi;
 import calculator.Operation;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Evaluator extends Visitor {
      *
      * @param n The number being visited
      */
-    public void visit(MyNumber n) {
+    public void visit(Numbi n) {
         computedValue = n.getValue();
     }
 

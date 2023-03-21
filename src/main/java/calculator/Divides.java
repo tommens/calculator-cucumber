@@ -47,5 +47,9 @@ public final class Divides extends Operation
      * @return The integer that is the result of the division
      */
   public int op(int l, int r)
-    { return (l/r); }
+  {
+      if (r == 0)
+          return -1; //TODO add exception
+      return (l/r);
+  }
 }

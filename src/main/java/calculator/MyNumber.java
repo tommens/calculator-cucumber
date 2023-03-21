@@ -9,7 +9,7 @@ import visitor.Visitor;
  * @see Expression
  * @see Operation
  */
-public class MyNumber implements Expression
+public class MyNumber extends Numbi
 {
   private final int value;
 
@@ -24,9 +24,13 @@ public class MyNumber implements Expression
      *
      * @param v The integer value to be contained in the object
      */
-    public /*constructor*/ MyNumber(int v) {
+    public /*constructor*/ MyNumber(Integer v) {
 	  value=v;
 	  }
+
+      public MyNumber(int v) {
+          value = v;
+      }
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -43,7 +47,7 @@ public class MyNumber implements Expression
      *
      * @return The depth of a number expression
      */
-  public int countDepth() {
+  public Integer countDepth() {
 	  return 0;
   }
 
@@ -51,7 +55,7 @@ public class MyNumber implements Expression
      *
      * @return The number of operations contained in a number expression
      */
-  public int countOps() {
+  public Integer countOps() {
 	  return 0;
   }
 
@@ -59,7 +63,7 @@ public class MyNumber implements Expression
      *
      * @return The number of numbers contained in  a number expression
      */
-  public int countNbs() {
+  public Integer countNbs() {
 	  return 1;
   }
 
