@@ -24,8 +24,13 @@ public class Main {
 
   	Expression e;
   	Calculator c = new Calculator();
+	  Log l = new Log();
+	  Expression pm = new MyNumber(7);
+	  l.add(pm);
+	  l.displayLog();
 
-	try{
+
+		try{
 
 		e = new MyNumber(8);
 		c.print(e);
