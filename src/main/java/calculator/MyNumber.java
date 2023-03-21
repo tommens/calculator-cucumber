@@ -114,7 +114,7 @@ public class MyNumber implements Expression
         int r = 0;
         int v = Math.abs(value);
         int i = Math.abs(imaginary);
-        double O = Math.atan(imaginary/value);
+        double O = Math.atan((double)imaginary/value);
         int sign = (imaginary / i) * (value / v);
         try {
             Modulus mod = new Modulus(params);
