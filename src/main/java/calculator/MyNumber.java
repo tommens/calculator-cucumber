@@ -2,6 +2,9 @@ package calculator;
 
 import visitor.Visitor;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
@@ -20,6 +23,9 @@ public class MyNumber implements Expression
      *
      * @return The integer number contained in the object
      */
+
+  public NumberNotation notation = NumberNotation.CARTESIAN;
+
   public Integer getValue() { return value; }
 
   public Integer getImaginary() { return imaginary; }
@@ -99,8 +105,33 @@ public class MyNumber implements Expression
           return Integer.toString(value);
       else if(value == 0)
           return Integer.toString(imaginary)+"i";
-      return String.format("%d%+di", value, imaginary);
+      return toString(notation);
   }
+
+    public final String toString(NumberNotation n) {
+
+        List<Expression> params = Arrays.asList(this, this);
+        int r = 0;
+        int v = Math.abs(value);
+        int i = Math.abs(imaginary);
+        int sign = (imaginary / i) * (value / v);
+        try {
+            Modulus mod = new Modulus(params);
+            r = mod.op(this).getValue();
+        }catch(IllegalConstruction e) {
+            String.format("%d%+di", value, imaginary); }
+
+        return switch (n) {
+            case CARTESIAN ->
+                    String.format("%d%+di", value, imaginary);
+
+            case POLAR ->
+                    String.format("%d (cos(arc-tan(%d/%d)) + i*sin(arc-tan(%d/%d)))", r, i*sign, v, i*sign, v);
+
+            case EXPONENTIAL ->
+                    String.format("%de^(i*arc-tan(%d/%d))", r, i*sign, v);
+        };
+    }
 
   /** Two MyNumber expressions are equal if the values they contain are equal
    *
