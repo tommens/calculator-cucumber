@@ -14,13 +14,16 @@ class TestSqrt {
 
     private final int value1 = 8;
     private final int value2 = 16;
+    private final int value3 = -1;
     private Sqrt op;
     private List<Expression> params;
 
     @BeforeEach
     void setUp() {
         params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
-        try { op = new Sqrt(params); }
+        try {
+            op = new Sqrt(params);
+        }
         catch(IllegalConstruction e) { fail(); }
     }
 
@@ -71,6 +74,18 @@ class TestSqrt {
     void testNullParamList() {
         params = null;
         assertThrows(IllegalConstruction.class, () -> op = new Sqrt(params));
+    }
+
+    @Test
+    void testComplexSolution(){
+        MyNumber sol = op.op(new MyNumber(value3));
+        assertEquals(sol.isComplex(), true);
+    }
+
+    @Test
+    void testRealSolution(){
+        MyNumber sol = op.op(new MyNumber(value1));
+        assertEquals(sol.isComplex(), false);
     }
 
 }

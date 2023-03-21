@@ -73,4 +73,10 @@ class TestModulus {
         assertThrows(IllegalConstruction.class, () -> op = new Modulus(params));
     }
 
+    @Test
+    void testRealSolution() {
+        MyNumber sol = op.op(new MyNumber(value1,value2));
+        assertEquals(sol.isComplex(), false);
+    }
+
 }
