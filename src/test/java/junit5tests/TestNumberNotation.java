@@ -25,7 +25,7 @@ class TestNumberNotation {
         String s = String.format("%d%+di", num.getValue(), num.getImaginary());
         testNotation(num, s, NumberNotation.CARTESIAN);
         //polar notation:
-        s = String.format("%d (cosine(%,.2f) + i*sine(%,.2f))", r, O, O);
+        s = String.format("%d*(cosine(%,.2f) + i*sine(%,.2f))", r, O, O);
         testNotation(num, s, NumberNotation.POLAR);
         //exponential notation:
         s = String.format("%de^(%,.2f*i)", r, O);

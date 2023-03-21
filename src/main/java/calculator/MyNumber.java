@@ -140,7 +140,7 @@ public class MyNumber implements Expression
                     String.format("%d%+di", value, imaginary);
 
             case POLAR ->
-                    String.format("%d (cosine(%,.2f) + i*sine(%,.2f))", r, O, O);
+                    String.format("%d*(cosine(%,.2f) + i*sine(%,.2f))", r, O, O);
 
             case EXPONENTIAL ->
                     String.format("%de^(%,.2f*i)", r, O);
