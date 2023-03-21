@@ -16,7 +16,6 @@ class TestEvaluator {
 
     private Calculator calc;
     private int value1, value2, imaginary1, imaginary2, den;
-    private Expression op;
 
     @BeforeEach
     void setUp() {

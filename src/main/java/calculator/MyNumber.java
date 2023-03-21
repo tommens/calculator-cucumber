@@ -128,8 +128,6 @@ public class MyNumber implements Expression
 
         List<Expression> params = Arrays.asList(this, this);
         int r = 0;
-        int v = Math.abs(value);
-        int i = Math.abs(imaginary);
         double O = Math.atan((double)imaginary/value);
         try {
             Modulus mod = new Modulus(params);
