@@ -43,9 +43,9 @@ public class Sqrt extends Operation
 
             int z = (int)Math.sqrt((a * a) + (b * b));
 
-            r = (int)Math.sqrt((z+a)/2);
+            r = (int)Math.sqrt((double)(z+a)/2);
 
-            i =(b/Math.abs(b)) * (int)Math.sqrt((z-a)/2);
+            i =(b/Math.abs(b)) * (int)Math.sqrt((double)(z-a)/2);
         }
 
         return new MyNumber(r,i);

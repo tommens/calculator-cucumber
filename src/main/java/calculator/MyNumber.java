@@ -19,15 +19,20 @@ public class MyNumber implements Expression
 
   private final int imaginary;
 
-    /** getter method to obtain the value contained in the object
-     *
-     * @return The integer number contained in the object
-     */
+
 
   public NumberNotation notation = NumberNotation.CARTESIAN;
 
+    /** getter method to obtain the value contained in the object
+     *
+     * @return The integer number of the real part contained in the object
+     */
   public Integer getValue() { return value; }
 
+    /** getter method to obtain the value contained in the object
+     *
+     * @return The integer number of the imaginary part contained in the object
+     */
   public Integer getImaginary() { return imaginary; }
 
     /**
@@ -40,11 +45,22 @@ public class MyNumber implements Expression
       imaginary=0;
   }
 
+    /**
+     * Constructor method for complex number
+     *
+     * @param v The integer value to be contained in the object
+     * @param i The integer value to be contained in the object for the imaginary part
+     */
     public /*constructor*/ MyNumber(int v, int i) {
         value=v;
         imaginary=i;
     }
 
+    /**
+     * Constructor method for complex number
+     *
+     * @param number The string value corresponding to a complex number
+     */
     public /*constructor*/ MyNumber(String number) {
         String[] parts = number.split("(?=[-+i])|(?<=[-+i])");
         value = Integer.parseInt(parts[0]);
@@ -119,7 +135,7 @@ public class MyNumber implements Expression
             Modulus mod = new Modulus(params);
             r = mod.op(this).getValue();
         }catch(IllegalConstruction e) {
-            String.format("%d%+di", value, imaginary); }
+            return String.format("%d%+di", value, imaginary); }
 
         return switch (n) {
             case CARTESIAN ->

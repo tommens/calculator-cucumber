@@ -76,7 +76,7 @@ class TestModulus {
     @Test
     void testRealSolution() {
         MyNumber sol = op.op(new MyNumber(value1,value2));
-        assertEquals(sol.isComplex(), false);
+        assertFalse(sol.isComplex());
     }
 
 }
