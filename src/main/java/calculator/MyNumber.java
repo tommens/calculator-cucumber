@@ -104,7 +104,7 @@ public class MyNumber implements Expression
       if(!this.isComplex())
           return Integer.toString(value);
       else if(value == 0)
-          return Integer.toString(imaginary)+"i";
+          return imaginary +"i";
       return toString(notation);
   }
 
@@ -115,7 +115,6 @@ public class MyNumber implements Expression
         int v = Math.abs(value);
         int i = Math.abs(imaginary);
         double O = Math.atan((double)imaginary/value);
-        int sign = (imaginary / i) * (value / v);
         try {
             Modulus mod = new Modulus(params);
             r = mod.op(this).getValue();

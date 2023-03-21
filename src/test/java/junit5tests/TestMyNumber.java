@@ -56,8 +56,8 @@ class TestMyNumber {
 	@Test
 	void testToString() {
 		assertEquals(Integer.toString(value), number.toString());
-		assertEquals(Integer.toString(value)+"+"+Integer.toString(imaginary)+"i", complexNumber.toString());
-		assertEquals(Integer.toString(imaginary)+"i", onlyComplexNumber.toString());
+		assertEquals(value +"+"+ imaginary +"i", complexNumber.toString());
+		assertEquals(imaginary +"i", onlyComplexNumber.toString());
 	}
 
 }

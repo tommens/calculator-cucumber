@@ -77,9 +77,9 @@ public abstract class Operation implements Expression
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to compute
-	 * @param l	 first argument of the binary operation
-	 * @param r	second argument of the binary operation
-	 * @return	result of computing the binary operation
+	 * @param n1 first number of the operation
+	 * @param n2 second number of the operation
+	 * @return	result of computing the operation
 	 */
    public abstract MyNumber op(MyNumber n1, MyNumber n2);
     // the operation itself is specified in the subclasses

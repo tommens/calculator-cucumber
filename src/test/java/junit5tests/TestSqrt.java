@@ -14,7 +14,6 @@ class TestSqrt {
 
     private final int value1 = 8;
     private final int value2 = 16;
-    private final int value3 = -1;
     private Sqrt op;
     private List<Expression> params;
 
@@ -78,6 +77,7 @@ class TestSqrt {
 
     @Test
     void testComplexSolution(){
+        int value3 = -1;
         MyNumber sol = op.op(new MyNumber(value3));
         assertEquals(sol.isComplex(), true);
     }
