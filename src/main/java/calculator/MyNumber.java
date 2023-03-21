@@ -114,6 +114,7 @@ public class MyNumber implements Expression
         int r = 0;
         int v = Math.abs(value);
         int i = Math.abs(imaginary);
+        double O = Math.atan(imaginary/value);
         int sign = (imaginary / i) * (value / v);
         try {
             Modulus mod = new Modulus(params);
@@ -126,10 +127,10 @@ public class MyNumber implements Expression
                     String.format("%d%+di", value, imaginary);
 
             case POLAR ->
-                    String.format("%d (cos(arc-tan(%d/%d)) + i*sin(arc-tan(%d/%d)))", r, i*sign, v, i*sign, v);
+                    String.format("%d (cosine(%,.2f) + i*sine(%,.2f))", r, O, O);
 
             case EXPONENTIAL ->
-                    String.format("%de^(i*arc-tan(%d/%d))", r, i*sign, v);
+                    String.format("%de^(%,.2f*i)", r, O);
         };
     }
 
