@@ -19,9 +19,6 @@ public class Calculator {
      public Expression read(String s)
     */
 
-    private final Memory memory = new Memory();
-    private final Log log = new Log();
-
     /**
      * Prints an arithmetic expression provided as input parameter.
      * @param e the arithmetic Expression to be printed
@@ -66,9 +63,7 @@ public class Calculator {
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
         // and return the result of the evaluation at the end of the process
-        int result = v.getResult();
-        //memory.add(variable, result);
-        return result;
+        return v.getResult();
     }
 
     /*

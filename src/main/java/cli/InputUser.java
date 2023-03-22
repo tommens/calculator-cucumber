@@ -1,15 +1,7 @@
 package cli;
 
-import calculator.Calculator;
-import calculator.Divides;
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Minus;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
-import calculator.Plus;
-import calculator.Times;
+import calculator.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

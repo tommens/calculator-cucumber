@@ -1,5 +1,7 @@
 package cli;
 
+import calculator.Log;
+import calculator.Memory;
 import calculator.Notation;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +17,9 @@ public class Main
     private static Notation notation = Notation.INFIX;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
+
+    private static final Log log = new Log();
+    private static final Memory memory = new Memory();
 
 
     /**
@@ -66,6 +71,9 @@ public class Main
                 verbose = InputUser.isABoolean(listInput.get(1));
             else if (listInput.get(0).equals(".help"))
                 printHelp();
+            else if (listInput.get(0).equals(".log"))
+                System.out.println("$> Displaying the log of the last 10 operations: ");
+
             else
             {
                 inputUser_instance.setUserInput(listInput);

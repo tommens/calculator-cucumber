@@ -1,41 +1,28 @@
 package calculator;
 
 
-import java.util.*;
+public class Log extends Memory {
 
-
-public class Log {
-
-    private Date date = new Date();
-
-    private List<Map.Entry<String,Expression>> pairList= new java.util.ArrayList<>();
-
-    public void add(Expression expression) {
-        pairList.add(new AbstractMap.SimpleEntry<>(date.toString(), expression));
+    public Log() {
+        super();
     }
 
-    public List<Map.Entry<String, Expression>> getPairList() {
-        return pairList;
-    }
 
-    public void displayLog(int n) {
-        if (n > pairList.size()) {
-            System.out.println(pairList);
+    @Override
+    public void displayLastData(int n) {
+        if (n > this.getMemory().size()) {
+            this.display();
         }
-        for(int a = pairList.size()-n; a!= pairList.size(); a++) {
-            System.out.println(pairList.get(a).getKey() + " " + pairList.get(a).getValue());
+        for(int a = this.getMemory().size()-n; a!= this.getMemory().size(); a++) {
+            Result r = this.getMemory().get(a);
+            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getResult() + ", Expression :  " + r.getExpression());
         }
     }
 
-    public void displayLog() {
-        System.out.println(pairList);
-    }
-
-    public void saveLog() {
-        // TODO
-    }
-
-    public void loadLog() {
-        // TODO
+    @Override
+    public void display() {
+        for (Result r : this.getMemory()) {
+            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getResult() + ", Expression :  " + r.getExpression());
+        }
     }
 }

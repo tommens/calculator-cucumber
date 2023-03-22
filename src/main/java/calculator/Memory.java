@@ -3,8 +3,6 @@ package calculator;
 import java.util.*;
 
 public class Memory {
-
-    private Date date = new Date();
     private ArrayList<Result> memory;
     private int size;
 
@@ -26,7 +24,7 @@ public class Memory {
         this.memory = memory;
     }
 
-    public void add(String variable, Expression expression, int result){
+    public void add(String variable, int result, Expression expression){
         if (memory.size() == size) {
             throw new RuntimeException("Memory is full");
         }
@@ -36,6 +34,11 @@ public class Memory {
             }
         }
         memory.add(new Result(variable, result, expression));
+    }
+
+    public void add(int result, Expression expression){
+        String uniqueID = UUID.randomUUID().toString();
+        this.getMemory().add(new Result(uniqueID, result, expression));
     }
 
 
@@ -78,15 +81,15 @@ public class Memory {
 
     public void display() {
         for (Result r : memory) {
-            System.out.println(r.getVariable() + " " + r.getExpression() + " " + r.getResult());
+            System.out.println("Variable : "+r.getVariable() + ", Result : " + r.getResult() + ", Expression :  " + r.getExpression());
         }
     }
 
-    public void saveLog() {
+    public void save(String path) {
         // TODO
     }
 
-    public void loadLog() {
+    public void load(String path) {
         // TODO
     }
 }
