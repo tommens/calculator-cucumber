@@ -76,9 +76,21 @@ class TestSqrt {
     }
 
     @Test
-    void testComplexSolution(){
+    void testComplexSolution1(){
         int value3 = -1;
         MyNumber sol = op.op(new MyNumber(value3));
+        assertTrue(sol.isComplex());
+    }
+
+    @Test
+    void testComplexSolution2(){
+        MyNumber sol = op.op(new MyNumber(value1,value2));
+        assertTrue(sol.isComplex());
+    }
+
+    @Test
+    void testComplexSolution3(){
+        MyNumber sol = op.op(new MyNumber(0,value2));
         assertTrue(sol.isComplex());
     }
 
