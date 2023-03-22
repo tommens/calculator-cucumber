@@ -1,8 +1,7 @@
 package cli;
 
-import calculator.Log;
-import calculator.Memory;
 import calculator.Notation;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,9 +16,6 @@ public class Main
     private static Notation notation = Notation.INFIX;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
-
-    private static final Log log = new Log();
-    private static final Memory memory = new Memory();
 
 
     /**

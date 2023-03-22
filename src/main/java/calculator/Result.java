@@ -8,7 +8,6 @@ public class Result {
     private final String variable;
     private final int result;
     private final Expression expression;
-
     private String timeStamp;
 
     public Result(String variable, int result, Expression expression) {
