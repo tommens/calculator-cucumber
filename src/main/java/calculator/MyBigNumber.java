@@ -68,16 +68,11 @@ public class MyBigNumber extends Numbi //TODO : clear with abstract class
     @Override
     public BigInteger countNbs()
     {
-        return BigInteger.ZERO;
+        return BigInteger.ONE;
     }
 
-    /**
-     * accept is a method needed to implement the visitor design pattern
-     * @param v The visitor object being passed as a parameter
-     */
-    @Override
-    public void accept(Visitor v)
+    public String toString()
     {
-        //v.visit(this);
+        return value.toString();
     }
 }
