@@ -48,28 +48,6 @@ public class InputUser
         return listNumbers.contains(input);
     }
 
-    public static boolean isRealNumber(String input)
-    {
-        double d = Double.parseDouble(input);
-        return !Double.isNaN(d);
-    }
-
-    /*public static boolean isRealNumber(String input)
-    {
-        if (listNumbers.contains(input.substring(0,1)))
-        {
-            if (listRealNumbers.contains(input)){
-                for (int j = 0; j < input.length();j++){
-                    if (input.substring(j,j+1)=="."){
-
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    */
-
 
     /**
      * @return boolean : is an operator
@@ -183,8 +161,6 @@ public class InputUser
                 list_of_expression.add(new MyNumber(new BigDecimal(s)));  //peut etre a modif ++++++++++++++++++++++++++++++
             else if (isOperator(s))
                 operator = s;
-            else if (isRealNumber(s))
-                list_of_expression.add(new MyRealNumber(Double.parseDouble(s)));
         }
         if (operator != null)
         {

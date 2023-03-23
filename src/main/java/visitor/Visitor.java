@@ -1,7 +1,6 @@
 package visitor;
 
 import calculator.MyNumber;
-import calculator.MyRealNumber;
 import calculator.Operation;
 
 /**
@@ -16,7 +15,6 @@ public abstract class Visitor {
      */
     public abstract void visit(MyNumber n);
 
-    public abstract void visit_Real(MyRealNumber n);
 
     /**
      * The Visitor can traverse an operation (a subtype of Expression)

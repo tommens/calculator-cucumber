@@ -2,7 +2,6 @@ package visitor;
 
 import calculator.Expression;
 import calculator.MyNumber;
-import calculator.MyRealNumber;
 import calculator.Operation;
 
 import java.math.BigDecimal;
@@ -30,13 +29,6 @@ public class Evaluator extends Visitor {
     public void visit(MyNumber n) {
         computedValue = n.getValue();
     }
-
-    @Override
-    public void visit_Real(MyRealNumber n) {
-        return;
-    }
-
-    public void visit_Real(MyNumber n) {computedValue = n.getValue();}
 
     /** Use the visitor design pattern to visit an operation
      *
