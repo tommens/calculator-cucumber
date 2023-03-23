@@ -2,6 +2,7 @@ package cli;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,13 +174,13 @@ public class InputUser
      * Compute the input of user
      * @param isVerbose : boolean to display the expression
      */
-    public double compute(boolean isVerbose)
+    public BigDecimal compute(boolean isVerbose)
     {
         String operator = null;
         for (String s : user_input_list)
         {
             if (isNumber(s))
-                list_of_expression.add(new MyNumber(Integer.parseInt(s)));
+                list_of_expression.add(new MyNumber(new BigDecimal(s)));  //peut etre a modif ++++++++++++++++++++++++++++++
             else if (isOperator(s))
                 operator = s;
             else if (isRealNumber(s))
@@ -192,6 +193,6 @@ public class InputUser
                 System.out.println("$> " + e.toString());
             return  new Calculator().eval(e);
         }
-        return 0;
+        return new BigDecimal(0);
     }
 }

@@ -5,6 +5,7 @@ import calculator.MyNumber;
 import calculator.MyRealNumber;
 import calculator.Operation;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /** Evaluation is a concrete visitor that serves to
@@ -13,37 +14,43 @@ import java.util.ArrayList;
 public class Evaluator extends Visitor {
 
     /** The result of the evaluation will be stored in this private variable */
-    private Double computedValue;
+    private BigDecimal computedValue;
 
 
     /** getter method to obtain the result of the evaluation
      *
      * @return an Integer object containing the result of the evaluation
      */
-    public Double getResult() { return computedValue; }
+    public BigDecimal getResult() { return computedValue; }
 
     /** Use the visitor design pattern to visit a number.
      *
      * @param n The number being visited
      */
     public void visit(MyNumber n) {
-        computedValue = Double.valueOf(n.getValue());
+        computedValue = n.getValue();
     }
-    public void visit_Real(MyRealNumber n) {computedValue = n.getValue();}
+
+    @Override
+    public void visit_Real(MyRealNumber n) {
+        return;
+    }
+
+    public void visit_Real(MyNumber n) {computedValue = n.getValue();}
 
     /** Use the visitor design pattern to visit an operation
      *
      * @param o The operation being visited
      */
     public void visit(Operation o) {
-        ArrayList<Double> evaluatedArgs = new ArrayList<>();
+        ArrayList<BigDecimal> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
         //second loop to accumulate all the evaluated subresults
-        Double temp = evaluatedArgs.get(0);
+        BigDecimal temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             temp = o.op(temp,evaluatedArgs.get(counter));

@@ -1,3 +1,4 @@
+
 package calculator;
 
 import visitor.Visitor;
@@ -34,9 +35,7 @@ public class MyRealNumber implements Expression
      *
      * @param v	The visitor object
      */
-    public void accept(Visitor v) {
-        v.visit_Real(this);
-    }
+    public void accept(Visitor v) {v.visit_Real(this);}
 
 
     /** The depth of a number expression is always 0

@@ -1,7 +1,6 @@
 package calculator;
 
-import com.sun.jdi.DoubleValue;
-
+import java.math.BigDecimal;
 import java.util.List;
 
 /** This class represents the arithmetic division operation "/".
@@ -51,5 +50,7 @@ public final class Divides extends Operation
   public Double op(int l, int r) {
       Double res = (double) l / (double) r;
       return res; }
-  public Double op(Double l, Double r) { return (l/r); }
+  public BigDecimal op(BigDecimal l, BigDecimal r) {
+      BigDecimal result =  l.divide(r);
+      return (result); }
 }

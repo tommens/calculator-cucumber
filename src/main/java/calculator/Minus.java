@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /** This class represents the arithmetic operation "-".
@@ -49,5 +50,7 @@ public final class Minus extends Operation
   public int op(int l, int r) {
   	return (l-r);
   }
-  public Double op(Double l, Double r) {return (l-r);}
+  public BigDecimal op(BigDecimal l, BigDecimal r) {
+      BigDecimal result = l.subtract(r);
+      return (result);}
 }

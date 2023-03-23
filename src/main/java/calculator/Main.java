@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,30 +28,36 @@ public class Main {
 
 	try{
 
-		e = new MyRealNumber(-8.5);
+		e = new MyNumber(new BigDecimal(-8.5) );
 		c.print(e);
 		c.eval(e);
 
 	    List<Expression> params = new ArrayList<>();
-	    Collections.addAll(params, new MyRealNumber(-3.5), new MyNumber(-4), new MyNumber(5));
+	    Collections.addAll(params, new MyNumber(new BigDecimal(-3.5) ), new MyNumber(new BigDecimal(-4) ), new MyNumber(new BigDecimal(5)));
 	    e = new Plus(params,Notation.PREFIX);
 		c.printExpressionDetails(e);
 		c.eval(e);
-	
+
+		List<Expression> params7 = new ArrayList<>();
+		Collections.addAll(params7, new MyNumber(new BigDecimal(-3) ), new MyNumber(new BigDecimal(-4) ), new MyNumber(new BigDecimal(5)));
+		e = new Plus(params7,Notation.PREFIX);
+		c.printExpressionDetails(e);
+		c.eval(e);
+
 		List<Expression> params2 = new ArrayList<>();
-		Collections.addAll(params2, new MyNumber(-5), new MyNumber(3));
+		Collections.addAll(params2, new MyNumber(new BigDecimal(-5)), new MyNumber(new BigDecimal(3)));
 		e = new Minus(params2, Notation.INFIX);
 		c.print(e);
 		c.eval(e);
 
 		List<Expression> params5 = new ArrayList<>();
-		Collections.addAll(params5, new MyNumber(-5), new MyNumber(-3));
+		Collections.addAll(params5, new MyNumber(new BigDecimal(6.95)), new MyNumber(new BigDecimal(7.40)));
 		e = new Minus(params5, Notation.INFIX);
 		c.print(e);
 		c.eval(e);
 
 		List<Expression> params6 = new ArrayList<>();
-		Collections.addAll(params6, new MyNumber(7), new MyNumber(2));
+		Collections.addAll(params6, new MyNumber(new BigDecimal(7)), new MyNumber(new BigDecimal(2)));
 		e = new Divides(params6, Notation.INFIX);
 		c.print(e);
 		c.eval(e);
@@ -62,7 +69,7 @@ public class Main {
 		c.eval(e);
 
 		List<Expression> params4 = new ArrayList<>();
-		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
+		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(new BigDecimal(-5)));
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);
