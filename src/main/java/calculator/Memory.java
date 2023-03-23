@@ -1,15 +1,13 @@
 package calculator;
 
-import cli.InputUser;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Memory {
-    private ArrayList<Result> memory;
-    private int size;
+import static cli.InputUser.*;
 
+public class Memory {
+    private ArrayList<Variable> memory;
+    private int size;
     private static final String path = "memlog/";
     private static final String logFile = "log.txt";
     private static final String MemoryFile = "memory.txt";
@@ -18,28 +16,18 @@ public class Memory {
     public Memory(int size){
         memory = new ArrayList<>();
         this.size = size;
-        try {
-            load(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public Memory() {
         memory = new ArrayList<>();
         this.size = -1;
-        try {
-            load(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
-    public ArrayList<Result> getMemory() {
+    public ArrayList<Variable> getMemory() {
         return memory;
     }
 
-    public void setMemory(ArrayList<Result> memory) {
+    public void setMemory(ArrayList<Variable> memory) {
         this.memory = memory;
     }
 
@@ -47,22 +35,25 @@ public class Memory {
         if (memory.size() == size) {
             throw new RuntimeException("Memory is full");
         }
-        for(Result r: memory) {
+        for(Variable r: memory) {
             if (r.getVariable().equals(variable)) {
                 throw new RuntimeException("Variable already exists");
             }
         }
-        memory.add(new Result(variable, result, expression));
+        memory.add(new Variable(variable, result, expression));
     }
 
     public void add(int result, Expression expression){
+        if (memory.size() == size) {
+            throw new RuntimeException("Memory is full");
+        }
         String uniqueID = UUID.randomUUID().toString();
-        this.getMemory().add(new Result(uniqueID, result, expression));
+        this.getMemory().add(new Variable(uniqueID, result, expression));
     }
 
 
     public void remove(String variable){
-        for(Result r: memory) {
+        for(Variable r: memory) {
             if (r.getVariable().equals(variable)) {
                 memory.remove(r);
                 return;
@@ -94,29 +85,32 @@ public class Memory {
             display();
         }
         for(int a = memory.size()-n; a!= memory.size(); a++) {
-            Result r = this.getMemory().get(a);
-            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getResult() + ", Expression :  " + r.getExpression());
+            Variable r = this.getMemory().get(a);
+            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
         }
     }
 
     public void display() {
-        for (Result r : memory) {
-            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getResult() + ", Expression :  " + r.getExpression());
+        for (Variable r : memory) {
+            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
         }
     }
 
-    public void save(String path) {
+    public void saveLog() {
         File log = new File(path + logFile);
-        File memory = new File(path + MemoryFile);
         saveFile(log);
+    }
+
+    public void saveMemory() {
+        File memory = new File(path + MemoryFile);
         saveFile(memory);
     }
 
     private void saveFile(File file) {
         try {
             Formatter formatter = new Formatter(file);
-            for (Result r : memory) {
-                formatter.format("%s /// %s /// %d /// %s", r.getTimeStamp(), r.getVariable(), r.getResult(), r.getExpression());
+            for (Variable r : memory) {
+                formatter.format("%s %%% %s %%% %d %%% %s", r.getTimeStamp(), r.getVariable(), r.getValue(), r.getExpression());
             }
         } catch (Exception e) {
             System.out.println("Error writing to log or memory file");
@@ -124,36 +118,66 @@ public class Memory {
     }
 
     public void loadFile(File file)  {
-        if(!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (Exception e) {
-                System.out.println("Error creating log file");
-            }
-        } else {
-            try {
-                Scanner sc = new Scanner(file);
-                while (sc.hasNextLine()) {
-                    String line = sc.nextLine();
-                    String[] data = line.split(" /// ");
-                    String timeStamp = data[0];
-                    String variable = data[1];
-                    int result =  Integer.parseInt(data[2]);
-                    String expression = data[3];
-                    // TODO : add expression to result
-                    //InputUser inputUser = new InputUser();
-                    memory.add(new Result(variable, result, /*new Expression(expression)*/null));
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] data = line.split(" %%% ");
+                String timeStamp = data[0];
+                String name = data[1];
+                int value =  Integer.parseInt(data[2]);
+                String expressionString = data[3];
+                List<Expression> expressions = new ArrayList<>();;
+                String operator = null;
+                Notation notation = checkNotation(expressionString);
+                for (int i = 0; i < expressionString.length(); i++) {
+                    if (isNumber(String.valueOf(expressionString.charAt(i)))) {
+                        expressions.add(new MyNumber(Integer.parseInt(String.valueOf(expressionString.charAt(i)))));
+                    }
+                    if (isOperator(String.valueOf(expressionString.charAt(i)))) {
+                        operator = String.valueOf(expressionString.charAt(i));
+                    }
                 }
-            } catch (Exception e) {
-                System.out.println("Error reading log or memory file");
+                System.out.println(operator);
+                System.out.println(expressions);
+                System.out.println(notation);
+                if (operator == null) {
+                    Expression expression = new MyNumber(Integer.parseInt(expressionString));
+                    System.out.println(expression);
+                    Variable variable = new Variable(name, value, expression, timeStamp);
+                    memory.add(variable);
+                } else {
+                    Expression expression = getOperator(operator, expressions, notation);
+                    System.out.println(expression);
+                    Variable variable = new Variable(name, value, expression, timeStamp);
+                    memory.add(variable);
+                }
             }
+        } catch (Exception e) {
+            //System.out.println("Error reading log or memory file");
+            e.printStackTrace();
         }
     }
 
-    public void load(String path) throws FileNotFoundException {
-        File log = new File(path + logFile);
+    private Notation checkNotation(String expression) {
+        if (isOperator(String.valueOf(expression.charAt(0)))) {
+            return Notation.PREFIX;
+        } else if (isOperator(String.valueOf(expression.charAt(expression.length() - 1)))) {
+            return Notation.POSTFIX;
+        } else {
+            return Notation.INFIX;
+        }
+    }
+
+    public void loadMemory() {
         File memory = new File(path + MemoryFile);
-        loadFile(log);
         loadFile(memory);
     }
+
+    public void loadLog() {
+        File log = new File(path + logFile);
+        loadFile(log);
+    }
+
+
 }

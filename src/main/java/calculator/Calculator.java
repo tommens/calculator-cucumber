@@ -57,15 +57,6 @@ public class Calculator {
         return v.getResult();
     }
 
-    public int evalVariable(Expression e, String variable) {
-        // create a new visitor to evaluate expressions
-        Evaluator v = new Evaluator();
-        // and ask the expression to accept this visitor to start the evaluation process
-        e.accept(v);
-        // and return the result of the evaluation at the end of the process
-        return v.getResult();
-    }
-
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct
      public Boolean validate(Expression e)

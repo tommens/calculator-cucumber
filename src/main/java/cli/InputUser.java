@@ -153,6 +153,7 @@ public class InputUser
     public int compute(boolean isVerbose)
     {
         String operator = null;
+        // System.out.println(user_input_list); // [2, +, 2]
         for (String s : user_input_list)
         {
             if (isNumber(s))
@@ -160,12 +161,14 @@ public class InputUser
             else if (isOperator(s))
                 operator = s;
         }
+        // System.out.println(list_of_expression); // [2, 2]
         if (operator != null)
         {
             Expression e = getOperator(operator, list_of_expression, this.notation);
+            System.out.println(e);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
-            return  new Calculator().eval(e);
+            return new Calculator().eval(e);
         }
         return 0;
     }

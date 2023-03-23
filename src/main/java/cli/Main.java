@@ -1,5 +1,6 @@
 package cli;
 
+import calculator.Memory;
 import calculator.Notation;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class Main
     private static Notation notation = Notation.INFIX;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
+
+    private static Memory memory = new Memory();
+    private static Memory log = new Memory();
 
 
     /**
@@ -88,10 +92,14 @@ public class Main
     {
         System.out.print("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
         printMenu();
+        //memory.loadLog();
+        //log.loadLog();
         while(isRunning)
         {
             get_input();
         }
         System.out.println("$> Bye bye !");
+        //memory.saveMemory();
+        //log.saveLog();
     }
 }

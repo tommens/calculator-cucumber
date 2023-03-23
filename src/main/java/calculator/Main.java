@@ -24,6 +24,8 @@ public class Main {
 
   	Expression e;
   	Calculator c = new Calculator();
+	  Memory log = new Memory();
+	  log.loadLog();
 
 		try{
 
@@ -55,10 +57,9 @@ public class Main {
 		c.print(e);
 		c.eval(e);
 	}
-
 	catch(IllegalConstruction exception) {
 		System.out.println("cannot create operations without parameters");
 		}
+		log.display();
  	}
-
 }
