@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+import static java.lang.Math.pow;
+
 /** This class represents the arithmetic operation "-".
  * The class extends an abstract superclass Operation.
  * Other subclasses of Operation represent other arithmetic operations.
@@ -61,15 +63,15 @@ public final class Minus extends Operation {
         if (l_exp > r_exp) {
             exp = l_exp;
             int gap = l_exp - r_exp;
-            new_val = l_val.subtract(r_val.divide(BigDecimal.valueOf(10 * gap), MathContext.DECIMAL128));
+            new_val = l_val.subtract(r_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
 
         } else if (l_exp < r_exp) {
-            exp = r_exp;
+            exp = l_exp;
             int gap = r_exp - l_exp;
-            new_val = r_val.subtract(l_val.divide(BigDecimal.valueOf(10 * gap), MathContext.DECIMAL128));
+            new_val = l_val.subtract(r_val.multiply(BigDecimal.valueOf(pow(10,gap))), MathContext.DECIMAL128);
         } else {
             exp = l_exp;
-            new_val = r_val.subtract(l_val);
+            new_val = l_val.subtract(r_val);
         }
         return new MyNumber(new_val, exp);
     }

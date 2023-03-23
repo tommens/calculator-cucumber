@@ -59,20 +59,8 @@ public final class Times extends Operation {
         int l_exp = l.getexp();
         int r_exp = r.getexp();
 
-        if (l_exp > r_exp) {
-            exp = l_exp;
-            int gap = l_exp - r_exp;
-            new_val = l_val.add(r_val.divide(BigDecimal.valueOf(10 * gap), MathContext.DECIMAL128));
-
-        } else if (l_exp < r_exp) {
-            exp = r_exp;
-            int gap = r_exp - l_exp;
-            new_val = r_val.add(l_val.divide(BigDecimal.valueOf(10 * gap), MathContext.DECIMAL128));
-        } else {
-            exp = l_exp;
-            new_val = r_val.add(l_val);
-        }
-
+        new_val=l_val.multiply(r_val);
+        exp=l_exp+r_exp;
 
         return new MyNumber(new_val, exp);
     }

@@ -4,6 +4,8 @@ import visitor.Visitor;
 
 import java.math.BigDecimal;
 
+import static java.lang.Math.pow;
+
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -14,7 +16,7 @@ import java.math.BigDecimal;
  */
 public class MyNumber implements Expression
 {
-    public RealNumberNotation notation = RealNumberNotation.SCIENTIFIC;
+    public RealNumberNotation notation = RealNumberNotation.TRADITIONAL;
   private final BigDecimal value;
   private final int exp;
 
@@ -88,16 +90,18 @@ public class MyNumber implements Expression
      */
   @Override
   public String toString() {
-      return switch (notation) {
-          case TRADITIONAL ->
-                  String.format(value.toString());
+      if (exp!=0) {
+          return switch (notation) {
+              case TRADITIONAL -> String.format(value.multiply(new BigDecimal(pow(10, exp))).toString());
 
-          case SCIENTIFIC ->
-                  String.format(value.toString()+"x10^"+(exp));
+              case SCIENTIFIC -> String.format(value.toString() + "x10^" + (exp));
 
-          case E_NOTATION ->
-                  String.format(value.toString()+"E^"+(exp));
-      };
+              case E_NOTATION -> String.format(value.toString() + "E^" + (exp));
+          };
+      }
+      else{
+          return String.format(value.toString());
+      }
   }
 
 
@@ -120,7 +124,24 @@ public class MyNumber implements Expression
       if (!(o instanceof MyNumber)) {
             return false;
       }
-      return this.value == ((MyNumber)o).value;
+
+      if(this.exp==0){
+          if(((MyNumber)o).exp==0){
+              return this.value.equals(((MyNumber)o).value);
+          }
+          else{
+              return this.value.equals(((MyNumber)o).value.multiply(new BigDecimal(pow(10,((MyNumber)o).exp))));
+          }
+      }
+      else{
+          if(((MyNumber)o).exp==0){
+              return this.value.multiply(new BigDecimal(pow(10,this.exp))).equals(((MyNumber)o).value);
+          }
+          else{
+              return this.value.multiply(new BigDecimal(pow(10,this.exp))).equals(((MyNumber) o).value.multiply(new BigDecimal(pow(10, ((MyNumber) o).exp))));
+          }
+      }
+
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }

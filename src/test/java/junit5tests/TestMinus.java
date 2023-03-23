@@ -6,20 +6,21 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class TestMinus {
 
-	private final int value1 = 8;
-	private final Double value2 = 6.5;
+	private final BigDecimal value1 = new BigDecimal(8);
+	private final BigDecimal value2 = new BigDecimal(6.5);
 	private Minus op;
 	private List<Expression> params;
 
 	@BeforeEach
 	void setUp() {
-		  params = Arrays.asList(new MyNumber(value1),new MyRealNumber(value2));
+		  params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
 		  try { op = new Minus(params); }
 		  catch(IllegalConstruction e) { fail(); }
 	}
@@ -44,7 +45,7 @@ class TestMinus {
 	@Test
 	void testEquals() {
 		// Two similar expressions, constructed separately (and using different constructors) should not be equal
-		List<Expression> p = Arrays.asList(new MyNumber(value1), new MyRealNumber(value2));
+		List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
 		try {
 			Minus e = new Minus(p, Notation.INFIX);
 			assertEquals(op, e);
@@ -61,7 +62,7 @@ class TestMinus {
 	@Test
 	void testHashCode() {
 		// Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-		List<Expression> p = Arrays.asList(new MyNumber(value1), new MyRealNumber(value2));
+		List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
 		try {
 			Minus e = new Minus(p, Notation.INFIX);
 			assertEquals(e.hashCode(), op.hashCode());

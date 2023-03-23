@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,9 +20,9 @@ class TestOperation {
 	void setUp() throws Exception {
 
 
-		List<Expression> params1 = Arrays.asList(new MyRealNumber(3.5), new MyRealNumber(4.0), new MyNumber(5));
-		List<Expression> params2 = Arrays.asList(new MyNumber(1), new MyRealNumber(4.8));
-		List<Expression> params3 = Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(7));
+		List<Expression> params1 = Arrays.asList(new MyNumber(new BigDecimal(3.5)), new MyNumber(new BigDecimal(4.0)), new MyNumber(new BigDecimal(5)));
+		List<Expression> params2 = Arrays.asList(new MyNumber(new BigDecimal(1)), new MyNumber(new BigDecimal(4.8)));
+		List<Expression> params3 = Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(new BigDecimal(7)));
 
 		o = new Divides(params3);
 		o2 = new Divides(params3);

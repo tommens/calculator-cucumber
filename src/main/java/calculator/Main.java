@@ -90,25 +90,28 @@ public class Main {
 		c.eval(e);
 
 
-		BigDecimal a= new MyNumber(new BigDecimal(-0.45,precision)).getValue();
-		c.eval(e).equals(a);
-
-		BigDecimal b= new MyNumber(new BigDecimal(-0.45,precision)).getValue();
-		System.out.println(a);
-		System.out.println(c.eval(e));
-		System.out.println(a.equals(c.eval(e)));
-
-
-
 		List<Expression> params11 = new ArrayList<>();
-		Collections.addAll(params11, new MyNumber(new BigDecimal(1,precision),3), new MyNumber(new BigDecimal(1,precision),2));
+		Collections.addAll(params11, new MyNumber(new BigDecimal(8,precision)), new MyNumber(new BigDecimal(6,precision),4));
 		e = new Plus(params11, Notation.INFIX);
 		c.print(e);
 		c.eval(e);
 
 		List<Expression> params10 = new ArrayList<>();
-		Collections.addAll(params10, new MyNumber(new BigDecimal(-1,precision),3), new MyNumber(new BigDecimal(1,precision),2));
+		Collections.addAll(params10, new MyNumber(new BigDecimal(8,precision)), new MyNumber(new BigDecimal(6,precision),4));
 		e = new Minus(params10, Notation.INFIX);
+		c.print(e);
+		c.eval(e);
+
+
+		List<Expression> params12 = new ArrayList<>();
+		Collections.addAll(params12, new MyNumber(new BigDecimal(8,precision)), new MyNumber(new BigDecimal(6,precision),4));
+		e = new Times(params12, Notation.INFIX);
+		c.print(e);
+		c.eval(e);
+
+		List<Expression> params13 = new ArrayList<>();
+		Collections.addAll(params13, new MyNumber(new BigDecimal(8,precision)), new MyNumber(new BigDecimal(4,precision),4));
+		e = new Divides(params13, Notation.INFIX);
 		c.print(e);
 		c.eval(e);
 

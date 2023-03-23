@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CalculatorSteps {
 		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of the list,
 		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+		numbers.get(0).forEach(n -> params.add(new MyNumber(new BigDecimal(n))));
 	    params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
@@ -65,7 +66,7 @@ public class CalculatorSteps {
 	@Given("^the sum of two numbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheSum(int n1, int n2) {
+	public void givenTheSum(BigDecimal n1, BigDecimal n2) {
 		try {
 			params = new ArrayList<>();
 		    params.add(new MyNumber(n1));
@@ -78,7 +79,7 @@ public class CalculatorSteps {
 	@Given("^the difference of two numbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheDiffernce(int n1, int n2) {
+	public void givenTheDiffernce(BigDecimal n1, BigDecimal n2) {
 		try {
 			params = new ArrayList<>();
 			params.add(new MyNumber(n1));
@@ -90,7 +91,7 @@ public class CalculatorSteps {
 	@Given("^the product of two numbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheProduct(int n1, int n2) {
+	public void givenTheProduct(BigDecimal n1, BigDecimal n2) {
 		try {
 			params = new ArrayList<>();
 			params.add(new MyNumber(n1));
@@ -102,7 +103,7 @@ public class CalculatorSteps {
 	@Given("^the quotient of two numbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheQuotient(int n1, int n2) {
+	public void givenTheQuotient(BigDecimal n1, BigDecimal n2) {
 		try {
 			params = new ArrayList<>();
 			params.add(new MyNumber(n1));
@@ -121,7 +122,7 @@ public class CalculatorSteps {
 	}
 
 	@When("^I provide a (.*) number (\\d+)$")
-	public void whenIProvideANumber(String s, int val) {
+	public void whenIProvideANumber(String s, BigDecimal val) {
 		//add extra parameter to the operation
 		params = new ArrayList<>();
 		params.add(new MyNumber(val));
@@ -129,7 +130,7 @@ public class CalculatorSteps {
 	}
 
 	@Then("^the (.*) is (\\d+)$")
-	public void thenTheOperationIs(String s, Double val) {
+	public void thenTheOperationIs(String s, BigDecimal val) {
 		try {
 			switch (s) {
 				case "sum"			->	op = new Plus(params);
@@ -145,7 +146,7 @@ public class CalculatorSteps {
 	}
 
 	@Then("the operation evaluates to {double}")
-	public void thenTheOperationEvaluatesTo(Double val) {
+	public void thenTheOperationEvaluatesTo(BigDecimal val) {
 		assertEquals(val, c.eval(op)); //val => expected
 	}
 

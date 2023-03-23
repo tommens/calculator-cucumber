@@ -10,6 +10,7 @@ import calculator.*;
 import cli.InputUser;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class TestInputUser
@@ -56,7 +57,7 @@ public class TestInputUser
     @Test
     void testGetOperator() throws IllegalConstruction {
         ArrayList<Expression> lst = new ArrayList<>();
-        lst.add(new MyNumber(1)); lst.add(new MyNumber(2));
+        lst.add(new MyNumber(new BigDecimal(1))); lst.add(new MyNumber(new BigDecimal(2)));
         assertEquals(InputUser.getOperator("+", lst, Notation.INFIX), new Plus(lst));
         assertEquals(InputUser.getOperator("-", lst, Notation.INFIX), new Minus(lst));
         assertEquals(InputUser.getOperator("/", lst, Notation.INFIX), new Divides(lst));
@@ -76,18 +77,18 @@ public class TestInputUser
     {
         InputUser user = new InputUser(Notation.INFIX);
         user.setUserInput(InputUser.cleanInput("1 + 2"));
-        assertEquals(user.compute(false), 3);
+        assertEquals(user.compute(false), new MyNumber(new BigDecimal(3)));
 
         user = new InputUser(Notation.INFIX);
         user.setUserInput(InputUser.cleanInput("1"));
-        assertEquals(user.compute(false), 0);
+        assertEquals(user.compute(false), new MyNumber(new BigDecimal(0)));
 
         user = new InputUser(Notation.INFIX);
         user.setUserInput(InputUser.cleanInput("1 +"));
-        assertEquals(user.compute(false), 1);
+        assertEquals(user.compute(false), new MyNumber(new BigDecimal(1)));
 
         user = new InputUser(Notation.INFIX);
         user.setUserInput(InputUser.cleanInput("1 + 2 + 3"));
-        assertEquals(user.compute(false), 6);
+        assertEquals(user.compute(false), new MyNumber(new BigDecimal(6)));
     }
 }
