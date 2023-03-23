@@ -4,6 +4,7 @@ import visitor.Visitor;
 
 import java.math.BigDecimal;
 
+
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
@@ -13,22 +14,37 @@ import java.math.BigDecimal;
  */
 public class MyNumber implements Expression
 {
+    public RealNumberNotation notation = RealNumberNotation.SCIENTIFIC;
   private final BigDecimal value;
+  private final int exp;
+
 
     /** getter method to obtain the value contained in the object
      *
-     * @return The integer number contained in the object
+     * @return BigDecimal number contained in the object
      */
   public BigDecimal getValue() { return value; }
+
+    /** getter method to obtain the exp contained in the object
+     *
+     * @return int number contained in the object
+     */
+    public int getexp() { return exp; }
 
     /**
      * Constructor method
      *
-     * @param v The integer value to be contained in the object
+     * @param v TBigDecimal value to be contained in the object
      */
     public /*constructor*/ MyNumber(BigDecimal v) {
-	  value=v;
+        value=v;
+        exp=0;
 	  }
+
+    public /*constructor*/ MyNumber(BigDecimal v, int e) {
+        value=v;
+        exp=e;
+    }
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -72,8 +88,18 @@ public class MyNumber implements Expression
      */
   @Override
   public String toString() {
-	  return value.toString();
+      return switch (notation) {
+          case TRADITIONAL ->
+                  String.format(value.toString());
+
+          case SCIENTIFIC ->
+                  String.format(value.toString()+"x10^"+(exp));
+
+          case E_NOTATION ->
+                  String.format(value.toString()+"E^"+(exp));
+      };
   }
+
 
   /** Two MyNumber expressions are equal if the values they contain are equal
    *
