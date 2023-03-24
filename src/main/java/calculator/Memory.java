@@ -34,16 +34,16 @@ public class Memory {
         this.memory = memory;
     }
 
-    public void add(String variable, int result, Expression expression){
+    public void add(String name, int value, Expression expression){
         if (memory.size() == size) {
             throw new RuntimeException("Memory is full");
         }
-        for(Variable r: memory) {
-            if (r.getVariable().equals(variable)) {
-                throw new RuntimeException("Variable already exists");
+        for(int i = 0; i < memory.size(); i++){
+            if(memory.get(i).getName().equals(name)){
+                memory.set(i,new Variable(name, value, expression));
             }
         }
-        memory.add(new Variable(variable, result, expression));
+        memory.add(new Variable(name, value, expression));
     }
 
     public void add(int result, Expression expression){
@@ -55,9 +55,9 @@ public class Memory {
     }
 
 
-    public void remove(String variable){
+    public void remove(String name){
         for(Variable r: memory) {
-            if (r.getVariable().equals(variable)) {
+            if (r.getName().equals(name)) {
                 memory.remove(r);
                 return;
             }
@@ -74,7 +74,7 @@ public class Memory {
             return;
         }
         if (size < memory.size()) {
-            throw new RuntimeException("Size is smaller than the number of variables");
+            throw new RuntimeException("submitted size is too small than the number of variables present in the memory");
         }
         this.size = size;
     }
@@ -89,13 +89,13 @@ public class Memory {
         }
         for(int a = memory.size()-n; a!= memory.size(); a++) {
             Variable r = this.getMemory().get(a);
-            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
+            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getName() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
         }
     }
 
     public void display() {
         for (Variable r : memory) {
-            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getVariable() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
+            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getName() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
         }
     }
 
@@ -112,12 +112,34 @@ public class Memory {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Variable r : memory) {
-                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getVariable() + " %%% " + r.getValue() + " %%% " + r.getExpression());
+                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getName() + " %%% " + r.getValue() + " %%% " + r.getExpression());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Expression analyzeString(String expressionString) {
+        List<Expression> expressions = new ArrayList<>();;
+        // TODO : upgrade this part to handle recursive expressions
+        String operator = null;
+        Notation notation = checkNotation(expressionString);
+        for (int i = 0; i < expressionString.length(); i++) {
+            if (isNumber(String.valueOf(expressionString.charAt(i)))) {
+                expressions.add(new MyNumber(Integer.parseInt(String.valueOf(expressionString.charAt(i)))));
+            }
+            if (isOperator(String.valueOf(expressionString.charAt(i)))) {
+                operator = String.valueOf(expressionString.charAt(i));
+            }
+        }
+        if (operator == null) {
+            Expression expression = new MyNumber(Integer.parseInt(expressionString));
+            return expression;
+        } else {
+            Expression expression = getOperator(operator, expressions, notation);
+            return expression;
         }
     }
 
@@ -130,30 +152,8 @@ public class Memory {
                 String timeStamp = data[0];
                 String name = data[1];
                 int value =  Integer.parseInt(data[2]);
-                String expressionString = data[3];
-                List<Expression> expressions = new ArrayList<>();;
-                // TODO : upgrade this part to handle recursive expressions
-                String operator = null;
-                Notation notation = checkNotation(expressionString);
-                for (int i = 0; i < expressionString.length(); i++) {
-                    if (isNumber(String.valueOf(expressionString.charAt(i)))) {
-                        expressions.add(new MyNumber(Integer.parseInt(String.valueOf(expressionString.charAt(i)))));
-                    }
-                    if (isOperator(String.valueOf(expressionString.charAt(i)))) {
-                        operator = String.valueOf(expressionString.charAt(i));
-                    }
-                }
-                if (operator == null) {
-                    Expression expression = new MyNumber(Integer.parseInt(expressionString));
-                    System.out.println(expression);
-                    Variable variable = new Variable(name, value, expression, timeStamp);
-                    memory.add(variable);
-                } else {
-                    Expression expression = getOperator(operator, expressions, notation);
-                    System.out.println(expression);
-                    Variable variable = new Variable(name, value, expression, timeStamp);
-                    memory.add(variable);
-                }
+                Expression expression = analyzeString(data[3]);
+                memory.add(new Variable(name, value, expression, timeStamp));
             }
         } catch (Exception e) {
             System.out.println("Error reading log or memory file");
