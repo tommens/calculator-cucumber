@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigInteger;
+
 /**
  * Problem :
  * ---------
@@ -16,26 +18,26 @@ package calculator;
  */
 public class BasesNumber
 {
-    /**
-     * The base of the number
-     */
+    /**The base of the number*/
     private int base;
+    /**The value of the number*/
+    private String value;
+    /**The value of the number*/
+    private BigInteger integer;
 
-    /**
-     * The value of the number
-     */
-    private int value;
 
     /**
      * The constructor of the class
      * @param base : the base of the number
      * @param value : the value of the number
      */
-    public BasesNumber(int base, int value)
+    public BasesNumber(int base, String value)
     {
         this.base = base;
         this.value = value;
+        integer = new BigInteger(value, base);
     }
+
 
     /**
      * The getter of the base
@@ -46,14 +48,16 @@ public class BasesNumber
         return base;
     }
 
+
     /**
      * The getter of the value
      * @return the value of the number
      */
-    public int getValue()
+    public String getValuetoString()
     {
         return value;
     }
+
 
     /**
      * The setter of the base
@@ -62,55 +66,27 @@ public class BasesNumber
     public void setBase(int base)
     {
         this.base = base;
+        integer = new BigInteger(value, base);
     }
+
 
     /**
      * The setter of the value
      * @param value : the value of the number
      */
-    public void setValue(int value)
+    public void setValue(String value)
     {
         this.value = value;
+        integer = new BigInteger(value, base);
     }
 
-    /**
-     * The method to convert a number from a base to another
-     * @param base : the base of the number
-     * @param value : the value of the number
-     * @return the number converted
-     */
-    public BasesNumber convert(int base, int value)
-    {
-        return new BasesNumber(base, value);
-    }
 
     /**
-     * The method to convert a number from a base to another
-     * @param base : the base of the number
-     * @return the number converted
+     * The getter of the value
+     * @return the value of the number
      */
-    public BasesNumber convert(int base)
+    public int getValueToInt()
     {
-        return new BasesNumber(base, value);
-    }
-
-    /**
-     * The method to convert a number from a base to another
-     * @return the number converted
-     */
-    public BasesNumber convert()
-    {
-        return new BasesNumber(base, value);
-    }
-
-    /**
-     * The method to convert a number from a base to another
-     * @param base : the base of the number
-     * @param value : the value of the number
-     * @return the number converted
-     */
-    public BasesNumber convert(BasesNumber base, BasesNumber value)
-    {
-        return new BasesNumber(base.getBase(), value.getValue());
+        return integer.intValue();
     }
 }
