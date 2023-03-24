@@ -36,6 +36,60 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 5
     Then the operation evaluates to 1
 
+  Scenario: Modulus two integer numbers
+    Given an integer operation '%'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 2
+
+  Scenario: pgcd two integer numbers
+    Given an integer operation 'pgcd'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 1
+
+    Scenario: ppcm two integer numbers
+    Given an integer operation 'ppcm'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 35
+
+    Scenario: prime two integer numbers
+    Given an integer operation 'prime'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 1
+
+  Scenario: prime two integer numbers
+    Given an integer operation 'prime'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 0
+
+    Scenario: pow two integer numbers
+    Given an integer operation '^'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 16
+
+  Scenario: combinatorial two integer numbers
+    Given an integer operation 'comb'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 6
+
+  Scenario: eucledian two integer numbers
+    Given an integer operation 'gcd'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 2
+
+  Scenario: euclidian division two integer numbers
+    Given an integer operation '//'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 0
+
   Scenario: Printing the sum of two integer numbers
     Given the sum of two numbers 8 and 6
     Then its INFIX notation is ( 8 + 6 )

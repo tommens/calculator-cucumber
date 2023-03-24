@@ -40,6 +40,14 @@ public class CalculatorSteps {
 				case "-"	->	op = new Minus(params);
 				case "*"	->	op = new Times(params);
 				case "/"	->	op = new Divides(params);
+				case "ppcm"	->	op = new Ppcm(params);
+				case "pgcd"	->	op = new Pgcd(params);
+				case "comb" ->	op = new Combinatorial(params);
+				case "gcd"  ->	op = new Eucledian(params);
+				case "//"   ->  op = new EuclidianDivides(params);
+				case "%"    ->  op = new Modulo(params);//
+				case "^"    ->  op = new Pow(params);
+				case "prime"->  op = new PrimeNumber(params);
 				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {
@@ -235,7 +243,7 @@ public class CalculatorSteps {
 				case "product"		->	op = new Times(params);
 				case "quotient"		->	op = new Divides(params);
 				case "difference"	->	op = new Minus(params);
-				case "modulus"		->	op = new Modulo(params);
+				case "modulus"		->	op = new Modulo(params);//TODO
 				default -> fail();
 			}
 			assertEquals(val, c.eval(op));
