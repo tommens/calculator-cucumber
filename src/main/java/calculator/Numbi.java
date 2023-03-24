@@ -1,10 +1,14 @@
 package calculator;
 
-import calculator.Expression;
 import visitor.Visitor;
 
-// add extend Number to make it a number
-
+/**
+ * Numbi is an abstract class that represents arithmetic numbers,
+ * which are a special kind of Expressions, just like operations are.
+ *
+ * @see Expression
+ * @see Operation
+ */
 public abstract class Numbi implements Expression
 {
     /**
@@ -19,24 +23,8 @@ public abstract class Numbi implements Expression
     }
 
     /**
-     * Counts the depth of nested expressions in an arithmetic expression
-     * @return The depth of an arithmetic expression
+     * The getValue method is used to obtain the value contained in the object
+     * @return The value contained in the object
      */
-    //@Override
-    public abstract <E extends Number> E countDepth();
-
-    /**
-     * Counts the number of operations recursively contained in an arithmetic expression
-     * @return The number of operations contained in an arithmetic expression
-     */
-    //@Override
-    public abstract <E extends Number> E countOps();
-    /**
-     * Counts the number of values recursively contained in an arithmetic expression
-     * @return The number of values contained in an arithmetic expression
-     */
-    //@Override
-    public abstract <E extends Number> E countNbs();
-
     public abstract <E extends Number> E getValue();
 }
