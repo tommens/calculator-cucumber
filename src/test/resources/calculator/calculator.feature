@@ -42,6 +42,54 @@ Feature: Integer Arithmetic Expressions
     And its PREFIX notation is + (8, 6)
     And its POSTFIX notation is (8, 6) +
 
+  Scenario: Printing the modulus of two integer numbers
+    Given the modulus of two numbers 8 and 6
+    Then its INFIX notation is ( 8 % 6 )
+    And its PREFIX notation is % (8, 6)
+    And its POSTFIX notation is (8, 6) %
+
+  Scenario: Printing the pgcd of two integer numbers
+    Given the pgcd of two numbers 8 and 6
+    Then its INFIX notation is ( 8 pgcd 6 )
+    And its PREFIX notation is pgcd (8, 6)
+    And its POSTFIX notation is (8, 6) pgcd
+
+    Scenario: Printing the ppcm of two integer numbers
+    Given the ppcm of two numbers 8 and 6
+    Then its INFIX notation is ( 8 ppcm 6 )
+    And its PREFIX notation is ppcm (8, 6)
+    And its POSTFIX notation is (8, 6) ppcm
+
+    Scenario: Printing the pow of two integer numbers
+    Given the pow of two numbers 8 and 6
+    Then its INFIX notation is ( 8 ^ 6 )
+    And its PREFIX notation is ^ (8, 6)
+    And its POSTFIX notation is (8, 6) ^
+
+    Scenario: Printing the prime of two integer numbers
+    Given the prime between two numbers 8 and 6
+    Then its INFIX notation is ( 8 prime 6 )
+    And its PREFIX notation is prime (8, 6)
+    And its POSTFIX notation is (8, 6) prime
+
+    Scenario: Printing the combinatorial of two integer numbers
+    Given the combinatorial of two numbers 8 and 6
+    Then its INFIX notation is ( 8 comb 6 )
+    And its PREFIX notation is comb (8, 6)
+    And its POSTFIX notation is (8, 6) comb
+
+    Scenario: Printing the eucledian of two integer numbers
+    Given the eucledian of two numbers 8 and 6
+    Then its INFIX notation is ( 8 gcd 6 )
+    And its PREFIX notation is gcd (8, 6)
+    And its POSTFIX notation is (8, 6) gcd
+
+    Scenario: Printing the euclidian division of two integer numbers
+    Given the euclidian division of two numbers 8 and 6
+    Then its INFIX notation is ( 8 // 6 )
+    And its PREFIX notation is // (8, 6)
+    And its POSTFIX notation is (8, 6) //
+
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
   # strings. In this case, the table is of dimension 1 * 3 (1 line and three columns).

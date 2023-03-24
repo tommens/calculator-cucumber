@@ -1,6 +1,7 @@
 package cucumbertests;
 
 import calculator.*;
+import calculator.arithmetics.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -120,6 +121,104 @@ public class CalculatorSteps {
 		else fail(notation + " is not a correct notation! ");
 	}
 
+	@Then("^the modulus of two numbers (\\d+) and (\\d+)$")
+	public void testOfModulo(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Modulo(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("^the factorial of a number (\\d+)$")
+	public void testOfFactorial(int n1)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			op = new Facto(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the pgcd of two numbers {int} and {int}")
+	public void testOfPGCD(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Pgcd(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the ppcm of two numbers {int} and {int}")
+	public void testOfPPCM(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Ppcm(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the pow of two numbers {int} and {int}")
+	public void testOfPow(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Pow(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the prime between two numbers {int} and {int}")
+	public void testOfPrime(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new PrimeNumber(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the combinatorial of two numbers {int} and {int}")
+	public void testOfCombination(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Combinatorial(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the eucledian of two numbers {int} and {int}")
+	public void testOfEucledian(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Eucledian(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the euclidian division of two numbers {int} and {int}")
+	public void testOfEuclidianDivision(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new EuclidianDivides(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
 	@When("^I provide a (.*) number (\\d+)$")
 	public void whenIProvideANumber(String s, int val) {
 		//add extra parameter to the operation
@@ -136,6 +235,7 @@ public class CalculatorSteps {
 				case "product"		->	op = new Times(params);
 				case "quotient"		->	op = new Divides(params);
 				case "difference"	->	op = new Minus(params);
+				case "modulus"		->	op = new Modulo(params);
 				default -> fail();
 			}
 			assertEquals(val, c.eval(op));

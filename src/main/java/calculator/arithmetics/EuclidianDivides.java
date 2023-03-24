@@ -40,7 +40,7 @@ public class EuclidianDivides extends Operation
     public EuclidianDivides(List<Expression> elist, Notation notation) throws IllegalConstruction
     {
         super(elist, notation);
-        symbol = "euclidian";
+        symbol = "//";
         neutral = 1;
     }
 
