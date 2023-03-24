@@ -18,9 +18,6 @@ public class Main
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
 
-    private static Memory memory = new Memory();
-    private static Memory log = new Memory();
-
 
     /**
      * Print the help

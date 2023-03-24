@@ -89,13 +89,13 @@ public class Memory {
         }
         for(int a = memory.size()-n; a!= memory.size(); a++) {
             Variable r = this.getMemory().get(a);
-            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getName() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
+            System.out.println(r.toStringDetails());
         }
     }
 
     public void display() {
         for (Variable r : memory) {
-            System.out.println("Timestamp : "+r.getTimeStamp()+", ID : "+r.getName() + ", Result : " + r.getValue() + ", Expression :  " + r.getExpression());
+            System.out.println(r.toStringDetails());
         }
     }
 
