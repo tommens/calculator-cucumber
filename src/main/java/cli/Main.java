@@ -92,14 +92,10 @@ public class Main
     {
         System.out.print("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
         printMenu();
-        //memory.loadLog();
-        //log.loadLog();
         while(isRunning)
         {
             get_input();
         }
         System.out.println("$> Bye bye !");
-        //memory.saveMemory();
-        //log.saveLog();
     }
 }

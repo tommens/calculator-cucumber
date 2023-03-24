@@ -1,6 +1,9 @@
 package calculator;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 import static cli.InputUser.*;
@@ -97,23 +100,24 @@ public class Memory {
     }
 
     public void saveLog() {
-        File log = new File(path + logFile);
-        saveFile(log);
+        save(logFile);
     }
 
     public void saveMemory() {
-        File memory = new File(path + MemoryFile);
-        saveFile(memory);
+        save(MemoryFile);
     }
 
-    private void saveFile(File file) {
+    private void save(String memoryFile) {
         try {
-            Formatter formatter = new Formatter(file);
+            FileWriter fileWriter = new FileWriter(path + memoryFile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Variable r : memory) {
-                formatter.format("%s %%% %s %%% %d %%% %s", r.getTimeStamp(), r.getVariable(), r.getValue(), r.getExpression());
+                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getVariable() + " %%% " + r.getValue() + " %%% " + r.getExpression());
+                bufferedWriter.newLine();
             }
-        } catch (Exception e) {
-            System.out.println("Error writing to log or memory file");
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -128,6 +132,7 @@ public class Memory {
                 int value =  Integer.parseInt(data[2]);
                 String expressionString = data[3];
                 List<Expression> expressions = new ArrayList<>();;
+                // TODO : upgrade this part to handle recursive expressions
                 String operator = null;
                 Notation notation = checkNotation(expressionString);
                 for (int i = 0; i < expressionString.length(); i++) {
@@ -138,9 +143,6 @@ public class Memory {
                         operator = String.valueOf(expressionString.charAt(i));
                     }
                 }
-                System.out.println(operator);
-                System.out.println(expressions);
-                System.out.println(notation);
                 if (operator == null) {
                     Expression expression = new MyNumber(Integer.parseInt(expressionString));
                     System.out.println(expression);
@@ -154,8 +156,7 @@ public class Memory {
                 }
             }
         } catch (Exception e) {
-            //System.out.println("Error reading log or memory file");
-            e.printStackTrace();
+            System.out.println("Error reading log or memory file");
         }
     }
 

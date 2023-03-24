@@ -61,5 +61,6 @@ public class Main {
 		System.out.println("cannot create operations without parameters");
 		}
 		log.display();
+		log.saveLog();
  	}
 }

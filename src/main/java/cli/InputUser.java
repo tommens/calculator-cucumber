@@ -165,7 +165,6 @@ public class InputUser
         if (operator != null)
         {
             Expression e = getOperator(operator, list_of_expression, this.notation);
-            System.out.println(e);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
             return new Calculator().eval(e);
