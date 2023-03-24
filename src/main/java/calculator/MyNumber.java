@@ -32,16 +32,6 @@ public class MyNumber extends Numbi
           value = v;
       }
 
-    /**
-     * accept method to implement the visitor design pattern to traverse arithmetic expressions.
-     * Each number will pass itself to the visitor object to get processed by the visitor.
-     *
-     * @param v	The visitor object
-     */
-  public void accept(Visitor v) {
-      v.visit(this);
-  }
-
 
     /** The depth of a number expression is always 0
      *

@@ -16,7 +16,7 @@ import java.math.BigInteger;
  * from 0 to 9. I would not go higher than base 36, since in practice nobody
  * be using that
  */
-public class BasesNumber
+public class BasesNumber extends Numbi
 {
     /**The base of the number*/
     private int base;
@@ -82,10 +82,44 @@ public class BasesNumber
 
 
     /**
-     * The getter of the value
-     * @return the value of the number
+     * Counts the depth of nested expressions in an arithmetic expression
+     * @return The depth of an arithmetic expression
      */
-    public int getValueToInt()
+    @Override
+    public Integer countDepth()
+    {
+        return 0;
+    }
+
+
+    /**
+     * Counts the number of operations recursively contained in an arithmetic expression
+     * @return The number of operations contained in an arithmetic expression
+     */
+    @Override
+    public Integer countOps()
+    {
+        return 0;
+    }
+
+
+    /**
+     * Counts the number of values recursively contained in an arithmetic expression
+     * @return The number of values contained in an arithmetic expression
+     */
+    @Override
+    public Integer countNbs()
+    {
+        return 1;
+    }
+
+
+    /**
+     * The getValue method is used to obtain the value contained in the object
+     * @return The value contained in the object
+     */
+    @Override
+    public Integer getValue()
     {
         return integer.intValue();
     }

@@ -33,17 +33,33 @@ public class TestBasesNumber
     void testgetBasesNumber2()
     {
         BasesNumber n = new BasesNumber(2, "11");
-        assertEquals(n.getValueToInt(), 3);
+        assertEquals(n.getValue(), 3);
         n.setValue("111");
-        assertEquals(n.getValueToInt(), 7);
+        assertEquals(n.getValue(), 7);
     }
 
     @Test
     void testgetBasesNumber16()
     {
         BasesNumber n = new BasesNumber(16, "A");
-        assertEquals(n.getValueToInt(), 10);
+        assertEquals(n.getValue(), 10);
         n.setValue("FA");
-        assertEquals(n.getValueToInt(), 250);
+        assertEquals(n.getValue(), 250);
+    }
+
+    @Test
+    void testgetBasesNumber36()
+    {
+        BasesNumber n = new BasesNumber(36, "1Z");
+        assertEquals(n.getValue(), 71);
+    }
+
+    @Test
+    void testgetBasesNumberGetter()
+    {
+        BasesNumber n = new BasesNumber(36, "1Z");
+        assertEquals(n.countDepth(), 0);
+        assertEquals(n.countOps(), 0);
+        assertEquals(n.countNbs(), 1);
     }
 }
