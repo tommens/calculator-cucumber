@@ -2,16 +2,20 @@ package cucumbertests;
 
 import calculator.*;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CalculatorSteps {
 
@@ -47,6 +51,7 @@ public class CalculatorSteps {
 		}
 	}
 
+
 	// The following example shows how to use a DataTable provided as input.
 	// The example looks slightly complex, since DataTables can take as input
 	//  tables in two dimensions, i.e. rows and lines. This is why the input
@@ -63,51 +68,51 @@ public class CalculatorSteps {
 
 	// The string in the Given annotation shows how to use regular expressions...
 	// In this example, the notation d+ is used to represent numbers, i.e. nonempty sequences of digits
-	@Given("^the sum of two numbers (\\d+) and (\\d+)$")
+	@Given("^the sum of two number (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheSum(BigDecimal n1, BigDecimal n2) {
+	public void givenTheSum(MyNumber n1,MyNumber n2) {
 		try {
 			params = new ArrayList<>();
-		    params.add(new MyNumber(n1));
-		    params.add(new MyNumber(n2));
+		    params.add(n1);
+		    params.add(n2);
 		    op = new Plus(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
 
 
-	@Given("^the difference of two numbers (\\d+) and (\\d+)$")
+	@Given("^the difference of two MyNumbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheDiffernce(BigDecimal n1, BigDecimal n2) {
+	public void givenTheDifference(MyNumber n1,MyNumber n2) {
 		try {
 			params = new ArrayList<>();
-			params.add(new MyNumber(n1));
-			params.add(new MyNumber(n2));
+			params.add(n1);
+			params.add(n2);
 			op = new Minus(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
 
-	@Given("^the product of two numbers (\\d+) and (\\d+)$")
+	@Given("^the product of two MyNumbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheProduct(BigDecimal n1, BigDecimal n2) {
+	public void givenTheProduct(MyNumber n1,MyNumber n2) {
 		try {
 			params = new ArrayList<>();
-			params.add(new MyNumber(n1));
-			params.add(new MyNumber(n2));
+			params.add(n1);
+			params.add(n2);
 			op = new Times(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
 
-	@Given("^the quotient of two numbers (\\d+) and (\\d+)$")
+	@Given("^the quotient of two MyNumbers (\\d+) and (\\d+)$")
 	// The alternative, and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
-	public void givenTheQuotient(BigDecimal n1, BigDecimal n2) {
+	public void givenTheQuotient(MyNumber n1,MyNumber n2) {
 		try {
 			params = new ArrayList<>();
-			params.add(new MyNumber(n1));
-			params.add(new MyNumber(n2));
+			params.add(n1);
+			params.add(n2);
 			op = new Divides(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
@@ -139,15 +144,51 @@ public class CalculatorSteps {
 				case "difference"	->	op = new Minus(params);
 				default -> fail();
 			}
-			assertEquals(val, c.eval(op));
+			assertEquals(new MyNumber(val), c.eval(op));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
 	}
 
 	@Then("the operation evaluates to {double}")
-	public void thenTheOperationEvaluatesTo(BigDecimal val) {
-		assertEquals(val, c.eval(op)); //val => expected
+	public void thenTheOperationEvaluatesTo(double val) {
+		assertEquals(new MyNumber(new BigDecimal(val)), c.eval(op)); //val => expected
 	}
 
+
+	@When("I provide a first number with parameters {double} and {int}")
+	public void iProvideAFirstNumberWithParametersAnd(double arg0, int arg1) {
+		params = new ArrayList<>();
+		params.add(new MyNumber(new BigDecimal(arg0),arg1));
+		op.addMoreParams(params);
+	}
+
+	@When("I provide a second number with parameters {double} and {int}")
+	public void iProvideASecondNumberWithParametersAnd(double arg0, int arg1) {
+		params = new ArrayList<>();
+		params.add(new MyNumber(new BigDecimal(arg0),arg1));
+		op.addMoreParams(params);
+	}
+
+	@Then("the operation evaluates to the number with parameters {string} and {int}")
+	public void theOperationEvaluatesToTheNumberWithParametersAnd(String arg0, int arg1) {
+		assertEquals(new MyNumber(new BigDecimal(arg0),arg1), c.eval(op));
+	}
+
+
+	@Given("two number with parameters {string} and {int} and {string} and {int}")
+	public void twoNumberWithParametersArgAndArgAndArgAndArg(String arg0, int arg1, String arg2, int arg3) {
+
+		assertEquals(new MyNumber(new BigDecimal(arg0),arg1), new MyNumber(new BigDecimal(arg2),arg3));
+
+	}
+
+	@Given("one number with parameters {string} and {int}")
+	public void oneNumberWithParametersArgAndArg(String arg0, int arg1) {
+		MyNumber number = new MyNumber(new BigDecimal(arg0),arg1);
+		int a=0;
+		assertEquals(number,number);
+		assertNotEquals(number,null);
+		assertNotEquals(number,a);
+	}
 }

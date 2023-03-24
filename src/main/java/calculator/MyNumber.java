@@ -3,6 +3,7 @@ package calculator;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 import static java.lang.Math.pow;
 
@@ -19,6 +20,8 @@ public class MyNumber implements Expression
     public RealNumberNotation notation = RealNumberNotation.TRADITIONAL;
   private final BigDecimal value;
   private final int exp;
+
+  private final int decimal_number = 15;
 
 
     /** getter method to obtain the value contained in the object
@@ -39,12 +42,12 @@ public class MyNumber implements Expression
      * @param v TBigDecimal value to be contained in the object
      */
     public /*constructor*/ MyNumber(BigDecimal v) {
-        value=v;
+        value=v.round(new MathContext(decimal_number));
         exp=0;
 	  }
 
     public /*constructor*/ MyNumber(BigDecimal v, int e) {
-        value=v;
+        value=v.round(new MathContext(decimal_number));
         exp=e;
     }
 
@@ -92,7 +95,7 @@ public class MyNumber implements Expression
   public String toString() {
       if (exp!=0) {
           return switch (notation) {
-              case TRADITIONAL -> String.format(value.multiply(new BigDecimal(pow(10, exp))).toString());
+              case TRADITIONAL -> String.format(value.multiply(BigDecimal.valueOf(pow(10, exp)).round(new MathContext(decimal_number))).toString());
 
               case SCIENTIFIC -> String.format(value.toString() + "x10^" + (exp));
 
@@ -125,20 +128,21 @@ public class MyNumber implements Expression
             return false;
       }
 
+
       if(this.exp==0){
           if(((MyNumber)o).exp==0){
-              return this.value.equals(((MyNumber)o).value);
+              return (this.value.compareTo(((MyNumber)o).value)==0);
           }
           else{
-              return this.value.equals(((MyNumber)o).value.multiply(new BigDecimal(pow(10,((MyNumber)o).exp))));
+              return (this.value.compareTo(((MyNumber)o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
           }
       }
       else{
           if(((MyNumber)o).exp==0){
-              return this.value.multiply(new BigDecimal(pow(10,this.exp))).equals(((MyNumber)o).value);
+              return (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber)o).value)==0);
           }
           else{
-              return this.value.multiply(new BigDecimal(pow(10,this.exp))).equals(((MyNumber) o).value.multiply(new BigDecimal(pow(10, ((MyNumber) o).exp))));
+              return (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber) o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
           }
       }
 
