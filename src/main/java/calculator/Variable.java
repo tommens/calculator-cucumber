@@ -24,6 +24,14 @@ public class Variable extends MyNumber {
         this.timeStamp = timeStamp;
     }
 
+    public Variable(String name, int value) {
+        super(value);
+        this.name = name;
+        this.expression = new MyNumber(value);
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy.HH:mm:ss");
+        this.timeStamp = df.format(new Date());
+    }
+
     public String getName() {
         return name;
     }
