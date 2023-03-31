@@ -8,53 +8,125 @@ import java.util.*;
 
 import static cli.InputUser.*;
 
+/**
+ * The memory class used to store the variables and the log
+ */
+
 public class Memory {
+
+    /**
+     * The memory is a arraylist of variables
+     */
     private ArrayList<Variable> memory;
+
+    /**
+     * The size of the memory
+     * -1 means infinite
+     */
     private int size;
+
+    /**
+     * The path to the log and memory files
+     */
     private static final String path = "memlog/";
+
+    /**
+     * The name of the log file
+     */
     private static final String logFile = "log.txt";
+
+    /**
+     * The name of the memory file
+     */
     private static final String MemoryFile = "memory.txt";
 
 
+    /**
+     * The constructor of the memory
+     * @param size the size of the memory
+     */
     public Memory(int size){
         memory = new ArrayList<>();
         this.size = size;
     }
 
+    /**
+     * The constructor of the memory
+     * The size is infinite
+     */
     public Memory() {
         memory = new ArrayList<>();
         this.size = -1;
     }
 
+    /**
+     * The getter of the memory
+     * @return the memory as an arraylist of variables
+     */
     public ArrayList<Variable> getMemory() {
         return memory;
     }
 
+    /**
+     * The setter of the memory
+     * @param memory the new memory
+     */
     public void setMemory(ArrayList<Variable> memory) {
         this.memory = memory;
     }
 
+    /**
+     * Add a variable to the memory
+     * @param name the name of the variable
+     * @param value the value of the variable
+     * @param expression the expression of the variable
+     */
     public void add(String name, int value, Expression expression){
-        if (memory.size() == size) {
+        if (this.getSize() == size) {
             throw new RuntimeException("Memory is full");
         }
+        // check if the variable already exists
         for(int i = 0; i < memory.size(); i++){
             if(memory.get(i).getName().equals(name)){
+                // overwrite the variable
                 memory.set(i,new Variable(name, value, expression));
             }
         }
         memory.add(new Variable(name, value, expression));
     }
 
-    public void add(int result, Expression expression){
+    /**
+     * Add a variable to the memory with an ID generated automatically as name
+     * used for the log
+     * @param value  the value of the variable
+     * @param expression the expression of the variable
+     */
+    public void add(int value, Expression expression){
         if (memory.size() == size) {
             throw new RuntimeException("Memory is full");
         }
         String uniqueID = UUID.randomUUID().toString();
-        this.getMemory().add(new Variable(uniqueID, result, expression));
+        this.getMemory().add(new Variable(uniqueID, value, expression));
     }
 
+    /**
+     * Get a variable from the memory
+     * @param name the name of the variable
+     * @return the variable
+     */
+    public Variable get(String name){
+        for(Variable r: memory) {
+            if (r.getName().equals(name)) {
+                return r;
+            }
+        }
+        throw new RuntimeException("Variable does not exist");
+    }
 
+    /**
+     * Remove a variable from the memory
+     * @param name the name of the variable
+     */
     public void remove(String name){
         for(Variable r: memory) {
             if (r.getName().equals(name)) {
@@ -64,10 +136,19 @@ public class Memory {
         }
         throw new RuntimeException("Variable does not exist");
     }
+
+    /**
+     * Get the size of the memory
+     * @return the size of the memory
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Redefine the size of the memory
+     * @param size the new size of the memory
+     */
     public void setSize(int size) {
         if (size < 0) {
             this.size = size;
@@ -79,10 +160,17 @@ public class Memory {
         this.size = size;
     }
 
+    /**
+     * Clear the memory
+     */
     public void clearMemory(){
         memory.clear();
     }
 
+    /**
+     * display last n variables entered into memory
+     * @param n
+     */
     public void displayLastData(int n) {
         if (n > memory.size()) {
             display();
@@ -93,20 +181,33 @@ public class Memory {
         }
     }
 
+    /**
+     * display the whole memory
+     */
     public void display() {
         for (Variable r : memory) {
             System.out.println(r.toStringDetails());
         }
     }
 
+    /**
+     * Save the log
+     */
     public void saveLog() {
         save(logFile);
     }
 
+    /**
+     * Save the memory
+     */
     public void saveMemory() {
         save(MemoryFile);
     }
 
+    /**
+     * Save the memory or the log
+     * @param memoryFile the name of the file
+     */
     private void save(String memoryFile) {
         try {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
@@ -121,6 +222,9 @@ public class Memory {
         }
     }
 
+    /**
+     * convert a string expression to an object expression
+     */
     public Expression analyzeString(String expressionString) {
         List<Expression> expressions = new ArrayList<>();;
         // TODO : upgrade this part to handle recursive expressions
@@ -143,6 +247,9 @@ public class Memory {
         }
     }
 
+    /**
+     *  Load the file in the memory
+     */
     public void loadFile(File file)  {
         try {
             Scanner sc = new Scanner(file);
@@ -170,11 +277,17 @@ public class Memory {
         }
     }
 
+    /**
+     *  Load the memory
+     */
     public void loadMemory() {
         File memory = new File(path + MemoryFile);
         loadFile(memory);
     }
 
+    /**
+     *  Load the log
+     */
     public void loadLog() {
         File log = new File(path + logFile);
         loadFile(log);

@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
+import static org.junit.Assert.assertThrows;
 
 public class CalculatorSteps {
 
@@ -149,10 +150,11 @@ public class CalculatorSteps {
 		m.add(name, c.eval(op), op);
 	}
 
-	@When("^I add a variable (.*) to the memory$")
-	public void iAddAVariableXToTheMemory() {
-
+	@When("^I remove the variable (.*) from memory$")
+	public void iRemoveTheVariableXFromMemory(String name) {
+		m.remove(name);
 	}
+
 
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
@@ -177,5 +179,11 @@ public class CalculatorSteps {
 	@Then("^the calculator memory contains a variable (.*) with value (\\d+)$")
 	public void theCalculatorContainsAVariableXWithValue(String name, int val) {
 		assertEquals(m.getMemory().get(0).getName(), name);
+	}
+
+	@Then("^the calculator memory does not contain a variable (.*)$")
+	public void theCalculatorMemoryDoesNotContainAVariableX(String name) {
+		assertEquals(m.getMemory().size(), 0);
+		assertThrows(RuntimeException.class, () -> m.get(name));
 	}
 }
