@@ -2,21 +2,25 @@ package cucumbertests;
 
 import calculator.*;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
+import static org.junit.Assert.assertThrows;
 
 public class CalculatorSteps {
 
 	private ArrayList<Expression> params;
 	private Operation op;
 	private Calculator c;
+	private Memory m;
 
 	@Before
     public void resetMemoryBeforeEachScenario() {
@@ -111,6 +115,11 @@ public class CalculatorSteps {
 		catch(IllegalConstruction e) { fail(); }
 	}
 
+	@Given("a memory in the calculator of size {int}")
+	public void aMemoryInTheCalculator(int size) {
+		m = new Memory(size);
+	}
+
 	@Then("^its (.*) notation is (.*)$")
 	public void thenItsNotationIs(String notation, String s) {
 		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
@@ -127,6 +136,25 @@ public class CalculatorSteps {
 		params.add(new MyNumber(val));
 		op.addMoreParams(params);
 	}
+
+	@When("^I provide a (.*) variable (.*) containing the value (\\d+)$")
+	public void whenIProvideAVariable(String s, String name, int val) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new Variable(name, val));
+		op.addMoreParams(params);
+	}
+
+	@When("^I create a variable (.*) containing above data and I store it in memory$")
+	public void iCreateAVariableXContainingAboveData(String name) {
+		m.add(name, c.eval(op), op);
+	}
+
+	@When("^I remove the variable (.*) from memory$")
+	public void iRemoveTheVariableXFromMemory(String name) {
+		m.remove(name);
+	}
+
 
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
@@ -148,5 +176,14 @@ public class CalculatorSteps {
 	public void thenTheOperationEvaluatesTo(int val) {
 		assertEquals(val, c.eval(op));
 	}
+	@Then("^the calculator memory contains a variable (.*) with value (\\d+)$")
+	public void theCalculatorContainsAVariableXWithValue(String name, int val) {
+		assertEquals(m.getMemory().get(0).getName(), name);
+	}
 
+	@Then("^the calculator memory does not contain a variable (.*)$")
+	public void theCalculatorMemoryDoesNotContainAVariableX(String name) {
+		assertEquals(m.getMemory().size(), 0);
+		assertThrows(RuntimeException.class, () -> m.get(name));
+	}
 }

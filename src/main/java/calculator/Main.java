@@ -1,5 +1,6 @@
 package calculator;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,8 +25,10 @@ public class Main {
 
   	Expression e;
   	Calculator c = new Calculator();
+	  Memory log = new Memory();
+	  log.loadLog();
 
-	try{
+		try{
 
 		e = new MyNumber(8);
 		c.print(e);
@@ -54,11 +57,11 @@ public class Main {
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);
+		log.display();
+		log.saveLog();
 	}
-
 	catch(IllegalConstruction exception) {
 		System.out.println("cannot create operations without parameters");
 		}
  	}
-
 }

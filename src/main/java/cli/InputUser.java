@@ -1,15 +1,7 @@
 package cli;
 
-import calculator.Calculator;
-import calculator.Divides;
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Minus;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
-import calculator.Plus;
-import calculator.Times;
+import calculator.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,6 +153,7 @@ public class InputUser
     public int compute(boolean isVerbose)
     {
         String operator = null;
+        // System.out.println(user_input_list); // [2, +, 2]
         for (String s : user_input_list)
         {
             if (isNumber(s))
@@ -168,12 +161,13 @@ public class InputUser
             else if (isOperator(s))
                 operator = s;
         }
+        // System.out.println(list_of_expression); // [2, 2]
         if (operator != null)
         {
             Expression e = getOperator(operator, list_of_expression, this.notation);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
-            return  new Calculator().eval(e);
+            return new Calculator().eval(e);
         }
         return 0;
     }
