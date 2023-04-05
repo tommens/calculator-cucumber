@@ -2,7 +2,9 @@ package cli;
 
 import calculator.*;
 
+
 import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,6 +192,7 @@ public class InputUser
     public MyNumber compute(boolean isVerbose)
     {
         String operator = null;
+        // System.out.println(user_input_list); // [2, +, 2]
         for (String s : user_input_list)
         {
             s.replaceAll(",",".");
@@ -208,12 +211,13 @@ public class InputUser
                 list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
             }
         }
+        // System.out.println(list_of_expression); // [2, 2]
         if (operator != null)
         {
             Expression e = getOperator(operator, list_of_expression, this.notation);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
-            return  new Calculator().eval(e);
+            return new Calculator().eval(e);
         }
         return new MyNumber(new BigDecimal(0),0);
     }

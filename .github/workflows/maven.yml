@@ -67,6 +67,18 @@ jobs:
       continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Generate quality report
+      env:
+       SONAR_TOKEN: ${{ secrets.SOFT_TOKEN }}
+       SONAR_HOST_URL: ${{ secrets.SOFT_HOST_URL }}
+      run : >
+        mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        -Dsonar.host.url=https://sonarcloud.io
+        -Dsonar.organization=randi-dcht
+        -Dsonar.projectKey=Randi-Dcht_projectSoftware
+        -Dsonar.branch.name=main
+        -Dsonar.login=$SONAR_TOKEN
     
 #    - name: Build and analyze with Sonar Cloud
 #      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=tommens_calculator-cucumber

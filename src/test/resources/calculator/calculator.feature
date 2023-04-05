@@ -37,6 +37,12 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to 3.5
 
 
+  Scenario: Adding two variables
+    Given an integer operation '+'
+    When I provide a first variable a containing the value 4
+    And I provide a second variable b containing the value 5
+    Then the operation evaluates to 9
+
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
   # strings. In this case, the table is of dimension 1 * 3 (1 line and three columns).

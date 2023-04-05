@@ -1,7 +1,11 @@
 package calculator;
 
+
 import java.math.BigDecimal;
 import java.math.MathContext;
+
+import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,9 +30,14 @@ public class Main {
 
   	Expression e;
   	Calculator c = new Calculator();
+
 	  MathContext precision = new MathContext(15);
 
-	try{
+	  Memory log = new Memory();
+	  log.loadLog();
+
+
+		try{
 
 		e = new MyNumber(new BigDecimal(-8.5,precision) );
 		c.print(e);
@@ -82,7 +91,6 @@ public class Main {
 		c.print(e);
 		c.eval(e);
 
-
 		List<Expression> params5 = new ArrayList<>();
 		Collections.addAll(params5, new MyNumber(new BigDecimal(6.95,precision)), new MyNumber(new BigDecimal(7.40,precision)));
 		e = new Minus(params5, Notation.INFIX);
@@ -116,11 +124,13 @@ public class Main {
 		c.eval(e);
 
 
-	}
 
+		log.display();
+		log.saveLog();
+
+	}
 	catch(IllegalConstruction exception) {
 		System.out.println("cannot create operations without parameters");
 		}
  	}
-
 }
