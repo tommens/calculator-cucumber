@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 import static cli.InputUser.*;
@@ -78,10 +79,10 @@ public class Memory {
     /**
      * Add a variable to the memory
      * @param name the name of the variable
-     * @param value the value of the variable
+     * @param number the value of the variable
      * @param expression the expression of the variable
      */
-    public void add(String name, int value, Expression expression){
+    public void add(String name, MyNumber number, Expression expression){
         if (this.getSize() == size) {
             throw new RuntimeException("Memory is full");
         }
@@ -89,24 +90,24 @@ public class Memory {
         for(int i = 0; i < memory.size(); i++){
             if(memory.get(i).getName().equals(name)){
                 // overwrite the variable
-                memory.set(i,new Variable(name, value, expression));
+                memory.set(i,new Variable(name, number, expression));
             }
         }
-        memory.add(new Variable(name, value, expression));
+        memory.add(new Variable(name, number, expression));
     }
 
     /**
      * Add a variable to the memory with an ID generated automatically as name
      * used for the log
-     * @param value  the value of the variable
+     * @param number  the value of the variable
      * @param expression the expression of the variable
      */
-    public void add(int value, Expression expression){
+    public void add(MyNumber number, Expression expression){
         if (memory.size() == size) {
             throw new RuntimeException("Memory is full");
         }
         String uniqueID = UUID.randomUUID().toString();
-        this.getMemory().add(new Variable(uniqueID, value, expression));
+        this.getMemory().add(new Variable(uniqueID, number, expression));
     }
 
     /**
@@ -232,14 +233,14 @@ public class Memory {
         Notation notation = checkNotation(expressionString);
         for (int i = 0; i < expressionString.length(); i++) {
             if (isNumber(String.valueOf(expressionString.charAt(i)))) {
-                expressions.add(new MyNumber(Integer.parseInt(String.valueOf(expressionString.charAt(i)))));
+                expressions.add(new MyNumber(new BigDecimal(expressionString.charAt(i))));
             }
             if (isOperator(String.valueOf(expressionString.charAt(i)))) {
                 operator = String.valueOf(expressionString.charAt(i));
             }
         }
         if (operator == null) {
-            Expression expression = new MyNumber(Integer.parseInt(expressionString));
+            Expression expression = new MyNumber(new BigDecimal(expressionString));
             return expression;
         } else {
             Expression expression = getOperator(operator, expressions, notation);
@@ -258,9 +259,9 @@ public class Memory {
                 String[] data = line.split(" %%% ");
                 String timeStamp = data[0];
                 String name = data[1];
-                int value =  Integer.parseInt(data[2]);
+                MyNumber number =  new MyNumber(new BigDecimal(data[2]));
                 Expression expression = analyzeString(data[3]);
-                memory.add(new Variable(name, value, expression, timeStamp));
+                memory.add(new Variable(name, number, expression, timeStamp));
             }
         } catch (Exception e) {
             System.out.println("Error reading log or memory file");

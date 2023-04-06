@@ -146,10 +146,10 @@ public class CalculatorSteps {
 	}
 
 	@When("^I provide a (.*) variable (.*) containing the value (\\d+)$")
-	public void whenIProvideAVariable(String s, String name, int val) {
+	public void whenIProvideAVariable(String s, String name, BigDecimal val) {
 		//add extra parameter to the operation
 		params = new ArrayList<>();
-		params.add(new Variable(name, val));
+		params.add(new Variable(name, new MyNumber(val)));
 		op.addMoreParams(params);
 	}
 
@@ -227,7 +227,7 @@ public class CalculatorSteps {
 	@Given("one number with parameters {string} and {int}")
 	public void oneNumberWithParametersArgAndArg(String arg0, int arg1) {
 		MyNumber number = new MyNumber(new BigDecimal(arg0),arg1);
-		int a=0;
+		MyNumber a= new MyNumber(new BigDecimal(0));
 		assertEquals(number,number);
 		assertNotEquals(number,null);
 		assertNotEquals(number,a);

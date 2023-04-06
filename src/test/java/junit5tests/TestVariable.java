@@ -3,6 +3,7 @@ package junit5tests;
 import calculator.*;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,23 +18,23 @@ class TestVariable {
     @Test
     public void testVariable() {
         try {
-            e = new MyNumber(8);
+            e = new MyNumber(new BigDecimal(8));
             c.print(e);
             c.eval(e);
 
             List<Expression> params = new ArrayList<>();
-            Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
+            Collections.addAll(params, new MyNumber(new BigDecimal(3)), new MyNumber(new BigDecimal(4)), new MyNumber(new BigDecimal(5)));
             e = new Plus(params, Notation.PREFIX);
             c.printExpressionDetails(e);
             c.eval(e);
             Variable v = new Variable("a",c.eval(e),e);
-            assert v.getName() == "a";
-            assert v.getValue() == 12;
+            assert v.getName().equals("a");
+            assert v.getValue().equals(new BigDecimal(12));
             assert v.getExpression().equals(e);
             System.out.println(v.toStringDetails());
 
             List<Expression> params2 = new ArrayList<>();
-            Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
+            Collections.addAll(params2, new MyNumber(new BigDecimal(5)), new MyNumber(new BigDecimal(3)));
             e = new Minus(params2, Notation.INFIX);
             c.print(e);
             c.eval(e);
@@ -45,7 +46,7 @@ class TestVariable {
             c.eval(e);
 
             List<Expression> params4 = new ArrayList<>();
-            Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
+            Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(new BigDecimal(5)));
             e = new Divides(params4, Notation.POSTFIX);
             c.print(e);
             c.eval(e);
