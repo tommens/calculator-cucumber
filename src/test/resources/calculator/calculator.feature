@@ -12,11 +12,14 @@ Feature: Integer Arithmetic Expressions
   # provided that each of the steps (Given, When, And and Then) are
   # implemented in a Java mapping file (CalculatorSteps.Java)
 
+  Scenario:
+
   Scenario: Adding two integer numbers
     Given an integer operation '+'
     When I provide a first number 4
     And I provide a second number 5
     Then the operation evaluates to 9
+
 
   Scenario: Subtracting two integer numbers
     Given an integer operation '-'
@@ -91,3 +94,24 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
       | "/" | 6| 2|     3|
+      | "GCD" | 5| 4| 1  |
+      | "GCD" | 9| 3| 3  |
+      | "GCD" | 3| 9| 3  |
+      | "GCD" | 5| 4| 1  |
+      | "GCD" | 24| 18| 6  |
+      | "GCD" | 18| 24| 6  |
+      | "GCD" | 4| 5| 1  |
+      | "LCM" | 1642| 341|  559922 |
+      | "LCM" | 4| 5| 20  |
+      | "LCM" | 36| 12| 36 |
+      | "LCM" | 12| 36| 36  |
+      | "LCM" | 1| 500| 500  |
+      | "%" | 48| 18| 12  |
+      | "%" | 18| 48| 18  |
+      | "%" | 48| 1| 0  |
+      | "%" | 40| 20| 0  |
+      | "**" | 40| 2| 1600  |
+      | "**" | 0| 20| 0  |
+      | "**" | 1| 20| 1  |
+      | "**" | 20| 0| 1  |
+      | "**" | 2| 3| 8  |

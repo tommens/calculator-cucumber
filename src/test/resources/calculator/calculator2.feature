@@ -13,18 +13,17 @@ Feature: Integer Arithmetic Expressions
   # implemented in a Java mapping file (CalculatorSteps.Java)
 
 
-  Scenario Outline: Writing the different operations in the different notations
-    Given an integer operation <op>
+  Scenario Outline: Evaluating operations with two integer parameters
+    Given an integer operation '<op>'
     When I provide a first number <n1>
     And I provide a second number <n2>
-    Then its PREFIX notation is <prefix_result>
-    And its POSTFIX notation is <postfix_result>
-    And its INFIX notation is <infix_result>
-
+    Then its INFIX notation is ( <n1> <op> <n2> )
+    And its PREFIX notation is <op> (<n1>, <n2>)
+    And its POSTFIX notation is (<n1>, <n2>) <op>
 
     Examples:
-      | op  | n1 |  | n2 | prefix_result | postfix_result | infix_result |
-      | "+" | 8  |  | 6  | + (8, 6)      | (8, 6) +       | ( 8 + 6 )    |
-      | "-" | 8  |  | 6  | - (8, 6)      | (8, 6) -       | ( 8 - 6 )    |
-      | "*" | 8  |  | 6  | * (8, 6)      | (8, 6) *       | ( 8 * 6 )    |
-      | "/" | 8  |  | 6  | / (8, 6)      | (8, 6) /       | ( 8 / 6 )    |
+      |n1| op  |n2|
+      |4| + | 5|
+      |8| - | 5|
+      |7| * | 2|
+      |6| / | 2|

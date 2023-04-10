@@ -10,8 +10,7 @@ import java.util.List;
  * @see Times
  * @see Divides
  */
-public final class Plus extends Operation
- {
+public final class Plus extends Operation {
 
   /**
    * Class constructor specifying a number of Expressions to add.

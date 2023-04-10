@@ -39,6 +39,10 @@ public class CalculatorSteps {
 				case "-"	->	op = new Minus(params);
 				case "*"	->	op = new Times(params);
 				case "/"	->	op = new Divides(params);
+				case "GCD"	->	op = new GreatestCommonDivisor(params);
+				case "LCM"	->	op = new LeastCommonMultiple(params);
+				case "%"	->	op = new Modulo(params);
+				case "**"	->	op = new Power(params);
 				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {
