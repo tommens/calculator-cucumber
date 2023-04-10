@@ -1,6 +1,10 @@
 package calculator;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
+
+import static java.lang.Math.pow;
 
 /** This class represents the arithmetic sum operation "+".
  * The class extends an abstract superclass Operation.
@@ -42,11 +46,39 @@ public final class Plus extends Operation
 
   /**
    * The actual computation of the (binary) arithmetic addition of two integers
-   * @param l The first integer
-   * @param r The second integer that should be added to the first
-   * @return The integer that is the result of the addition
+   *
+   * @param l The first BigDecimal number
+   * @param r The second BigDecimal number that should be added to the first
+   * @return The BigDecimal number that is the result of the addition
    */
-  public int op(int l, int r) {
-  	return (l+r);
+  public MyNumber op(MyNumber l, MyNumber r) {
+      BigDecimal new_val;
+      int exp;
+
+      BigDecimal l_val =  l.getValue();
+      BigDecimal r_val =  r.getValue();
+      int l_exp = l.getexp();
+      int r_exp = r.getexp();
+
+      if (l_exp>r_exp){
+          exp=l_exp;
+          int gap=l_exp-r_exp;
+          new_val = l_val.add(r_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+
+      }
+      else if (l_exp<r_exp){
+          exp=r_exp;
+          int gap=r_exp-l_exp;
+          new_val = r_val.add(l_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+      }
+      else {
+          exp=l_exp;
+          new_val = r_val.add(l_val);
+      }
+
+
+      return new MyNumber(new_val,exp);
   }
+
+  //public int op(int l, int r) {return (l+r);}
 }

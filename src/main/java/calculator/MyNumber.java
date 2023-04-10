@@ -2,6 +2,12 @@ package calculator;
 
 import visitor.Visitor;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+import static java.lang.Math.pow;
+
+
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
@@ -11,22 +17,39 @@ import visitor.Visitor;
  */
 public class MyNumber implements Expression
 {
-  private final int value;
+    public RealNumberNotation notation = RealNumberNotation.TRADITIONAL;
+  private final BigDecimal value;
+  private final int exp;
+
+  private final int decimal_number = 15;
+
 
     /** getter method to obtain the value contained in the object
      *
-     * @return The integer number contained in the object
+     * @return BigDecimal number contained in the object
      */
-  public Integer getValue() { return value; }
+  public BigDecimal getValue() { return value; }
+
+    /** getter method to obtain the exp contained in the object
+     *
+     * @return int number contained in the object
+     */
+    public int getexp() { return exp; }
 
     /**
      * Constructor method
      *
-     * @param v The integer value to be contained in the object
+     * @param v TBigDecimal value to be contained in the object
      */
-    public /*constructor*/ MyNumber(int v) {
-	  value=v;
+    public /*constructor*/ MyNumber(BigDecimal v) {
+        value=v.round(new MathContext(decimal_number));
+        exp=0;
 	  }
+
+    public /*constructor*/ MyNumber(BigDecimal v, int e) {
+        value=v.round(new MathContext(decimal_number));
+        exp=e;
+    }
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -70,8 +93,20 @@ public class MyNumber implements Expression
      */
   @Override
   public String toString() {
-	  return Integer.toString(value);
+      if (exp!=0) {
+          return switch (notation) {
+              case TRADITIONAL -> String.format(value.multiply(BigDecimal.valueOf(pow(10, exp)).round(new MathContext(decimal_number))).toString());
+
+              case SCIENTIFIC -> String.format(value.toString() + "x10^" + (exp));
+
+              case E_NOTATION -> String.format(value.toString() + "E^" + (exp));
+          };
+      }
+      else{
+          return String.format(value.toString());
+      }
   }
+
 
   /** Two MyNumber expressions are equal if the values they contain are equal
    *
@@ -92,7 +127,25 @@ public class MyNumber implements Expression
       if (!(o instanceof MyNumber)) {
             return false;
       }
-      return this.value == ((MyNumber)o).value;
+
+
+      if(this.exp==0){
+          if(((MyNumber)o).exp==0){
+              return (this.value.compareTo(((MyNumber)o).value)==0);
+          }
+          else{
+              return (this.value.compareTo(((MyNumber)o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
+          }
+      }
+      else{
+          if(((MyNumber)o).exp==0){
+              return (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber)o).value)==0);
+          }
+          else{
+              return (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber) o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
+          }
+      }
+
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }
@@ -105,7 +158,7 @@ public class MyNumber implements Expression
      */
   @Override
   public int hashCode() {
-		return value;
+		return value.hashCode();
   }
 
 }

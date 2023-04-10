@@ -6,14 +6,15 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class TestMinus {
 
-	private final int value1 = 8;
-	private final int value2 = 6;
+	private final BigDecimal value1 = new BigDecimal(8);
+	private final BigDecimal value2 = new BigDecimal(6.5);
 	private Minus op;
 	private List<Expression> params;
 

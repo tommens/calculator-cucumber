@@ -27,11 +27,11 @@ public class Variable extends MyNumber {
      * The constructor of the variable
      * used to log custom variables in the memory
      * @param name the name of the variable
-     * @param value the value of the variable
+     * @param number the value of the variable
      * @param expression the expression of the variable
      */
-    public Variable(String name, int value, Expression expression) {
-        super(value);
+    public Variable(String name, MyNumber number, Expression expression) {
+        super(number.getValue());
         this.name = name;
         this.expression = expression;
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy.HH:mm:ss");
@@ -42,12 +42,12 @@ public class Variable extends MyNumber {
      * The constructor of the variable
      * used to log variables in the log
      * @param name the name of the variable
-     * @param value the value of the variable
+     * @param number the value of the variable
      * @param expression the expression of the variable
      * @param timeStamp the time stamp of the variable
      */
-    public Variable(String name, int value, Expression expression, String timeStamp) {
-        super(value);
+    public Variable(String name, MyNumber number, Expression expression, String timeStamp) {
+        super(number.getValue());
         this.name = name;
         this.expression = expression;
         this.timeStamp = timeStamp;
@@ -57,12 +57,12 @@ public class Variable extends MyNumber {
      * The constructor of the variable
      * used create a variable without expression
      * @param name the name of the variable
-     * @param value the value of the variable
+     * @param number the value of the variable
      */
-    public Variable(String name, int value) {
-        super(value);
+    public Variable(String name, MyNumber number) {
+        super(number.getValue());
         this.name = name;
-        this.expression = new MyNumber(value);
+        this.expression = number;
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy.HH:mm:ss");
         this.timeStamp = df.format(new Date());
     }

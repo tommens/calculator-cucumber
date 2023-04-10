@@ -2,6 +2,9 @@ package cli;
 
 import calculator.*;
 
+
+import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,7 @@ public class InputUser
     protected static String listOperators = "+-*/";
     /**List of number*/
     protected static String listNumbers = "0123456789";
+    //protected static String listRealNumbers = "0123456789.";
 
 
     /**
@@ -44,6 +48,41 @@ public class InputUser
     public static boolean isNumber(String input)
     {
         return listNumbers.contains(input);
+    }
+
+    public static boolean isDecimalNumber(String input)
+    {
+        String[] parts = input.split(".");
+        if(isNumber(parts[0])&&isNumber(parts[1])){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isENotationNumber(String input)
+    {
+        String[] parts = input.split("E");
+        if(isNumber(parts[0])&&isNumber(parts[1])){
+            return true;
+        }
+
+        if(isDecimalNumber(parts[0])&&isNumber(parts[1])){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isScientificNotationNumber(String input)
+    {
+        String[] parts = input.split("x10\\^");
+        if(isNumber(parts[0])&&isNumber(parts[1])){
+            return true;
+        }
+
+        if(isDecimalNumber(parts[0])&&isNumber(parts[1])){
+            return true;
+        }
+        return false;
     }
 
 
@@ -150,16 +189,27 @@ public class InputUser
      * Compute the input of user
      * @param isVerbose : boolean to display the expression
      */
-    public int compute(boolean isVerbose)
+    public MyNumber compute(boolean isVerbose)
     {
         String operator = null;
         // System.out.println(user_input_list); // [2, +, 2]
         for (String s : user_input_list)
         {
+            s.replaceAll(",",".");
             if (isNumber(s))
-                list_of_expression.add(new MyNumber(Integer.parseInt(s)));
+                list_of_expression.add(new MyNumber(new BigDecimal(s)));
+
             else if (isOperator(s))
                 operator = s;
+
+            else if (isENotationNumber(s)) {
+                String[] parts = s.split("E");
+                list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
+            }
+            else if (isScientificNotationNumber(s)) {
+                String[] parts = s.split("x10\\^");
+                list_of_expression.add(new MyNumber(new BigDecimal(parts[0]),Integer.parseInt(parts[1])));
+            }
         }
         // System.out.println(list_of_expression); // [2, 2]
         if (operator != null)
@@ -169,6 +219,6 @@ public class InputUser
                 System.out.println("$> " + e.toString());
             return new Calculator().eval(e);
         }
-        return 0;
+        return new MyNumber(new BigDecimal(0),0);
     }
 }
