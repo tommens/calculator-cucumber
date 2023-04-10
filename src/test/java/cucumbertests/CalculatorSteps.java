@@ -2,22 +2,19 @@ package cucumbertests;
 
 import calculator.*;
 import io.cucumber.java.Before;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static org.junit.Assert.assertThrows;
 
@@ -75,7 +72,7 @@ public class CalculatorSteps {
 	// The string in the Given annotation shows how to use regular expressions...
 	// In this example, the notation d+ is used to represent numbers, i.e. nonempty sequences of digits
 	@Given("^the sum of two number (\\d+) and (\\d+)$")
-	// The alternative, and in this case simpler, notation would be:
+	// The alternative and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
 	public void givenTheSum(MyNumber n1,MyNumber n2) {
 		try {
@@ -88,7 +85,7 @@ public class CalculatorSteps {
 
 
 	@Given("^the difference of two MyNumbers (\\d+) and (\\d+)$")
-	// The alternative, and in this case simpler, notation would be:
+	// The alternative and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
 	public void givenTheDifference(MyNumber n1,MyNumber n2) {
 		try {
@@ -100,7 +97,7 @@ public class CalculatorSteps {
 	}
 
 	@Given("^the product of two MyNumbers (\\d+) and (\\d+)$")
-	// The alternative, and in this case simpler, notation would be:
+	// The alternative and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
 	public void givenTheProduct(MyNumber n1,MyNumber n2) {
 		try {
@@ -112,7 +109,7 @@ public class CalculatorSteps {
 	}
 
 	@Given("^the quotient of two MyNumbers (\\d+) and (\\d+)$")
-	// The alternative, and in this case simpler, notation would be:
+	// The alternative and in this case simpler, notation would be:
 	// @Given("the sum of two numbers {int} and {int}")
 	public void givenTheQuotient(MyNumber n1,MyNumber n2) {
 		try {

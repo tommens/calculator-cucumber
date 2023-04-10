@@ -35,6 +35,9 @@ public class Main {
 
 	  Memory log = new Memory();
 	  log.loadLog();
+	  //log.clearMemory();
+	  //log.add("test",new MyNumber(new BigDecimal(5.5)),null);
+	  System.out.println(log.getMemory());
 
 
 		try{
@@ -46,6 +49,7 @@ public class Main {
 	    List<Expression> params = new ArrayList<>();
 	    Collections.addAll(params, new MyNumber(new BigDecimal(-3.5,precision) ), new MyNumber(new BigDecimal(-4,precision) ), new MyNumber(new BigDecimal(5,precision)));
 	    e = new Plus(params,Notation.PREFIX);
+		log.add("test",new MyNumber(new BigDecimal(-4,precision) ),e);
 		c.printExpressionDetails(e);
 		c.eval(e);
 
@@ -123,8 +127,7 @@ public class Main {
 		c.print(e);
 		c.eval(e);
 
-
-
+		//log.clearMemory();
 		log.display();
 		log.saveLog();
 

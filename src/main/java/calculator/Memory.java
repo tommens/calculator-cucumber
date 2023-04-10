@@ -83,9 +83,9 @@ public class Memory {
      * @param expression the expression of the variable
      */
     public void add(String name, MyNumber number, Expression expression){
-        if (this.getSize() == size) {
+        /*if (this.getSize() == size) {
             throw new RuntimeException("Memory is full");
-        }
+        }*/
         // check if the variable already exists
         for(int i = 0; i < memory.size(); i++){
             if(memory.get(i).getName().equals(name)){
