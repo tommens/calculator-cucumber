@@ -57,7 +57,9 @@ public class Main {
 		c.eval(e);
 
 		//conversions
-		Length.printConversion(96.7,"mm","yd");
+		Length.printLengthConversion(96.7,"mm","yd");
+		Area.printAreaConversion(21,"cm2","dam2");
+		Currency.printCurrencyConversion(87.1,"CHF","€");
 	}
 
 	catch(IllegalConstruction exception) {
