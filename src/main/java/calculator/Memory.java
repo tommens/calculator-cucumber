@@ -24,7 +24,7 @@ public class Memory {
      * The size of the memory
      * -1 means infinite
      */
-    private int size;
+    private int maxSize;
 
     /**
      * The path to the log and memory files
@@ -44,11 +44,11 @@ public class Memory {
 
     /**
      * The constructor of the memory
-     * @param size the size of the memory
+     * @param maxSize the maxSize of the memory
      */
-    public Memory(int size){
+    public Memory(int maxSize){
         memory = new ArrayList<>();
-        this.size = size;
+        this.maxSize = maxSize;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Memory {
      */
     public Memory() {
         memory = new ArrayList<>();
-        this.size = -1;
+        this.maxSize = -1;
     }
 
     /**
@@ -83,9 +83,9 @@ public class Memory {
      * @param expression the expression of the variable
      */
     public void add(String name, MyNumber number, Expression expression){
-        /*if (this.getSize() == size) {
+        if (this.memory.size() == maxSize) {
             throw new RuntimeException("Memory is full");
-        }*/
+        }
         // check if the variable already exists
         for(int i = 0; i < memory.size(); i++){
             if(memory.get(i).getName().equals(name)){
@@ -103,7 +103,7 @@ public class Memory {
      * @param expression the expression of the variable
      */
     public void add(MyNumber number, Expression expression){
-        if (memory.size() == size) {
+        if (memory.size() == maxSize) {
             throw new RuntimeException("Memory is full");
         }
         String uniqueID = UUID.randomUUID().toString();
@@ -139,26 +139,26 @@ public class Memory {
     }
 
     /**
-     * Get the size of the memory
+     * Get the maximum size of the memory
      * @return the size of the memory
      */
-    public int getSize() {
-        return size;
+    public int getMaxSize() {
+        return this.maxSize;
     }
 
     /**
-     * Redefine the size of the memory
-     * @param size the new size of the memory
+     * Redefine the maxSize of the memory
+     * @param maxSize the new maxSize of the memory
      */
-    public void setSize(int size) {
-        if (size < 0) {
-            this.size = size;
+    public void setMaxSize(int maxSize) {
+        if (maxSize < 0) {
+            this.maxSize = maxSize;
             return;
         }
-        if (size < memory.size()) {
-            throw new RuntimeException("submitted size is too small than the number of variables present in the memory");
+        if (maxSize < memory.size()) {
+            throw new RuntimeException("submitted maxSize is too small than the number of variables present in the memory");
         }
-        this.size = size;
+        this.maxSize = maxSize;
     }
 
     /**
