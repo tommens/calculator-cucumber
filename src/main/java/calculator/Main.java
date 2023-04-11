@@ -3,6 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import converter.*;
 
 /**
  * A very simple calculator in Java
@@ -54,12 +55,14 @@ public class Main {
 		e = new Divides(params4,Notation.POSTFIX);
 		c.print(e);
 		c.eval(e);
+
+		//conversions
+		Length.printConversion(96.7,"mm","yd");
 	}
 
 	catch(IllegalConstruction exception) {
 		System.out.println("cannot create operations without parameters");
 		}
  	}
-
 
 }

@@ -1,6 +1,9 @@
 package converter;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Length {
     //Factors of different length conversions to meters.
     final private double MM_TO_M = 0.001; //millimeters
@@ -14,7 +17,7 @@ public class Length {
     final private double YD_TO_M = 0.9144; //yards
     final private double NM_TO_M = 1852; //nautical miles
     final private double FT_TO_M = 0.3048; //feet
-    final private double M_TO_M = 1; //meters
+    final private double M_TO_M = 1.0; //meters
 
     private double factor;
 
@@ -43,12 +46,17 @@ public class Length {
     }
 
     //The method doing the whole conversion and printing the results.
-    public void convert_length(double value, String fromUnit, String toUnit) {
+    public static void printConversion(double value, String fromUnit, String toUnit) {
         Length from = new Length(fromUnit);
         Length to = new Length(toUnit);
 
         double inMeters = from.toMeters(value);
-        double result = to.fromMeters(inMeters);
+
+        //We use BigDecimal and RoundingMode to avoid rounding errors.
+        BigDecimal result = BigDecimal.valueOf(to.fromMeters(inMeters));
+        int scale = 9;
+        RoundingMode roundingMode = RoundingMode.HALF_UP;
+        result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
     }
