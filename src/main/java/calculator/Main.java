@@ -62,6 +62,8 @@ public class Main {
 		Currency.printCurrencyConversion(87.1,"CHF","€");
 		Power.printPowerConversion(23.24,"PW","kW");
 		Energy.printEnergyConversion(2.54,"kWh","cal");
+		Pressure.printPressureConversion(23,"atm","kPa");
+		Time.printTimeConversion(6,"wk","ms");
 	}
 
 	catch(IllegalConstruction exception) {
