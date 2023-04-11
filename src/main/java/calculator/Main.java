@@ -60,6 +60,8 @@ public class Main {
 		Length.printLengthConversion(96.7,"mm","yd");
 		Area.printAreaConversion(21,"cm2","dam2");
 		Currency.printCurrencyConversion(87.1,"CHF","€");
+		Power.printPowerConversion(23.24,"PW","kW");
+		Energy.printEnergyConversion(2.54,"kWh","cal");
 	}
 
 	catch(IllegalConstruction exception) {

@@ -6,13 +6,13 @@ import java.math.RoundingMode;
 
 public class Area {
     //Factors of different Area conversions to meters.
-    final private double MM2_TO_M2 = 1e-6; //mm²
-    final private double CM2_TO_M2 = 0.0001; //cm²
-    final private double DM2_TO_M2 = 0.01; //dm²
-    final private double DAM2_TO_M2 = 100; //dam²
-    final private double HM2_TO_M2 = 10000; //hm²
-    final private double KM2_TO_M2 = 1e6; //km²
-    final private double M2_TO_M2 = 1.0; //m²
+    final private double mm2_TO_m2 = 1e-6; //mm²
+    final private double cm2_TO_m2 = 0.0001; //cm²
+    final private double dm2_TO_m2 = 0.01; //dm²
+    final private double dam2_TO_m2 = 100; //dam²
+    final private double hm2_TO_m2 = 10000; //hm²
+    final private double km2_TO_m2 = 1e6; //km²
+    final private double m2_TO_m2 = 1.0; //m²
 
     private double factor;
 
@@ -21,8 +21,7 @@ public class Area {
         try {
             //We set the factor depending on the asked unit using the names
             //we defined at the beginning.
-            unit = unit.toUpperCase(); //we put it in upper case to match the factors' names
-            Field field = this.getClass().getDeclaredField(unit + "_TO_M2");
+            Field field = this.getClass().getDeclaredField(unit + "_TO_m2");
             factor = field.getDouble(this);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             System.out.println("Unknown unit, try something else");
