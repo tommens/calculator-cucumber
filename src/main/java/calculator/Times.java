@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 
 /** This class represents the arithmetic multiplication operation "*".
@@ -10,49 +12,89 @@ import java.util.List;
  * @see Plus
  * @see Divides
  */
-public final class Times extends Operation
- {
-  /**
-   * Class constructor specifying a number of Expressions to multiply.
-   *
-   * @param elist The list of Expressions to multiply
-   * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Times(List<Expression>,Notation)
-   */
-  public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
-  	this(elist, null);
-  }
+public final class Times extends Operation {
+    /**
+     * Class constructor specifying a number of Expressions to multiply.
+     *
+     * @param elist The list of Expressions to multiply
+     * @throws IllegalConstruction If an empty list of expressions if passed as parameter
+     * @see #Times(List<Expression>,Notation)
+     */
+    public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
+        this(elist, null);
+    }
 
-  /**
-   * Class constructor specifying a number of Expressions to multiply,
-   * as well as the Notation used to represent the operation.
-   *
-   * @param elist The list of Expressions to multiply
-   * @param n The Notation to be used to represent the operation
-   * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Times(List<Expression>)
-   * @see Operation#Operation(List<Expression>,Notation)
-   */
-  public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
-  	super(elist,n);
-  	symbol = "*";
-  	neutral = 1;
-  }
+    /**
+     * Class constructor specifying a number of Expressions to multiply,
+     * as well as the Notation used to represent the operation.
+     *
+     * @param elist The list of Expressions to multiply
+     * @param n     The Notation to be used to represent the operation
+     * @throws IllegalConstruction If an empty list of expressions if passed as parameter
+     * @see #Times(List<Expression>)
+     * @see Operation#Operation(List<Expression>,Notation)
+     */
+    public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
+        super(elist, n);
+        symbol = "*";
+        neutral = 1;
+    }
 
-  /**
-   * The actual computation of the (binary) arithmetic multiplication of two integers
-   * @param n1 The first number
-   * @param n2 The second integer that should be multiplied with the first
-   * @return The number that is the result of the multiplication
-   */
-  public MyNumber op(MyNumber n1, MyNumber n2) {
-      int a = n1.getValue();
-      int b = n1.getImaginary();
-      int c = n2.getValue();
-      int d = n2.getImaginary();
 
-      int r = (a * c) - (b * d);
-      int i = (a * d) + (b * c);
-      return new MyNumber(r,i);
-  }
+    /**
+     * The actual computation of the (binary) arithmetic multiplication of two BigDecimal number
+     *
+     * @param l The first BigDecimal number
+     * @param r The second BigDecimal number that should be multiplied with the first
+     * @return The BigDecimal number that is the result of the multiplication
+     */
+
+    //public int op(int l, int r) { return (l*r); }
+    public MyNumber op(MyNumber l, MyNumber r) {
+        BigDecimal new_val;
+        int exp;
+        BigDecimal new_val2;
+        int exp2;
+        BigDecimal new_val3;
+        int exp3;
+        BigDecimal new_val4;
+        int exp4;
+
+        BigDecimal a = l.getValue();
+        BigDecimal c = r.getValue();
+        int a_exp = l.getexp();
+        int c_exp = r.getexp();
+
+        BigDecimal b = l.getImaginary();
+        BigDecimal d = r.getImaginary();
+        int b_exp = l.getImaginaryExp();
+        int d_exp = r.getImaginaryExp();
+
+        new_val=a.multiply(c);
+        exp=a_exp+c_exp;
+        MyNumber tmp1 = new MyNumber(new_val,exp);
+
+        new_val2=b.multiply(d);
+        exp2=b_exp+d_exp;
+        MyNumber tmp2 = new MyNumber(new_val2,exp2);
+
+        new_val3=a.multiply(d);
+        exp3=a_exp+d_exp;
+        MyNumber tmp3 = new MyNumber(new_val3,exp3);
+
+        new_val4=b.multiply(c);
+        exp4=b_exp+c_exp;
+        MyNumber tmp4 = new MyNumber(new_val4,exp4);
+
+        try{
+            MyNumber real = new Minus(args).op(tmp1,tmp2);
+            MyNumber imaginary = new Plus(args).op(tmp3,tmp4);
+
+            return new MyNumber(real.getValue(), real.getexp(), imaginary.getValue(),imaginary.getexp());
+        }
+        catch (IllegalConstruction e)
+        {
+            return l;
+        }
+    }
 }

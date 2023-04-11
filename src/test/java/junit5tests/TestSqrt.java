@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ class TestSqrt {
 
     @BeforeEach
     void setUp() {
-        params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
+        params = Arrays.asList(new MyNumber(new BigDecimal(value1)),new MyNumber(new BigDecimal(value2)));
         try {
             op = new Sqrt(params);
         }
@@ -45,7 +46,7 @@ class TestSqrt {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should not be equal
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(new BigDecimal(value1)), new MyNumber(new BigDecimal(value2)));
         try {
             Sqrt e = new Sqrt(p, Notation.INFIX);
             assertEquals(op, e);
@@ -61,7 +62,7 @@ class TestSqrt {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(new BigDecimal(value1)), new MyNumber(new BigDecimal(value2)));
         try {
             Sqrt e = new Sqrt(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());
@@ -78,25 +79,25 @@ class TestSqrt {
     @Test
     void testComplexSolution1(){
         int value3 = -1;
-        MyNumber sol = op.op(new MyNumber(value3));
+        MyNumber sol = op.op(new MyNumber(new BigDecimal(value3)));
         assertTrue(sol.isComplex());
     }
 
     @Test
     void testComplexSolution2(){
-        MyNumber sol = op.op(new MyNumber(value1,value2));
+        MyNumber sol = op.op(new MyNumber(new BigDecimal(value1),new BigDecimal(value2)));
         assertTrue(sol.isComplex());
     }
 
     @Test
     void testComplexSolution3(){
-        MyNumber sol = op.op(new MyNumber(0,value2));
+        MyNumber sol = op.op(new MyNumber(new BigDecimal(0),new BigDecimal(value2)));
         assertTrue(sol.isComplex());
     }
 
     @Test
     void testRealSolution(){
-        MyNumber sol = op.op(new MyNumber(value1));
+        MyNumber sol = op.op(new MyNumber(new BigDecimal(value1)));
         assertFalse(sol.isComplex());
     }
 

@@ -2,6 +2,8 @@ package calculator;
 
 import visitor.Evaluator;
 
+import java.math.BigDecimal;
+
 /**
  * This class represents the core logic of a Calculator.
  * It can be used to print and evaluate artihmetic expressions.

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestCounting {
 
-    private int value1, value2;
+    private BigDecimal value1, value2;
     private Expression e;
 
     @BeforeEach
     void setUp() {
-        value1 = 8;
-        value2 = 6;
+        value1 = new BigDecimal(8);
+        value2 = new BigDecimal(6);
         e = null;
     }
 

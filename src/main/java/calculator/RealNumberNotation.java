@@ -1,16 +1,11 @@
 package calculator;
 
-public enum NumberNotation {
+public enum RealNumberNotation {
 
-    CARTESIAN,
-
-    POLAR,
-
-    EXPONENTIAL,
+    TRADITIONAL,  // 0.00...00016
 
     SCIENTIFIC,  // 6.022×10^23
 
     E_NOTATION,  // 6.022E23
-
 
 }

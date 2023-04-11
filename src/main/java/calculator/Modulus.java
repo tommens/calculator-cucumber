@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 
 public class Modulus extends Operation
@@ -24,12 +26,23 @@ public class Modulus extends Operation
         neutral = 1;
     }
 
-    public MyNumber op(MyNumber n1, MyNumber n2) {
-        int a = n1.getValue();
-        int b = n1.getImaginary();
+    public MyNumber op(MyNumber l, MyNumber r) {
+        MyNumber a = new MyNumber(l.getValue(),l.getexp());
+        MyNumber b = new MyNumber(l.getImaginary(),l.getImaginaryExp());
 
-        int r = (int)Math.sqrt((a * a) + (b * b));
-        return new MyNumber(r,0);
+
+        try{
+            MyNumber tmp1 = new Times(args).op(a,a);
+            MyNumber tmp2 = new Times(args).op(b,b);
+            MyNumber tmp = new Plus(args).op(tmp1,tmp2);
+
+            BigDecimal sqrt = tmp.getValue().sqrt(MathContext.DECIMAL128);
+            return  new MyNumber(sqrt,tmp.getexp());
+        }
+        catch (IllegalConstruction e)
+        {
+            return l;
+        }
     }
 
     /**

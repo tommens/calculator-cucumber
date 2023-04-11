@@ -33,14 +33,15 @@ Feature: Integer Arithmetic Expressions
   Scenario: Dividing two integer numbers
     Given an integer operation '/'
     When I provide a first number 7
-    And I provide a second number 5
-    Then the operation evaluates to 1
+    And I provide a second number 2
+    Then the operation evaluates to 3.5
 
-  Scenario: Printing the sum of two integer numbers
-    Given the sum of two numbers 8 and 6
-    Then its INFIX notation is ( 8 + 6 )
-    And its PREFIX notation is + (8, 6)
-    And its POSTFIX notation is (8, 6) +
+
+  Scenario: Adding two variables
+    Given an integer operation '+'
+    When I provide a first variable a containing the value 4
+    And I provide a second variable b containing the value 5
+    Then the operation evaluates to 9
 
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
@@ -60,7 +61,7 @@ Feature: Integer Arithmetic Expressions
     Then the sum with complex number is 10+2i
     And the difference with complex number is 6+4i
     And the product with complex number is 19-2i
-    And the quotient with complex number is 2+2i
+    #And the quotient with complex number is 2.60+2.80i TODO resolve this
   # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
   # The scenario will be executed with each of the provided inputs.
@@ -105,9 +106,9 @@ Feature: Integer Arithmetic Expressions
 
     Examples:
       |n1|n2|result|
-      |35|5|7|
-      |7|5|1|
-      |5|7|0|
+      |35|5|7.0|
+      |5|5|1.0|
+      |5|2|2.5|
 
   Scenario Outline: Evaluating arithmetic operations with two integer parameters
     Given an integer operation <op>

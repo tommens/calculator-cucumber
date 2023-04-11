@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ class TestModulus {
 
     @BeforeEach
     void setUp() {
-        params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
+        params = Arrays.asList(new MyNumber(new BigDecimal(value1)),new MyNumber(new BigDecimal(value2)));
         try { op = new Modulus(params); }
         catch(IllegalConstruction e) { fail(); }
     }
@@ -43,7 +44,7 @@ class TestModulus {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should not be equal
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(new BigDecimal(value1)), new MyNumber(new BigDecimal(value2)));
         try {
             Modulus e = new Modulus(p, Notation.INFIX);
             assertEquals(op, e);
@@ -59,7 +60,7 @@ class TestModulus {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(new BigDecimal(value1)), new MyNumber(new BigDecimal(value2)));
         try {
             Modulus e = new Modulus(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());
@@ -75,7 +76,7 @@ class TestModulus {
 
     @Test
     void testRealSolution() {
-        MyNumber sol = op.op(new MyNumber(value1,value2));
+        MyNumber sol = op.op(new MyNumber(new BigDecimal(value1),new BigDecimal(value2)));
         assertFalse(sol.isComplex());
     }
 

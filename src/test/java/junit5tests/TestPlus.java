@@ -6,14 +6,15 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class TestPlus {
 
-	private final int value1 = 8;
-	private final int value2 = 6;
+	private final BigDecimal value1 = new BigDecimal(8);
+	private final BigDecimal value2 = new BigDecimal(6.5);
 	private Plus op;
 	private List<Expression> params;
 
@@ -49,7 +50,7 @@ class TestPlus {
 			Plus e = new Plus(p, Notation.INFIX);
 			assertEquals(op, e);
 			assertEquals(e, e);
-			assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(new MyNumber(5), new MyNumber(4))), Notation.INFIX));
+			assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(new MyNumber(new BigDecimal(5)), new MyNumber(new BigDecimal(4)))), Notation.INFIX));
 		}
 		catch(IllegalConstruction e) { fail(); }
 	}

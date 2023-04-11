@@ -15,6 +15,7 @@ public abstract class Visitor {
      */
     public abstract void visit(MyNumber n);
 
+
     /**
      * The Visitor can traverse an operation (a subtype of Expression)
      *

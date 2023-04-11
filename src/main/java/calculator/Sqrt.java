@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.lang.Math;
 
@@ -25,30 +27,58 @@ public class Sqrt extends Operation
         neutral = 1;
     }
 
-    public MyNumber op(MyNumber n1, MyNumber n2) {
-        int a = n1.getValue();
-        int r = 0;
-        int i = 0;
-        if(!n1.isComplex()){
-            if(a<0){
-                double tmp = a * -1;
-                i = (int)Math.sqrt(tmp);
+    public MyNumber op(MyNumber l, MyNumber r) {
+        BigDecimal a = l.getValue();
+        int exp = l.getexp();
+        int expi = l.getImaginaryExp();
+        BigDecimal real;
+        BigDecimal imaginary;
+        if(!l.isComplex()){
+            if(a.signum()<0){
+                imaginary = a.abs().sqrt(MathContext.DECIMAL128);
+                return new MyNumber(new BigDecimal(0),0,imaginary,exp);
             }
+
             else {
-                r = (int)Math.sqrt(a);
+                real = a.sqrt(MathContext.DECIMAL128);
+                return new MyNumber(real,exp);
             }
         }
+
+
         else{
-            int b = n1.getImaginary();
 
-            int z = (int)Math.sqrt((a * a) + (b * b));
+            BigDecimal b = l.getImaginary();
 
-            r = (int)Math.sqrt((double)(z+a)/2);
+            try{
+                MyNumber z = new Modulus(args).op(l);
+                MyNumber den = new MyNumber(new BigDecimal("2"));
 
-            i =(b/Math.abs(b)) * (int)Math.sqrt((double)(z-a)/2);
+                MyNumber numReal = new Plus(args).op(z,new MyNumber(a,exp));
+                MyNumber tmp = new Divides(args).op(numReal,den);
+                real = tmp.getValue().sqrt(MathContext.DECIMAL128);
+                int expReal = tmp.getexp();
+
+                MyNumber li = new Divides(args).op(new MyNumber(b,expi),new MyNumber(b.abs(),expi));
+
+                MyNumber numImaginary = new Minus(args).op(z,new MyNumber(a,exp));
+                MyNumber tmp2 = new Divides(args).op(numImaginary,den);
+                BigDecimal i = tmp2.getValue().sqrt(MathContext.DECIMAL128);
+                int e = tmp2.getexp();
+
+                MyNumber n = new Times(args).op(li,new MyNumber(i,e));
+
+                imaginary = n.getValue();
+                int expImaginary = n.getexp();
+
+                return new MyNumber(real,expReal,imaginary,expImaginary);
+            }
+            catch (IllegalConstruction e)
+            {
+                return l;
+            }
         }
 
-        return new MyNumber(r,i);
 
     }
 

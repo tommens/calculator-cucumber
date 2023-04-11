@@ -6,24 +6,28 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 class TestMyNumber {
 
-	private final int value = 8;
+	private final BigDecimal value = new BigDecimal (8);
 
-	private final int imaginary = 3;
+	private final BigDecimal imaginary = new BigDecimal (3);
+	private final int exp =2;
 	private MyNumber number;
+	private MyNumber realnumber;
 
 	private MyNumber complexNumber;
 
 	private  MyNumber onlyComplexNumber;
-	
 	@BeforeEach
 	void setUp() {
+
 		number = new MyNumber(value);
+		realnumber = new MyNumber(value,exp);
 		complexNumber = new MyNumber(value,imaginary);
-		onlyComplexNumber = new MyNumber(0,imaginary);
+		onlyComplexNumber = new MyNumber(new BigDecimal("0"),imaginary);
 	}
 
 	@Test
@@ -31,21 +35,30 @@ class TestMyNumber {
 		// Two distinct MyNumber, constructed separately (using a different constructor) but containing the same value should be equal
 		assertEquals(new MyNumber(value), number);
 		// Two MyNumbers containing a distinct value should not be equal:
-		int otherValue = 7;
+		BigDecimal otherValue = new BigDecimal(7);
 		assertNotEquals(new MyNumber(otherValue),number);
 		assertEquals(number, number); // Identity check (for coverage, as this should always be true)
 		assertNotEquals(number, value); // number is of type MyNumber, while value is of type int, so not equal
-		assertNotEquals(number,null);
 
+		assertNotEquals(number,null);
 		assertEquals(new MyNumber(value,imaginary), complexNumber);
 		assertNotEquals(complexNumber,number);
 		assertEquals(complexNumber, complexNumber);
 		assertNotEquals(complexNumber,null);
 
-		assertEquals(new MyNumber(0,imaginary), onlyComplexNumber);
+		assertEquals(new MyNumber(new BigDecimal("0"),imaginary), onlyComplexNumber);
 		assertNotEquals(complexNumber,onlyComplexNumber);
 		assertEquals(onlyComplexNumber, onlyComplexNumber);
 		assertNotEquals(onlyComplexNumber,null);
+
+
+		System.out.println(realnumber);
+		System.out.println(new MyNumber(value,exp));
+		assertEquals(new MyNumber(value,exp),realnumber);
+
+		assertNotEquals(realnumber,number);
+		assertEquals(realnumber,realnumber);
+		assertNotEquals(realnumber, value);
 
 		try {
 			assertNotEquals(new Times(new ArrayList<>()), number);
@@ -55,9 +68,9 @@ class TestMyNumber {
 
 	@Test
 	void testToString() {
-		assertEquals(Integer.toString(value), number.toString());
-		assertEquals(value +"+"+ imaginary +"i", complexNumber.toString());
-		assertEquals(imaginary +"i", onlyComplexNumber.toString());
+		assertEquals(new MyNumber(value).toString(), number.toString());
+		assertEquals(new MyNumber(value,imaginary).toString(), complexNumber.toString());
+		assertEquals(new MyNumber(new BigDecimal(0),imaginary).toString(), onlyComplexNumber.toString());
 	}
 
 }

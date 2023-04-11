@@ -9,6 +9,9 @@ import calculator.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,20 +28,20 @@ class TestNotation {
 
 	/* This is an auxilary method to avoid code duplication.
      */
-	void testNotations(String symbol,int value1,int value2,Operation op) {
+	void testNotations(String symbol,BigDecimal value1,BigDecimal value2,Operation op) {
 		//prefix notation:
-		testNotation(symbol +" (" + value1 + ", " + value2 + ")", op, Notation.PREFIX);
+		testNotation(symbol +" (" + value1.toString() + ",00+0,00i, " + value2.toString() + ",00+0,00i)", op, Notation.PREFIX);
 		//infix notation:
-		testNotation("( " + value1 + " " + symbol + " " + value2 + " )", op, Notation.INFIX);
+		testNotation("( " + value1.toString() + ",00+0,00i " + symbol + " " + value2.toString() + ",00+0,00i )", op, Notation.INFIX);
 		//postfix notation:
-		testNotation("(" + value1 + ", " + value2 + ") " + symbol, op, Notation.POSTFIX);
+		testNotation("(" + value1.toString() + ",00+0,00i, " + value2.toString() + ",00+0,00i) " + symbol, op, Notation.POSTFIX);
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"*", "+", "/", "-"})
 	void testOutput(String symbol) {
-		int value1 = 8;
-		int value2 = 6;
+		BigDecimal value1 = new BigDecimal(8);
+		BigDecimal value2 = new BigDecimal(6);
 		Operation op = null;
 		//List<Expression> params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
 		List<Expression> params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));

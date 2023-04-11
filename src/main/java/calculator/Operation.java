@@ -2,6 +2,7 @@ package calculator;
 
 import visitor.Visitor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -77,11 +78,12 @@ public abstract class Operation implements Expression
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to compute
-	 * @param n1 first number of the operation
-	 * @param n2 second number of the operation
-	 * @return	result of computing the operation
+	 *
+	 * @param l first argument of the binary operation
+	 * @param r second argument of the binary operation
+	 * @return result of computing the binary operation
 	 */
-   public abstract MyNumber op(MyNumber n1, MyNumber n2);
+   public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
 
 	/** Add more parameters to the existing list of parameters
