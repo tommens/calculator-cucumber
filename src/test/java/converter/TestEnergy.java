@@ -25,7 +25,7 @@ public class TestEnergy {
 
     @Test
     public void testPrintEnergyConversion() {
-        double methodResult = Energy.printEnergyConversion(10, "J", "kWh").doubleValue();
+        double methodResult = Energy.printConversion(10, "J", "kWh").doubleValue();
         double expectedResult = BigDecimal.valueOf(2.778e-6).doubleValue();
         assertEquals(expectedResult,methodResult);
     }

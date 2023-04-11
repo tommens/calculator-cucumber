@@ -24,7 +24,7 @@ public class TestTime {
     }
     @Test
     public void testPrintTimeConversion() {
-        double methodResult = Time.printTimeConversion(2, "yr", "wk").doubleValue();
+        double methodResult = Time.printConversion(2, "yr", "wk").doubleValue();
         double expectedResult = BigDecimal.valueOf(104).doubleValue();
         assertEquals(expectedResult,methodResult,1);
     }

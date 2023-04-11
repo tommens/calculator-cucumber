@@ -1,15 +1,20 @@
- Background:
+Feature: Conversion of measurement units
+
+  # This is just a comment.
+  # You can start with a Background: that will be run before executing each scenario.
+
+  Background:
     Given I initialise a calculator
 
   Scenario: Converting units of measurement
-    Given a measurement 'Length' and a value 1
-    When I provide a first unit "dm"
+    Given a measurement 'Length' and a first unit "dm"
+    When I provide a value 1
     And a second unit "dam"
     Then the conversion from "dm" to "dam" evaluates to 0.01
 
   Scenario Outline: Converting units of measurement
-    Given a measurement 'Power' and a value 1
-    When I provide a first unit "W"
+    Given a measurement 'Power' and a first unit "W"
+    When I provide a value 1
     And a second unit '<unit>'
     Then the conversion from "W" to "<unit>" evaluates to <result>
 
@@ -22,8 +27,8 @@
       |PW  |1e-15 |
 
  Scenario Outline: Converting units of measurement
-    Given a measurement 'Time' and a value 1
-    When I provide a first unit "<unit1>"
+    Given a measurement 'Time' and a first unit "<unit1>"
+    When I provide a value 1
     And a second unit '<unit2>'
     Then the conversion from "<unit1>" to "<unit2>" evaluates to <result>
 
@@ -37,8 +42,8 @@
       |yr   |h    |8760   |
 
  Scenario Outline: Converting units of measurement
-    Given a measurement '<measurement>' and a value <value>
-    When I provide a first unit "<unit1>"
+    Given a measurement '<measurement>' and a first unit "<unit1>"
+    When I provide a value <value>
     And a second unit '<unit2>'
     Then the conversion from "<unit1>" to "<unit2> evaluates to <result>
 

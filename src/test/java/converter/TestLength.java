@@ -24,7 +24,7 @@ public class TestLength {
     }
     @Test
     public void testPrintLengthConversion() {
-        double methodResult = Length.printLengthConversion(1000, "m", "km").doubleValue();
+        double methodResult = Length.printConversion(1000, "m", "km").doubleValue();
         double expectedResult = BigDecimal.valueOf(1.0).doubleValue();
         assertEquals(expectedResult,methodResult);
     }

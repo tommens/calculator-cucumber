@@ -25,7 +25,7 @@ public class TestPower {
 
     @Test
     public void testPrintPowerConversion() {
-        double methodResult = Power.printPowerConversion(10, "MW", "W").doubleValue();
+        double methodResult = Power.printConversion(10, "MW", "W").doubleValue();
         double expectedResult = BigDecimal.valueOf(10e6).doubleValue();
         assertEquals(expectedResult,methodResult);
     }

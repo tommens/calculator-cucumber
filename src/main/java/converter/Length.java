@@ -45,7 +45,7 @@ public class Length extends Measurement {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static BigDecimal printLengthConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printConversion(double value, String fromUnit, String toUnit) {
         Length from = new Length(fromUnit);
         Length to = new Length(toUnit);
 

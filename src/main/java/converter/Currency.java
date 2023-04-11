@@ -40,7 +40,7 @@ public class Currency extends Measurement {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static BigDecimal printCurrencyConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printConversion(double value, String fromUnit, String toUnit) {
         Currency from = new Currency(fromUnit);
         Currency to = new Currency(toUnit);
 

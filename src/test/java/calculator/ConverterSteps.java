@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ConverterSteps {
     private Calculator c;
-    private String measurement;
+    private Measurement measurement;
     private String firstUnit;
     private String secondUnit;
     private double value;
@@ -29,29 +29,29 @@ public class ConverterSteps {
 
     @Given("a measurement {String} and a first unit {String}")
     public void givenAMeasurementAndAValue(String m, String unit1) {
-        measurement=m;
+        String measure=m;
         firstUnit=unit1;
-        switch (measurement) {
+        switch (measure) {
             case "Area" -> {
-                Area measure = new Area(unit1);
+                measurement = new Area(unit1);
             }
             case "Currency" -> {
-                Currency measure = new Currency(unit1);
+                measurement = new Currency(unit1);
             }
             case "Energy" -> {
-                Energy measure = new Energy(unit1);
+                measurement = new Energy(unit1);
             }
             case "Length" -> {
-                Length measure = new Length(unit1);
+                measurement = new Length(unit1);
             }
             case "Power" -> {
-                Power measure = new Power(unit1);
+                measurement = new Power(unit1);
             }
             case "Pressure" -> {
-                Pressure measure = new Pressure(unit1);
+                measurement = new Pressure(unit1);
             }
             case "Time" -> {
-                Time measure = new Time(unit1);
+                measurement = new Time(unit1);
             }
         }
     }
@@ -68,6 +68,6 @@ public class ConverterSteps {
 
     @Then("the conversion from {String} to {String} evaluates to {double}")
     public void theConversionEvaluatesTo(String unit1, String unit2, double result) {
-        assertEquals(result,measure);
+        assertEquals(result,measurement.printConversion(result,unit1,unit2));
     }
 }

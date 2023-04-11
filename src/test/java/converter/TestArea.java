@@ -25,7 +25,7 @@ public class TestArea {
 
     @Test
     public void testPrintAreaConversion() {
-        double methodResult = Area.printAreaConversion(2, "m2", "km2").doubleValue();
+        double methodResult = Area.printConversion(2, "m2", "km2").doubleValue();
         double expectedResult = BigDecimal.valueOf(2e-6).doubleValue();
         assertEquals(expectedResult,methodResult);
     }

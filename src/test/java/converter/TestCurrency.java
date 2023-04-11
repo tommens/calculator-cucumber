@@ -25,7 +25,7 @@ public class TestCurrency {
 
     @Test
     public void testPrintCurrencyConversion() {
-        double methodResult = Currency.printCurrencyConversion(10, "€", "£").doubleValue();
+        double methodResult = Currency.printConversion(10, "€", "£").doubleValue();
         double expectedResult = BigDecimal.valueOf(8.784454607).doubleValue();
         assertEquals(expectedResult,methodResult);
     }

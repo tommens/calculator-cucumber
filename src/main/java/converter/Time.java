@@ -40,7 +40,7 @@ public class Time extends Measurement {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static BigDecimal printTimeConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printConversion(double value, String fromUnit, String toUnit) {
         Time from = new Time(fromUnit);
         Time to = new Time(toUnit);
 

@@ -40,7 +40,7 @@ public class Area extends Measurement {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static BigDecimal printAreaConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printConversion(double value, String fromUnit, String toUnit) {
         Area from = new Area(fromUnit);
         Area to = new Area(toUnit);
 

@@ -57,13 +57,13 @@ public class Main {
 		c.eval(e);
 
 		//conversions
-		Length.printLengthConversion(96.7,"mm","yd");
-		Area.printAreaConversion(21,"cm2","dam2");
-		Currency.printCurrencyConversion(87.1,"CHF","€");
-		Power.printPowerConversion(23.24,"PW","kW");
-		Energy.printEnergyConversion(2.54,"kWh","cal");
-		Pressure.printPressureConversion(23,"atm","kPa");
-		Time.printTimeConversion(6,"wk","ms");
+		Length.printConversion(96.7,"mm","yd");
+		Area.printConversion(21,"cm2","dam2");
+		Currency.printConversion(87.1,"CHF","€");
+		Power.printConversion(23.24,"PW","kW");
+		Energy.printConversion(2.54,"kWh","cal");
+		Pressure.printConversion(23,"atm","kPa");
+		Time.printConversion(6,"wk","ms");
 	}
 
 	catch(IllegalConstruction exception) {

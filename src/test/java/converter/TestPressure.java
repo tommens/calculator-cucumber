@@ -25,7 +25,7 @@ public class TestPressure {
 
     @Test
     public void testPrintPressureConversion() {
-        double methodResult = Pressure.printPressureConversion(15, "Pa", "bar").doubleValue();
+        double methodResult = Pressure.printConversion(15, "Pa", "bar").doubleValue();
         double expectedResult = BigDecimal.valueOf(0.00015).doubleValue();
         assertEquals(expectedResult,methodResult);
     }

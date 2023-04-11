@@ -38,7 +38,7 @@ public class Energy extends Measurement {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static BigDecimal printEnergyConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printConversion(double value, String fromUnit, String toUnit) {
         Energy from = new Energy(fromUnit);
         Energy to = new Energy(toUnit);
 

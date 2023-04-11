@@ -39,7 +39,7 @@ public class Power extends Measurement {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static BigDecimal printPowerConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printConversion(double value, String fromUnit, String toUnit) {
         Power from = new Power(fromUnit);
         Power to = new Power(toUnit);
 
