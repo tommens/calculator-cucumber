@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Pressure {
+public class Pressure extends Measurement {
     //Factors of different pressure conversions to Pascals.
     final private double hPa_TO_Pa = 100; //hectoPascals
     final private double kPa_TO_Pa = 1000; //kiloPascals

@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Area {
+public class Area extends Measurement {
     //Factors of different Area conversions to meters.
     final private double mm2_TO_m2 = 1e-6; //mm²
     final private double cm2_TO_m2 = 0.0001; //cm²

@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Power {
+public class Power extends Measurement {
     //Factors of different power conversions to watts.
     final private double kW_TO_W = 1000; //kilowatts
     final private double MW_TO_W = 1e6; //megawatt

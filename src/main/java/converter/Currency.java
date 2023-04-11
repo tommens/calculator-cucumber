@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Currency {
+public class Currency extends Measurement {
     //Factors of different currency conversions to euros.
     final private double $_TO_€ = 0.91636347; //dollars
     final private double ¥_TO_€ = 0.0068542225; //yens

@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Time {
+public class Time extends Measurement {
     //Factors of different time conversions to seconds.
     final private double ms_TO_s = 0.001; //milliseconds
     final private double mn_TO_s = 60; //minutes

@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Length {
+public class Length extends Measurement {
     //Factors of different length conversions to meters.
     final private double mm_TO_m = 0.001; //millimeters
     final private double cm_TO_m = 0.01; //centimeters
