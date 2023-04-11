@@ -2,6 +2,8 @@ package converter;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCurrency {
@@ -19,5 +21,12 @@ public class TestCurrency {
         double result = currency.fromEuros(10);
         double expected = 75.15;
         assertEquals(expected, result,0.01);
+    }
+
+    @Test
+    public void testPrintCurrencyConversion() {
+        double methodResult = Currency.printCurrencyConversion(10, "€", "£").doubleValue();
+        double expectedResult = BigDecimal.valueOf(8.784454607).doubleValue();
+        assertEquals(expectedResult,methodResult);
     }
 }

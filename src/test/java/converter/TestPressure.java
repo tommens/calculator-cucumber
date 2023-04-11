@@ -2,6 +2,8 @@ package converter;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPressure {
@@ -19,5 +21,12 @@ public class TestPressure {
         double result = pressure.fromPascals(10);
         double expected = 0.1;
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void testPrintPressureConversion() {
+        double methodResult = Pressure.printPressureConversion(15, "Pa", "bar").doubleValue();
+        double expectedResult = BigDecimal.valueOf(0.00015).doubleValue();
+        assertEquals(expectedResult,methodResult);
     }
 }

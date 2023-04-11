@@ -2,6 +2,8 @@ package converter;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEnergy {
@@ -19,5 +21,12 @@ public class TestEnergy {
         double result = energy.fromJoules(10);
         double expected = 2.39006;
         assertEquals(expected, result,0.001);
+    }
+
+    @Test
+    public void testPrintEnergyConversion() {
+        double methodResult = Energy.printEnergyConversion(10, "J", "kWh").doubleValue();
+        double expectedResult = BigDecimal.valueOf(2.778e-6).doubleValue();
+        assertEquals(expectedResult,methodResult);
     }
 }

@@ -3,6 +3,8 @@ package converter;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import java.math.BigDecimal;
+
 public class TestArea {
 
     @Test
@@ -19,5 +21,12 @@ public class TestArea {
         double result = area.fromSquareMeters(10);
         double expected = 1e7;
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void testPrintAreaConversion() {
+        double methodResult = Area.printAreaConversion(2, "m2", "km2").doubleValue();
+        double expectedResult = BigDecimal.valueOf(2e-6).doubleValue();
+        assertEquals(expectedResult,methodResult);
     }
 }

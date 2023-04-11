@@ -39,7 +39,7 @@ public class Pressure {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static void printPressureConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printPressureConversion(double value, String fromUnit, String toUnit) {
         Pressure from = new Pressure(fromUnit);
         Pressure to = new Pressure(toUnit);
 
@@ -52,5 +52,6 @@ public class Pressure {
         result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
+        return result;
     }
 }

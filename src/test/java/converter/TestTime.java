@@ -2,6 +2,8 @@ package converter;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestTime {
@@ -19,5 +21,11 @@ public class TestTime {
         double result = time.fromSeconds(99);
         double expected = 3.1393e-6;
         assertEquals(expected, result,0.1e-6);
+    }
+    @Test
+    public void testPrintTimeConversion() {
+        double methodResult = Time.printTimeConversion(2, "yr", "wk").doubleValue();
+        double expectedResult = BigDecimal.valueOf(104).doubleValue();
+        assertEquals(expectedResult,methodResult,1);
     }
 }

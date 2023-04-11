@@ -38,7 +38,7 @@ public class Energy {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static void printEnergyConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printEnergyConversion(double value, String fromUnit, String toUnit) {
         Energy from = new Energy(fromUnit);
         Energy to = new Energy(toUnit);
 
@@ -51,5 +51,6 @@ public class Energy {
         result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
+        return result;
     }
 }

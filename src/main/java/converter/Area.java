@@ -40,7 +40,7 @@ public class Area {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static void printAreaConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printAreaConversion(double value, String fromUnit, String toUnit) {
         Area from = new Area(fromUnit);
         Area to = new Area(toUnit);
 
@@ -53,5 +53,6 @@ public class Area {
         result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
+        return result;
     }
 }

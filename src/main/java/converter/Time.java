@@ -40,7 +40,7 @@ public class Time {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static void printTimeConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printTimeConversion(double value, String fromUnit, String toUnit) {
         Time from = new Time(fromUnit);
         Time to = new Time(toUnit);
 
@@ -53,5 +53,6 @@ public class Time {
         result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
+        return result;
     }
 }

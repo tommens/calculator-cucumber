@@ -40,7 +40,7 @@ public class Currency {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static void printCurrencyConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printCurrencyConversion(double value, String fromUnit, String toUnit) {
         Currency from = new Currency(fromUnit);
         Currency to = new Currency(toUnit);
 
@@ -53,5 +53,6 @@ public class Currency {
         result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
+        return result;
     }
 }

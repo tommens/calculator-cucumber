@@ -45,7 +45,7 @@ public class Length {
     }
 
     //The method doing the whole conversion and printing the results.
-    public static void printLengthConversion(double value, String fromUnit, String toUnit) {
+    public static BigDecimal printLengthConversion(double value, String fromUnit, String toUnit) {
         Length from = new Length(fromUnit);
         Length to = new Length(toUnit);
 
@@ -58,5 +58,6 @@ public class Length {
         result = result.setScale(scale, roundingMode);
 
         System.out.println(value + fromUnit + " = " + result + toUnit);
+        return result;
     }
 }
