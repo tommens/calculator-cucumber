@@ -22,12 +22,7 @@ public class ConverterSteps {
         measurement = null;
     }
 
-    @Given("I initialise a calculator")
-    public void givenIInitialiseACalculator() {
-        c = new Calculator();
-    }
-
-    @Given("a measurement {String} and a first unit {String}")
+    @Given("a measurement {string} and a first unit {string}")
     public void givenAMeasurementAndAValue(String m, String unit1) {
         String measure=m;
         firstUnit=unit1;
@@ -61,12 +56,12 @@ public class ConverterSteps {
         value=val;
     }
 
-    @When("a second unit {String}")
+    @When("a second unit {string}")
     public void ASecondUnit(String unit2) {
         secondUnit=unit2;
     }
 
-    @Then("the conversion from {String} to {String} evaluates to {double}")
+    @Then("the conversion from {string} to {string} evaluates to {double}")
     public void theConversionEvaluatesTo(String unit1, String unit2, double result) {
         assertEquals(result,measurement.printConversion(result,unit1,unit2));
     }
