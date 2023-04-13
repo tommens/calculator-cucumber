@@ -77,5 +77,8 @@ public class MyInteger extends MyNumber{
         return this.value == ((MyInteger)o).value;
     }
 
-
+    @Override
+    public int hashCode() {
+        return getInteger();
+    }
 }

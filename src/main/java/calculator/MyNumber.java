@@ -69,15 +69,9 @@ public abstract class MyNumber implements Expression
   }
 
 
-    /** The method hashCode needs to be overridden it the equals method is overridden;
-     * 	otherwise there may be problems when you use your object in hashed collections
-     * 	such as HashMap, HashSet, LinkedHashSet.
-     *
-     * @return	The result of computing the hash.
-     */
   @Override
-  public int hashCode() {
-		return getInteger();
-  }
+  public abstract boolean equals(Object obj);
 
+  @Override
+  public abstract int hashCode();
 }
