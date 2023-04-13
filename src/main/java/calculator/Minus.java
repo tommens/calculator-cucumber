@@ -62,4 +62,15 @@ public final class Minus extends Operation
      public BigDecimal op(BigDecimal l, BigDecimal r) {
          return l.subtract(r,mathContext);
      }
- }
+ 
+     /**
+      * The actual computation of the (binary) arithmetic subtraction of two rational numbers
+      * @param l	 The first rational number
+      * @param r     The second rational number that should be subtracted from the first
+      * @return
+      */
+     @Override
+     public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+         return l.subtract(r);
+     }
+}

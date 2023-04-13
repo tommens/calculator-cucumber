@@ -3,6 +3,7 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -108,6 +109,13 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
+	@When("^I provide a (.*) rational number (\\d+)_/(\\d+)$")
+	public void whenIProvideARationalNumber(String s, int numerator, int denominator) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(MyRationalNumber.create(numerator,denominator));
+		op.addMoreParams(params);
+	}
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
 		try {
@@ -129,9 +137,20 @@ public class CalculatorSteps {
 		assertEquals(val, c.eval(op));
 	}
 
-
 	@Then("the result of the operation is {string}")
 	public void thenTheResultOfOperation(String val) {
 		assertEquals(new BigDecimal(val), c.evalReal(op));
 	}
+  
+	@ParameterType(".*")
+	public MyRationalNumber rationalNumber(String s) {
+		String[] parts = s.split("/");
+		return MyRationalNumber.create(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+	}
+	@Then("the operation evaluates to rational {string}")
+	public void thenTheOperationEvaluatesTo(String val) {
+		String[] parts = val.split("_/");
+		assertEquals(MyRationalNumber.create(Integer.parseInt(parts[0]), Integer.parseInt(parts[1])), c.evalRational(op));
+	}
+
 }

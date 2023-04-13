@@ -100,6 +100,15 @@ public abstract class Operation implements Expression
 	 */
 	public abstract BigDecimal op(BigDecimal l, BigDecimal r);
 
+  /**
+   * Abstract method representing the actual binary arithmetic operation to compute between two rational numbers
+	 * @param l	 first rational number of the binary operation
+	 * @param r	second rational number of the binary operation
+	 * @return	result of computing the binary operation
+	 */
+	public abstract MyRationalNumber op(MyRationalNumber l, MyRationalNumber r);
+
+
 	/** Add more parameters to the existing list of parameters
 	 *
 	 * @param params	The list of parameters to be added

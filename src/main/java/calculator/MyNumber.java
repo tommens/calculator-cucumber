@@ -26,6 +26,13 @@ public abstract class MyNumber implements Expression
      */
     public abstract BigDecimal getRealNumber();
 
+
+    /**
+     * abstract method to obtain the rational number corresponding to the value of the object
+     * @return The rational number contain in the object
+     */
+    public abstract MyRationalNumber getRational();
+
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
      * Each number will pass itself to the visitor object to get processed by the visitor.

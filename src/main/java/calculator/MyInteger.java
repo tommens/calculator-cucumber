@@ -35,6 +35,15 @@ public class MyInteger extends MyNumber{
     public BigDecimal getRealNumber() {
         return new BigDecimal(value);
     }
+      
+    /**
+     * getter method to obtain the rational number contained in the object
+     * @return the rational number contained in the object
+     */
+    @Override
+    public MyRationalNumber getRational() {
+        return MyRationalNumber.create(value, 1);
+    }
 
     /**
      * Convert a number into a String to allow it to be printed.
@@ -67,4 +76,6 @@ public class MyInteger extends MyNumber{
         }
         return this.value == ((MyInteger)o).value;
     }
+
+
 }

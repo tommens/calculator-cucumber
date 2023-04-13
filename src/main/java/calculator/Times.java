@@ -60,4 +60,16 @@ public final class Times extends Operation
      public BigDecimal op(BigDecimal l, BigDecimal r) {
          return l.multiply(r,mathContext);
      }
- }
+ 
+     /**
+      * The actual computation of the (binary) arithmetic multiplication of two rational numbers
+      * @param l The first rational number
+      * @param r The second rational number that should be multiplied with the first
+      * @return The rational number that is the result of the multiplication
+      */
+
+     @Override
+     public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+         return l.multiply(r);
+     }
+}

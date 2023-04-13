@@ -19,12 +19,14 @@ class TestEvaluator {
         calc = new Calculator();
         value1 = 8;
         value2 = 6;
+
     }
 
     @Test
     void testEvaluatorMyNumber() {
         assertEquals( value1, calc.eval(new MyInteger(value1)));
     }
+
 
     @ParameterizedTest
     @ValueSource(strings = {"*", "+", "/", "-"})
@@ -44,5 +46,6 @@ class TestEvaluator {
             fail();
         }
     }
+
 
 }
