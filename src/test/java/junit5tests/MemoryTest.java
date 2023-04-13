@@ -35,7 +35,7 @@ class MemoryTest {
         for (int i = 0; i < 98; i++) {
             m.add("a", new MyNumber(new BigDecimal(9)), e2);
         }
-        /*assertThrows(RuntimeException.class, () -> m.add("a", new MyNumber(new BigDecimal(9)), e2));*/
+        assertThrows(RuntimeException.class, () -> m.add("a", new MyNumber(new BigDecimal(9)), e2));
     }
 
     @Test
@@ -70,6 +70,6 @@ class MemoryTest {
         for(int i = 0; i < 100; i++) {
             m.add("a", new MyNumber(new BigDecimal(12)), e);
         }
-        assertThrows(RuntimeException.class, () -> m.setSize(50));
+        assertThrows(RuntimeException.class, () -> m.setMaxSize(50));
     }
 }
