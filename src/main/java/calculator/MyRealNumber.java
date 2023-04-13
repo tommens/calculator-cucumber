@@ -2,7 +2,6 @@ package calculator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 
 /**
  * This class represent a real number
@@ -32,7 +31,7 @@ public class MyRealNumber extends MyNumber{
     }
 
     public MyRealNumber(Long nominator, Long denominator) {
-    	value = new BigDecimal(nominator).divide(new BigDecimal(denominator), 12, RoundingMode.CEILING);
+        value = new BigDecimal(nominator).divide(new BigDecimal(denominator), MathContext.DECIMAL128);
     }
 
     /**
