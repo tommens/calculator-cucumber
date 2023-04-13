@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,22 @@ public class CalculatorSteps {
 		else fail(notation + " is not a correct notation! ");
 	}
 
+	@When("I provide a first real number {string}")
+	public void whenIProvideARealNumber(String s) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyRealNumber(s));
+		op.addMoreParams(params);
+	}
+
+	@When("I provide a second real number {string}")
+	public void whenIProvideASecondRealNumber(String s) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyRealNumber(s));
+		op.addMoreParams(params);
+	}
+
 	@When("^I provide a (.*) number (\\d+)$")
 	public void whenIProvideANumber(String s, int val) {
 		//add extra parameter to the operation
@@ -120,6 +137,11 @@ public class CalculatorSteps {
 		assertEquals(val, c.eval(op));
 	}
 
+	@Then("the result of the operation is {string}")
+	public void thenTheResultOfOperation(String val) {
+		assertEquals(new BigDecimal(val), c.evalReal(op));
+	}
+  
 	@ParameterType(".*")
 	public MyRationalNumber rationalNumber(String s) {
 		String[] parts = s.split("/");

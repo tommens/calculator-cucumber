@@ -1,5 +1,7 @@
 package calculator;
 
+import java.math.BigDecimal;
+
 /**
  * This class represent an integer number
  * The class extends an abstract class MyNumber
@@ -25,6 +27,15 @@ public class MyInteger extends MyNumber{
         return value;
     }
 
+    /**
+     * getter method to obtain the value as a real number
+     * @return The value as a real number
+     */
+    @Override
+    public BigDecimal getRealNumber() {
+        return new BigDecimal(value);
+    }
+      
     /**
      * getter method to obtain the rational number contained in the object
      * @return the rational number contained in the object

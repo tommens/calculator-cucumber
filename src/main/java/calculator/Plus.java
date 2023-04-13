@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /** This class represents the arithmetic sum operation "+".
@@ -38,6 +39,29 @@ public final class Plus extends Operation {
         symbol = "+";
         neutral = 0;
     }
+
+    /**
+     * The actual computation of the (binary) arithmetic addition of two integers
+     * @param l The first integer
+     * @param r The second integer that should be added to the first
+     * @return The integer that is the result of the addition
+     */
+    public int op(int l, int r) {
+      return (l+r);
+    }
+
+
+     /**
+      * The actual computation of the (binary) arithmetic addition of two real numbers
+      * @param l first argument of the binary operation
+      * @param r second argument of the binary operation
+      * @return The real number that is the result of the addition
+      */
+     @Override
+     public BigDecimal op(BigDecimal l, BigDecimal r) {
+         return l.add(r,mathContext);
+     }
+ 
 
     /**
      * The actual computation of the (binary) arithmetic addition of two integers
