@@ -91,6 +91,7 @@ public class Calculator {
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
         // and return the result of the evaluation at the end of the process
+        return v.getResult();
     }
 
     /**

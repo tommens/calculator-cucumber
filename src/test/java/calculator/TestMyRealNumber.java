@@ -55,5 +55,12 @@ public class TestMyRealNumber {
         assertEquals(s,number2.toDecimalString());
     }
 
+    @Test
+    void testGetRational(){
+        MyRationalNumber r = MyRationalNumber.create(1,10);
+
+        assertEquals(r,new MyRealNumber("0.1").getRational());
+    }
+
 
 }

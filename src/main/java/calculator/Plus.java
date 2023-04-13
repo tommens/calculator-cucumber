@@ -61,18 +61,7 @@ public final class Plus extends Operation {
      public BigDecimal op(BigDecimal l, BigDecimal r) {
          return l.add(r,mathContext);
      }
- 
 
-    /**
-     * The actual computation of the (binary) arithmetic addition of two integers
-     *
-     * @param l The first integer
-     * @param r The second integer that should be added to the first
-     * @return The integer that is the result of the addition
-     */
-    public int op(int l, int r) {
-        return (l + r);
-    }
 
     /**
      * The actual computation of the (binary) arithmetic addition of two rational numbers

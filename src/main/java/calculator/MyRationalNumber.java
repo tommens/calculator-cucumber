@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class MyRationalNumber extends MyNumber {
-    private final int nominator;
-    private final int denominator;
+    private Long nominator;
+    private Long denominator;
 
     /**
      * Constructor method to create a rational number
@@ -15,13 +15,23 @@ public class MyRationalNumber extends MyNumber {
      * @param nominator   The integer value of the nominator
      * @param denominator The integer value of the denominator
      */
-    private MyRationalNumber(int nominator, int denominator) throws  IllegalArgumentException{
+    private MyRationalNumber(Long nominator, Long denominator) throws  IllegalArgumentException{
         if (denominator == 0) throw new IllegalArgumentException("Denominator cannot be 0");
         this.nominator = nominator;
         this.denominator = denominator;
 
     }
 
+    /**
+     * Constructor method to create a rational number from a BigDecimal value
+     * @param value The BigDecimal value to be converted to a rational number
+     */
+    private MyRationalNumber(BigDecimal value) {
+        this(value.unscaledValue().longValue(), pow(10L, value.scale()));
+
+    }
+
+    //create a methode that convert a BigDecimal to a rational number
 
     /**
      * Factory method to create a rational number and check if the denominator is different from 0.
@@ -29,9 +39,25 @@ public class MyRationalNumber extends MyNumber {
      * @param nominator   The integer value of the nominator
      * @param denominator The integer value of the denominator
      * @return The rational number created
+     * @throws IllegalArgumentException
      */
-    public static MyRationalNumber create(int nominator, int denominator) throws IllegalArgumentException {
+    public static MyRationalNumber create(Long nominator, Long denominator) throws IllegalArgumentException {
         return new MyRationalNumber(nominator, denominator).reduce();
+    }
+
+    public static MyRationalNumber create(int nominator, int denominator) throws IllegalArgumentException {
+        return new MyRationalNumber((long) nominator, (long) denominator).reduce();
+    }
+
+
+    /**
+     * Factory method to create a rational number from a BigDecimal value
+     * @param value The BigDecimal value to be converted to a rational number
+     * @return The rational number created
+     * @throws IllegalArgumentException
+     */
+    public static MyRationalNumber create(BigDecimal value) throws IllegalArgumentException {
+        return new MyRationalNumber(value).reduce();
     }
 
     /**
@@ -39,8 +65,8 @@ public class MyRationalNumber extends MyNumber {
      *
      * @return The integers nominator and denominator contained in the object
      */
-    public Integer[] getValue() {
-        return new Integer[]{nominator, denominator};
+    public Long[] getValue() {
+        return new Long[]{nominator, denominator};
     }
 
     /**
@@ -49,7 +75,7 @@ public class MyRationalNumber extends MyNumber {
      */
     @Override
     public Integer getInteger() {
-        return nominator / denominator;
+        return (int)(nominator / denominator);
     }
 
     /**
@@ -66,7 +92,7 @@ public class MyRationalNumber extends MyNumber {
      * @return The BigDecimal value of the rational number
      */
     public BigDecimal getRealNumber() {
-        return new BigDecimal(nominator).divide(new BigDecimal(denominator));
+        return new MyRealNumber(nominator, denominator).getRealNumber();
     }
 
     @Override
@@ -113,8 +139,8 @@ public class MyRationalNumber extends MyNumber {
      * @return The result of the addition
      */
     public MyRationalNumber add(MyRationalNumber other) {
-        int newNominator = this.nominator * other.denominator + other.nominator * this.denominator;
-        int newDenominator = this.denominator * other.denominator;
+        Long newNominator = this.nominator * other.denominator + other.nominator * this.denominator;
+        Long newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
@@ -125,8 +151,8 @@ public class MyRationalNumber extends MyNumber {
      * @return The result of the subtraction
      */
     public MyRationalNumber subtract(MyRationalNumber other) {
-        int newNominator = this.nominator * other.denominator - other.nominator * this.denominator;
-        int newDenominator = this.denominator * other.denominator;
+        Long newNominator = this.nominator * other.denominator - other.nominator * this.denominator;
+        Long newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
@@ -137,8 +163,8 @@ public class MyRationalNumber extends MyNumber {
      * @return The result of the multiplication
      */
     public MyRationalNumber multiply(MyRationalNumber other) {
-        int newNominator = this.nominator * other.nominator;
-        int newDenominator = this.denominator * other.denominator;
+        Long newNominator = this.nominator * other.nominator;
+        Long newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
@@ -150,8 +176,8 @@ public class MyRationalNumber extends MyNumber {
      */
     public MyRationalNumber divide(MyRationalNumber other) throws IllegalArgumentException {
 
-        int newNominator = this.nominator * other.denominator;
-        int newDenominator = this.denominator * other.nominator;
+        Long newNominator = this.nominator * other.denominator;
+        Long newDenominator = this.denominator * other.nominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
     }
 
@@ -161,11 +187,11 @@ public class MyRationalNumber extends MyNumber {
      * @return The rational number in its simplest form
      */
     private MyRationalNumber reduce() throws IllegalArgumentException{
-        int sign = nominator * denominator < 0 ? -1 : 1;
-        int absNominator = Math.abs(nominator);
-        int absDenominator = Math.abs(denominator);
+        int sign = nominator >= 0L ? (denominator > 0L ? 1 : -1) : (denominator > 0L ? -1 : 1);
+        Long absNominator = Math.abs(nominator);
+        Long absDenominator = Math.abs(denominator);
 
-        int gcd = gcd(absNominator, absDenominator);
+        Long gcd = gcd(absNominator, absDenominator);
         return new MyRationalNumber(sign * absNominator / gcd, absDenominator / gcd);
     }
 
@@ -176,9 +202,17 @@ public class MyRationalNumber extends MyNumber {
      * @param b The second integer
      * @return The greatest common divisor of the two integers
      */
-    private int gcd(int a, int b) {
+    private Long gcd(Long a, Long b) {
         return b == 0 ? a : gcd(b, a % b);
 
+    }
+
+    private static long pow(long base, int exponent) {
+        long result = 1;
+        for (int i = 0; i < exponent; i++) {
+            result *= base;
+        }
+        return result;
     }
 
 }

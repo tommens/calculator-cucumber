@@ -30,6 +30,10 @@ public class MyRealNumber extends MyNumber{
         value = new BigDecimal(v,mc);
     }
 
+    public MyRealNumber(Long nominator, Long denominator) {
+    	value = new BigDecimal(nominator).divide(new BigDecimal(denominator));
+    }
+
     /**
      * getter method to obtain the value contained in the object as an integer
      * @return The value contained in the object as an integer
@@ -46,6 +50,15 @@ public class MyRealNumber extends MyNumber{
     @Override
     public BigDecimal getRealNumber() {
         return value;
+    }
+
+    /**
+     * getter method to obtain the value contained in the object as a rational number
+     * @return The value contained in the object as a rational number
+     */
+    @Override
+    public MyRationalNumber getRational() {
+        return MyRationalNumber.create(value);
     }
 
 
