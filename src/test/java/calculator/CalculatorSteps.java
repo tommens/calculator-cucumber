@@ -3,6 +3,7 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,8 +30,8 @@ public class CalculatorSteps {
 		c = new Calculator();
 	}
 
-	@Given("an integer operation {string}")
-	public void givenAnIntegerOperation(String s) {
+	@Given("an operation {string}")
+	public void givenAnOperation(String s) {
 		// Write code here that turns the phrase above into concrete actions
 		params = new ArrayList<>(); // create an empty set of parameters to be filled in
 		try {
@@ -91,6 +92,13 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
+	@When("^I provide a (.*) rational number (\\d+)_/(\\d+)$")
+	public void whenIProvideARationalNumber(String s, int numerator, int denominator) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(MyRationalNumber.create(numerator,denominator));
+		op.addMoreParams(params);
+	}
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
 		try {
@@ -110,6 +118,17 @@ public class CalculatorSteps {
 	@Then("the operation evaluates to {int}")
 	public void thenTheOperationEvaluatesTo(int val) {
 		assertEquals(val, c.eval(op));
+	}
+
+	@ParameterType(".*")
+	public MyRationalNumber rationalNumber(String s) {
+		String[] parts = s.split("/");
+		return MyRationalNumber.create(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+	}
+	@Then("the operation evaluates to rational {string}")
+	public void thenTheOperationEvaluatesTo(String val) {
+		String[] parts = val.split("_/");
+		assertEquals(MyRationalNumber.create(Integer.parseInt(parts[0]), Integer.parseInt(parts[1])), c.evalRational(op));
 	}
 
 }
