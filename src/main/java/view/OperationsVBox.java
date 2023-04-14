@@ -2,8 +2,8 @@ package view;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +29,7 @@ public class OperationsVBox extends CalculatorPart {
         fracButton.setVisible(true);
         fracButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
         fracButton.prefHeightProperty().bind(hbox.heightProperty());
+        fracButton.setTooltip(new Tooltip("Use this button to create a rational number. Enter the nominator, press this button and enter the denominator."));
 
         Button resultButton = new Button("=");
         resultButton.setVisible(true);

@@ -3,10 +3,11 @@ package calculator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import view.CalculatorView;
-import view.IntNumbersVBox;
+
 
 /**
  * Cette classe est la classe qui lance l'application JAVAFX.
@@ -36,17 +37,26 @@ public class MainApplication extends Application {
 
         });
 
+        primaryStage.setOpacity(0.95);
+
         //Menu principal
 
         CalculatorView panel = CalculatorView.getInstance();
         Scene scene = new Scene(panel);
+        scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add("view/style.css");
+
         primaryStage.setTitle("Calculator --- WALCARIUS -- MARCHELLI -- TULIPPE-HECQ -- VAN DRIESSCHE");
         panel.prefHeightProperty().bind(scene.heightProperty());
         panel.prefWidthProperty().bind(scene.widthProperty());
 
 
+        //make font size of panel elements resize while resizing the window
+        panel.prefHeightProperty().addListener((observable, oldValue, newValue) -> panel.setFontSize(newValue.doubleValue()));
 
-        primaryStage.setMinWidth(1280);
+
+
+        primaryStage.setMinWidth(600);
         primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(0.56));
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(0.56));
 

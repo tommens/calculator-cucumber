@@ -31,12 +31,9 @@ public abstract class CalculatorPart extends VBox {
         setMaxHeightNbButtons();
         setMaxWidthNbButtons(elements.size());
         HBox hbox = new HBox();
-        elements.stream().forEach((element) -> {
-            Button button = new Button(element.toString());
-            button.setOnAction(actionEvent -> { modifyDisplay(button, button.getText());
-
-
-            });
+        elements.forEach((element) -> {
+            Button button = new Button(element);
+            button.setOnAction(actionEvent -> modifyDisplay(button, button.getText()));
 
             button.prefWidthProperty().bind(hbox.widthProperty().multiply(1. / elements.size()));
             button.prefHeightProperty().bind(hbox.heightProperty());
@@ -61,6 +58,10 @@ public abstract class CalculatorPart extends VBox {
         } catch (Exception e) {
 
         }
+    }
+
+    public void setFontSize(double fontSize) {
+        getChildren().forEach(node -> node.setStyle("-fx-font-size: " + fontSize + "px;"));
     }
 
 }

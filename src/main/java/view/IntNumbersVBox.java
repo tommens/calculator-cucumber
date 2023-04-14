@@ -1,13 +1,9 @@
 package view;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 
 public class IntNumbersVBox extends CalculatorPart {
     private static IntNumbersVBox instance;
@@ -30,6 +26,7 @@ public class IntNumbersVBox extends CalculatorPart {
         instance = instance == null ? new IntNumbersVBox() : instance;
         return instance;
     }
+
 
 
 }

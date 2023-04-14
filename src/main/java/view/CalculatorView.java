@@ -1,10 +1,7 @@
 package view;
 
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class CalculatorView extends VBox {
@@ -33,7 +30,8 @@ public class CalculatorView extends VBox {
     }
 
     public static CalculatorView getInstance(){
-        return instance == null ? new CalculatorView() : instance;
+        instance = instance == null ? new CalculatorView() : instance;
+        return instance;
     }
     public IntNumbersVBox getIntNumbersVBox(){
         IntNumbersVBox intNumbersVBox = IntNumbersVBox.getInstance();
@@ -42,7 +40,7 @@ public class CalculatorView extends VBox {
         System.out.println(intNumbersVBox.getMaxWidthNbButtons()/totalWidthRequired);
         return intNumbersVBox;
     }
-    private Node getOperationsVBox() {
+    private OperationsVBox getOperationsVBox() {
         OperationsVBox operationsVBox = OperationsVBox.getInstance();
         operationsVBox.prefWidthProperty().bind(widthProperty().multiply(operationsVBox.getMaxWidthNbButtons()/totalWidthRequired));
         operationsVBox.prefHeightProperty().bind(heightProperty().multiply(operationsVBox.getMaxHeightNbButtons() / totalHeightRequired));
@@ -64,8 +62,15 @@ public class CalculatorView extends VBox {
         getDisplay().setText(getDisplay().getText()+stringToAdd);
     }
 
+    public void clearDisplay(){
+        getDisplay().setText("");
+    }
 
+    public void setFontSize(double fontSize){
+        getDisplay().setStyle("-fx-font-size: "+fontSize/8+"px;");
+        getIntNumbersVBox().setFontSize(fontSize/20);
+        getOperationsVBox().setFontSize(fontSize/20);
 
-
+    }
 
 }
