@@ -3,6 +3,8 @@ package calculator;
 import visitor.Visitor;
 
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -163,30 +165,52 @@ public class MyNumber implements Expression
         Double r;
 
         Double O;
-        try {
-            MyNumber tmp1 = new Divides(null).op(new MyNumber(imaginary,imaginaryExp),new MyNumber(value,exp));
-            O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimal_number))).doubleValue());
 
-            MyNumber tmp2 = new Modulus(null).op(this);
+        DecimalFormat format = new DecimalFormat("0.#");
+        try {
+            List<Expression> args = new ArrayList<>();
+            O = Math.PI/2;
+            if(value.signum()!=0) {
+                MyNumber tmp1 = new Divides(args).op(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
+                O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimal_number))).doubleValue());
+            }
+            MyNumber tmp2 = new Modulus(args).op(this);
             r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimal_number))).doubleValue();
+
         }
         catch(IllegalConstruction e) {
-            return String.format("%,.2f+%,.2fi", real, imag);
+            return String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
+                    (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
+                            String.format("%s+%si", format.format(real),format.format(imag)));
         }
 
         return switch (n) {
             case CARTESIAN ->
-                String.format("%,.2f+%,.2fi", real, imag);
+                //String.format("%,.2f+%,.2fi", real, imag);
+                String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
+                    (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
+                            String.format("%s+%si", format.format(real),format.format(imag)));
 
             case POLAR ->
-                    String.format("%,.2f*(cosine(%,.2f) + i*sine(%,.2f))", r, O, O);
+                    String.format("%s%s",format.format(r),
+                            (Double.compare(O,0)!=0) ? String.format("*(cosine(%s) + i*sine(%s))", O, O):
+                                    "");
 
             case EXPONENTIAL ->
-                    String.format("%,.2fe^(%,.2f*i)", r, O);
+                    String.format("%s%s",format.format(r),
+                            (Double.compare(O,0)!=0) ? String.format("*e^(%s*i)", O):"");
 
-              case SCIENTIFIC -> String.format(value.toString() + "x10^" + (exp)+" + "+ imaginary.toString() + "x10^" + (imaginaryExp)+"i");
+            case SCIENTIFIC ->
+                    //String.format(value.toString() + "x10^" + (exp)+" + "+ imaginary.toString() + "x10^" + (imaginaryExp)+"i");
+                    String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sx10^%s", imaginary,imaginaryExp) :
+                            (imaginary.signum() == 0) ? String.format("%sx10^%s", value,exp) :
+                                    String.format("%sx10^%s + i*%sx10^%s", value,exp,imaginary,imaginaryExp));
 
-              case E_NOTATION -> String.format(value.toString() + "E^" + (exp)+" + "+ imaginary.toString() + "E^" + (imaginaryExp)+"i");
+            case E_NOTATION ->
+                    //String.format(value.toString() + "E^" + (exp)+" + "+ imaginary.toString() + "E^" + (imaginaryExp)+"i");
+            String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
+                    (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
+                            String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));
           };
       }
 

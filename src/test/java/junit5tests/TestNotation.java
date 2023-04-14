@@ -30,11 +30,11 @@ class TestNotation {
      */
 	void testNotations(String symbol,BigDecimal value1,BigDecimal value2,Operation op) {
 		//prefix notation:
-		testNotation(symbol +" (" + value1.toString() + ",00+0,00i, " + value2.toString() + ",00+0,00i)", op, Notation.PREFIX);
+		testNotation(symbol +" (" + value1.toString()+", " + value2.toString()+")", op, Notation.PREFIX);
 		//infix notation:
-		testNotation("( " + value1.toString() + ",00+0,00i " + symbol + " " + value2.toString() + ",00+0,00i )", op, Notation.INFIX);
+		testNotation("( " + value1.toString() +" "+ symbol + " " + value2.toString()+" )", op, Notation.INFIX);
 		//postfix notation:
-		testNotation("(" + value1.toString() + ",00+0,00i, " + value2.toString() + ",00+0,00i) " + symbol, op, Notation.POSTFIX);
+		testNotation("(" + value1.toString() +", "+ value2.toString() +") "+ symbol, op, Notation.POSTFIX);
 	}
 
 	@ParameterizedTest

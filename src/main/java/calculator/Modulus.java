@@ -37,7 +37,7 @@ public class Modulus extends Operation
             MyNumber tmp = new Plus(args).op(tmp1,tmp2);
 
             BigDecimal sqrt = tmp.getValue().sqrt(MathContext.DECIMAL128);
-            return  new MyNumber(sqrt,tmp.getexp());
+            return  new MyNumber(sqrt,(int)tmp.getexp()/2);
         }
         catch (IllegalConstruction e)
         {
