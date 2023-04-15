@@ -59,8 +59,8 @@ public final class Minus extends Operation
       return l;
   }
 
-     @Override
-     public void accept(TimeVisitor v) {
-         v.visit(this);
-     }
+  @Override
+  public void accept(TimeVisitor v) {
+      v.visit(this);
+  }
  }

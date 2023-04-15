@@ -1,5 +1,7 @@
 package calculator;
 
+import visitor.TimeVisitor;
+
 import java.util.List;
 
 /** This class represents the arithmetic division operation "/".
@@ -48,4 +50,12 @@ public final class Divides extends Operation
      */
   public int op(int l, int r)
     { return (l/r); }
+
+    @Override
+    public MyTime op(MyTime l, MyTime r) {
+        throw new RuntimeException("Sorry, you can't divide two dates.");
+    }
+
+    @Override
+    public void accept(TimeVisitor v) {}
 }

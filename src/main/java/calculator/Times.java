@@ -1,5 +1,7 @@
 package calculator;
 
+import visitor.TimeVisitor;
+
 import java.util.List;
 
 /** This class represents the arithmetic multiplication operation "*".
@@ -46,5 +48,14 @@ public final class Times extends Operation
    * @return The integer that is the result of the multiplication
    */
   public int op(int l, int r)
-    { return (l*r); }
-}
+    { return (l*r);
+    }
+
+    @Override
+    public MyTime op(MyTime l, MyTime r) {
+      throw new RuntimeException("Sorry, you can't multiply two dates.");
+    }
+
+    @Override
+    public void accept(TimeVisitor v) {}
+ }

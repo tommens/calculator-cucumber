@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.TimeVisitor;
 import visitor.Visitor;
 
 /**
@@ -38,6 +39,8 @@ public class MyNumber implements Expression
       v.visit(this);
   }
 
+    @Override
+    public void accept(TimeVisitor v) {}
 
     /** The depth of a number expression is always 0
      *

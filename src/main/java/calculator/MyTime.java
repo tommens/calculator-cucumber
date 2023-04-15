@@ -2,9 +2,7 @@ package calculator;
 
 import visitor.*;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -43,7 +41,7 @@ public class MyTime implements Expression {
                     currentTime = part;
                 }
             }//Changing the time format depending on what was provided
-            else if (part.equalsIgnoreCase("am") || part.equalsIgnoreCase("pm")) {
+            else if (part.matches("(?i)am|pm")) {
                 timeFormat = part.toLowerCase();
             } //Checking if the timezone was provided
             else if (part.matches("[+-]\\d{2}:\\d{2}")) {
@@ -53,12 +51,12 @@ public class MyTime implements Expression {
 
         String fullDate;
         String pattern;
-        if (timeFormat != null) {
-            fullDate = String.format("%s %s %s %s", currentDate, currentTime, timeFormat, timezone);
-            pattern = "yyyy-MM-dd HH:mm:ss a z";
-        } else {
+        if (timeFormat == null) {
             fullDate = String.format("%s %s %s", currentDate, currentTime, timezone);
-            pattern = "yyyy-MM-dd hh:mm:ss z";
+            pattern = "yyyy-MM-dd HH:mm:ss z";
+        } else {
+            fullDate = String.format("%s %s %s %s", currentDate, currentTime, timeFormat, timezone);
+            pattern = "yyyy-MM-dd hh:mm:ss a z";
         }
 
         date = ZonedDateTime.parse(fullDate, DateTimeFormatter.ofPattern(pattern));
@@ -88,29 +86,44 @@ public class MyTime implements Expression {
     @Override
     public int countDepth() {
         return 1;
-    }/*
-    public long inSeconds() {
-        return dateInSeconds;
     }
-    public long inMinutes() {
-        return dateInSeconds / SECONDS_IN_A_MINUTE;
-    }
-    public long inHours() {
-        return dateInSeconds / SECONDS_IN_AN_HOUR;
-    }
-    public long inDays() {
-        return dateInSeconds / SECONDS_IN_A_DAY;
-    }*/
 
     public void subtract(MyTime mt){
-        Duration duration = Duration.between(this.date, mt.date);
-
-        System.out.println("Duration from " + date + "to " + mt.date + ":");
-        System.out.printf(duration.toDays()+" days, "+duration.toHours() % 24+" hours, "+
-                        duration.toMinutes() % 1440+" minutes and "+duration.getSeconds() % 86400+" seconds;");
+        long durationHours,durationMinutes,durationSeconds;
+        Duration duration = Duration.between(mt.date, this.date);
+        if (duration.toDays() == 0) {
+            durationHours=0;
+        }
+        else {durationHours=duration.toHours() % (24*duration.toDays());}
+        if (durationHours == 0) {
+            durationMinutes=0;
+        }
+        else {durationMinutes = duration.toMinutes() % (60*durationHours);}
+        if (durationMinutes == 0) {
+            durationSeconds=0;
+        }
+        else {durationSeconds = duration.toSeconds() % (60*durationMinutes);}
+        System.out.println("Duration from " + date + " to " + mt.date + " : ");
+        System.out.println(duration.toDays()+" days, "+ durationHours +" hours, "+
+                        durationMinutes +" minutes and "+ durationSeconds +" seconds;");
         System.out.println("Or " + duration.getSeconds() + " seconds;");
         System.out.println("Or " + duration.toMinutes() + " minutes;");
         System.out.println("Or " + duration.toHours() + " hours;");
+    }
+
+    public MyTime add(MyTime mt){
+        long sumInSeconds = this.dateInSeconds + mt.dateInSeconds;
+        ZonedDateTime sumDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(sumInSeconds), ZoneId.systemDefault());
+        String sumDateStr = sumDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
+        MyTime sum = new MyTime(sumDateStr);
+        System.out.println("Addition of the dates " + date + " and " + mt.date +
+                " corresponds to the following date : " + sum.getDate());
+        return sum;
+    }
+
+
+    public ZonedDateTime getDate() {
+        return date;
     }
 
 }

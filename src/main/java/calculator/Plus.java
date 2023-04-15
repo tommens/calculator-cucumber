@@ -1,5 +1,7 @@
 package calculator;
 
+import visitor.TimeVisitor;
+
 import java.util.List;
 
 /** This class represents the arithmetic sum operation "+".
@@ -48,5 +50,15 @@ public final class Plus extends Operation
    */
   public int op(int l, int r) {
   	return (l+r);
+  }
+
+  @Override
+  public MyTime op(MyTime l, MyTime r) {
+      return l.add(r);
+  }
+
+  @Override
+  public void accept(TimeVisitor v) {
+      v.visit(this);
   }
 }
