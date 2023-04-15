@@ -57,8 +57,8 @@ public class Main {
 
 		//Time computation
 		List<Expression> params5 = new ArrayList<>();
-		Collections.addAll(params5, new MyTime("2017-12-28 03:00:05 pm +04:00"),
-				new MyTime("2017-12-01 00:00:00 +00:00"));
+		Collections.addAll(params5, new MyTime("2023-04-16"),
+				new MyTime("2023-04-15"));
 		e = new Minus(params5, Notation.INFIX);
 		tc.print(e);
 		tc.eval(e);
