@@ -7,5 +7,6 @@ public class TimeCalculator {
         return v.getResult();
     }
     public void print(Expression e) {
+        System.out.println();
     }
 }

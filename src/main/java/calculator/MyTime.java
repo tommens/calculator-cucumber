@@ -4,6 +4,7 @@ import visitor.*;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Time is a concrete class that represents time intervals for time computations
@@ -42,7 +43,7 @@ public class MyTime implements Expression {
                 }
             }//Changing the time format depending on what was provided
             else if (part.matches("(?i)am|pm")) {
-                timeFormat = part.toLowerCase();
+                timeFormat = part.toUpperCase();
             } //Checking if the timezone was provided
             else if (part.matches("[+-]\\d{2}:\\d{2}")) {
                 timezone = part;
