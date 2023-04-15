@@ -1,10 +1,9 @@
 package calculator;
 
-import visitor.Visitor;
+import visitor.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,10 +16,10 @@ public class MyTime implements Expression {
     private String timezone = "+00:00";
     private String timeFormat = null;
     private ZonedDateTime date;
-    private double dateInSeconds = 0;
-    private int SECONDS_IN_A_MINUTE = 60;
-    private int SECONDS_IN_AN_HOUR = 3600;
-    private int SECONDS_IN_A_DAY = 86400;
+    private long dateInSeconds = 0;
+    private final int SECONDS_IN_A_MINUTE = 60;
+    private final int SECONDS_IN_AN_HOUR = 3600;
+    private final int SECONDS_IN_A_DAY = 86400;
 
     /**
      * Constructor method for Time class
@@ -73,7 +72,9 @@ public class MyTime implements Expression {
      * @param v The visitor object
      */
     @Override
-    public void accept(Visitor v) {
+    public void accept(Visitor v) {}
+    @Override
+    public void accept(TimeVisitor v) {
         v.visit(this);
     }
     @Override
@@ -87,15 +88,29 @@ public class MyTime implements Expression {
     @Override
     public int countDepth() {
         return 1;
+    }/*
+    public long inSeconds() {
+        return dateInSeconds;
     }
-    public double inMinutes() {
+    public long inMinutes() {
         return dateInSeconds / SECONDS_IN_A_MINUTE;
     }
-    public double inHours() {
+    public long inHours() {
         return dateInSeconds / SECONDS_IN_AN_HOUR;
     }
-    public double inDays() {
+    public long inDays() {
         return dateInSeconds / SECONDS_IN_A_DAY;
+    }*/
+
+    public void subtract(MyTime mt){
+        Duration duration = Duration.between(this.date, mt.date);
+
+        System.out.println("Duration from " + date + "to " + mt.date + ":");
+        System.out.printf(duration.toDays()+" days, "+duration.toHours() % 24+" hours, "+
+                        duration.toMinutes() % 1440+" minutes and "+duration.getSeconds() % 86400+" seconds;");
+        System.out.println("Or " + duration.getSeconds() + " seconds;");
+        System.out.println("Or " + duration.toMinutes() + " minutes;");
+        System.out.println("Or " + duration.toHours() + " hours;");
     }
 
 }

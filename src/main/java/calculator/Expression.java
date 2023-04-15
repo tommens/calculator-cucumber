@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.TimeVisitor;
 import visitor.Visitor;
 
 /**
@@ -17,6 +18,8 @@ public interface Expression {
     * @param v The visitor object being passed as a parameter
     */
    void accept(Visitor v);
+
+   void accept(TimeVisitor v);
 
    /**
     * Counts the depth of nested expressions in an arithmetic expression

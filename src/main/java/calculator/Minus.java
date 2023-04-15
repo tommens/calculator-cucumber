@@ -1,5 +1,7 @@
 package calculator;
 
+import visitor.TimeVisitor;
+
 import java.util.List;
 
 /** This class represents the arithmetic operation "-".
@@ -49,4 +51,16 @@ public final class Minus extends Operation
   public int op(int l, int r) {
   	return (l-r);
   }
-}
+
+  //Getting duration between two times
+  @Override
+  public MyTime op(MyTime l, MyTime r) {
+      l.subtract(r);
+      return l;
+  }
+
+     @Override
+     public void accept(TimeVisitor v) {
+         v.visit(this);
+     }
+ }
