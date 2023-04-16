@@ -1,9 +1,5 @@
 package calculator;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,11 +70,9 @@ public class Main {
 		Collections.addAll(params6, new MyNumber((int)timeInSeconds));
 		Collections.addAll(params6, new MyNumber(3600));
 		e = new Minus(params6, Notation.INFIX);
-		System.out.println(c.eval(e));
 		System.out.println(MyTime.resultToDate(c.eval(e)));
 
 		e = new Plus(params6, Notation.INFIX);
-		System.out.println(c.eval(e));
 		System.out.println(MyTime.resultToDate(c.eval(e)));
 	}
 

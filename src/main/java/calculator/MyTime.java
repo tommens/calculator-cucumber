@@ -1,11 +1,11 @@
 package calculator;
 
-import visitor.*;
+import visitor.TimeVisitor;
+import visitor.Visitor;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.Date;
 
 /**
@@ -16,11 +16,8 @@ public class MyTime implements Expression {
     private String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date(System.currentTimeMillis()));
     private String timezone = "+00:00";
     private String timeFormat = null;
-    private ZonedDateTime date;
-    private long dateInSeconds = 0;
-    private final int SECONDS_IN_A_MINUTE = 60;
-    private final int SECONDS_IN_AN_HOUR = 3600;
-    private final int SECONDS_IN_A_DAY = 86400;
+    private final ZonedDateTime date;
+    private final long dateInSeconds;
 
     /**
      * Constructor method for Time class
@@ -64,15 +61,15 @@ public class MyTime implements Expression {
         dateInSeconds = date.toEpochSecond();
     }
 
+    public long toSeconds(){
+        return dateInSeconds;
+    }
     /**
      * Accept method to implement the visitor design pattern to traverse arithmetic expressions.
      * Each time interval will pass itself to the visitor object to get processed by the visitor.
      *
      * @param v The visitor object
      */
-    public long toSeconds(){
-        return dateInSeconds;
-    }
     @Override
     public void accept(Visitor v) {}
     @Override
