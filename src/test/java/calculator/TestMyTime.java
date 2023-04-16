@@ -9,11 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestMyTime {
     private MyTime myTime1;
     private MyTime myTime2;
+    private MyNumber myNumber;
 
     @BeforeEach
     public void setUp() {
         myTime1 = new MyTime("2017-12-28 03:00:05 pm +04:00");
         myTime2 = new MyTime("2017-12-01 00:00:00 +00:00");
+        myNumber = new MyNumber(3600);
     }
 
     @Test
@@ -24,10 +26,24 @@ public class TestMyTime {
 
     @Test
     public void testAdd() {
-        MyTime sum = myTime1.add(myTime2);
-        assertEquals("2065-11-27T12:00:05Z", sum.getDate().toString());
+        MyTime sum = myTime1.add(myNumber);
+        assertEquals("2017-12-28T13:00:05Z", sum.getDate().toString());
     }
 
+    @Test
+    public void testToSeconds(){
+        assertEquals(1514458805,myTime1.toSeconds());
+    }
+
+    @Test
+    public void testGetDate(){
+        assertEquals("2017-12-28T15:00:05+04:00",myTime1.getDate().toString());
+    }
+
+    @Test
+    public void testResultToDate(){
+        assertEquals("1970-01-01 01:00:00",MyTime.resultToDate(3600));
+    }
     @Test
     public void testCountOps() {
         assertEquals(0, myTime1.countOps());

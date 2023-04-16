@@ -51,7 +51,6 @@ public class MyTime implements Expression {
                 timezone = part;
             }
         }
-
         String fullDate;
         String pattern;
         if (timeFormat == null) {
@@ -61,7 +60,6 @@ public class MyTime implements Expression {
             fullDate = String.format("%s %s %s %s", currentDate, currentTime, timeFormat, timezone);
             pattern = "yyyy-MM-dd hh:mm:ss a z";
         }
-
         date = ZonedDateTime.parse(fullDate, DateTimeFormatter.ofPattern(pattern));
         dateInSeconds = date.toEpochSecond();
     }
@@ -72,6 +70,9 @@ public class MyTime implements Expression {
      *
      * @param v The visitor object
      */
+    public long toSeconds(){
+        return dateInSeconds;
+    }
     @Override
     public void accept(Visitor v) {}
     @Override
@@ -136,4 +137,11 @@ public class MyTime implements Expression {
         return date;
     }
 
+    //method used in Main to convert the result to a date when adding or subtracting a long
+    // (representing seconds) to a date
+    public static String resultToDate(int result){
+        LocalDateTime dateTime = LocalDateTime.ofEpochSecond(result, 0, ZoneOffset.UTC);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dateTime.format(formatter);
+    }
 }

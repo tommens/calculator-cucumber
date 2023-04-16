@@ -1,5 +1,9 @@
 package calculator;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,14 +68,18 @@ public class Main {
 		tc.eval(e);
 
 		List<Expression> params6 = new ArrayList<>();
-		Collections.addAll(params6, new MyTime(""),
-				new MyNumber(3600));
+		//I create a MyTime object, then convert it to EpochSeconds to be able to do the subtraction.
+		MyTime time = new MyTime("");
+		long timeInSeconds = time.toSeconds();
+		Collections.addAll(params6, new MyNumber((int)timeInSeconds));
+		Collections.addAll(params6, new MyNumber(3600));
 		e = new Minus(params6, Notation.INFIX);
-		tc.print(e);
-		tc.eval(e);
+		System.out.println(c.eval(e));
+		System.out.println(MyTime.resultToDate(c.eval(e)));
+
 		e = new Plus(params6, Notation.INFIX);
-		tc.print(e);
-		tc.eval(e);
+		System.out.println(c.eval(e));
+		System.out.println(MyTime.resultToDate(c.eval(e)));
 	}
 
 	catch(IllegalConstruction exception) {
