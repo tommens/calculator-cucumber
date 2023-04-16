@@ -57,5 +57,10 @@ public final class Divides extends Operation
     }
 
     @Override
+    public MyTime op(MyTime l, MyNumber seconds) {
+        throw new RuntimeException("Sorry, you can't divide a date and a number");
+    }
+
+    @Override
     public void accept(TimeVisitor v) {}
 }

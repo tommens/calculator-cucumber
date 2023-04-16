@@ -53,8 +53,12 @@ public final class Plus extends Operation
   }
 
   @Override
+  public MyTime op(MyTime l, MyNumber seconds) {
+      return l.add(seconds);
+  }
+  @Override
   public MyTime op(MyTime l, MyTime r) {
-      return l.add(r);
+      throw new RuntimeException("Sorry, you can't add two dates");
   }
 
   @Override

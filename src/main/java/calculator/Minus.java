@@ -60,6 +60,12 @@ public final class Minus extends Operation
   }
 
   @Override
+  public MyTime op(MyTime l, MyNumber seconds) {
+     MyNumber negativeNumber = new MyNumber(-(seconds.getValue()));
+     return l.add(negativeNumber);
+  }
+
+  @Override
   public void accept(TimeVisitor v) {
       v.visit(this);
   }

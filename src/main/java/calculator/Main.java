@@ -57,12 +57,19 @@ public class Main {
 
 		//Time computation
 		List<Expression> params5 = new ArrayList<>();
-		Collections.addAll(params5, new MyTime("2023-04-16"),
-				new MyTime("2023-04-15"));
+		Collections.addAll(params5, new MyTime("2023-04-15 03:10:45 pm +01:00"),
+				new MyTime("2023-04-15 06:00:00 am +00:00"));
 		e = new Minus(params5, Notation.INFIX);
 		tc.print(e);
 		tc.eval(e);
-		e = new Plus(params5, Notation.INFIX);
+
+		List<Expression> params6 = new ArrayList<>();
+		Collections.addAll(params6, new MyTime(""),
+				new MyNumber(3600));
+		e = new Minus(params6, Notation.INFIX);
+		tc.print(e);
+		tc.eval(e);
+		e = new Plus(params6, Notation.INFIX);
 		tc.print(e);
 		tc.eval(e);
 	}
