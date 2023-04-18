@@ -14,7 +14,7 @@ Feature: Integer Arithmetic Expressions
 
 
   Scenario Outline: Writing the different operations in the different notations
-    Given an integer operation <op>
+    Given an operation <op>
     When I provide a first number <n1>
     And I provide a second number <n2>
     Then its PREFIX notation is <prefix_result>
