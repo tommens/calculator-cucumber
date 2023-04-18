@@ -44,6 +44,28 @@ public final class Plus extends Operation
   	neutral = 0;
   }
 
+private MyNumber addition(BigDecimal l, int l_exp, BigDecimal r, int r_exp){
+    BigDecimal new_val;
+    int exp;
+
+    if (l_exp>r_exp){
+        exp=l_exp;
+        int gap=l_exp-r_exp;
+        new_val = l.add(r.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+
+    }
+    else if (l_exp<r_exp){
+        exp=r_exp;
+        int gap=r_exp-l_exp;
+        new_val = r.add(l.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+    }
+    else {
+        exp=l_exp;
+        new_val = r.add(l);
+    }
+    return new MyNumber(new_val,exp);
+}
+
   /**
    * The actual computation of the (binary) arithmetic addition of two integers
    *
@@ -52,57 +74,23 @@ public final class Plus extends Operation
    * @return The BigDecimal number that is the result of the addition
    */
   public MyNumber op(MyNumber l, MyNumber r) {
-      BigDecimal new_val;
-      int exp;
 
       BigDecimal l_val =  l.getValue();
       BigDecimal r_val =  r.getValue();
       int l_exp = l.getexp();
       int r_exp = r.getexp();
 
-
-      if (l_exp>r_exp){
-          exp=l_exp;
-          int gap=l_exp-r_exp;
-          new_val = l_val.add(r_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
-
-      }
-      else if (l_exp<r_exp){
-          exp=r_exp;
-          int gap=r_exp-l_exp;
-          new_val = r_val.add(l_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
-      }
-      else {
-          exp=l_exp;
-          new_val = r_val.add(l_val);
-      }
-
-      BigDecimal new_vali;
-      int expi;
+      MyNumber real = addition(l_val,l_exp,r_val,r_exp);
 
       BigDecimal li_val =  l.getImaginary();
       BigDecimal ri_val =  r.getImaginary();
       int li_exp = l.getImaginaryExp();
       int ri_exp = r.getImaginaryExp();
 
-      if (li_exp>ri_exp){
-          expi=li_exp;
-          int gap=li_exp-ri_exp;
-          new_vali = li_val.add(ri_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
-
-      }
-      else if (li_exp<ri_exp){
-          expi=ri_exp;
-          int gap=ri_exp-li_exp;
-          new_vali = ri_val.add(li_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
-      }
-      else {
-          expi=li_exp;
-          new_vali = ri_val.add(li_val);
-      }
+      MyNumber imaginary = addition(li_val,li_exp,ri_val,ri_exp);
 
 
-      return new MyNumber(new_val,exp,new_vali,expi);
+      return new MyNumber(real.getValue(),real.getexp(),imaginary.getValue(),imaginary.getexp());
   }
 
   //public int op(int l, int r) {return (l+r);}

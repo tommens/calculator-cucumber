@@ -179,9 +179,7 @@ public class MyNumber implements Expression
 
         }
         catch(IllegalConstruction e) {
-            return String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
-                    (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
-                            String.format("%s+%si", format.format(real),format.format(imag)));
+            return String.format("%s", format.format(real));
         }
 
         return switch (n) {
