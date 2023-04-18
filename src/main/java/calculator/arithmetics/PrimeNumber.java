@@ -1,9 +1,7 @@
 package calculator.arithmetics;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
+
 import java.util.List;
 
 
@@ -44,6 +42,19 @@ public class PrimeNumber extends Operation
         neutral = 1;
     }
 
+    /**
+     * Abstract method representing the actual binary arithmetic operation to compute
+     *
+     * @param l first argument of the binary operation
+     * @param r second argument of the binary operation
+     * @return result of computing the binary operation
+     */
+    @Override
+    public MyNumber op(MyNumber l, MyNumber r)
+    {
+        return calculate(l.getInteger(), r.getInteger()) == 1 ? new MyNumber(1) : new MyNumber(0);
+    }
+
 
     /**
      * Allows to compute the prime of two numbers
@@ -55,7 +66,7 @@ public class PrimeNumber extends Operation
     {
         try
         {
-            return new Pgcd(args).op(a, b);
+            return new Pgcd(args).op(new MyNumber(a), new MyNumber(b)).getInteger();
         }
         catch (IllegalConstruction e)
         {
@@ -70,9 +81,4 @@ public class PrimeNumber extends Operation
      * @param r second argument of the binary operation
      * @return result of computing the binary operation (boolean 1 or 0)
      */
-    @Override
-    public int op(int l, int r)
-    {
-       return calculate(l, r) == 1 ? 1 : 0;
-    }
 }

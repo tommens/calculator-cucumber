@@ -1,9 +1,7 @@
 package calculator.arithmetics;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
+
 import java.util.List;
 
 
@@ -44,6 +42,19 @@ public class Combinatorial extends Operation
         neutral = 0;
     }
 
+    /**
+     * Abstract method representing the actual binary arithmetic operation to compute
+     *
+     * @param l first argument of the binary operation
+     * @param r second argument of the binary operation
+     * @return result of computing the binary operation
+     */
+    @Override
+    public MyNumber op(MyNumber l, MyNumber r)
+    {
+        return new MyNumber(comb(l.getInteger(), r.getInteger()));
+    }
+
 
     /**
      * Algorithm to compute the combinatorial
@@ -71,9 +82,5 @@ public class Combinatorial extends Operation
      * @param r second argument of the binary operation
      * @return result of computing the binary operation
      */
-    @Override
-    public int op(int l, int r)
-    {
-        return comb(l, r);
-    }
+
 }

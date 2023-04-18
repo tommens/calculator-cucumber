@@ -2,6 +2,8 @@ package calculator;
 
 import visitor.Visitor;
 
+import java.math.BigInteger;
+
 /**
  * Expression is an abstract class that represents arithmetic expressions.
  * It has two concrete subclasses Operation and MyNumber.
@@ -23,19 +25,19 @@ public interface Expression {
     *
     * @return The depth of an arithmetic expression
     */
-   <E extends Number> E countDepth();
+   int countDepth();
 
    /**
     * Counts the number of operations recursively contained in an arithmetic expression
     *
     * @return The number of operations contained in an arithmetic expression
     */
-   <E extends Number> E countOps();
+   int countOps();
 
    /**
     * Counts the number of values recursively contained in an arithmetic expression
     *
     * @return The number of values contained in an arithmetic expression
     */
-   <E extends Number> E countNbs();
+   int countNbs();
 }

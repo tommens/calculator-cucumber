@@ -36,9 +36,9 @@ public class TestPow
     void testCalculatePow() throws IllegalConstruction
     {
         Pow op = new Pow(new ArrayList<Expression>());
-        assertEquals(1, op.op(1, 2));
-        assertEquals(8, op.op(2, 3));
-        assertEquals(-1, op.op(0, 0));
-        assertEquals(0, op.op(0, 1));
+        assertEquals(1, op.op(new MyNumber(1), new MyNumber(2)));
+        assertEquals(8, op.op(new MyNumber(2), new MyNumber(3)));
+        assertEquals(-1, op.op(new MyNumber(0), new MyNumber(0)));
+        assertEquals(0, op.op(new MyNumber(0), new MyNumber(1)));
     }
 }

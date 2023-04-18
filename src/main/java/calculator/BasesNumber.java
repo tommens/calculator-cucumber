@@ -1,6 +1,7 @@
 package calculator;
 
 import java.math.BigInteger;
+import visitor.Visitor;
 
 /**
  * Problem :
@@ -16,7 +17,7 @@ import java.math.BigInteger;
  * from 0 to 9. I would not go higher than base 36, since in practice nobody
  * be using that
  */
-public class BasesNumber extends Numbi
+public class BasesNumber implements Expression
 {
     /**The base of the number*/
     private int base;
@@ -25,6 +26,16 @@ public class BasesNumber extends Numbi
     /**The value of the number*/
     private BigInteger integer;
 
+    /**
+     * accept is a method needed to implement the visitor design pattern
+     *
+     * @param v The visitor object being passed as a parameter
+     */
+    //@Override
+    public void accept(Visitor v)
+    {
+        //TODO error here !!
+    }
 
     /**
      * The constructor of the class
@@ -83,10 +94,11 @@ public class BasesNumber extends Numbi
 
     /**
      * Counts the depth of nested expressions in an arithmetic expression
+     *
      * @return The depth of an arithmetic expression
      */
     @Override
-    public Integer countDepth()
+    public int countDepth()
     {
         return 0;
     }
@@ -94,10 +106,11 @@ public class BasesNumber extends Numbi
 
     /**
      * Counts the number of operations recursively contained in an arithmetic expression
+     *
      * @return The number of operations contained in an arithmetic expression
      */
     @Override
-    public Integer countOps()
+    public int countOps()
     {
         return 0;
     }
@@ -105,10 +118,11 @@ public class BasesNumber extends Numbi
 
     /**
      * Counts the number of values recursively contained in an arithmetic expression
+     *
      * @return The number of values contained in an arithmetic expression
      */
     @Override
-    public Integer countNbs()
+    public int countNbs()
     {
         return 1;
     }
@@ -118,8 +132,7 @@ public class BasesNumber extends Numbi
      * The getValue method is used to obtain the value contained in the object
      * @return The value contained in the object
      */
-    @Override
-    public Integer getValue()
+    public int getValue()
     {
         return integer.intValue();
     }

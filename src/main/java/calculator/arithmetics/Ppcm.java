@@ -1,9 +1,8 @@
 package calculator.arithmetics;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -44,6 +43,29 @@ public class Ppcm extends Operation
         neutral = 0;
     }
 
+    /**
+     * Abstract method representing the actual binary arithmetic operation to compute
+     *
+     * @param l first argument of the binary operation
+     * @param r second argument of the binary operation
+     * @return result of computing the binary operation
+     */
+    @Override
+    public MyNumber op(MyNumber l, MyNumber r)
+    {
+        if (l.getInteger() == 0 || r.getInteger() == 0)
+            return new MyNumber(0);
+        try
+        {
+            return new MyNumber(ppcm(l.getInteger(), r.getInteger()));
+        }
+        catch (IllegalConstruction e)
+        {
+            e.printStackTrace();
+            return new MyNumber(-1);
+        }
+    }
+
 
     /**
      * Algorithm to compute the ppcm
@@ -53,30 +75,6 @@ public class Ppcm extends Operation
      */
     public int ppcm(int a, int b) throws IllegalConstruction
     {
-        return (a * b) / new Pgcd(args).op(a,b);
-    }
-
-
-    /**
-     * Abstract method representing the actual binary arithmetic operation to compute
-     * @param l first argument of the binary operation
-     * @param r second argument of the binary operation
-     * @return result of computing the binary operation
-     *       error : return -1
-     */
-    @Override
-    public int op(int l, int r)
-    {
-        if (l == 0 || r == 0)
-            return 0;
-        try
-        {
-            return ppcm(l, r);
-        }
-        catch (IllegalConstruction e)
-        {
-            e.printStackTrace();
-            return -1;
-        }
+        return (a * b) / new Pgcd(args).op(new MyNumber(a),new MyNumber(b)).getInteger();
     }
 }

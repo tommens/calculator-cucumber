@@ -34,7 +34,7 @@ public class TestCombinatorial
     void testCalculateCombi() throws IllegalConstruction
     {
         Combinatorial op = new Combinatorial(new ArrayList<Expression>());
-        assertEquals(10, op.op(5, 2));
-        assertEquals(10, op.op(5, 3));
+        assertEquals(10, op.op(new MyNumber(5), new MyNumber(2)));
+        assertEquals(10, op.op(new MyNumber(5), new MyNumber(3)));
     }
 }

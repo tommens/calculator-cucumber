@@ -1,7 +1,6 @@
 package visitor;
 
 import calculator.MyNumber;
-import calculator.Numbi;
 import calculator.Operation;
 
 /**
@@ -14,7 +13,7 @@ public abstract class Visitor {
      *
      * @param n The number being visited
      */
-    public abstract void visit(Numbi n);
+    public abstract void visit(MyNumber n);
 
 
     /**

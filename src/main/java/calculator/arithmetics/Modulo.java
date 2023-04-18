@@ -1,9 +1,7 @@
 package calculator.arithmetics;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
+
 import java.util.List;
 
 
@@ -44,6 +42,22 @@ public class Modulo extends Operation
         neutral = 0;
     }
 
+    /**
+     * Abstract method representing the actual binary arithmetic operation to compute
+     *
+     * @param l first argument of the binary operation
+     * @param r second argument of the binary operation
+     * @return result of computing the binary operation
+     */
+    @Override
+    public MyNumber op(MyNumber l, MyNumber r)
+    {
+        if (r.getInteger() == 0)
+            return new MyNumber(-1);
+        int x = l.getInteger() % r.getInteger();
+        return new MyNumber(x);
+    }
+
 
     /**
      * Abstract method representing the actual binary arithmetic operation to compute
@@ -52,11 +66,4 @@ public class Modulo extends Operation
      * @return result of computing the binary operation
      *               if r == 0, return -1
      */
-    @Override
-    public int op(int l, int r)
-    {
-        if (r == 0)
-            return -1;
-        return l % r;
-    }
 }

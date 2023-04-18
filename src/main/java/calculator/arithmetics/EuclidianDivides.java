@@ -1,9 +1,7 @@
 package calculator.arithmetics;
 
-import calculator.Expression;
-import calculator.IllegalConstruction;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
+
 import java.util.List;
 
 
@@ -44,6 +42,19 @@ public class EuclidianDivides extends Operation
         neutral = 1;
     }
 
+    /**
+     * Abstract method representing the actual binary arithmetic operation to compute
+     *
+     * @param l first argument of the binary operation
+     * @param r second argument of the binary operation
+     * @return result of computing the binary operation
+     */
+    @Override
+    public MyNumber op(MyNumber l, MyNumber r)
+    {
+        return new MyNumber( euclidianDivision(l.getInteger(), r.getInteger())[1]);
+    }
+
 
     /**
      * Algorithm to compute the euclidean division
@@ -74,9 +85,4 @@ public class EuclidianDivides extends Operation
      * @param r second argument of the binary operation
      * @return result of computing the binary operation (remainder)
      */
-    @Override
-    public int op(int l, int r)
-    {
-        return euclidianDivision(l, r)[1];
-    }
 }
