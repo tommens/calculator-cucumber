@@ -106,9 +106,9 @@ class TestNumberNotation {
         int value2 = 6;
         MyNumber num = new MyNumber(new BigDecimal(value1),new BigDecimal(value2));
 
-        Double r = Math.sqrt((double)(value1*value1)+(double)(value2*value2));
+        double r = Math.sqrt((double)(value1*value1)+(double)(value2*value2));
 
-        Double O = Math.atan((double)value2/value1);
+        double O = Math.atan((double)value2/value1);
 
         testNotations(num,O,r);
 

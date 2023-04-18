@@ -163,7 +163,7 @@ public class MyNumber implements Expression
 
         Double r;
 
-        Double O;
+        double O;
 
         DecimalFormat format = new DecimalFormat("0.#");
         try {
@@ -232,9 +232,9 @@ public class MyNumber implements Expression
           return false;
       }
 
-      Boolean real = false;
+      boolean real;
 
-      Boolean imag = false;
+      boolean imag;
 
       if(this.exp==0){
           if(((MyNumber)o).exp==0){
