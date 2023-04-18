@@ -31,11 +31,11 @@ class TestCounting {
     void testNumberCounting() {
         e = new MyNumber(value1);
         //test whether a number has zero depth (i.e. no nested expressions)
-        assertEquals( 0, e.countDepth());
+        assertEquals( Integer.valueOf(0), e.countDepth());
         //test whether a number contains zero operations
-        assertEquals(0, e.countOps());
+        assertEquals(Integer.valueOf(0), e.countOps());
         //test whether a number contains 1 number
-        assertEquals(1, e.countNbs());
+        assertEquals(Integer.valueOf(1), e.countNbs());
     }
 
     @ParameterizedTest
@@ -57,11 +57,11 @@ class TestCounting {
             fail();
         }
         //test whether a binary operation has depth 1
-        assertEquals(1, e.countDepth(),"counting depth of an Operation");
+        assertEquals(Integer.valueOf(1), e.countDepth(),"counting depth of an Operation");
         //test whether a binary operation contains 1 operation
-        assertEquals(1, e.countOps());
+        assertEquals(Integer.valueOf(1), e.countOps());
         //test whether a binary operation contains 2 numbers
-        assertEquals(2, e.countNbs());
+        assertEquals(Integer.valueOf(2), e.countNbs());
     }
 
 }

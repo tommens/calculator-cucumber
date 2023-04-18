@@ -112,7 +112,7 @@ public abstract class Operation implements Expression
 	 *
  	 * @return	The depth of the arithmetic expression being traversed
 	 */
-	public final int countDepth() {
+	public final Integer countDepth() {
 	    // use of Java 8 functional programming capabilities
 	return 1 + args.stream()
 			   .mapToInt(Expression::countDepth)
@@ -126,7 +126,7 @@ public abstract class Operation implements Expression
 	 *
 	 * @return	The number of operations contained in an arithmetic expression being traversed
 	 */
-	public final int countOps() {
+	public final Integer countOps() {
 	    // use of Java 8 functional programming capabilities
 	return 1 + args.stream()
 			   .mapToInt(Expression::countOps)
@@ -134,7 +134,7 @@ public abstract class Operation implements Expression
 			   .getAsInt();
   }
 
-  public final int countNbs() {
+  public final Integer countNbs() {
 	    // use of Java 8 functional programming capabilities
 	return args.stream()
 			   .mapToInt(Expression::countNbs)

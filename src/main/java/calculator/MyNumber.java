@@ -2,18 +2,6 @@ package calculator;
 
 import visitor.Visitor;
 
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
-
-import static java.lang.Math.pow;
-
-
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.

@@ -1,6 +1,7 @@
 package cucumbertests;
 
 import calculator.*;
+import calculator.arithmetics.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -49,7 +50,15 @@ public class CalculatorSteps {
 				case "/"	    ->	op = new Divides(params);
 				case "modulus"	->	op = new Modulus(params);
 				case "sqrt"	    ->	op = new Sqrt(params);
-				default		    ->	fail();
+				case "ppcm"	->	op = new Ppcm(params);
+				case "pgcd"	->	op = new Pgcd(params);
+				case "comb" ->	op = new Combinatorial(params);
+				case "gcd"  ->	op = new Eucledian(params);
+				case "//"   ->  op = new EuclidianDivides(params);
+				case "%"    ->  op = new Modulo(params);//
+				case "^"    ->  op = new Pow(params);
+				case "prime"->  op = new PrimeNumber(params);
+				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {
 			fail();
@@ -145,6 +154,104 @@ public class CalculatorSteps {
 		else fail(notation + " is not a correct notation! ");
 	}
 
+	@Then("^the modulus of two numbers (\\d+) and (\\d+)$")
+	public void testOfModulo(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Modulo(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("^the factorial of a number (\\d+)$")
+	public void testOfFactorial(int n1)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			op = new Facto(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the pgcd of two numbers {int} and {int}")
+	public void testOfPGCD(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Pgcd(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the ppcm of two numbers {int} and {int}")
+	public void testOfPPCM(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Ppcm(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the pow of two numbers {int} and {int}")
+	public void testOfPow(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Pow(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the prime between two numbers {int} and {int}")
+	public void testOfPrime(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new PrimeNumber(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the combinatorial of two numbers {int} and {int}")
+	public void testOfCombination(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Combinatorial(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the eucledian of two numbers {int} and {int}")
+	public void testOfEucledian(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new Eucledian(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
+	@Then("the euclidian division of two numbers {int} and {int}")
+	public void testOfEuclidianDivision(int n1, int n2)
+	{
+		try {
+			params = new ArrayList<>();
+			params.add(new MyNumber(n1));
+			params.add(new MyNumber(n2));
+			op = new EuclidianDivides(params);
+		}catch (IllegalConstruction e) {fail();}
+	}
+
 	@When("^I provide a (.*) number (\\d+)$")
 	public void whenIProvideANumber(String s, BigDecimal val) {
 		//add extra parameter to the operation
@@ -237,7 +344,7 @@ public class CalculatorSteps {
 	public void theCalculatorContainsAVariableXWithValue(String name, int val) {
 		assertEquals(m.getMemory().get(0).getName(), name);
 	}
-  
+
   @Then("^the calculator memory does not contain a variable (.*)$")
 	public void theCalculatorMemoryDoesNotContainAVariableX(String name) {
 		assertEquals(m.getMemory().size(), 0);
@@ -261,6 +368,6 @@ public class CalculatorSteps {
 		assertNotEquals(number,null);
 		assertNotEquals(number,a);
 
-	
+
 	}
 }
