@@ -4,8 +4,6 @@ package calculator;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import java.io.File;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

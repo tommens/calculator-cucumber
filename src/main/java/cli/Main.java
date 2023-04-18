@@ -1,6 +1,5 @@
 package cli;
 
-import calculator.Memory;
 import calculator.Notation;
 
 import java.util.List;

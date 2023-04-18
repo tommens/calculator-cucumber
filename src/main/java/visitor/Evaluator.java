@@ -4,7 +4,6 @@ import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Operation;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /** Evaluation is a concrete visitor that serves to

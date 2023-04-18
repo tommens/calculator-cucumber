@@ -5,7 +5,6 @@ import visitor.Visitor;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import java.math.BigDecimal;

@@ -1,7 +1,6 @@
 package calculator;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 
 /** This class represents the arithmetic multiplication operation "*".

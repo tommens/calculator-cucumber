@@ -1,7 +1,6 @@
 package junit5tests;
 
 //Import Junit5 libraries for unit testing:
-import io.cucumber.java.it.Ma;
 import org.junit.jupiter.api.*;
 
 import static java.lang.Math.pow;
@@ -12,8 +11,6 @@ import calculator.*;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 
 class TestNumberNotation {

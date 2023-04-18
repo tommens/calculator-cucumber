@@ -3,7 +3,6 @@ package calculator;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
-import java.lang.Math;
 
 public class Sqrt extends Operation
 {
