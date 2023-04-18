@@ -15,7 +15,6 @@ public class Evaluator extends Visitor {
     /** The result of the evaluation will be stored in this private variable */
     private MyNumber computedValue;
 
-
     /** getter method to obtain the result of the evaluation
      *
      * @return an Integer object containing the result of the evaluation

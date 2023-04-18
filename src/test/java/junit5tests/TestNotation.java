@@ -1,7 +1,6 @@
 package junit5tests;
 
 //Import Junit5 libraries for unit testing:
-import org.junit.jupiter.api.*;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import calculator.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,11 +30,11 @@ class TestNotation {
      */
 	void testNotations(String symbol,BigDecimal value1,BigDecimal value2,Operation op) {
 		//prefix notation:
-		testNotation(symbol +" (" + value1.toString() + ", " + value2.toString() + ")", op, Notation.PREFIX);
+		testNotation(symbol +" (" + value1.toString()+", " + value2.toString()+")", op, Notation.PREFIX);
 		//infix notation:
-		testNotation("( " + value1.toString() + " " + symbol + " " + value2.toString() + " )", op, Notation.INFIX);
+		testNotation("( " + value1.toString() +" "+ symbol + " " + value2.toString()+" )", op, Notation.INFIX);
 		//postfix notation:
-		testNotation("(" + value1.toString() + ", " + value2.toString() + ") " + symbol, op, Notation.POSTFIX);
+		testNotation("(" + value1.toString() +", "+ value2.toString() +") "+ symbol, op, Notation.POSTFIX);
 	}
 
 	@ParameterizedTest

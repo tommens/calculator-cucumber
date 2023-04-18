@@ -33,6 +33,7 @@ public class Main {
 
 	  MathContext precision = new MathContext(15);
 
+
 	  Memory log = new Memory();
 	  log.loadLog();
 	  //log.clearMemory();

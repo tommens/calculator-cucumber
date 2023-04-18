@@ -57,15 +57,41 @@ public final class Divides extends Operation {
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal new_val;
         int exp;
+        BigDecimal new_val2;
+        int exp2;
 
-        BigDecimal l_val = l.getValue();
-        BigDecimal r_val = r.getValue();
-        int l_exp = l.getexp();
-        int r_exp = r.getexp();
+        BigDecimal a = l.getValue();
+        BigDecimal c = r.getValue();
+        int a_exp = l.getexp();
+        int c_exp = r.getexp();
 
-        new_val=l_val.divide(r_val,MathContext.DECIMAL128);
-        exp=l_exp-r_exp;
+        BigDecimal b = l.getImaginary();
+        BigDecimal d = r.getImaginary();
+        int b_exp = l.getImaginaryExp();
+        int d_exp = r.getImaginaryExp();
 
-        return new MyNumber(new_val, exp);
+        try{
+            MyNumber den1 = new Times(args).op(new MyNumber(c,c_exp),new MyNumber(c,c_exp));
+            MyNumber den2 = new Times(args).op(new MyNumber(d,d_exp),new MyNumber(d,d_exp));
+            MyNumber den = new Plus(args).op(den1,den2);
+
+            MyNumber numReal1 = new Times(args).op(new MyNumber(a,a_exp),new MyNumber(c,c_exp));
+            MyNumber numReal2 = new Times(args).op(new MyNumber(b,b_exp),new MyNumber(d,d_exp));
+            MyNumber numReal = new Plus(args).op(numReal1,numReal2);
+            new_val = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+            exp=numReal.getexp()-den.getexp();
+
+            MyNumber numImaginary1 = new Times(args).op(new MyNumber(b,b_exp),new MyNumber(c,c_exp));
+            MyNumber numImaginary2 = new Times(args).op(new MyNumber(a,a_exp),new MyNumber(d,d_exp));
+            MyNumber numImaginary = new Minus(args).op(numImaginary1,numImaginary2);
+            new_val2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
+            exp2=numImaginary.getexp()-den.getexp();
+
+            return new MyNumber(new_val, exp, new_val2,exp2);
+        }
+        catch (IllegalConstruction e)
+        {
+            return l;
+        }
     }
 }

@@ -12,15 +12,22 @@ import java.util.ArrayList;
 class TestMyNumber {
 
 	private final BigDecimal value = new BigDecimal (8);
+
+	private final BigDecimal imaginary = new BigDecimal (3);
 	private final int exp =2;
 	private MyNumber number;
 	private MyNumber realnumber;
 
+	private MyNumber complexNumber;
+
+	private  MyNumber onlyComplexNumber;
 	@BeforeEach
 	void setUp() {
 
 		number = new MyNumber(value);
 		realnumber = new MyNumber(value,exp);
+		complexNumber = new MyNumber(value,imaginary);
+		onlyComplexNumber = new MyNumber(new BigDecimal("0"),imaginary);
 	}
 
 	@Test
@@ -32,6 +39,18 @@ class TestMyNumber {
 		assertNotEquals(new MyNumber(otherValue),number);
 		assertEquals(number, number); // Identity check (for coverage, as this should always be true)
 		assertNotEquals(number, value); // number is of type MyNumber, while value is of type int, so not equal
+
+		assertNotEquals(number,null);
+		assertEquals(new MyNumber(value,imaginary), complexNumber);
+		assertNotEquals(complexNumber,number);
+		assertEquals(complexNumber, complexNumber);
+		assertNotEquals(complexNumber,null);
+
+		assertEquals(new MyNumber(new BigDecimal("0"),imaginary), onlyComplexNumber);
+		assertNotEquals(complexNumber,onlyComplexNumber);
+		assertEquals(onlyComplexNumber, onlyComplexNumber);
+		assertNotEquals(onlyComplexNumber,null);
+
 
 		System.out.println(realnumber);
 		System.out.println(new MyNumber(value,exp));
@@ -49,8 +68,9 @@ class TestMyNumber {
 
 	@Test
 	void testToString() {
-
-		assertEquals(value.toString(), number.toString());
+		assertEquals(new MyNumber(value).toString(), number.toString());
+		assertEquals(new MyNumber(value,imaginary).toString(), complexNumber.toString());
+		assertEquals(new MyNumber(new BigDecimal(0),imaginary).toString(), onlyComplexNumber.toString());
 	}
 
 }

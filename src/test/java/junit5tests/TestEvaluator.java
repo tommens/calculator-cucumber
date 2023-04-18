@@ -10,6 +10,7 @@ import calculator.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.List;
 class TestEvaluator {
 
     private Calculator calc;
-    private BigDecimal value1, value2;
+    private BigDecimal value1, value2, imaginary1, imaginary2;
     private int exp1, exp2;
     private Expression op;
 
@@ -28,6 +29,8 @@ class TestEvaluator {
         calc = new Calculator();
         value1 = new BigDecimal(8);
         value2 = new BigDecimal(6);
+        imaginary1 = new BigDecimal(4);
+        imaginary2 = new BigDecimal(1);
         exp1 = 2;
         exp2 = 4;
     }
@@ -37,8 +40,13 @@ class TestEvaluator {
         assertEquals( new MyNumber(value1), calc.eval(new MyNumber(value1)));
     }
 
+    @Test
+    void testEvaluatorMyComplexNumber() {
+        assertEquals( new MyNumber(value1,imaginary1), calc.eval(new MyNumber(value1,imaginary1)));
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = {"*", "+", "/", "-"})
+    @ValueSource(strings = {"*", "+", "/", "-", "sqrt", "||"})
     void testEvaluateOperations(String symbol) {
         List<Expression> params = Arrays.asList(new MyNumber (value1),new MyNumber(value2));
         try {
@@ -50,7 +58,26 @@ class TestEvaluator {
                 case "-"	->	assertEquals( new MyNumber(value1.subtract(value2)), calc.eval(new Minus(params)));
                 case "*"	->	assertEquals( new MyNumber(value1.multiply(value2)), calc.eval(new Times(params)));
                 case "/"	->	assertEquals( new MyNumber(value1.divide(value2, MathContext.DECIMAL128)), calc.eval(new Divides(params)));
+                case "sqrt"	->	assertEquals( new MyNumber(value1.sqrt(MathContext.DECIMAL128)), calc.eval(new Sqrt(params)));
+                case "||"	->	assertEquals( new MyNumber(value1), calc.eval(new Modulus(params)));
                 default		->	fail();
+            }
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"+", "-"})
+
+    void testEvaluateComplexOperations(String symbol) {
+        List<Expression> params = Arrays.asList(new MyNumber(value1,imaginary1),new MyNumber(value2,imaginary2));
+        try {
+            //construct another type of operation depending on the input value
+            //of the parameterised test
+            switch (symbol) {
+                case "+"	->	assertEquals( new MyNumber(value1.add(value2, MathContext.DECIMAL128),imaginary1.add(imaginary2, MathContext.DECIMAL128)), calc.eval(new Plus(params)));
+                case "-"	->	assertEquals( new MyNumber(value1.subtract(value2, MathContext.DECIMAL128),imaginary1.subtract(imaginary2)), calc.eval(new Minus(params)));
             }
         } catch (IllegalConstruction e) {
             fail();

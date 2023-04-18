@@ -73,6 +73,32 @@ public final class Minus extends Operation {
             exp = l_exp;
             new_val = l_val.subtract(r_val);
         }
-        return new MyNumber(new_val, exp);
+
+        BigDecimal new_vali;
+        int expi;
+
+        BigDecimal li_val =  l.getImaginary();
+        BigDecimal ri_val =  r.getImaginary();
+        int li_exp = l.getImaginaryExp();
+        int ri_exp = r.getImaginaryExp();
+
+        if (li_exp>ri_exp){
+            expi=li_exp;
+            int gap=li_exp-ri_exp;
+            new_vali = li_val.subtract(ri_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+
+        }
+        else if (li_exp<ri_exp){
+            expi=li_exp;
+            int gap=ri_exp-li_exp;
+            new_vali = li_val.subtract(ri_val.divide(BigDecimal.valueOf(pow(10,gap)), MathContext.DECIMAL128));
+        }
+        else {
+            expi=li_exp;
+            new_vali = li_val.subtract(ri_val);
+        }
+
+
+        return new MyNumber(new_val,exp,new_vali,expi);
     }
 }

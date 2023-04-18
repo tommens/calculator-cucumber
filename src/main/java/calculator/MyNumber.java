@@ -2,6 +2,12 @@ package calculator;
 
 import visitor.Visitor;
 
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -17,16 +23,24 @@ import static java.lang.Math.pow;
  */
 public class MyNumber implements Expression
 {
-    public RealNumberNotation notation = RealNumberNotation.TRADITIONAL;
   private final BigDecimal value;
   private final int exp;
 
   private final int decimal_number = 15;
 
 
+
+  private final BigDecimal imaginary;
+
+  private final int imaginaryExp;
+
+
+
+  public NumberNotation notation = NumberNotation.CARTESIAN;
+
     /** getter method to obtain the value contained in the object
      *
-     * @return BigDecimal number contained in the object
+     * @return BigDecimal number of the real part contained in the objectµ
      */
   public BigDecimal getValue() { return value; }
 
@@ -36,19 +50,62 @@ public class MyNumber implements Expression
      */
     public int getexp() { return exp; }
 
+    /** getter method to obtain the value contained in the object
+     *
+     * @return The integer number of the imaginary part contained in the object
+     */
+  public BigDecimal getImaginary() { return imaginary; }
+
+    public int getImaginaryExp() { return imaginaryExp; }
+
     /**
      * Constructor method
      *
      * @param v TBigDecimal value to be contained in the object
      */
+
     public /*constructor*/ MyNumber(BigDecimal v) {
         value=v.round(new MathContext(decimal_number));
         exp=0;
-	  }
 
+        BigDecimal tmp = new BigDecimal(0);
+        imaginary = tmp.round(new MathContext(decimal_number));
+        imaginaryExp = 0;
+	  }
     public /*constructor*/ MyNumber(BigDecimal v, int e) {
         value=v.round(new MathContext(decimal_number));
         exp=e;
+
+        BigDecimal tmp = new BigDecimal(0);
+        imaginary = tmp.round(new MathContext(decimal_number));
+        imaginaryExp = 0;
+    }
+
+    public /*constructor*/ MyNumber(BigDecimal v, BigDecimal i) {
+        value=v.round(new MathContext(decimal_number));
+        exp=0;
+
+        imaginary = i.round(new MathContext(decimal_number));
+        imaginaryExp = 0;
+    }
+
+    public /*constructor*/ MyNumber(BigDecimal v, int e, BigDecimal i, int ie) {
+        value=v.round(new MathContext(decimal_number));
+        exp=e;
+
+        imaginary = i.round(new MathContext(decimal_number));
+        imaginaryExp = ie;
+    }
+
+    public /*constructor*/ MyNumber(String number) {
+        String[] parts = number.split("(?=[-+i])|(?<=[-+i])");
+        value = new BigDecimal(Double.parseDouble(parts[0]));
+        if(parts[1].equals("-"))
+            imaginary = new BigDecimal(Double.parseDouble(parts[2])*-1);
+        else
+            imaginary = new BigDecimal(Double.parseDouble(parts[2]));
+        exp = 0;
+        imaginaryExp = 0;
     }
 
     /**
@@ -91,21 +148,71 @@ public class MyNumber implements Expression
      *
      * @return	The String that is the result of the conversion.
      */
-  @Override
-  public String toString() {
-      if (exp!=0) {
-          return switch (notation) {
-              case TRADITIONAL -> String.format(value.multiply(BigDecimal.valueOf(pow(10, exp)).round(new MathContext(decimal_number))).toString());
 
-              case SCIENTIFIC -> String.format(value.toString() + "x10^" + (exp));
+    public boolean isComplex(){
+        return !(imaginary.signum() == 0);
+    }
+    @Override
+    public String toString() {
+        return toString(notation);
+    }
 
-              case E_NOTATION -> String.format(value.toString() + "E^" + (exp));
+    public final String toString(NumberNotation n) {
+
+        Double real = value.multiply(BigDecimal.valueOf(pow(10, exp)).round(new MathContext(decimal_number))).doubleValue();
+        Double imag = imaginary.multiply(BigDecimal.valueOf(pow(10, imaginaryExp)).round(new MathContext(decimal_number))).doubleValue();
+
+        Double r;
+
+        Double O;
+
+        DecimalFormat format = new DecimalFormat("0.#");
+        try {
+            List<Expression> args = new ArrayList<>();
+            O = Math.PI/2;
+            if(value.signum()!=0) {
+                MyNumber tmp1 = new Divides(args).op(new MyNumber(imaginary, imaginaryExp), new MyNumber(value, exp));
+                O = Math.atan(tmp1.getValue().multiply(BigDecimal.valueOf(pow(10, tmp1.getexp())).round(new MathContext(decimal_number))).doubleValue());
+            }
+            MyNumber tmp2 = new Modulus(args).op(this);
+            r = tmp2.getValue().multiply(BigDecimal.valueOf(pow(10, tmp2.getexp())).round(new MathContext(decimal_number))).doubleValue();
+
+        }
+        catch(IllegalConstruction e) {
+            return String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
+                    (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
+                            String.format("%s+%si", format.format(real),format.format(imag)));
+        }
+
+        return switch (n) {
+            case CARTESIAN ->
+                //String.format("%,.2f+%,.2fi", real, imag);
+                String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
+                    (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
+                            String.format("%s+%si", format.format(real),format.format(imag)));
+
+            case POLAR ->
+                    String.format("%s%s",format.format(r),
+                            (Double.compare(O,0)!=0) ? String.format("*(cosine(%s) + i*sine(%s))", O, O):
+                                    "");
+
+            case EXPONENTIAL ->
+                    String.format("%s%s",format.format(r),
+                            (Double.compare(O,0)!=0) ? String.format("*e^(%s*i)", O):"");
+
+            case SCIENTIFIC ->
+                    //String.format(value.toString() + "x10^" + (exp)+" + "+ imaginary.toString() + "x10^" + (imaginaryExp)+"i");
+                    String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sx10^%s", imaginary,imaginaryExp) :
+                            (imaginary.signum() == 0) ? String.format("%sx10^%s", value,exp) :
+                                    String.format("%sx10^%s + i*%sx10^%s", value,exp,imaginary,imaginaryExp));
+
+            case E_NOTATION ->
+                    //String.format(value.toString() + "E^" + (exp)+" + "+ imaginary.toString() + "E^" + (imaginaryExp)+"i");
+            String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("i*%sE^%s", imaginary,imaginaryExp) :
+                    (imaginary.signum() == 0) ? String.format("%sE^%s", value,exp) :
+                            String.format("%sE^%s + i*%sE^%s", value,exp,imaginary,imaginaryExp));
           };
       }
-      else{
-          return String.format(value.toString());
-      }
-  }
 
 
   /** Two MyNumber expressions are equal if the values they contain are equal
@@ -125,27 +232,48 @@ public class MyNumber implements Expression
 
       // If the object is of another type then return false
       if (!(o instanceof MyNumber)) {
-            return false;
+          return false;
       }
 
+      Boolean real = false;
+
+      Boolean imag = false;
 
       if(this.exp==0){
           if(((MyNumber)o).exp==0){
-              return (this.value.compareTo(((MyNumber)o).value)==0);
+              real = (this.value.compareTo(((MyNumber)o).value)==0);
           }
           else{
-              return (this.value.compareTo(((MyNumber)o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
+              real = (this.value.compareTo(((MyNumber)o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
           }
       }
       else{
           if(((MyNumber)o).exp==0){
-              return (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber)o).value)==0);
+              real = (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber)o).value)==0);
           }
           else{
-              return (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber) o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
+              real = (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber) o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
           }
       }
 
+      if(this.imaginaryExp==0){
+          if(((MyNumber)o).imaginaryExp==0){
+              imag = (this.imaginary.compareTo(((MyNumber)o).imaginary)==0);
+          }
+          else{
+              imag = (this.imaginary.compareTo(((MyNumber)o).imaginary.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).imaginaryExp))))==0);
+          }
+      }
+      else{
+          if(((MyNumber)o).imaginaryExp==0){
+              imag = (this.imaginary.multiply(BigDecimal.valueOf(pow(10, this.imaginaryExp))).compareTo(((MyNumber)o).imaginary)==0);
+          }
+          else{
+              imag = (this.imaginary.multiply(BigDecimal.valueOf(pow(10, this.imaginaryExp))).compareTo(((MyNumber) o).imaginary.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).imaginaryExp))))==0);
+          }
+      }
+
+      return imag && real;
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }

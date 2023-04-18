@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import calculator.*;
 
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,9 @@ class TestOperation {
 	void testEquals() {
 		assertEquals(o,o2);
 	}
+
+	@Test
+	void testNotEquals(){ assertNotEquals(o,null);}
 
 	@Test
 	void testCountDepth() {

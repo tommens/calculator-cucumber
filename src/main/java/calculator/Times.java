@@ -53,15 +53,48 @@ public final class Times extends Operation {
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal new_val;
         int exp;
+        BigDecimal new_val2;
+        int exp2;
+        BigDecimal new_val3;
+        int exp3;
+        BigDecimal new_val4;
+        int exp4;
 
-        BigDecimal l_val = l.getValue();
-        BigDecimal r_val = r.getValue();
-        int l_exp = l.getexp();
-        int r_exp = r.getexp();
+        BigDecimal a = l.getValue();
+        BigDecimal c = r.getValue();
+        int a_exp = l.getexp();
+        int c_exp = r.getexp();
 
-        new_val=l_val.multiply(r_val);
-        exp=l_exp+r_exp;
+        BigDecimal b = l.getImaginary();
+        BigDecimal d = r.getImaginary();
+        int b_exp = l.getImaginaryExp();
+        int d_exp = r.getImaginaryExp();
 
-        return new MyNumber(new_val, exp);
+        new_val=a.multiply(c);
+        exp=a_exp+c_exp;
+        MyNumber tmp1 = new MyNumber(new_val,exp);
+
+        new_val2=b.multiply(d);
+        exp2=b_exp+d_exp;
+        MyNumber tmp2 = new MyNumber(new_val2,exp2);
+
+        new_val3=a.multiply(d);
+        exp3=a_exp+d_exp;
+        MyNumber tmp3 = new MyNumber(new_val3,exp3);
+
+        new_val4=b.multiply(c);
+        exp4=b_exp+c_exp;
+        MyNumber tmp4 = new MyNumber(new_val4,exp4);
+
+        try{
+            MyNumber real = new Minus(args).op(tmp1,tmp2);
+            MyNumber imaginary = new Plus(args).op(tmp3,tmp4);
+
+            return new MyNumber(real.getValue(), real.getexp(), imaginary.getValue(),imaginary.getexp());
+        }
+        catch (IllegalConstruction e)
+        {
+            return l;
+        }
     }
 }
