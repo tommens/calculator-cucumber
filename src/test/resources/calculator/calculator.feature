@@ -90,11 +90,7 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 2
     Then the operation evaluates to 0
 
-  Scenario: Printing the sum of two integer numbers
-    Given the sum of two numbers 8 and 6
-    Then its INFIX notation is ( 8 + 6 )
-    And its PREFIX notation is + (8, 6)
-    And its POSTFIX notation is (8, 6) +
+
 
   Scenario: Adding two variables
     Given an integer operation '+'

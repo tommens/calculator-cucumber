@@ -32,12 +32,12 @@ public class TestFacto
     void testCalculateFacto() throws IllegalConstruction
     {
         Facto op = new Facto(new ArrayList<Expression>());
-        assertEquals(120, op.op(new MyNumber(5), new MyNumber(0)));
-        assertEquals(1, op.op(new MyNumber(1), new MyNumber(0)));
-        assertEquals(1, op.op(new MyNumber(0), new MyNumber(0)));
+        assertEquals(120, op.op(new MyNumber(5), new MyNumber(0)).getInteger());
+        assertEquals(1, op.op(new MyNumber(1), new MyNumber(0)).getInteger());
+        assertEquals(1, op.op(new MyNumber(0), new MyNumber(0)).getInteger());
 
-        assertEquals(120, op.op(5));
-        assertEquals(1, op.op(1));
-        assertEquals(1, op.op(0));
+        assertEquals(120, op.op(5).getInteger());
+        assertEquals(1, op.op(1).getInteger());
+        assertEquals(1, op.op(0).getInteger());
     }
 }

@@ -45,8 +45,8 @@ public class TestPrimeNumber
     {
         List<Expression> params = Arrays.asList(new MyNumber(8), new MyNumber(6));
         PrimeNumber op = new PrimeNumber(params);
-        assertEquals(1, op.op(new MyNumber(6), new MyNumber(35)));
-        assertEquals(0, op.op(new MyNumber(6), new MyNumber(27)));
-        assertEquals(0, op.op(new MyNumber(5), new MyNumber(10)));
+        assertEquals(1, op.op(new MyNumber(6), new MyNumber(35)).getInteger());
+        assertEquals(0, op.op(new MyNumber(6), new MyNumber(27)).getInteger());
+        assertEquals(0, op.op(new MyNumber(5), new MyNumber(10)).getInteger());
     }
 }

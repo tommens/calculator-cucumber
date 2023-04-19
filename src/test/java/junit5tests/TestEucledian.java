@@ -35,9 +35,9 @@ public class TestEucledian
     void testCalculateEuclidian() throws IllegalConstruction
     {
         Eucledian op = new Eucledian(new ArrayList<Expression>());
-        assertEquals(8, op.op(new MyNumber(24), new MyNumber(16)));
-        assertEquals(27, op.op(new MyNumber(81), new MyNumber(27)));
-        assertEquals(5, op.op(new MyNumber(50), new MyNumber(15)));
-        assertEquals(12, op.op(new MyNumber(144), new MyNumber(60)));
+        assertEquals(8, op.op(new MyNumber(24), new MyNumber(16)).getInteger());
+        assertEquals(27, op.op(new MyNumber(81), new MyNumber(27)).getInteger());
+        assertEquals(5, op.op(new MyNumber(50), new MyNumber(15)).getInteger());
+        assertEquals(12, op.op(new MyNumber(144), new MyNumber(60)).getInteger());
     }
 }

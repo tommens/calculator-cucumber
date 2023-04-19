@@ -31,10 +31,10 @@ public class TestPgcd
     {
         List<Expression> params = Arrays.asList(new MyNumber(8), new MyNumber(6));
         Pgcd op = new Pgcd(params);
-        assertEquals(2, op.op(new MyNumber(8), new MyNumber(6)));
-        assertEquals(20, op.op(new MyNumber(100), new MyNumber(40)));
-        assertEquals(0, op.op(new MyNumber(0), new MyNumber(0)));
-        assertEquals(1, op.op(new MyNumber(1), new MyNumber(1)));
-        assertEquals(1, op.op(new MyNumber(13), new MyNumber(7)));
+        assertEquals(2, op.op(new MyNumber(8), new MyNumber(6)).getInteger());
+        assertEquals(20, op.op(new MyNumber(100), new MyNumber(40)).getInteger());
+        assertEquals(0, op.op(new MyNumber(0), new MyNumber(0)).getInteger());
+        assertEquals(1, op.op(new MyNumber(1), new MyNumber(1)).getInteger());
+        assertEquals(1, op.op(new MyNumber(13), new MyNumber(7)).getInteger());
     }
 }

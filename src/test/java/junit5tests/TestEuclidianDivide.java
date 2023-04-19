@@ -45,7 +45,7 @@ public class TestEuclidianDivide
     void testCalculateEuclidianDivide2() throws IllegalConstruction
     {
         EuclidianDivides op = new EuclidianDivides(new ArrayList<Expression>());
-       // assertEquals(2, op.op(new MyNumber(17), new MyNumber(5)));
-       // assertEquals(-1, op.op(new MyNumber(17), new MyNumber(0)));
+       assertEquals(2, op.op(new MyNumber(17), new MyNumber(5)).getInteger());
+       assertEquals(-1, op.op(new MyNumber(17), new MyNumber(0)).getInteger());
     }
 }

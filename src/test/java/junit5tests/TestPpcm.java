@@ -31,10 +31,10 @@ public class TestPpcm
     void testCalculatePpcm() throws IllegalConstruction
     {
         Ppcm op = new Ppcm(new ArrayList<Expression>());
-        //assertEquals(24, op.op(new MyNumber(8), new MyNumber(6)));
-        //assertEquals(200, op.op(new MyNumber(100), new MyNumber(40)));
-        //assertEquals(0, op.op(new MyNumber(0), new MyNumber(0)));
-        //assertEquals(1, op.op(new MyNumber(1), new MyNumber(1)));
-        //assertEquals(91, op.op(new MyNumber(13), new MyNumber(7)));
+        assertEquals(24, op.op(new MyNumber(8), new MyNumber(6)).getInteger());
+        assertEquals(200, op.op(new MyNumber(100), new MyNumber(40)).getInteger());
+        assertEquals(0, op.op(new MyNumber(0), new MyNumber(0)).getInteger());
+        assertEquals(1, op.op(new MyNumber(1), new MyNumber(1)).getInteger());
+        assertEquals(91, op.op(new MyNumber(13), new MyNumber(7)).getInteger());
     }
 }
