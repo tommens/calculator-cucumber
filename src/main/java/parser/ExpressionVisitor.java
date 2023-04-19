@@ -12,64 +12,93 @@ import java.util.List;
  */
 public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
 
+    private ArrayList<ArrayList<Expression>> temp = new ArrayList<>();
+    private Notation tempNot;
+
     @Override
     public Expression visitInput(ExprParser.InputContext ctx) {
         return visit(ctx.getChild(0));
     }
 
     @Override
-    public Expression visitAddition(ExprParser.AdditionContext ctx) {
-        List<Expression> list = new ArrayList<>();
-        Expression leftExpression = visit(ctx.getChild(0));
-        Expression rightExpression = visit(ctx.getChild(2));
-        Collections.addAll(list,leftExpression,rightExpression);
+    public Expression visitPrefixOperation(ExprParser.PrefixOperationContext ctx) {
+        temp.add(new ArrayList<Expression>());
+        visit(ctx.getChild(1));
+        tempNot = Notation.PREFIX;
+        Expression op = visit(ctx.getChild(0));
+        tempNot = null;
+        temp.remove(temp.size()-1);
+        return op;
+    }
+
+    @Override
+    public Expression visitInfixOperation(ExprParser.InfixOperationContext ctx) {
+        temp.add(new ArrayList<Expression>());
+        visit(ctx.getChild(0));
+        visit(ctx.getChild(2));
+        tempNot = Notation.INFIX;
+        Expression op = visit(ctx.getChild(1));
+        tempNot = null;
+        temp.remove(temp.size()-1);
+        return op;
+    }
+
+    @Override
+    public Expression visitPostfixOperation(ExprParser.PostfixOperationContext ctx) {
+        temp.add(new ArrayList<Expression>());
+        visit(ctx.getChild(0));
+        tempNot = Notation.POSTFIX;
+        Expression op = visit(ctx.getChild(1));
+        tempNot = null;
+        temp.remove(temp.size()-1);
+        return op;
+    }
+
+    @Override
+    public Expression visitValues(ExprParser.ValuesContext ctx) {
+        for (int i=0; i< ctx.getChildCount();i++){
+            Expression e = visit(ctx.getChild(i));
+            if (e != null){
+                temp.get(temp.size()-1).add(e);
+            }
+        }
+        return null;
+    }
+
+
+    @Override
+    public Expression visitPlus(ExprParser.PlusContext ctx){
         try {
-            return new Plus(list);
+            return new Plus(temp.get(temp.size()-1),tempNot);
         }catch (IllegalConstruction exception){
-            System.out.println("cannot create operations without parameters");
-            return null;
+            return  null;
         }
     }
 
     @Override
-    public Expression visitSubtraction(ExprParser.SubtractionContext ctx) {
-        List<Expression> list = new ArrayList<>();
-        Expression leftExpression = visit(ctx.getChild(0));
-        Expression rightExpression = visit(ctx.getChild(2));
-        Collections.addAll(list,leftExpression,rightExpression);
+    public Expression visitMinus(ExprParser.MinusContext ctx) {
         try {
-            return new Minus(list);
+            return new Minus(temp.get(temp.size()-1),tempNot);
         }catch (IllegalConstruction exception){
-            System.out.println("cannot create operations without parameters");
-            return null;
+            return  null;
         }
     }
 
     @Override
-    public Expression visitMultiplication(ExprParser.MultiplicationContext ctx) {
-        List<Expression> list = new ArrayList<>();
-        Expression leftExpression = visit(ctx.getChild(0));
-        Expression rightExpression = visit(ctx.getChild(2));
-        Collections.addAll(list,leftExpression,rightExpression);
+    public Expression visitTimes(ExprParser.TimesContext ctx) {
         try {
-            return new Times(list);
+            return new Times(temp.get(temp.size()-1),tempNot);
         }catch (IllegalConstruction exception){
-            System.out.println("cannot create operations without parameters");
-            return null;
+            return  null;
         }
     }
 
     @Override
-    public Expression visitDivision(ExprParser.DivisionContext ctx) {
-        List<Expression> list = new ArrayList<>();
-        Expression leftExpression = visit(ctx.getChild(0));
-        Expression rightExpression = visit(ctx.getChild(2));
-        Collections.addAll(list,leftExpression,rightExpression);
+    public Expression visitDivides(ExprParser.DividesContext ctx) {
         try {
-            return new Divides(list);
+            return new Times(temp.get(temp.size()-1),tempNot);
         }catch (IllegalConstruction exception){
-            System.out.println("cannot create operations without parameters");
-            return null;
+            return  null;
         }
     }
 
@@ -87,4 +116,5 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     public Expression visitFraction(ExprParser.FractionContext ctx) {
         return null;
     }
+
 }

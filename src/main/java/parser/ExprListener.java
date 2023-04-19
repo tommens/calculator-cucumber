@@ -18,65 +18,105 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitInput(ExprParser.InputContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Addition}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Enter a parse tree produced by {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAddition(ExprParser.AdditionContext ctx);
+	void enterExpr(ExprParser.ExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Addition}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Exit a parse tree produced by {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAddition(ExprParser.AdditionContext ctx);
+	void exitExpr(ExprParser.ExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Multiplication}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Enter a parse tree produced by {@link ExprParser#prefixOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultiplication(ExprParser.MultiplicationContext ctx);
+	void enterPrefixOperation(ExprParser.PrefixOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Multiplication}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Exit a parse tree produced by {@link ExprParser#prefixOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultiplication(ExprParser.MultiplicationContext ctx);
+	void exitPrefixOperation(ExprParser.PrefixOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Subtraction}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Enter a parse tree produced by {@link ExprParser#infixOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubtraction(ExprParser.SubtractionContext ctx);
+	void enterInfixOperation(ExprParser.InfixOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Subtraction}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Exit a parse tree produced by {@link ExprParser#infixOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubtraction(ExprParser.SubtractionContext ctx);
+	void exitInfixOperation(ExprParser.InfixOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Enter a parse tree produced by {@link ExprParser#postfixOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterNumber(ExprParser.NumberContext ctx);
+	void enterPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Exit a parse tree produced by {@link ExprParser#postfixOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitNumber(ExprParser.NumberContext ctx);
+	void exitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Division}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Enter a parse tree produced by the {@code values}
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatornumnumnum}.
 	 * @param ctx the parse tree
 	 */
-	void enterDivision(ExprParser.DivisionContext ctx);
+	void enterValues(ExprParser.ValuesContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Division}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Exit a parse tree produced by the {@code values}
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatornumnumnum}.
 	 * @param ctx the parse tree
 	 */
-	void exitDivision(ExprParser.DivisionContext ctx);
+	void exitValues(ExprParser.ValuesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Plus}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlus(ExprParser.PlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Plus}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlus(ExprParser.PlusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Minus}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterMinus(ExprParser.MinusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Minus}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitMinus(ExprParser.MinusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Times}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimes(ExprParser.TimesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Times}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimes(ExprParser.TimesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Divides}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterDivides(ExprParser.DividesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Divides}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitDivides(ExprParser.DividesContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Integer}
 	 * labeled alternative in {@link ExprParser#num}.

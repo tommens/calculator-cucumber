@@ -139,6 +139,7 @@
                 <configuration>
                     <!--needed to prevent module problem-->
                     <detectJavaApiLink>false</detectJavaApiLink>
+                    <excludePackageNames>parser</excludePackageNames>
                 </configuration>
                 <executions>
                     <!-- Exports JavaDocs to regular HTML files -->

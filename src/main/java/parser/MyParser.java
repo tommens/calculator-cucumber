@@ -27,13 +27,4 @@ public class MyParser {
         ExpressionVisitor visitor = new ExpressionVisitor();
         return visitor.visit(tree);
     }
-
-    public static void main(String[] args){
-        Expression result;
-        String[] test = new String[]{"42","3.2","4+5","3.2/5","6*12","9.8+6.2+3*12"};
-        for (String s: test){
-            result = parse(s);
-            System.out.println(result);
-        }
-    }
 }

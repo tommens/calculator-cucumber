@@ -17,40 +17,64 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInput(ExprParser.InputContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Addition}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Visit a parse tree produced by {@link ExprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddition(ExprParser.AdditionContext ctx);
+	T visitExpr(ExprParser.ExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Multiplication}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Visit a parse tree produced by {@link ExprParser#prefixOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultiplication(ExprParser.MultiplicationContext ctx);
+	T visitPrefixOperation(ExprParser.PrefixOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Subtraction}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Visit a parse tree produced by {@link ExprParser#infixOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubtraction(ExprParser.SubtractionContext ctx);
+	T visitInfixOperation(ExprParser.InfixOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Visit a parse tree produced by {@link ExprParser#postfixOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumber(ExprParser.NumberContext ctx);
+	T visitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Division}
-	 * labeled alternative in {@link ExprParser#expr}.
+	 * Visit a parse tree produced by the {@code values}
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatornumnumnum}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDivision(ExprParser.DivisionContext ctx);
+	T visitValues(ExprParser.ValuesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Plus}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlus(ExprParser.PlusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Minus}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMinus(ExprParser.MinusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Times}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTimes(ExprParser.TimesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Divides}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDivides(ExprParser.DividesContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Integer}
 	 * labeled alternative in {@link ExprParser#num}.
