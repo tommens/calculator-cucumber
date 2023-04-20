@@ -22,7 +22,7 @@ public class Modulus extends Operation
      */
     public Modulus(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
-        symbol = "*";
+        symbol = "||";
         neutral = 1;
     }
 

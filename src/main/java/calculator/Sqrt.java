@@ -22,7 +22,7 @@ public class Sqrt extends Operation
      */
     public Sqrt(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
-        symbol = "*";
+        symbol = "sqrt";
         neutral = 1;
     }
 
