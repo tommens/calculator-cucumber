@@ -3,8 +3,6 @@ package parser;
 import calculator.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 /**
@@ -96,7 +94,7 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitDivides(ExprParser.DividesContext ctx) {
         try {
-            return new Times(temp.get(temp.size()-1),tempNot);
+            return new Divides(temp.get(temp.size()-1),tempNot);
         }catch (IllegalConstruction exception){
             return  null;
         }
@@ -114,7 +112,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
 
     @Override
     public Expression visitFraction(ExprParser.FractionContext ctx) {
-        return null;
+        String value = ctx.getText();
+        String[] fracVal = value.split("_");
+        return MyRationalNumber.create(Long.parseLong(fracVal[0]), Long.parseLong(fracVal[1]));
     }
 
 }

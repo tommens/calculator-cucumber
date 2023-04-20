@@ -2,9 +2,7 @@ package parser;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.Expression;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
 import org.junit.jupiter.api.*;
 
 
@@ -48,5 +46,39 @@ public class TestMyParser {
         String expectedString = "- (1, ( 1 + 2 ))";
         Expression e = MyParser.parse(testString);
         assertEquals(expectedString,e.toString());
+    }
+
+    @Test
+    void testInteger(){
+        String testString = "12";
+        Expression e = MyParser.parse(testString);
+        assertEquals(MyInteger.class, e.getClass());
+    }
+
+    @Test
+    void testReal(){
+        String testString = "3.14";
+        Expression e = MyParser.parse(testString);
+        assertEquals(MyRealNumber.class, e.getClass());
+    }
+
+    @Test
+    void testRational(){
+        String testString = "5_6";
+        Expression e = MyParser.parse(testString);
+        assertEquals(MyRationalNumber.class, e.getClass());
+    }
+
+    @Test
+    void testOperation(){
+        String values = "(1,2,3)";
+        String testString;
+        String[] op = new String[]{"+","-","/","*"};
+        Class[] opClass = new Class[]{Plus.class,Minus.class,Divides.class,Times.class};
+        for (int i=0; i<4; i++){
+            testString = op[i].concat(values);
+            Expression e = MyParser.parse(testString);
+            assertEquals(opClass[i],e.getClass());
+        }
     }
 }
