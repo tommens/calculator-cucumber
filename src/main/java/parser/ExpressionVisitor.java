@@ -2,6 +2,7 @@ package parser;
 
 import calculator.*;
 
+import java.math.MathContext;
 import java.util.ArrayList;
 
 
@@ -12,6 +13,12 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
 
     private ArrayList<ArrayList<Expression>> temp = new ArrayList<>();
     private Notation tempNot;
+
+    private MathContext mathContext;
+
+    public ExpressionVisitor(MathContext mc){
+        mathContext = mc;
+    }
 
     @Override
     public Expression visitInput(ExprParser.InputContext ctx) {
@@ -67,7 +74,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitPlus(ExprParser.PlusContext ctx){
         try {
-            return new Plus(temp.get(temp.size()-1),tempNot);
+            Plus op = new Plus(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
         }catch (IllegalConstruction exception){
             return  null;
         }
@@ -76,7 +85,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitMinus(ExprParser.MinusContext ctx) {
         try {
-            return new Minus(temp.get(temp.size()-1),tempNot);
+            Minus op = new Minus(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
         }catch (IllegalConstruction exception){
             return  null;
         }
@@ -85,7 +96,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitTimes(ExprParser.TimesContext ctx) {
         try {
-            return new Times(temp.get(temp.size()-1),tempNot);
+            Times op = new Times(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
         }catch (IllegalConstruction exception){
             return  null;
         }
@@ -94,7 +107,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitDivides(ExprParser.DividesContext ctx) {
         try {
-            return new Divides(temp.get(temp.size()-1),tempNot);
+            Divides op = new Divides(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
         }catch (IllegalConstruction exception){
             return  null;
         }
@@ -107,6 +122,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
 
     @Override
     public Expression visitReal(ExprParser.RealContext ctx) {
+        if (mathContext != null){
+            return new MyRealNumber(ctx.getText(),mathContext);
+        }
         return new MyRealNumber(ctx.getText());
     }
 
@@ -117,4 +135,9 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
         return MyRationalNumber.create(Long.parseLong(fracVal[0]), Long.parseLong(fracVal[1]));
     }
 
+    private void setMathContext(Operation op){
+        if (mathContext != null){
+            op.setMathContext(mathContext);
+        }
+    }
 }

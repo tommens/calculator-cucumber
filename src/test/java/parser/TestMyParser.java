@@ -63,6 +63,26 @@ public class TestMyParser {
     }
 
     @Test
+    void testPosScienceReal(){
+        String testString = "3.14E+5";
+        Expression e = MyParser.parse(testString);
+        assertEquals(MyRealNumber.class, e.getClass());
+        String testString2 = "3.14E5";
+        Expression e2 = MyParser.parse(testString2);
+        assertEquals(MyRealNumber.class, e2.getClass());
+        MyRealNumber n1 = (MyRealNumber) e;
+        MyRealNumber n2 = (MyRealNumber) e2;
+        assertEquals(n1,n2);
+    }
+
+    @Test
+    void testNegScienceReal(){
+        String testString = "3.14E-12";
+        Expression e = MyParser.parse(testString);
+        assertEquals(MyRealNumber.class, e.getClass());
+    }
+
+    @Test
     void testRational(){
         String testString = "5_6";
         Expression e = MyParser.parse(testString);

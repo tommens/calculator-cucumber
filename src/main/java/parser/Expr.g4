@@ -34,5 +34,5 @@ OPENBRACKET : '(';
 CLOSEBRACKET : ')';
 SEPARATOR : ',';
 INT : [0-9]+;
-REAL  : [0-9]+[.][0-9]+;
+REAL  : [0-9]+[.][0-9]+('E'[+|-]?[0-9]+)?;
 FRAC  : [0-9]+[_][0-9]+;
