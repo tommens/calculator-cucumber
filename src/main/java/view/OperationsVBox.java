@@ -8,6 +8,9 @@ import javafx.scene.layout.HBox;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class is used to create the part of the calculator containing the basics operations (+, -, *, /, %, =) and some other useful buttons (rational number and . for real numbers). Singleton Design Pattern.
+ */
 public class OperationsVBox extends CalculatorPart {
 
     private static OperationsVBox instance;
@@ -19,11 +22,19 @@ public class OperationsVBox extends CalculatorPart {
                 getLastHBox());
     }
 
+    /**
+     * This method is used to create a HBox containing the last bottom buttons of this calculator part.
+     * @return The HBox containing the buttons.
+     */
     private Node getLastHBox() {
         int nbButtons = 2;
+
         setMaxHeightNbButtons();
         setMaxWidthNbButtons(nbButtons);
+
         HBox hbox = new HBox();
+
+        // Button to create a rational number
         Button fracButton = new Button("X/Y");
         fracButton.setOnAction(actionEvent -> modifyDisplay(fracButton, "_"));
         fracButton.setVisible(true);
@@ -31,6 +42,7 @@ public class OperationsVBox extends CalculatorPart {
         fracButton.prefHeightProperty().bind(hbox.heightProperty());
         fracButton.setTooltip(new Tooltip("Use this button to create a rational number. Enter the nominator, press this button and enter the denominator."));
 
+        // Button to evaluate the expression
         Button resultButton = new Button("=");
         resultButton.setVisible(true);
         resultButton.setOnAction(actionEvent -> {
@@ -46,6 +58,10 @@ public class OperationsVBox extends CalculatorPart {
         return hbox;
     }
 
+    /**
+     * This method is used to get the instance of the OperationsVBox.
+     * @return The instance of the OperationsVBox.
+     */
     public static OperationsVBox getInstance(){
         instance = instance == null ? new OperationsVBox() : instance;
         return instance;

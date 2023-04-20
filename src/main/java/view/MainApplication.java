@@ -1,4 +1,4 @@
-package calculator;
+package view;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -6,26 +6,27 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import view.CalculatorView;
 
 
 /**
- * Cette classe est la classe qui lance l'application JAVAFX.
+ * This class is the main application of the calculator GUI
  */
 public class MainApplication extends Application {
     private static Stage primaryStage;
-    private static CalculatorView intNumbersVBox;
+
     @Override
     public void start(Stage primaryStage){
         Platform.setImplicitExit(false);
         System.setProperty("file.encoding", "UTF-8" );
         this.primaryStage = primaryStage;
 
-        intNumbersVBox = CalculatorView.getInstance();
         initialize();
 
     }
 
+    /**
+     * Initialize the calculator view
+     */
     public static void initialize(){
         primaryStage.setOnCloseRequest(event -> {
             if (!event.getEventType().equals(WindowEvent.WINDOW_CLOSE_REQUEST)) {
@@ -37,26 +38,32 @@ public class MainApplication extends Application {
 
         });
 
+        // Make the window a little bit transparent
         primaryStage.setOpacity(0.95);
 
-        //Menu principal
+        // Create the calculator view
+        CalculatorView calculatorView = CalculatorView.getInstance();
 
-        CalculatorView panel = CalculatorView.getInstance();
-        Scene scene = new Scene(panel);
+        // Create the scene
+        Scene scene = new Scene(calculatorView);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add("view/style.css");
 
         primaryStage.setTitle("Calculator --- WALCARIUS -- MARCHELLI -- TULIPPE-HECQ -- VAN DRIESSCHE");
-        panel.prefHeightProperty().bind(scene.heightProperty());
-        panel.prefWidthProperty().bind(scene.widthProperty());
+
+        // Bind the calculatorView to the scene
+        calculatorView.prefHeightProperty().bind(scene.heightProperty());
+        calculatorView.prefWidthProperty().bind(scene.widthProperty());
 
 
-        //make font size of panel elements resize while resizing the window
-        panel.prefHeightProperty().addListener((observable, oldValue, newValue) -> panel.setFontSize(newValue.doubleValue()));
+        //make font size of calculatorView elements resize while resizing the window
+        calculatorView.prefHeightProperty().addListener((observable, oldValue, newValue) -> calculatorView.setFontSize(newValue.doubleValue()));
 
 
-
+        // Set the minimum size of the window
         primaryStage.setMinWidth(600);
+
+        // Keep the ratio of the window
         primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(0.56));
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(0.56));
 

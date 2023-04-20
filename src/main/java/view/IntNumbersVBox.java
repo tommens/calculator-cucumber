@@ -5,6 +5,9 @@ package view;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class is used to create the VBox containing the numbers (0 to 9) of the calculator. Singleton Design Pattern.
+ */
 public class IntNumbersVBox extends CalculatorPart {
     private static IntNumbersVBox instance;
 
@@ -18,10 +21,10 @@ public class IntNumbersVBox extends CalculatorPart {
     }
 
 
-
-
-
-    //Create getInstance singleton
+    /**
+     * This method is used to get the instance of the IntNumbersVBox.
+     * @return
+     */
     public static IntNumbersVBox getInstance(){
         instance = instance == null ? new IntNumbersVBox() : instance;
         return instance;
