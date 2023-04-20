@@ -8,7 +8,8 @@ expr  : prefixOperation
       ;
 
 prefixOperation : operator values;
-infixOperation : values operator values;
+infixOperation : values operator values
+               | values operator infixOperation;
 postfixOperation : values operator;
 
 values : num

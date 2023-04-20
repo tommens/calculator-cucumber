@@ -39,13 +39,21 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitInfixOperation(ExprParser.InfixOperationContext ctx) {
         temp.add(new ArrayList<Expression>());
-        visit(ctx.getChild(0));
-        visit(ctx.getChild(2));
+        Expression e1 = visit(ctx.getChild(0));
+        addValueInfixOp(e1);
+        Expression e2 = visit(ctx.getChild(2));
+        addValueInfixOp(e2);
         tempNot = Notation.INFIX;
         Expression op = visit(ctx.getChild(1));
         tempNot = null;
         temp.remove(temp.size()-1);
         return op;
+    }
+
+    private void addValueInfixOp(Expression exp){
+        if (exp != null){
+            temp.get(temp.size()-1).add(exp);
+        }
     }
 
     @Override
