@@ -227,7 +227,7 @@ public class Memory {
      * convert a string expression to an object expression
      */
     public Expression analyzeString(String expressionString) {
-        List<Expression> expressions = new ArrayList<>();;
+        List<Expression> expressions = new ArrayList<>();
         // TODO : upgrade this part to handle recursive expressions
         String operator = null;
         Notation notation = checkNotation(expressionString);
@@ -240,11 +240,9 @@ public class Memory {
             }
         }
         if (operator == null) {
-            Expression expression = new MyNumber(new BigDecimal(expressionString));
-            return expression;
+            return new MyNumber(new BigDecimal(expressionString));
         } else {
-            Expression expression = getOperator(operator, expressions, notation);
-            return expression;
+            return getOperator(operator, expressions, notation);
         }
     }
 

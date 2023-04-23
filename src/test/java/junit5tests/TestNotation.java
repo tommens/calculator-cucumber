@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,9 +31,9 @@ class TestNotation {
 		//prefix notation:
 		testNotation(symbol +" (" + value1.toString()+", " + value2.toString()+")", op, Notation.PREFIX);
 		//infix notation:
-		testNotation("( " + value1.toString() +" "+ symbol + " " + value2.toString()+" )", op, Notation.INFIX);
+		testNotation("( " + value1 +" "+ symbol + " " + value2 +" )", op, Notation.INFIX);
 		//postfix notation:
-		testNotation("(" + value1.toString() +", "+ value2.toString() +") "+ symbol, op, Notation.POSTFIX);
+		testNotation("(" + value1 +", "+ value2 +") "+ symbol, op, Notation.POSTFIX);
 	}
 
 	@ParameterizedTest

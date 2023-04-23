@@ -14,7 +14,7 @@ import java.util.List;
 class TestTimes {
 
 	private final BigDecimal value1 = new BigDecimal(8);
-	private final BigDecimal value3 = new BigDecimal(5.5);
+	private final BigDecimal value3 = new BigDecimal("5.5");
 	private Times op;
 	private List<Expression> params;
 
@@ -35,7 +35,7 @@ class TestTimes {
 	void testConstructor2() {
 		// A Plus expression should not be the same as a Times expression
 		try {
-			assertNotSame(op, new Plus(new ArrayList<>()));
+			assertNotSame(op, new Times(new ArrayList<>()));
 		} catch (IllegalConstruction e) {
 			fail();
 		}

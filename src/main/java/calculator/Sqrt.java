@@ -3,7 +3,6 @@ package calculator;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
-import java.lang.Math;
 
 public class Sqrt extends Operation
 {
@@ -23,7 +22,7 @@ public class Sqrt extends Operation
      */
     public Sqrt(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist,n);
-        symbol = "*";
+        symbol = "sqrt";
         neutral = 1;
     }
 

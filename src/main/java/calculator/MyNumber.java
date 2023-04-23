@@ -101,11 +101,11 @@ public class MyNumber implements Expression
 
     public /*constructor*/ MyNumber(String number) {
         String[] parts = number.split("(?=[-+i])|(?<=[-+i])");
-        value = new BigDecimal(Double.parseDouble(parts[0]));
+        value = BigDecimal.valueOf(Double.parseDouble(parts[0]));
         if(parts[1].equals("-"))
-            imaginary = new BigDecimal(Double.parseDouble(parts[2])*-1);
+            imaginary = BigDecimal.valueOf(Double.parseDouble(parts[2]) * -1);
         else
-            imaginary = new BigDecimal(Double.parseDouble(parts[2]));
+            imaginary = BigDecimal.valueOf(Double.parseDouble(parts[2]));
         exp = 0;
         imaginaryExp = 0;
     }
@@ -157,6 +157,12 @@ public class MyNumber implements Expression
     public boolean isComplex(){
         return !(imaginary.signum() == 0);
     }
+
+    public BigDecimal applyExp(BigDecimal v, int e){
+        return v.multiply(BigDecimal.valueOf(pow(10, e)));
+    }
+    
+
     @Override
     public String toString() {
         return toString(notation);
@@ -164,12 +170,12 @@ public class MyNumber implements Expression
 
     public final String toString(NumberNotation n) {
 
-        Double real = value.multiply(BigDecimal.valueOf(pow(10, exp)).round(new MathContext(decimal_number))).doubleValue();
-        Double imag = imaginary.multiply(BigDecimal.valueOf(pow(10, imaginaryExp)).round(new MathContext(decimal_number))).doubleValue();
+        Double real = applyExp(this.value,this.exp).round(new MathContext(decimal_number)).doubleValue();
+        Double imag = applyExp(this.imaginary,this.imaginaryExp).round(new MathContext(decimal_number)).doubleValue();
 
         Double r;
 
-        Double O;
+        double O;
 
         DecimalFormat format = new DecimalFormat("0.#");
         try {
@@ -184,9 +190,7 @@ public class MyNumber implements Expression
 
         }
         catch(IllegalConstruction e) {
-            return String.format("%s%s", "", (value.signum() == 0 && imaginary.signum() != 0) ? String.format("%si", format.format(imag)) :
-                    (imaginary.signum() == 0) ? String.format("%s", format.format(real)) :
-                            String.format("%s+%si", format.format(real),format.format(imag)));
+            return String.format("%s", format.format(real));
         }
 
         return switch (n) {
@@ -240,45 +244,14 @@ public class MyNumber implements Expression
           return false;
       }
 
-      Boolean real = false;
+      // If the real and imaginary part are equals then return true
+      BigDecimal lReal = applyExp(this.value,this.exp);
+      BigDecimal rReal = applyExp(((MyNumber) o).value,((MyNumber) o).exp);
 
-      Boolean imag = false;
-
-      if(this.exp==0){
-          if(((MyNumber)o).exp==0){
-              real = (this.value.compareTo(((MyNumber)o).value)==0);
-          }
-          else{
-              real = (this.value.compareTo(((MyNumber)o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
-          }
-      }
-      else{
-          if(((MyNumber)o).exp==0){
-              real = (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber)o).value)==0);
-          }
-          else{
-              real = (this.value.multiply(BigDecimal.valueOf(pow(10, this.exp))).compareTo(((MyNumber) o).value.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).exp))))==0);
-          }
-      }
-
-      if(this.imaginaryExp==0){
-          if(((MyNumber)o).imaginaryExp==0){
-              imag = (this.imaginary.compareTo(((MyNumber)o).imaginary)==0);
-          }
-          else{
-              imag = (this.imaginary.compareTo(((MyNumber)o).imaginary.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).imaginaryExp))))==0);
-          }
-      }
-      else{
-          if(((MyNumber)o).imaginaryExp==0){
-              imag = (this.imaginary.multiply(BigDecimal.valueOf(pow(10, this.imaginaryExp))).compareTo(((MyNumber)o).imaginary)==0);
-          }
-          else{
-              imag = (this.imaginary.multiply(BigDecimal.valueOf(pow(10, this.imaginaryExp))).compareTo(((MyNumber) o).imaginary.multiply(BigDecimal.valueOf(pow(10, ((MyNumber) o).imaginaryExp))))==0);
-          }
-      }
-
-      return imag && real;
+      BigDecimal lImaginary = applyExp(this.imaginary,this.imaginaryExp);
+      BigDecimal rImaginary = applyExp(((MyNumber) o).imaginary,((MyNumber) o).imaginaryExp);
+      return lReal.compareTo(rReal)==0 &&
+              lImaginary.compareTo(rImaginary)==0;
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }

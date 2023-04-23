@@ -1,7 +1,6 @@
 package calculator;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 
 /** This class represents the arithmetic multiplication operation "*".
@@ -53,11 +52,8 @@ public final class Times extends Operation {
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal new_val;
         int exp;
-        BigDecimal new_val2;
         int exp2;
-        BigDecimal new_val3;
         int exp3;
-        BigDecimal new_val4;
         int exp4;
 
         BigDecimal a = l.getValue();
@@ -74,17 +70,17 @@ public final class Times extends Operation {
         exp=a_exp+c_exp;
         MyNumber tmp1 = new MyNumber(new_val,exp);
 
-        new_val2=b.multiply(d);
+        new_val=b.multiply(d);
         exp2=b_exp+d_exp;
-        MyNumber tmp2 = new MyNumber(new_val2,exp2);
+        MyNumber tmp2 = new MyNumber(new_val,exp2);
 
-        new_val3=a.multiply(d);
+        new_val=a.multiply(d);
         exp3=a_exp+d_exp;
-        MyNumber tmp3 = new MyNumber(new_val3,exp3);
+        MyNumber tmp3 = new MyNumber(new_val,exp3);
 
-        new_val4=b.multiply(c);
+        new_val=b.multiply(c);
         exp4=b_exp+c_exp;
-        MyNumber tmp4 = new MyNumber(new_val4,exp4);
+        MyNumber tmp4 = new MyNumber(new_val,exp4);
 
         try{
             MyNumber real = new Minus(args).op(tmp1,tmp2);

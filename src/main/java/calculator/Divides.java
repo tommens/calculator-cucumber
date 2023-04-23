@@ -2,7 +2,6 @@ package calculator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.List;
 
 /** This class represents the arithmetic division operation "/".
@@ -42,6 +41,13 @@ public final class Divides extends Operation
         neutral = 1;
     }
 
+    private MyNumber additionOfMultiplication(MyNumber a, MyNumber b, MyNumber c, MyNumber d) throws IllegalConstruction{
+        MyNumber den1 = new Times(args).op(a,b);
+        MyNumber den2 = new Times(args).op(c,d);
+        return new Plus(args).op(den1,den2);
+
+    }
+
     /**
      * The actual computation of the (binary) arithmetic division of two BigDecimal number
      *
@@ -60,30 +66,28 @@ public final class Divides extends Operation
         BigDecimal new_val2;
         int exp2;
 
-        BigDecimal a = l.getValue();
-        BigDecimal c = r.getValue();
         int a_exp = l.getexp();
         int c_exp = r.getexp();
-
-        BigDecimal b = l.getImaginary();
-        BigDecimal d = r.getImaginary();
         int b_exp = l.getImaginaryExp();
         int d_exp = r.getImaginaryExp();
 
-        try{
-            MyNumber den1 = new Times(args).op(new MyNumber(c,c_exp),new MyNumber(c,c_exp));
-            MyNumber den2 = new Times(args).op(new MyNumber(d,d_exp),new MyNumber(d,d_exp));
-            MyNumber den = new Plus(args).op(den1,den2);
+        MyNumber a = new MyNumber(l.getValue(),a_exp);
+        MyNumber b = new MyNumber(l.getImaginary(),b_exp);
+        MyNumber c = new MyNumber(r.getValue(),c_exp);
+        MyNumber d = new MyNumber(r.getImaginary(),d_exp);
 
-            MyNumber numReal1 = new Times(args).op(new MyNumber(a,a_exp),new MyNumber(c,c_exp));
-            MyNumber numReal2 = new Times(args).op(new MyNumber(b,b_exp),new MyNumber(d,d_exp));
-            MyNumber numReal = new Plus(args).op(numReal1,numReal2);
+        try{
+            MyNumber den = additionOfMultiplication(c,c,d,d);
+
+            MyNumber numReal = additionOfMultiplication(a,c,b,d);
+
             new_val = numReal.getValue().divide(den.getValue(),MathContext.DECIMAL128);
             exp=numReal.getexp()-den.getexp();
 
-            MyNumber numImaginary1 = new Times(args).op(new MyNumber(b,b_exp),new MyNumber(c,c_exp));
-            MyNumber numImaginary2 = new Times(args).op(new MyNumber(a,a_exp),new MyNumber(d,d_exp));
+            MyNumber numImaginary1 = new Times(args).op(b,c);
+            MyNumber numImaginary2 = new Times(args).op(a,d);
             MyNumber numImaginary = new Minus(args).op(numImaginary1,numImaginary2);
+
             new_val2 = numImaginary.getValue().divide(den.getValue(),MathContext.DECIMAL128);
             exp2=numImaginary.getexp()-den.getexp();
 

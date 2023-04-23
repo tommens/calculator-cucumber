@@ -53,10 +53,7 @@ public class InputUser
     public static boolean isDecimalNumber(String input)
     {
         String[] parts = input.split(".");
-        if(isNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-        return false;
+        return isNumber(parts[0]) && isNumber(parts[1]);
     }
 
     public static boolean isENotationNumber(String input)
@@ -66,10 +63,7 @@ public class InputUser
             return true;
         }
 
-        if(isDecimalNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-        return false;
+        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
     }
 
     public static boolean isScientificNotationNumber(String input)
@@ -79,10 +73,7 @@ public class InputUser
             return true;
         }
 
-        if(isDecimalNumber(parts[0])&&isNumber(parts[1])){
-            return true;
-        }
-        return false;
+        return isDecimalNumber(parts[0]) && isNumber(parts[1]);
     }
 
 
