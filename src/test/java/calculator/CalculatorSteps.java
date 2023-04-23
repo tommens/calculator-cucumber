@@ -3,10 +3,12 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,8 @@ public class CalculatorSteps {
 		c = new Calculator();
 	}
 
-	@Given("an integer operation {string}")
-	public void givenAnIntegerOperation(String s) {
+	@Given("an operation {string}")
+	public void givenAnOperation(String s) {
 		// Write code here that turns the phrase above into concrete actions
 		params = new ArrayList<>(); // create an empty set of parameters to be filled in
 		try {
@@ -55,7 +57,7 @@ public class CalculatorSteps {
 		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of the list,
 		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+		numbers.get(0).forEach(n -> params.add(new MyInteger(Integer.parseInt(n))));
 	    params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
@@ -68,8 +70,8 @@ public class CalculatorSteps {
 	public void givenTheSum(int n1, int n2) {
 		try {
 			params = new ArrayList<>();
-		    params.add(new MyNumber(n1));
-		    params.add(new MyNumber(n2));
+		    params.add(new MyInteger(n1));
+		    params.add(new MyInteger(n2));
 		    op = new Plus(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
@@ -83,14 +85,37 @@ public class CalculatorSteps {
 		else fail(notation + " is not a correct notation! ");
 	}
 
+	@When("I provide a first real number {string}")
+	public void whenIProvideARealNumber(String s) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyRealNumber(s));
+		op.addMoreParams(params);
+	}
+
+	@When("I provide a second real number {string}")
+	public void whenIProvideASecondRealNumber(String s) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyRealNumber(s));
+		op.addMoreParams(params);
+	}
+
 	@When("^I provide a (.*) number (\\d+)$")
 	public void whenIProvideANumber(String s, int val) {
 		//add extra parameter to the operation
 		params = new ArrayList<>();
-		params.add(new MyNumber(val));
+		params.add(new MyInteger(val));
 		op.addMoreParams(params);
 	}
 
+	@When("^I provide a (.*) rational number (\\d+)_/(\\d+)$")
+	public void whenIProvideARationalNumber(String s, int numerator, int denominator) {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(MyRationalNumber.create(numerator,denominator));
+		op.addMoreParams(params);
+	}
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
 		try {
@@ -110,6 +135,22 @@ public class CalculatorSteps {
 	@Then("the operation evaluates to {int}")
 	public void thenTheOperationEvaluatesTo(int val) {
 		assertEquals(val, c.eval(op));
+	}
+
+	@Then("the result of the operation is {string}")
+	public void thenTheResultOfOperation(String val) {
+		assertEquals(new BigDecimal(val), c.evalReal(op));
+	}
+  
+	@ParameterType(".*")
+	public MyRationalNumber rationalNumber(String s) {
+		String[] parts = s.split("/");
+		return MyRationalNumber.create(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+	}
+	@Then("the operation evaluates to rational {string}")
+	public void thenTheOperationEvaluatesTo(String val) {
+		String[] parts = val.split("_/");
+		assertEquals(MyRationalNumber.create(Integer.parseInt(parts[0]), Integer.parseInt(parts[1])), c.evalRational(op));
 	}
 
 }
