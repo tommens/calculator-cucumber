@@ -57,7 +57,7 @@ public abstract class CalculatorPart extends VBox {
         HBox hbox = new HBox();
         elements.forEach((element) -> {
             Button button = new Button(element);
-            button.setOnAction(actionEvent -> modifyDisplay(button, button.getText()));
+            button.setOnAction(actionEvent -> ExpressionLabel.getInstance().updateText(button.getText()));
 
             //bind the size of the button to the size of the hbox
             button.prefWidthProperty().bind(hbox.widthProperty().multiply(1. / elements.size()));
@@ -73,23 +73,6 @@ public abstract class CalculatorPart extends VBox {
         });
 
         return hbox;
-    }
-
-    /**
-     * This method is used to modify the display of the calculator.
-     * @param button The button that was pressed.
-     * @param text The text of the button.
-     */
-    void modifyDisplay(Button button, String text){
-        try {
-            Node calculatorView = button.getParent();
-            while (!(calculatorView instanceof CalculatorView)) {
-                calculatorView = calculatorView.getParent();
-            }
-            ((CalculatorView) calculatorView).setDisplay(text);
-        } catch (Exception e) {
-
-        }
     }
 
     /**
