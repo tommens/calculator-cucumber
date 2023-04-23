@@ -155,26 +155,7 @@ public class MyNumber implements Expression
     public BigDecimal applyExp(BigDecimal v, int e){
         return v.multiply(BigDecimal.valueOf(pow(10, e)));
     }
-
-
-    public boolean equalsNumber(BigDecimal l , int expl, BigDecimal r, int expr){
-        if(expl==0){
-            if(expr==0){
-                return (l.compareTo(r)==0);
-            }
-            else{
-                return (l.compareTo(applyExp(r,expr))==0);
-            }
-        }
-        else{
-            if(expr==0){
-                return (applyExp(l,expl).compareTo(r)==0);
-            }
-            else{
-                return (applyExp(l,expl).compareTo(applyExp(r,expr))==0);
-            }
-        }
-    }
+    
 
     @Override
     public String toString() {
@@ -258,9 +239,13 @@ public class MyNumber implements Expression
       }
 
       // If the real and imaginary part are equals then return true
-      return equalsNumber(this.value,this.exp,((MyNumber) o).value,((MyNumber) o).exp) &&
-              equalsNumber(this.imaginary,this.imaginaryExp,((MyNumber) o).imaginary,((MyNumber) o).imaginaryExp);
+      BigDecimal lReal = applyExp(this.value,this.exp);
+      BigDecimal rReal = applyExp(((MyNumber) o).value,((MyNumber) o).exp);
 
+      BigDecimal lImaginary = applyExp(this.imaginary,this.imaginaryExp);
+      BigDecimal rImaginary = applyExp(((MyNumber) o).imaginary,((MyNumber) o).imaginaryExp);
+      return lReal.compareTo(rReal)==0 &&
+              lImaginary.compareTo(rImaginary)==0;
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }
