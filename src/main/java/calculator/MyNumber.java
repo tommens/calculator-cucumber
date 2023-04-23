@@ -2,16 +2,14 @@ package calculator;
 
 import visitor.Visitor;
 
-
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import static java.lang.Math.pow;
-
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -60,8 +58,13 @@ public class MyNumber implements Expression
     /**
      * Constructor method
      *
-     * @param v TBigDecimal value to be contained in the object
+     * @param value  TBigDecimal value to be contained in the object
      */
+    public MyNumber(int value)
+    {
+        this(new BigDecimal(value));
+    }
+
 
     public /*constructor*/ MyNumber(BigDecimal v) {
         value=v.round(new MathContext(decimal_number));
@@ -118,7 +121,8 @@ public class MyNumber implements Expression
   }
 
 
-    /** The depth of a number expression is always 0
+    /**
+     * The depth of a number expression is always 0
      *
      * @return The depth of a number expression
      */
@@ -126,7 +130,8 @@ public class MyNumber implements Expression
 	  return 0;
   }
 
-    /** The number of operations contained in a number expression is always 0
+    /**
+     * The number of operations contained in a number expression is always 0
      *
      * @return The number of operations contained in a number expression
      */
@@ -134,7 +139,8 @@ public class MyNumber implements Expression
 	  return 0;
   }
 
-    /** The number of numbers contained in a number expression is always 1
+    /**
+     * The number of numbers contained in a number expression is always 1
      *
      * @return The number of numbers contained in  a number expression
      */
@@ -260,5 +266,11 @@ public class MyNumber implements Expression
   public int hashCode() {
 		return value.hashCode();
   }
+
+
+  public int getInteger()
+    {
+        return value.intValue();
+    }
 
 }

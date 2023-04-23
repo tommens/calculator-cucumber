@@ -2,6 +2,8 @@ package calculator;
 
 import visitor.Visitor;
 
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -109,7 +111,7 @@ public abstract class Operation implements Expression
 	 * Count the depth of an arithmetic expression recursively,
 	 * using Java 8 functional programming capabilities (streams, maps, etc...)
 	 *
- 	 * @return	The depth of the arithmetic expression being traversed
+	 * @return The depth of the arithmetic expression being traversed
 	 */
 	public final int countDepth() {
 	    // use of Java 8 functional programming capabilities
@@ -123,7 +125,7 @@ public abstract class Operation implements Expression
 	 * Count the number of operations contained in an arithmetic expression recursively,
 	 * using Java 8 functional programming capabilities (streams, maps, etc...)
 	 *
-	 * @return	The number of operations contained in an arithmetic expression being traversed
+	 * @return The number of operations contained in an arithmetic expression being traversed
 	 */
 	public final int countOps() {
 	    // use of Java 8 functional programming capabilities
@@ -209,5 +211,4 @@ public abstract class Operation implements Expression
 		result = prime * result + args.hashCode();
 		return result;
 	}
-
 }

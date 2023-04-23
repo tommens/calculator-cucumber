@@ -36,12 +36,115 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 2
     Then the operation evaluates to 3.5
 
+  Scenario: Modulus two integer numbers
+    Given an integer operation '%'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 2
+
+  Scenario: pgcd two integer numbers
+    Given an integer operation 'pgcd'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 1
+
+    Scenario: ppcm two integer numbers
+    Given an integer operation 'ppcm'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 35
+
+    Scenario: prime two integer numbers
+    Given an integer operation 'prime'
+    When I provide a first number 7
+    And I provide a second number 5
+    Then the operation evaluates to 1
+
+  Scenario: prime two integer numbers
+    Given an integer operation 'prime'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 0
+
+    Scenario: pow two integer numbers
+    Given an integer operation '^'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 16
+
+  Scenario: combinatorial two integer numbers
+    Given an integer operation 'comb'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 6
+
+  Scenario: eucledian two integer numbers
+    Given an integer operation 'gcd'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 2
+
+  Scenario: euclidian division two integer numbers
+    Given an integer operation '//'
+    When I provide a first number 4
+    And I provide a second number 2
+    Then the operation evaluates to 0
+
+
 
   Scenario: Adding two variables
     Given an integer operation '+'
     When I provide a first variable a containing the value 4
     And I provide a second variable b containing the value 5
     Then the operation evaluates to 9
+
+  Scenario: Printing the modulus of two integer numbers
+    Given the modulus of two numbers 8 and 6
+    Then its INFIX notation is ( 8 % 6 )
+    And its PREFIX notation is % (8, 6)
+    And its POSTFIX notation is (8, 6) %
+
+  Scenario: Printing the pgcd of two integer numbers
+    Given the pgcd of two numbers 8 and 6
+    Then its INFIX notation is ( 8 pgcd 6 )
+    And its PREFIX notation is pgcd (8, 6)
+    And its POSTFIX notation is (8, 6) pgcd
+
+    Scenario: Printing the ppcm of two integer numbers
+    Given the ppcm of two numbers 8 and 6
+    Then its INFIX notation is ( 8 ppcm 6 )
+    And its PREFIX notation is ppcm (8, 6)
+    And its POSTFIX notation is (8, 6) ppcm
+
+    Scenario: Printing the pow of two integer numbers
+    Given the pow of two numbers 8 and 6
+    Then its INFIX notation is ( 8 ^ 6 )
+    And its PREFIX notation is ^ (8, 6)
+    And its POSTFIX notation is (8, 6) ^
+
+    Scenario: Printing the prime of two integer numbers
+    Given the prime between two numbers 8 and 6
+    Then its INFIX notation is ( 8 prime 6 )
+    And its PREFIX notation is prime (8, 6)
+    And its POSTFIX notation is (8, 6) prime
+
+    Scenario: Printing the combinatorial of two integer numbers
+    Given the combinatorial of two numbers 8 and 6
+    Then its INFIX notation is ( 8 comb 6 )
+    And its PREFIX notation is comb (8, 6)
+    And its POSTFIX notation is (8, 6) comb
+
+    Scenario: Printing the eucledian of two integer numbers
+    Given the eucledian of two numbers 8 and 6
+    Then its INFIX notation is ( 8 gcd 6 )
+    And its PREFIX notation is gcd (8, 6)
+    And its POSTFIX notation is (8, 6) gcd
+
+    Scenario: Printing the euclidian division of two integer numbers
+    Given the euclidian division of two numbers 8 and 6
+    Then its INFIX notation is ( 8 // 6 )
+    And its PREFIX notation is // (8, 6)
+    And its POSTFIX notation is (8, 6) //
 
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of

@@ -12,8 +12,8 @@ import java.util.List;
  * @see Times
  * @see Plus
  */
-public final class Divides extends Operation {
-
+public final class Divides extends Operation
+{
     /**
      * Class constructor specifying a number of Expressions to divide.
      *
