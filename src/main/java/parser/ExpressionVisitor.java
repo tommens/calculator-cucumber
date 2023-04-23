@@ -124,6 +124,50 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     }
 
     @Override
+    public Expression visitModulo(ExprParser.ModuloContext ctx) {
+        try {
+            Modulo op = new Modulo(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
+        }catch (IllegalConstruction exception){
+            return  null;
+        }
+    }
+
+    @Override
+    public Expression visitPower(ExprParser.PowerContext ctx) {
+        try {
+            Power op = new Power(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
+        }catch (IllegalConstruction exception){
+            return  null;
+        }
+    }
+
+    @Override
+    public Expression visitGCD(ExprParser.GCDContext ctx) {
+        try {
+            GreatestCommonDivisor op = new GreatestCommonDivisor(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
+        }catch (IllegalConstruction exception){
+            return  null;
+        }
+    }
+
+    @Override
+    public Expression visitLCM(ExprParser.LCMContext ctx) {
+        try {
+            LeastCommonMultiple op = new LeastCommonMultiple(temp.get(temp.size()-1),tempNot);
+            setMathContext(op);
+            return op;
+        }catch (IllegalConstruction exception){
+            return  null;
+        }
+    }
+
+    @Override
     public Expression visitInteger(ExprParser.IntegerContext ctx) {
         return new MyInteger(Integer.parseInt(ctx.getText()));
     }

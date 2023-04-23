@@ -42,7 +42,7 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	T visitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatornumnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatornumnumnum}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -75,6 +75,34 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDivides(ExprParser.DividesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Modulo}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulo(ExprParser.ModuloContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Power}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPower(ExprParser.PowerContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code GCD}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGCD(ExprParser.GCDContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LCM}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLCM(ExprParser.LCMContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Integer}
 	 * labeled alternative in {@link ExprParser#num}.

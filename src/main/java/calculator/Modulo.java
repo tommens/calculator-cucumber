@@ -8,7 +8,7 @@ public class Modulo extends Operation{
         super(elist);
     }
 
-    protected Modulo(List<Expression> elist, Notation n) throws IllegalConstruction {
+    public Modulo(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
         symbol = "%";
     }

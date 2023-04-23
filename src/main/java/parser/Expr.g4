@@ -23,6 +23,10 @@ operator: ('+')     #Plus
         | ('-')     #Minus
         | ('*')     #Times
         | ('/')     #Divides
+        | ('%')     #Modulo
+        | ('^')     #Power
+        | ('gcd')   #GCD
+        | ('lcm')   #LCM
         ;
 
 num   : INT     #Integer

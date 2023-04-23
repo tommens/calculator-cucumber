@@ -59,13 +59,13 @@ public interface ExprListener extends ParseTreeListener {
 	void exitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatornumnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatornumnumnum}.
 	 * @param ctx the parse tree
 	 */
 	void enterValues(ExprParser.ValuesContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatornumnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatornumnumnum}.
 	 * @param ctx the parse tree
 	 */
 	void exitValues(ExprParser.ValuesContext ctx);
@@ -117,6 +117,54 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDivides(ExprParser.DividesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Modulo}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterModulo(ExprParser.ModuloContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Modulo}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitModulo(ExprParser.ModuloContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Power}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterPower(ExprParser.PowerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Power}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitPower(ExprParser.PowerContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code GCD}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterGCD(ExprParser.GCDContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code GCD}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitGCD(ExprParser.GCDContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LCM}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterLCM(ExprParser.LCMContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LCM}
+	 * labeled alternative in {@link ExprParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitLCM(ExprParser.LCMContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Integer}
 	 * labeled alternative in {@link ExprParser#num}.

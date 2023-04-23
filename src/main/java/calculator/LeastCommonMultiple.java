@@ -8,7 +8,7 @@ public class LeastCommonMultiple extends Operation{
         super(elist);
     }
 
-    protected LeastCommonMultiple(List<Expression> elist, Notation n) throws IllegalConstruction {
+    public LeastCommonMultiple(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
         symbol="LCM";
     }

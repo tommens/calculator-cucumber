@@ -44,7 +44,7 @@ public class CalculatorSteps {
 				case "GCD"	->	op = new GreatestCommonDivisor(params);
 				case "LCM"	->	op = new LeastCommonMultiple(params);
 				case "%"	->	op = new Modulo(params);
-				case "**"	->	op = new Power(params);
+				case "^"	->	op = new Power(params);
 				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {

@@ -8,9 +8,9 @@ public class Power extends Operation{
         super(elist);
     }
 
-    protected Power(List<Expression> elist, Notation n) throws IllegalConstruction {
+    public Power(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
-        symbol = "**";
+        symbol = "^";
     }
 
     @Override
