@@ -34,8 +34,6 @@ public class Main {
 
 	  Memory log = new Memory();
 	  log.loadLog();
-	  //log.clearMemory();
-	  //log.add("test",new MyNumber(new BigDecimal(5.5)),null);
 	  System.out.println(log.getMemory());
 
 

@@ -8,9 +8,6 @@ import java.util.List;
 /**
  * Class to implement : combinatorial
  * @author Randi-Dcht
- * @param : elist The list of expressions passed as argument to the arithmetic operation
- * @param : notation The notation used to display the operation
- * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
  */
 public class Combinatorial extends Operation
 {
@@ -74,13 +71,4 @@ public class Combinatorial extends Operation
         }
         return Math.floorDiv(numerator, denominator);
     }
-
-
-    /**
-     * Abstract method representing the actual binary arithmetic operation to compute
-     * @param l first argument of the binary operation
-     * @param r second argument of the binary operation
-     * @return result of computing the binary operation
-     */
-
 }

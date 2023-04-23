@@ -56,11 +56,4 @@ public class Calculator {
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }
-
-    /*
-     We could also have other methods, e.g. to verify whether an expression is syntactically correct
-     public Boolean validate(Expression e)
-     or to simplify some expression
-     public Expression simplify(Expression e)
-    */
 }

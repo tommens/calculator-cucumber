@@ -9,9 +9,6 @@ import java.util.List;
 /**
  * Class to implement : Ppcm
  * @author Randi-Dcht
- * @param : elist The list of expressions passed as argument to the arithmetic operation
- * @param : notation The notation used to display the operation
- * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
  */
 public class Ppcm extends Operation
 {
