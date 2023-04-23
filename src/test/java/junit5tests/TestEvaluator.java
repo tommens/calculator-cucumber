@@ -41,11 +41,11 @@ class TestEvaluator {
         double im1 = imaginary1.doubleValue();
         double im2 = imaginary2.doubleValue();
 
-        times = new MyNumber(new BigDecimal((val1*val2)-(im1*im2)),new BigDecimal((val1*im2)+(val2*im1)));
+        times = new MyNumber(BigDecimal.valueOf((val1 * val2) - (im1 * im2)), BigDecimal.valueOf((val1 * im2) + (val2 * im1)));
 
-        modulus = new BigDecimal(Math.sqrt((val1 * val1) + (im1 * im1)));
+        modulus = BigDecimal.valueOf(Math.sqrt((val1 * val1) + (im1 * im1)));
 
-        sqrt = new MyNumber(new BigDecimal(Math.sqrt((modulus.doubleValue() + val1)/2)),new BigDecimal(Math.sqrt((modulus.doubleValue()-val1)/2)));
+        sqrt = new MyNumber(BigDecimal.valueOf(Math.sqrt((modulus.doubleValue() + val1) / 2)), BigDecimal.valueOf(Math.sqrt((modulus.doubleValue() - val1) / 2)));
 
         double den = (val2*val2)+(im2*im2);
         double numR = (val1*val2)+(im1*im2);

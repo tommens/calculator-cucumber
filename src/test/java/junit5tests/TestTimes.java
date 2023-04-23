@@ -14,7 +14,7 @@ import java.util.List;
 class TestTimes {
 
 	private final BigDecimal value1 = new BigDecimal(8);
-	private final BigDecimal value3 = new BigDecimal(5.5);
+	private final BigDecimal value3 = new BigDecimal("5.5");
 	private Times op;
 	private List<Expression> params;
 

@@ -14,7 +14,7 @@ import java.util.List;
 class TestPlus {
 
 	private final BigDecimal value1 = new BigDecimal(8);
-	private final BigDecimal value2 = new BigDecimal(6.5);
+	private final BigDecimal value2 = new BigDecimal("6.5");
 	private Plus op;
 	private List<Expression> params;
 
