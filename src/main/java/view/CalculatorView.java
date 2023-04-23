@@ -48,7 +48,7 @@ public class CalculatorView extends VBox {
     public IntNumbersVBox getIntNumbersVBox(){
         IntNumbersVBox intNumbersVBox = IntNumbersVBox.getInstance();
 
-        System.out.println(intNumbersVBox.getMaxWidthNbButtons()/totalWidthRequired);
+        //System.out.println(intNumbersVBox.getMaxWidthNbButtons()/totalWidthRequired);
         calculatorParts.add(intNumbersVBox);
         setTotalHeightRequired(intNumbersVBox.getMaxHeightNbButtons());
         setTotalWidthRequired(intNumbersVBox.getMaxWidthNbButtons());

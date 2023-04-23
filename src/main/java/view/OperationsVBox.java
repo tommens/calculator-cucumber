@@ -16,7 +16,8 @@ public class OperationsVBox extends CalculatorPart {
     private static OperationsVBox instance;
 
     private OperationsVBox(){
-        getChildren().addAll(getGeneralHBox(new ArrayList<>(Arrays.asList("+", "-"))),
+        getChildren().addAll(getGeneralHBox(new ArrayList<>(Arrays.asList("(", ")"))),
+                getGeneralHBox(new ArrayList<>(Arrays.asList("+", "-"))),
                 getGeneralHBox(new ArrayList<>(Arrays.asList("*", "/"))),
                 getGeneralHBox(new ArrayList<>(Arrays.asList("%", "."))),
                 getLastHBox());
@@ -46,8 +47,7 @@ public class OperationsVBox extends CalculatorPart {
         Button resultButton = new Button("=");
         resultButton.setVisible(true);
         resultButton.setOnAction(actionEvent -> {
-            System.out.println("Evaluating");
-            /* call the evaluation function */
+
         });
         resultButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
         resultButton.prefHeightProperty().bind(hbox.heightProperty());
