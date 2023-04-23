@@ -336,9 +336,27 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
+	@When("I provide a first complex number with parameters {double} and {double}")
+	public void iProvideAFirstComplexNumberWith(double real, double imag) {
+		params = new ArrayList<>();
+		params.add(new MyNumber(new BigDecimal(real),new BigDecimal(imag)));
+		op.addMoreParams(params);
+	}
+
+	@When("I provide a second complex number with parameters {double} and {double}")
+	public void iProvideASecondComplexNumberWith(double real, double imag) {
+		params = new ArrayList<>();
+		params.add(new MyNumber(new BigDecimal(real),new BigDecimal(imag)));
+		op.addMoreParams(params);
+	}
+
 	@Then("the operation evaluates to the number with parameters {string} and {int}")
 	public void theOperationEvaluatesToTheNumberWithParametersAnd(String arg0, int arg1) {
 		assertEquals(new MyNumber(new BigDecimal(arg0),arg1), c.eval(op));
+	}
+	@Then("the operation evaluates to the complex number with parameters {double} and {double}")
+	public void theOperationEvaluatesToTheComplexNumber(double real, double imag) {
+		assertEquals(new MyNumber(new BigDecimal(real),new BigDecimal(imag)), c.eval(op));
 	}
 	@Then("^the calculator memory contains a variable (.*) with value (\\d+)$")
 	public void theCalculatorContainsAVariableXWithValue(String name, int val) {

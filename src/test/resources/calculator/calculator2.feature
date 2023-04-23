@@ -42,6 +42,20 @@ Feature: Integer Arithmetic Expressions
       | '/' | 1   | 2    | 1   | 3     | "1"   | -1   |
       | '/' | 1   | 4    | 1   | 3     | "1"   | 1    |
 
+  Scenario Outline: Operations with complex numbers
+    Given an integer operation <s>
+    When I provide a first complex number with parameters <r1> and <i1>
+    And I provide a second complex number with parameters <r2> and <i2>
+    Then the operation evaluates to the complex number with parameters <r> and <i>
+    Examples:
+      | s         | r1  | i1 | r2  | i2 | r   | i   |
+      | '+'       | 1   | 2  | 1   | 3  | 2   | 5   |
+      | '-'       | 1   | 4  | 1   | 3  | 0   | 1   |
+      | '*'       | 5   | 2  | 5   | -2 | 29  | 0   |
+      | '/'       | 8   | 3  | 2   | -1 | 2.6 | 2.8 |
+      | 'sqrt'    | 3   | 4  | 1   | 3  | 2   | 1   |
+      | 'modulus' | 0   | 16 | 1   | 3  | 16  | 0   |
+
   Scenario Outline: Equality of 2 numbers with exp
     Given two number with parameters <arg0> and <arg1> and <arg2> and <arg3>
     Examples:
