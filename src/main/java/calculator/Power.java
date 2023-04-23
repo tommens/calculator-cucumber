@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Power extends Operation{
@@ -12,15 +13,18 @@ public class Power extends Operation{
         symbol = "**";
     }
 
-    public static int power(int a, int b){
-        int res =1;
-        for (int i = 0; i< b; i++) {
-            res *= a;
-        }
-        return res;
-    }
     @Override
     public int op(int l, int r) {
-        return power(l,r);
+        return (int) Utils.pow(l,r);
+    }
+
+    @Override
+    public BigDecimal op(BigDecimal l, BigDecimal r) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+        throw new UnsupportedOperationException();
     }
 }

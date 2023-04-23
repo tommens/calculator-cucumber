@@ -13,8 +13,10 @@ Feature: Integer Arithmetic Expressions
   # implemented in a Java mapping file (CalculatorSteps.Java)
 
 
-  Scenario Outline: Evaluating operations with two integer parameters
-    Given an integer operation '<op>'
+
+
+  Scenario Outline: Writing the different operations in the different notations
+    Given an operation <op>
     When I provide a first number <n1>
     And I provide a second number <n2>
     Then its INFIX notation is ( <n1> <op> <n2> )

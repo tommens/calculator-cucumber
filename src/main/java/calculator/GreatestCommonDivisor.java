@@ -1,9 +1,7 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.math.BigInteger;
-
-import static calculator.Utils.computeGCD;
 
 public class GreatestCommonDivisor extends Operation{
     public GreatestCommonDivisor(List<Expression> elist) throws IllegalConstruction {
@@ -18,6 +16,16 @@ public class GreatestCommonDivisor extends Operation{
 
     @Override
     public int op(int l, int r) {
-        return computeGCD(l,r);
+        return Math.toIntExact(Utils.gcd((long) l, (long) r));
+    }
+
+    @Override
+    public BigDecimal op(BigDecimal l, BigDecimal r) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+        throw new UnsupportedOperationException();
     }
 }

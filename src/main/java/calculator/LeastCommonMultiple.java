@@ -1,5 +1,6 @@
 package calculator;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class LeastCommonMultiple extends Operation{
@@ -14,6 +15,16 @@ public class LeastCommonMultiple extends Operation{
 
     @Override
     public int op(int l, int r) {
-        return (l * r)/Utils.computeGCD(l,r);
+        return (int) ((l * r)/Utils.gcd((long) l, (long) r));
+    }
+
+    @Override
+    public BigDecimal op(BigDecimal l, BigDecimal r) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+        throw new UnsupportedOperationException();
     }
 }
