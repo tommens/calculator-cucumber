@@ -8,9 +8,6 @@ import java.util.List;
 /**
  * Class to implement : modulo
  * @author Randi-Dcht
- * @param : elist The list of expressions passed as argument to the arithmetic operation
- * @param : notation The notation used to display the operation
- * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
  */
 public class Modulo extends Operation
 {
@@ -57,13 +54,4 @@ public class Modulo extends Operation
         int x = l.getInteger() % r.getInteger();
         return new MyNumber(x);
     }
-
-
-    /**
-     * Abstract method representing the actual binary arithmetic operation to compute
-     * @param l first argument of the binary operation
-     * @param r second argument of the binary operation
-     * @return result of computing the binary operation
-     *               if r == 0, return -1
-     */
 }

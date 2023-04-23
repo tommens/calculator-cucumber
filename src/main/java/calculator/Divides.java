@@ -55,11 +55,6 @@ public final class Divides extends Operation
      * @param r The second BigDecimal number that should divide the first
      * @return The BigDecimal number that is the result of the division
      */
-
-      /*public Double op(int l, int r) {
-      Double res = (double) l / (double) r;
-      return res; }
-      */
     public MyNumber op(MyNumber l, MyNumber r) {
         BigDecimal new_val;
         int exp;

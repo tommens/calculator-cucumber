@@ -46,12 +46,4 @@ public class Pow extends Operation
             return new MyNumber(-1);
         return new  MyNumber((int) Math.pow(l.getInteger(), r.getInteger()));
     }
-
-
-    /**
-     * Abstract method representing the actual binary arithmetic operation to compute
-     * @param l first argument of the binary operation
-     * @param r second argument of the binary operation
-     * @return result of computing the binary operation
-     */
 }
