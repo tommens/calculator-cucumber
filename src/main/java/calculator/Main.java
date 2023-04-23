@@ -1,9 +1,10 @@
 package calculator;
 
+import view.MainApplication;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import converter.*;
 
 /**
  * A very simple calculator in Java
@@ -22,53 +23,47 @@ public class Main {
 	 * @param args	Command-line parameters are not used in this version
 	 */
 	public static void main(String[] args) {
+		MainApplication.main(args);
 
-  	Expression e;
-  	Calculator c = new Calculator();
 
-	try{
 
-		e = new MyNumber(8);
-		c.print(e);
-		c.eval(e);
+		Expression e;
+		Calculator c = new Calculator();
 
-	    List<Expression> params = new ArrayList<>();
-	    Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-	    e = new Plus(params,Notation.PREFIX);
-		c.printExpressionDetails(e);
-		c.eval(e);
-	
-		List<Expression> params2 = new ArrayList<>();
-		Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-		e = new Minus(params2, Notation.INFIX);
-		c.print(e);
-		c.eval(e);
+		try{
 
-		List<Expression> params3 = new ArrayList<>();
-		Collections.addAll(params3, new Plus(params), new Minus(params2));
-		e = new Times(params3);
-		c.printExpressionDetails(e);
-		c.eval(e);
+			e = new MyNumber(8);
+			c.print(e);
+			c.eval(e);
 
-		List<Expression> params4 = new ArrayList<>();
-		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
-		e = new Divides(params4,Notation.POSTFIX);
-		c.print(e);
-		c.eval(e);
+			List<Expression> params = new ArrayList<>();
+			Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
+			e = new Plus(params,Notation.PREFIX);
+			c.printExpressionDetails(e);
+			c.eval(e);
 
-		//conversions
-		Length.printConversion(96.7,"mm","yd");
-		Area.printConversion(21,"cm2","dam2");
-		Currency.printConversion(87.1,"CHF","€");
-		Power.printConversion(23.24,"PW","kW");
-		Energy.printConversion(2.54,"kWh","cal");
-		Pressure.printConversion(23,"atm","kPa");
-		Time.printConversion(6,"wk","ms");
-	}
+			List<Expression> params2 = new ArrayList<>();
+			Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
+			e = new Minus(params2, Notation.INFIX);
+			c.print(e);
+			c.eval(e);
 
-	catch(IllegalConstruction exception) {
-		System.out.println("cannot create operations without parameters");
+			List<Expression> params3 = new ArrayList<>();
+			Collections.addAll(params3, new Plus(params), new Minus(params2));
+			e = new Times(params3);
+			c.printExpressionDetails(e);
+			c.eval(e);
+
+			List<Expression> params4 = new ArrayList<>();
+			Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
+			e = new Divides(params4,Notation.POSTFIX);
+			c.print(e);
+			c.eval(e);
 		}
- 	}
+
+		catch(IllegalConstruction exception) {
+			System.out.println("cannot create operations without parameters");
+		}
+	}
 
 }
