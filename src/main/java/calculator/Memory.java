@@ -84,7 +84,7 @@ public class Memory {
      */
     public void add(String name, MyNumber number, Expression expression){
         if (this.memory.size() == maxSize) {
-            throw new RuntimeException("Memory is full");
+            throw new OutOfMemoryError("Memory is full");
         }
         // check if the variable already exists
         for(int i = 0; i < memory.size(); i++){
@@ -104,7 +104,7 @@ public class Memory {
      */
     public void add(MyNumber number, Expression expression){
         if (memory.size() == maxSize) {
-            throw new RuntimeException("Memory is full");
+            throw new OutOfMemoryError("Memory is full");
         }
         String uniqueID = UUID.randomUUID().toString();
         this.getMemory().add(new Variable(uniqueID, number, expression));
@@ -121,8 +121,10 @@ public class Memory {
                 return r;
             }
         }
-        throw new RuntimeException("Variable does not exist");
+        throw new IllegalArgumentException("Variable does not exist");
     }
+
+
 
     /**
      * Remove a variable from the memory
@@ -135,7 +137,7 @@ public class Memory {
                 return;
             }
         }
-        throw new RuntimeException("Variable does not exist");
+        throw new IllegalArgumentException("Variable does not exist");
     }
 
     /**
@@ -156,7 +158,7 @@ public class Memory {
             return;
         }
         if (maxSize < memory.size()) {
-            throw new RuntimeException("submitted maxSize is too small than the number of variables present in the memory");
+            throw new IllegalArgumentException("submitted maxSize is too small than the number of variables present in the memory");
         }
         this.maxSize = maxSize;
     }
@@ -164,7 +166,7 @@ public class Memory {
     /**
      * Clear the memory
      */
-    public void clearMemory(){
+    public void clear(){
         memory.clear();
     }
 
@@ -227,23 +229,8 @@ public class Memory {
      * convert a string expression to an object expression
      */
     public Expression analyzeString(String expressionString) {
-        List<Expression> expressions = new ArrayList<>();
         // TODO : upgrade this part to handle recursive expressions
-        String operator = null;
-        Notation notation = checkNotation(expressionString);
-        for (int i = 0; i < expressionString.length(); i++) {
-            if (isNumber(String.valueOf(expressionString.charAt(i)))) {
-                expressions.add(new MyNumber(new BigDecimal(expressionString.charAt(i))));
-            }
-            if (isOperator(String.valueOf(expressionString.charAt(i)))) {
-                operator = String.valueOf(expressionString.charAt(i));
-            }
-        }
-        if (operator == null) {
-            return new MyNumber(new BigDecimal(expressionString));
-        } else {
-            return getOperator(operator, expressions, notation);
-        }
+        return null;
     }
 
     /**
@@ -263,16 +250,6 @@ public class Memory {
             }
         } catch (Exception e) {
             System.out.println("Error reading log or memory file");
-        }
-    }
-
-    private Notation checkNotation(String expression) {
-        if (isOperator(String.valueOf(expression.charAt(0)))) {
-            return Notation.PREFIX;
-        } else if (isOperator(String.valueOf(expression.charAt(expression.length() - 1)))) {
-            return Notation.POSTFIX;
-        } else {
-            return Notation.INFIX;
         }
     }
 

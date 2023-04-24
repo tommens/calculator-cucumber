@@ -22,6 +22,10 @@ public class InputUser
     protected static String listNumbers = "0123456789";
     //protected static String listRealNumbers = "0123456789.";
 
+    protected static Memory memory;
+    protected static Memory log;
+    protected static String name;
+
 
     /**
      * Method to clean the input of user (remove space)
@@ -206,10 +210,32 @@ public class InputUser
         if (operator != null)
         {
             Expression e = getOperator(operator, list_of_expression, this.notation);
+            MyNumber eval = new Calculator().eval(e);
             if (isVerbose)
                 System.out.println("$> " + e.toString());
-            return new Calculator().eval(e);
+
+            log.add(eval, e);
+            if (name != null)
+                try {
+                    memory.add(name, eval,e);
+                } catch (OutOfMemoryError ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            return eval;
         }
         return new MyNumber(new BigDecimal(0),0);
+    }
+
+    public void setLog(Memory log) {
+        InputUser.log = log;
+    }
+
+    public void setMemory(Memory memory) {
+        InputUser.memory = memory;
+    }
+
+    public void setName(String name) {
+        InputUser.name = name;
     }
 }

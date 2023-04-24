@@ -35,7 +35,7 @@ class MemoryTest {
         for (int i = 0; i < 98; i++) {
             m.add("a", new MyNumber(new BigDecimal(9)), e2);
         }
-        assertThrows(RuntimeException.class, () -> m.add("a", new MyNumber(new BigDecimal(9)), e2));
+        assertThrows(OutOfMemoryError.class, () -> m.add("a", new MyNumber(new BigDecimal(9)), e2));
     }
 
     @Test
@@ -47,7 +47,7 @@ class MemoryTest {
         m.add("a", new MyNumber(new BigDecimal(12)), e);
         m.remove("a");
         assert m.getMemory().isEmpty();
-        assertThrows(RuntimeException.class, () -> m.remove("a"));
+        assertThrows(IllegalArgumentException.class, () -> m.remove("a"));
     }
 
     @Test
@@ -57,7 +57,7 @@ class MemoryTest {
         Collections.addAll(params, new MyNumber(new BigDecimal(3)), new MyNumber(new BigDecimal(4)), new MyNumber(new BigDecimal(5)));
         Expression e = new Plus(params,Notation.PREFIX);
         m.add("a", new MyNumber(new BigDecimal(12)), e);
-        m.clearMemory();
+        m.clear();
         assert m.getMemory().isEmpty();
     }
 
@@ -70,6 +70,6 @@ class MemoryTest {
         for(int i = 0; i < 100; i++) {
             m.add("a", new MyNumber(new BigDecimal(12)), e);
         }
-        assertThrows(RuntimeException.class, () -> m.setMaxSize(50));
+        assertThrows(IllegalArgumentException.class, () -> m.setMaxSize(50));
     }
 }

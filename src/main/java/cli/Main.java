@@ -1,6 +1,8 @@
 package cli;
 
+import calculator.Memory;
 import calculator.Notation;
+import calculator.Variable;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +18,9 @@ public class Main
     private static Notation notation = Notation.INFIX;
     /**is Verbose mode (print list of expression)*/
     private static boolean verbose = false;
+
+    private static Memory memory = new Memory();
+    private static Memory log = new Memory();
 
 
     /**
@@ -67,11 +72,75 @@ public class Main
                 verbose = InputUser.isABoolean(listInput.get(1));
             else if (listInput.get(0).equals(".help"))
                 printHelp();
-            else if (listInput.get(0).equals(".log"))
-                System.out.println("$> Displaying the log of the last 10 operations: ");
-
-            else
+            else if (listInput.get(0).equals(".log")) {
+                if (listInput.size() == 1) {
+                    System.out.println("$> Displaying all log");
+                    log.display();
+                } else {
+                    System.out.println("$> Displaying last " + listInput.get(1) + " data");
+                    log.displayLastData(Integer.parseInt(listInput.get(1)));
+                }
+            }
+            else if (listInput.get(0).equals(".memory")) {
+                if (listInput.size() == 1) {
+                    System.out.println("$> Displaying all memory");
+                    memory.display();
+                } else {
+                    System.out.println("$> Displaying last " + listInput.get(1) + " data");
+                    memory.displayLastData(Integer.parseInt(listInput.get(1)));
+                }
+            }
+            else if (listInput.get(0).equals(".remove") && listInput.size() == 2) {
+                try {
+                    memory.remove(listInput.get(1));
+                    System.out.println("$> Removing variable: "+ listInput.get(1));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("$> " + e.getMessage());
+                }
+            }
+            else if (listInput.get(0).equals(".clear"))
             {
+                System.out.println("$> Clearing all variables");
+                memory.clear();
+            }
+            else if (listInput.get(0).equals(".rename") && listInput.size() == 4)
+                try {
+                    if (listInput.get(1).equals("memory")) {
+                        Variable variable = memory.get(listInput.get(2));
+                        variable.setName(listInput.get(3));
+                        System.out.println("$> Renaming variable: " + listInput.get(2) + " to " + listInput.get(3));
+                    } else if (listInput.get(1).equals("log")) {
+                        Variable variable = log.get(listInput.get(2));
+                        variable.setName(listInput.get(3));
+                        System.out.println("$> Renaming variable: " + listInput.get(2) + " to " + listInput.get(3));
+                    } else {
+                        System.out.println("$> please enter valid syntax");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("$> " + e.getMessage());
+                }
+            else if (listInput.get(0).equals(".set_size") && listInput.size() == 2) {
+                try {
+                    memory.setMaxSize(Integer.parseInt(listInput.get(1)));
+                    System.out.println("$> Setting new size of memory: " + listInput.get(1));
+                } catch (IllegalArgumentException e) {
+                    System.out.println("$> " + e.getMessage());
+                }
+            }
+            else if (listInput.get(0).equals(".size")) {
+                if (memory.getMaxSize() == -1)
+                    System.out.println("$> displaying maximum size of memory: unlimited");
+                else
+                    System.out.println("$> displaying maximum size of memory: " + memory.getMaxSize());
+
+            } else {
+                if (listInput.get(0).equals(".store")) {
+                    System.out.println("$> Adding new variable: "+ listInput.get(1));
+                    inputUser_instance.setMemory(memory);
+                    inputUser_instance.setName(listInput.get(1));
+                    listInput = listInput.subList(2, listInput.size());
+                }
+                inputUser_instance.setLog(log);
                 inputUser_instance.setUserInput(listInput);
                 System.out.println("$> " + inputUser_instance.compute(verbose));
             }
@@ -88,10 +157,14 @@ public class Main
     {
         System.out.print("$> Calculator Cucumber\n This is a calculator that can be used to perform basic arithmetic operations.\n");
         printMenu();
+        memory.loadMemory();
+        log.loadLog();
         while(isRunning)
         {
             get_input();
         }
+        memory.saveMemory();
+        log.saveLog();
         System.out.println("$> Bye bye !");
     }
 }
