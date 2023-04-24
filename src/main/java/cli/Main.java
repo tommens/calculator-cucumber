@@ -29,8 +29,8 @@ public class Main
     public static void printHelp()
     {
         System.out.println("=== HELP START===");
-        System.out.println("$> Quit program : .quit");
-        System.out.println("$> Verbose mode : .verbose <true|false> ");
+        System.out.println("$> Quit program : '.quit'");
+        System.out.println("$> Verbose mode : '.verbose <true|false>' ");
         printMenu();
         System.out.println("=== HELP END===\n");
     }
@@ -41,9 +41,15 @@ public class Main
      */
     public static void printMenu()
     {
-        System.out.println("$> Please enter an expression to evaluate or .quit to exit ");
-        System.out.println("$> To change the notation, use the command .mode <mode> where <mode> is normal, complex, XX "); //TODO : complete here
-        System.out.println("$> To change the notation, use the command .notation <notation> where <notation> is infix, prefix, postfix ");
+        System.out.println("$> Please enter an expression to evaluate or '.quit' to exit ");
+        System.out.println("$> To change the notation, use the command '.mode <mode>' where <mode> is normal, complex, XX "); //TODO : complete here
+        System.out.println("$> To change the notation, use the command '.notation <notation>' where <notation> is infix, prefix, postfix ");
+        System.out.println("$> To display the memory, use the command '.memory' ");
+        System.out.println("$> To display the log, use the command '.log' or 'log <number>' where number is the last lines of data in the memory ");
+        System.out.println("$> To store a variable in the memory, use the command '.store <variable name> <expression>' ");
+        System.out.println("$> To remove a variable in the memory, use the command '.remove <variable name>' ");
+        System.out.println("$> To change the name of a variable, use the command '.rename <type> <variable name> <new variable name>' where type is memory or log ");
+        System.out.println("$> To clear the memory, use the command '.clear' where type is memory or log ");
     }
 
 
@@ -90,7 +96,10 @@ public class Main
                     memory.displayLastData(Integer.parseInt(listInput.get(1)));
                 }
             }
-            else if (listInput.get(0).equals(".remove") && listInput.size() == 2) {
+            else if (listInput.get(0).equals(".remove")) {
+                if (listInput.size() != 2) {
+                    System.out.println("$> please enter valid syntax");
+                }
                 try {
                     memory.remove(listInput.get(1));
                     System.out.println("$> Removing variable: "+ listInput.get(1));
@@ -100,11 +109,23 @@ public class Main
             }
             else if (listInput.get(0).equals(".clear"))
             {
-                System.out.println("$> Clearing all variables");
-                memory.clear();
-            }
-            else if (listInput.get(0).equals(".rename") && listInput.size() == 4)
+                if (listInput.size() != 2) {
+                    System.out.println("$> please enter valid syntax");
+                }
+                if (listInput.get(1).equals("memory")) {
+                    System.out.println("$> Clearing all variables in memory");
+                    memory.clear();
+                } else if (listInput.get(1).equals("log")) {
+                    System.out.println("$> Clearing all variables in log");
+                    log.clear();
+                } else {
+                    System.out.println("$> please enter valid syntax");
+                }
+            } else if (listInput.get(0).equals(".rename"))
                 try {
+                    if (listInput.size() != 4) {
+                        System.out.println("$> please enter valid syntax");
+                    }
                     if (listInput.get(1).equals("memory")) {
                         Variable variable = memory.get(listInput.get(2));
                         variable.setName(listInput.get(3));
@@ -119,7 +140,10 @@ public class Main
                 } catch (IllegalArgumentException e) {
                     System.out.println("$> " + e.getMessage());
                 }
-            else if (listInput.get(0).equals(".set_size") && listInput.size() == 2) {
+            else if (listInput.get(0).equals(".set_size")) {
+                if (listInput.size() != 2) {
+                    System.out.println("$> please enter valid syntax");
+                }
                 try {
                     memory.setMaxSize(Integer.parseInt(listInput.get(1)));
                     System.out.println("$> Setting new size of memory: " + listInput.get(1));

@@ -216,7 +216,7 @@ public class Memory {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Variable r : memory) {
-                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getName() + " %%% " + r.getValue() + " %%% " + r.getExpression());
+                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getName() + " %%% " + r.getValue().toString() + " %%% " + r.getExpression());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
