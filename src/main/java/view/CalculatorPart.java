@@ -51,12 +51,14 @@ public abstract class CalculatorPart extends VBox {
      * @param elements The list of the buttons' text.
      * @return The HBox containing the buttons.
      */
-    Node getGeneralHBox(ArrayList<String> elements) {
+    HBox getGeneralHBox(ArrayList<String> elements, String styleClass) {
         setMaxHeightNbButtons();
         setMaxWidthNbButtons(elements.size());
         HBox hbox = new HBox();
         elements.forEach((element) -> {
+
             Button button = new Button(element);
+            button.getStyleClass().add(styleClass);
             button.setOnAction(actionEvent -> ExpressionLabel.getInstance().updateText(button.getText()));
 
             //bind the size of the button to the size of the hbox

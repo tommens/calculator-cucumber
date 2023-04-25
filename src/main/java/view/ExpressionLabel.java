@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 public class ExpressionLabel extends Label {
 
     private static ExpressionLabel instance;
+
     private ExpressionLabel(){
         getStyleClass().add("expression-label");
     }
@@ -23,4 +24,9 @@ public class ExpressionLabel extends Label {
         setText(getText() + toAdd);
     }
 
+    public void shortenText(int nbCharToRemove) {
+        if(getText().length() > 0)
+            setText(getText().substring(0, getText().length() - nbCharToRemove));
+    }
 }
+
