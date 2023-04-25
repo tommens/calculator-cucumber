@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class CalculatorView extends VBox {
     private static CalculatorView instance;
-    private Label display;
 
     private List<CalculatorPart> calculatorParts;
 
@@ -20,16 +19,14 @@ public class CalculatorView extends VBox {
 
     private CalculatorView(){
         calculatorParts = new ArrayList<>();
-        VBox vbox = new VBox();
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(getIntNumbersVBox(), getOperationsVBox());
+        HBox buttonsHbox = new HBox();
+        buttonsHbox.getChildren().addAll(getIntNumbersVBox(), getOperationsVBox());
 
 
 
-        vbox.getChildren().addAll(getDisplay(),hbox);
+        getChildren().addAll(ExpressionLabel.getInstance(), ResultLabel.getInstance(), buttonsHbox);
 
         bindHeightAndWidth();
-        getChildren().add(vbox);
     }
 
     /**
@@ -45,14 +42,14 @@ public class CalculatorView extends VBox {
      * This method get a Unique instance of the IntNumbersVBox part and update the total height and width required by the calculator.
      * @return The unique instance of the IntNumbersVBox.
      */
-    public IntNumbersVBox getIntNumbersVBox(){
-        IntNumbersVBox intNumbersVBox = IntNumbersVBox.getInstance();
+    public LeftVBox getIntNumbersVBox(){
+        LeftVBox leftVBox = LeftVBox.getInstance();
 
-        System.out.println(intNumbersVBox.getMaxWidthNbButtons()/totalWidthRequired);
-        calculatorParts.add(intNumbersVBox);
-        setTotalHeightRequired(intNumbersVBox.getMaxHeightNbButtons());
-        setTotalWidthRequired(intNumbersVBox.getMaxWidthNbButtons());
-        return intNumbersVBox;
+        //System.out.println(intNumbersVBox.getMaxWidthNbButtons()/totalWidthRequired);
+        calculatorParts.add(leftVBox);
+        setTotalHeightRequired(leftVBox.getMaxHeightNbButtons());
+        setTotalWidthRequired(leftVBox.getMaxWidthNbButtons());
+        return leftVBox;
     }
 
     /**
@@ -69,40 +66,14 @@ public class CalculatorView extends VBox {
     }
 
 
-    /**
-     * This method get a Unique instance of the Display (Label) part.
-     * @return The unique instance of the Display.
-     */
-    public Label getDisplay(){
-        if(display==null) {
-            display = new Label("");
-            display.setVisible(true);
-            display.prefWidthProperty().bind(widthProperty());
-        }
-        return display;
-    }
-
-    /**
-     * This method is used to modify the display of the calculator.
-     * @param stringToAdd The string to add to the display.
-     */
-    public void setDisplay(String stringToAdd){
-        getDisplay().setText(getDisplay().getText()+stringToAdd);
-    }
-
-    /**
-     * This method is used to clear the display of the calculator.
-     */
-    public void clearDisplay(){
-        getDisplay().setText("");
-    }
 
     /**
      * This method is used to set the font size of the calculator.
      * @param fontSize The font size to set.
      */
     public void setFontSize(double fontSize){
-        getDisplay().setStyle("-fx-font-size: "+fontSize/8+"px;");
+        ExpressionLabel.getInstance().setStyle("-fx-font-size: "+fontSize/8+"px;");
+        ResultLabel.getInstance().setStyle("-fx-font-size: "+fontSize/8+"px;");
         getIntNumbersVBox().setFontSize(fontSize/20);
         getOperationsVBox().setFontSize(fontSize/20);
 
@@ -132,8 +103,12 @@ public class CalculatorView extends VBox {
             calculatorPart.prefWidthProperty().bind(widthProperty().multiply(calculatorPart.getMaxWidthNbButtons()/totalWidthRequired));
             calculatorPart.prefHeightProperty().bind(heightProperty().multiply(calculatorPart.getMaxHeightNbButtons()/totalHeightRequired));
         });
-        getDisplay().setVisible(true);
-        getDisplay().prefHeightProperty().bind(heightProperty().multiply(1/totalHeightRequired));
+        ExpressionLabel.getInstance().prefWidthProperty().bind(widthProperty());
+        ExpressionLabel.getInstance().prefHeightProperty().bind(heightProperty().multiply(1/totalHeightRequired));
+
+        ResultLabel.getInstance().prefHeightProperty().bind(heightProperty().multiply(1/totalHeightRequired));
+        ResultLabel.getInstance().prefWidthProperty().bind(widthProperty());
+
     }
 
 }

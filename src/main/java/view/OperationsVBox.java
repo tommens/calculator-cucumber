@@ -1,5 +1,6 @@
 package view;
 
+import calculator.Calculator;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -16,7 +17,8 @@ public class OperationsVBox extends CalculatorPart {
     private static OperationsVBox instance;
 
     private OperationsVBox(){
-        getChildren().addAll(getGeneralHBox(new ArrayList<>(Arrays.asList("+", "-"))),
+        getChildren().addAll(getGeneralHBox(new ArrayList<>(Arrays.asList("(", ")"))),
+                getGeneralHBox(new ArrayList<>(Arrays.asList("+", "-"))),
                 getGeneralHBox(new ArrayList<>(Arrays.asList("*", "/"))),
                 getGeneralHBox(new ArrayList<>(Arrays.asList("%", "."))),
                 getLastHBox());
@@ -27,7 +29,7 @@ public class OperationsVBox extends CalculatorPart {
      * @return The HBox containing the buttons.
      */
     private Node getLastHBox() {
-        int nbButtons = 2;
+        int nbButtons = 3;
 
         setMaxHeightNbButtons();
         setMaxWidthNbButtons(nbButtons);
@@ -36,23 +38,31 @@ public class OperationsVBox extends CalculatorPart {
 
         // Button to create a rational number
         Button fracButton = new Button("X/Y");
-        fracButton.setOnAction(actionEvent -> modifyDisplay(fracButton, "_"));
-        fracButton.setVisible(true);
+        fracButton.setOnAction(actionEvent -> ExpressionLabel.getInstance().updateText("_"));
         fracButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
         fracButton.prefHeightProperty().bind(hbox.heightProperty());
         fracButton.setTooltip(new Tooltip("Use this button to create a rational number. Enter the nominator, press this button and enter the denominator."));
 
         // Button to evaluate the expression
         Button resultButton = new Button("=");
-        resultButton.setVisible(true);
         resultButton.setOnAction(actionEvent -> {
-            System.out.println("Evaluating");
-            /* call the evaluation function */
+            Calculator calculator= new Calculator();
+            int x = calculator.eval(calculator.read(ExpressionLabel.getInstance().getText()));
+            ResultLabel.getInstance().setText(String.valueOf(x));
         });
         resultButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
         resultButton.prefHeightProperty().bind(hbox.heightProperty());
 
-        hbox.getChildren().addAll(fracButton, resultButton);
+        Button clearButton = new Button("CLEAR");
+        clearButton.setOnAction(actionEvent -> {
+            ExpressionLabel.getInstance().setText("");
+            ResultLabel.getInstance().setText("");
+        });
+        clearButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
+        clearButton.prefHeightProperty().bind(hbox.heightProperty());
+
+
+        hbox.getChildren().addAll(fracButton, resultButton, clearButton);
         hbox.prefHeightProperty().bind(heightProperty());
         hbox.prefWidthProperty().bind(widthProperty());
         return hbox;

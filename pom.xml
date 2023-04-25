@@ -29,8 +29,14 @@
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
 
+
         <javafx.version>20</javafx.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+
+        <antlr4.visitor>true</antlr4.visitor>
+        <antlr4.listener>true</antlr4.listener>
+        <antlr4.version>4.12.0</antlr4.version>
+
 
     </properties>
 
@@ -60,12 +66,22 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
             <type>pom</type>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.antlr/antlr4-runtime -->
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>${antlr4.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -145,6 +161,7 @@
                 <configuration>
                     <!--needed to prevent module problem-->
                     <detectJavaApiLink>false</detectJavaApiLink>
+                    <excludePackageNames>parser</excludePackageNames>
                 </configuration>
                 <executions>
                     <!-- Exports JavaDocs to regular HTML files -->
@@ -158,6 +175,26 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>${antlr4.version}</version>
+                <configuration>
+                    <sourceDirectory>src/main/java</sourceDirectory>
+                    <outputDirectory>src/main//java</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
         </plugins>
     </build>
 
