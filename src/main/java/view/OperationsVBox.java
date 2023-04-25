@@ -5,7 +5,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Arrays;
