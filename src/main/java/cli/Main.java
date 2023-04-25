@@ -50,6 +50,8 @@ public class Main
         System.out.println("$> To remove a variable in the memory, use the command '.remove <variable name>' ");
         System.out.println("$> To change the name of a variable, use the command '.rename <type> <variable name> <new variable name>' where type is memory or log ");
         System.out.println("$> To clear the memory, use the command '.clear' where type is memory or log ");
+        System.out.println("$> To display the maximum size of the memory, use the command '.size'");
+        System.out.println("$> To set custom maximum size of the memory, use the command '.set_size <number>' where number is the maximum size of the memory ");
     }
 
 
@@ -163,10 +165,16 @@ public class Main
                     inputUser_instance.setMemory(memory);
                     inputUser_instance.setName(listInput.get(1));
                     listInput = listInput.subList(2, listInput.size());
+                    inputUser_instance.setLog(log);
+                    inputUser_instance.setUserInput(listInput);
+                    System.out.println("$> " + inputUser_instance.compute(verbose));
+                    inputUser_instance.setMemory(null);
+                    inputUser_instance.setName(null);
+                } else {
+                    inputUser_instance.setLog(log);
+                    inputUser_instance.setUserInput(listInput);
+                    System.out.println("$> " + inputUser_instance.compute(verbose));
                 }
-                inputUser_instance.setLog(log);
-                inputUser_instance.setUserInput(listInput);
-                System.out.println("$> " + inputUser_instance.compute(verbose));
             }
         }
         else

@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
 
 import static cli.InputUser.*;
@@ -68,13 +67,6 @@ public class Memory {
         return memory;
     }
 
-    /**
-     * The setter of the memory
-     * @param memory the new memory
-     */
-    public void setMemory(ArrayList<Variable> memory) {
-        this.memory = memory;
-    }
 
     /**
      * Add a variable to the memory
@@ -107,7 +99,7 @@ public class Memory {
             throw new OutOfMemoryError("Memory is full");
         }
         String uniqueID = UUID.randomUUID().toString();
-        this.getMemory().add(new Variable(uniqueID, number, expression));
+        this.memory.add(new Variable(uniqueID, number, expression));
     }
 
     /**
@@ -216,7 +208,7 @@ public class Memory {
             FileWriter fileWriter = new FileWriter(path + memoryFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Variable r : memory) {
-                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getName() + " %%% " + r.getValue().toString() + " %%% " + r.getExpression());
+                bufferedWriter.write(r.getTimeStamp() + " %%% " + r.getName() + " %%% " + r.toString() + " %%% " + r.getExpression());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
@@ -228,7 +220,7 @@ public class Memory {
     /**
      * convert a string expression to an object expression
      */
-    public Expression analyzeString(String expressionString) {
+    public Expression convertStringToExpression(String expressionString) {
         // TODO : upgrade this part to handle recursive expressions
         return null;
     }
@@ -244,8 +236,8 @@ public class Memory {
                 String[] data = line.split(" %%% ");
                 String timeStamp = data[0];
                 String name = data[1];
-                MyNumber number =  new MyNumber(new BigDecimal(data[2]));
-                Expression expression = analyzeString(data[3]);
+                MyNumber number =  new MyNumber(data[2]);
+                Expression expression = convertStringToExpression(data[3]);
                 memory.add(new Variable(name, number, expression, timeStamp));
             }
         } catch (Exception e) {

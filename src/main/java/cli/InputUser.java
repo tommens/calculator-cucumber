@@ -214,14 +214,16 @@ public class InputUser
             if (isVerbose)
                 System.out.println("$> " + e.toString());
 
-            log.add(eval, e);
-            if (name != null)
+            if (name != null) {
                 try {
-                    memory.add(name, eval,e);
+                    memory.add(name, eval, e);
+                    log.add(name, eval, e);
                 } catch (OutOfMemoryError ex) {
                     System.out.println(ex.getMessage());
                 }
-
+            } else {
+                log.add(eval, e);
+            }
             return eval;
         }
         return new MyNumber(new BigDecimal(0),0);

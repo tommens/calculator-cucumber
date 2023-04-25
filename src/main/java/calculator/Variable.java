@@ -31,7 +31,7 @@ public class Variable extends MyNumber {
      * @param expression the expression of the variable
      */
     public Variable(String name, MyNumber number, Expression expression) {
-        super(number.getValue());
+        super(number.getValue(), number.getexp(),  number.getImaginary(), number.getImaginaryExp());
         this.name = name;
         this.expression = expression;
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy.HH:mm:ss");
@@ -47,7 +47,7 @@ public class Variable extends MyNumber {
      * @param timeStamp the time stamp of the variable
      */
     public Variable(String name, MyNumber number, Expression expression, String timeStamp) {
-        super(number.getValue());
+        super(number.getValue(), number.getexp(),  number.getImaginary(), number.getImaginaryExp());
         this.name = name;
         this.expression = expression;
         this.timeStamp = timeStamp;
@@ -60,7 +60,7 @@ public class Variable extends MyNumber {
      * @param number the value of the variable
      */
     public Variable(String name, MyNumber number) {
-        super(number.getValue());
+        super(number.getValue(), number.getexp(),  number.getImaginary(), number.getImaginaryExp());
         this.name = name;
         this.expression = number;
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy.HH:mm:ss");
@@ -108,27 +108,10 @@ public class Variable extends MyNumber {
     }
 
     /**
-     * Set the time stamp of the variable
-     * @param timeStamp the time stamp of the variable
-     */
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    /**
-     * String representation of the variable
-     * @return the name of the variable
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
-    /**
      * String representation of the variable with details
      * @return the name, value and expression of the variable
      */
     public String toStringDetails() {
-        return this.timeStamp + " : " + this.name + " = " + this.getValue() + " = " + this.expression;
+        return this.timeStamp + " : " + this.name + " = " + this.toString() + " = " + this.expression;
     }
 }
