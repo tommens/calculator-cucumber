@@ -25,7 +25,7 @@ public class ConverterSteps {
             case "Currency" -> measurement = new Currency(unit1);
             case "Energy" -> measurement = new Energy(unit1);
             case "Length" -> measurement = new Length(unit1);
-            case "Power" -> measurement = new Power(unit1);
+            case "Power" -> measurement = new converter.Power(unit1);
             case "Pressure" -> measurement = new Pressure(unit1);
             case "Time" -> measurement = new Time(unit1);
         }

@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public class OperationsVBox extends CalculatorPart {
      * @return The HBox containing the buttons.
      */
     private Node getLastHBox() {
-        int nbButtons = 3;
+        int nbButtons = 4;
 
         setMaxHeightNbButtons();
         setMaxWidthNbButtons(nbButtons);
@@ -61,8 +62,13 @@ public class OperationsVBox extends CalculatorPart {
         clearButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
         clearButton.prefHeightProperty().bind(hbox.heightProperty());
 
+        // Button for converting measurements
+        Button conversionButton = new Button("Unit converter");
+        conversionButton.setOnAction(actionEvent -> ConversionWindow.displayConversionWindow());
+        conversionButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
+        conversionButton.prefHeightProperty().bind(hbox.heightProperty());
 
-        hbox.getChildren().addAll(fracButton, resultButton, clearButton);
+        hbox.getChildren().addAll(fracButton, resultButton, clearButton,conversionButton);
         hbox.prefHeightProperty().bind(heightProperty());
         hbox.prefWidthProperty().bind(widthProperty());
         return hbox;
