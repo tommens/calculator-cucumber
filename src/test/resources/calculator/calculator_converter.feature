@@ -19,12 +19,12 @@ Feature: Conversion of measurement units
     Then the conversion from "W" to "<unit>" evaluates to <result>
 
     Examples:
-      |unit|result|
-      |kW  |1e-3  |
-      |MW  |1e-6  |
-      |GW  |1e-9  |
-      |TW  |1e-12 |
-      |PW  |1e-15 |
+      |unit|result           |
+      |kW  |0.001            |
+      |MW  |0.000001         |
+      |GW  |0.000000001      |
+      |TW  |0.000000000001   |
+      |PW  |0.000000000000001|
 
  Scenario Outline: Converting units of measurement
     Given a measurement 'Time' and a first unit "<unit1>"
@@ -34,22 +34,22 @@ Feature: Conversion of measurement units
 
     Examples:
       |unit1|unit2|result |
-      |ms   |s    |1e-3   |
-      |mn   |ms   |60000  |
-      |h    |wk   |168    |
-      |d    |yr   |365    |
-      |wk   |d    |7      |
-      |yr   |h    |8760   |
+      |ms   |s    |0.001  |
+      |mn   |ms   |60000.0|
+      |h    |wk   |0.005952  |
+      |d    |yr   |0.002739379  |
+      |wk   |d    |7.0    |
+      |yr   |h    |8761.111111111 |
 
  Scenario Outline: Converting units of measurement
     Given a measurement '<measurement>' and a first unit "<unit1>"
     When I provide a value <value>
     And a second unit '<unit2>'
-    Then the conversion from "<unit1>" to "<unit2> evaluates to <result>
+    Then the conversion from "<unit1>" to "<unit2>" evaluates to <result>
 
     Examples:
-      | measurement | value | unit1  | unit2  | result   |
-      | Pressure    | 2     | Pa     | hPa    | 0.02     |
-      | Energy      | 5     | PET    | J      | 2.0934e11|
-      | Currency    | 10    | CNY    | $      | 1.4520   |
-      | Area        | 20    | km2    | mm2    | 2e13     |
+      | measurement | value | unit1  | unit2  | result         |
+      | Pressure    | 2     | Pa     | hPa    | 0.02           |
+      | Energy      | 5     | PET    | J      |209340000000.0  |
+      | Currency    | 10    | CNY    | $      | 1.452064539    |
+      | Area        | 20    | km2    | mm2    |20000000000000.0|
