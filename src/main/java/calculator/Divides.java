@@ -47,8 +47,9 @@ public final class Divides extends Operation
      * @param r The second integer that should divide the first
      * @return The integer that is the result of the division
      */
-  public int op(int l, int r)
-    { return (l/r); }
+  public int op(int l, int r) throws ArithmeticException
+    { if(r==0) throw new ArithmeticException("Division by zero");
+      return (l/r); }
 
 
     /**
@@ -58,7 +59,7 @@ public final class Divides extends Operation
      * @return The real number that is the result of the division
      */
     @Override
-    public BigDecimal op(BigDecimal l, BigDecimal r) {
+    public BigDecimal op(BigDecimal l, BigDecimal r)  throws ArithmeticException{
         return l.divide(r,mathContext);
     }
     
@@ -69,7 +70,7 @@ public final class Divides extends Operation
      * @return The rational number that is the result of the division
      */
     @Override
-    public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+    public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) throws ArithmeticException{
         return l.divide(r);
     }
 }

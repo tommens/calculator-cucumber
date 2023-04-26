@@ -57,7 +57,7 @@ public class MyRealNumber extends MyNumber{
      * @return The value contained in the object as a rational number
      */
     @Override
-    public MyRationalNumber getRational() {
+    public MyRationalNumber getRational() throws ArithmeticException {
         return MyRationalNumber.create(value);
     }
 

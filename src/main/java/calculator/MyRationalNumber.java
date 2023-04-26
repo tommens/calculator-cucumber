@@ -15,8 +15,8 @@ public class MyRationalNumber extends MyNumber {
      * @param nominator   The integer value of the nominator
      * @param denominator The integer value of the denominator
      */
-    private MyRationalNumber(Long nominator, Long denominator) throws  IllegalArgumentException{
-        if (denominator == 0) throw new IllegalArgumentException("Denominator cannot be 0");
+    private MyRationalNumber(Long nominator, Long denominator) throws  ArithmeticException{
+        if (denominator == 0) throw new ArithmeticException("Denominator cannot be 0");
         this.nominator = nominator;
         this.denominator = denominator;
 
@@ -26,7 +26,7 @@ public class MyRationalNumber extends MyNumber {
      * Constructor method to create a rational number from a BigDecimal value
      * @param value The BigDecimal value to be converted to a rational number
      */
-    private MyRationalNumber(BigDecimal value) {
+    private MyRationalNumber(BigDecimal value) throws ArithmeticException{
         this(value.unscaledValue().longValue(), pow(10L, value.scale()));
 
     }
@@ -39,13 +39,13 @@ public class MyRationalNumber extends MyNumber {
      * @param nominator   The integer value of the nominator
      * @param denominator The integer value of the denominator
      * @return The rational number created
-     * @throws IllegalArgumentException
+     * @throws ArithmeticException
      */
-    public static MyRationalNumber create(Long nominator, Long denominator) throws IllegalArgumentException {
+    public static MyRationalNumber create(Long nominator, Long denominator) throws ArithmeticException {
         return new MyRationalNumber(nominator, denominator).reduce();
     }
 
-    public static MyRationalNumber create(int nominator, int denominator) throws IllegalArgumentException {
+    public static MyRationalNumber create(int nominator, int denominator) throws ArithmeticException {
         return new MyRationalNumber((long) nominator, (long) denominator).reduce();
     }
 
@@ -54,9 +54,9 @@ public class MyRationalNumber extends MyNumber {
      * Factory method to create a rational number from a BigDecimal value
      * @param value The BigDecimal value to be converted to a rational number
      * @return The rational number created
-     * @throws IllegalArgumentException
+     * @throws ArithmeticException
      */
-    public static MyRationalNumber create(BigDecimal value) throws IllegalArgumentException {
+    public static MyRationalNumber create(BigDecimal value) throws ArithmeticException {
         return new MyRationalNumber(value).reduce();
     }
 
@@ -83,7 +83,7 @@ public class MyRationalNumber extends MyNumber {
      * @return The rational number itself
      */
     @Override
-    public MyRationalNumber getRational() {
+    public MyRationalNumber getRational() throws ArithmeticException{
         return create(nominator, denominator);
     }
 
@@ -138,7 +138,7 @@ public class MyRationalNumber extends MyNumber {
      * @param other The rational number to be added
      * @return The result of the addition
      */
-    public MyRationalNumber add(MyRationalNumber other) {
+    public MyRationalNumber add(MyRationalNumber other) throws ArithmeticException {
         Long newNominator = this.nominator * other.denominator + other.nominator * this.denominator;
         Long newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
@@ -150,7 +150,7 @@ public class MyRationalNumber extends MyNumber {
      * @param other The rational number to subtract
      * @return The result of the subtraction
      */
-    public MyRationalNumber subtract(MyRationalNumber other) {
+    public MyRationalNumber subtract(MyRationalNumber other) throws ArithmeticException{
         Long newNominator = this.nominator * other.denominator - other.nominator * this.denominator;
         Long newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
@@ -162,7 +162,7 @@ public class MyRationalNumber extends MyNumber {
      * @param other The rational number which will multiply the first one
      * @return The result of the multiplication
      */
-    public MyRationalNumber multiply(MyRationalNumber other) {
+    public MyRationalNumber multiply(MyRationalNumber other) throws ArithmeticException{
         Long newNominator = this.nominator * other.nominator;
         Long newDenominator = this.denominator * other.denominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
@@ -174,8 +174,7 @@ public class MyRationalNumber extends MyNumber {
      * @param other The rational number which will divide the first one
      * @return The result of the division
      */
-    public MyRationalNumber divide(MyRationalNumber other) throws IllegalArgumentException {
-
+    public MyRationalNumber divide(MyRationalNumber other) throws ArithmeticException {
         Long newNominator = this.nominator * other.denominator;
         Long newDenominator = this.denominator * other.nominator;
         return new MyRationalNumber(newNominator, newDenominator).reduce();
@@ -186,7 +185,7 @@ public class MyRationalNumber extends MyNumber {
      *
      * @return The rational number in its simplest form
      */
-    private MyRationalNumber reduce() throws IllegalArgumentException{
+    private MyRationalNumber reduce() throws ArithmeticException{
         int sign = nominator >= 0L ? (denominator > 0L ? 1 : -1) : (denominator > 0L ? -1 : 1);
         Long absNominator = Math.abs(nominator);
         Long absDenominator = Math.abs(denominator);

@@ -40,7 +40,7 @@ public class RealNumberEvaluator extends Visitor{
      * @param o The operation being visited
      */
     @Override
-    public void visit(Operation o) {
+    public void visit(Operation o) throws ArithmeticException{
         ArrayList<BigDecimal> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.args) {

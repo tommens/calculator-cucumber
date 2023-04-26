@@ -31,7 +31,7 @@ public abstract class MyNumber implements Expression
      * abstract method to obtain the rational number corresponding to the value of the object
      * @return The rational number contain in the object
      */
-    public abstract MyRationalNumber getRational();
+    public abstract MyRationalNumber getRational() throws ArithmeticException;
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -39,7 +39,7 @@ public abstract class MyNumber implements Expression
      *
      * @param v	The visitor object
      */
-  public void accept(Visitor v) {
+  public void accept(Visitor v) throws ArithmeticException{
       v.visit(this);
   }
 
