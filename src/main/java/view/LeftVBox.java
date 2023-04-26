@@ -35,8 +35,7 @@ public class LeftVBox extends CalculatorPart {
         // Button to evaluate the expression
         Button resultButton = new Button("=");
         resultButton.setOnAction(actionEvent -> {
-            Calculator calculator = new Calculator();
-            int x = calculator.eval(calculator.read(ExpressionTextField.getInstance().getText()));
+            String x = MainApplication.getCalculator().evalExpression(ExpressionTextField.getInstance().getText());
             ResultLabel.getInstance().setText(String.valueOf(x));
         });
 

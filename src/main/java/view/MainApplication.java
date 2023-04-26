@@ -1,5 +1,6 @@
 package view;
 
+import calculator.Calculator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -15,6 +16,8 @@ public class MainApplication extends Application {
     private static final float HEIGHT_WIDTH_RATIO = .56f;
     private static final int WINDOW_MINIMUM_WIDTH = 600;
     private static Stage primaryStage;
+
+    private static Calculator calculator = new Calculator();
 
     /**
      * Initialize the calculator view
@@ -74,5 +77,9 @@ public class MainApplication extends Application {
         MainApplication.primaryStage = primaryStage;
 
         initialize();
+    }
+
+    public static Calculator getCalculator(){
+        return calculator;
     }
 }

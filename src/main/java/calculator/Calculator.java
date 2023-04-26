@@ -26,11 +26,15 @@ public class Calculator {
      public Expression read(String s)
     */
 
+    /** Number of digit to be encoded for real numbers */
     private int precision;
+    /** MathContext for real numbers */
     private MathContext mathContext = MathContext.UNLIMITED;
-
+    /** Rounding method for operation on real numbers */
     private RoundingMode roundingMode = RoundingMode.HALF_UP;
 
+    /** Current type on which expression will be evaluated */
+    private ArithmeticType currentType;
 
     /**
      * Convert an input string into an arithmetic expression
@@ -154,6 +158,31 @@ public class Calculator {
         System.out.println("The result of evaluating expression " + e);
         System.out.println("is: " + evalRational(e) + ".");
         System.out.println();
+    }
+
+    public MathContext getMathContext(){
+        return mathContext;
+    }
+
+    public void setType(ArithmeticType type) {
+        currentType = type;
+        System.out.println(currentType);
+    }
+
+    public String evalExpression(String expr){
+        Expression e = read(expr);
+        switch (currentType){
+            case  INTEGER -> {
+                return Integer.toString(eval(e));
+            }
+            case  REAL -> {
+                return evalReal(e).toString();
+            }
+            case RATIONAL -> {
+                return evalRational(e).toString();
+            }
+        }
+        return "Error";
     }
 
     /*

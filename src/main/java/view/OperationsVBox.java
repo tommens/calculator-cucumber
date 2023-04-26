@@ -15,7 +15,7 @@ public class OperationsVBox extends CalculatorPart {
     private static OperationsVBox instance;
 
     private OperationsVBox() {
-        addHBox(new ButtonsHBox(Stream.of("(", ")", ".").map(GenericButton::new).toList(), "operator-button"));
+        addHBox(new ButtonsHBox(Stream.of("(", ",", ")").map(GenericButton::new).toList(), "operator-button"));
         addHBox(getSecondHBox());
         addHBox(new ButtonsHBox(Stream.of("*", "/", "gcd").map(GenericButton::new).toList(), "operator-button"));
         addHBox(new ButtonsHBox(Stream.of("%", "^", "lcm").map(GenericButton::new).toList(), "operator-button"));
@@ -63,7 +63,7 @@ public class OperationsVBox extends CalculatorPart {
         Button backButton = new Button("<-");
         backButton.setOnAction(actionEvent -> ExpressionTextField.getInstance().shortenText(1));
 
-        HBox hBox = new ButtonsHBox(List.of(new GenericButton(" "), backButton, clearButton));
+        HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton));
         hBox.prefHeightProperty().bind(heightProperty());
         hBox.prefWidthProperty().bind(widthProperty());
         return hBox;
