@@ -2,6 +2,7 @@ package calculator;
 
 import visitor.TimeVisitor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /** This class represents the arithmetic sum operation "+".
@@ -51,9 +52,31 @@ public final class Plus extends Operation
   public int op(int l, int r) {
   	return (l+r);
   }
-
+  /**
+   * The actual computation of the (binary) arithmetic addition of two real numbers
+   * @param l first argument of the binary operation
+   * @param r second argument of the binary operation
+   * @return The real number that is the result of the addition
+   */
   @Override
-  public MyTime op(MyTime l, MyNumber seconds) {
+  public BigDecimal op(BigDecimal l, BigDecimal r) {
+   return l.add(r,mathContext);
+  }
+
+
+  /**
+   * The actual computation of the (binary) arithmetic addition of two rational numbers
+   *
+   * @param l The first rational number
+   * @param r The second rational number that should be added to the first
+   * @return The rational number that is the result of the addition
+   */
+  @Override
+  public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+   return l.add(r);
+  }
+  @Override
+  public MyTime op(MyTime l, MyRealNumber seconds) {
       return l.add(seconds);
   }
   @Override

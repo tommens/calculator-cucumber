@@ -121,8 +121,8 @@ public class MyTime implements Expression {
                 " corresponds to the following date : " + sum.getDate());
         return sum;
     }*/
-    public MyTime add(MyNumber seconds) {
-        long sumInSeconds = this.dateInSeconds + seconds.getValue();
+    public MyTime add(MyRealNumber seconds) {
+        long sumInSeconds = this.dateInSeconds + seconds.getRealNumber().longValue();
         ZonedDateTime sumDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(sumInSeconds), ZoneId.systemDefault());
         String sumDateStr = sumDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
         MyTime sum = new MyTime(sumDateStr);

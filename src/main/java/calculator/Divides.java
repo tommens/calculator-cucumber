@@ -2,6 +2,7 @@ package calculator;
 
 import visitor.TimeVisitor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /** This class represents the arithmetic division operation "/".
@@ -51,13 +52,34 @@ public final class Divides extends Operation
   public int op(int l, int r)
     { return (l/r); }
 
+  /**
+   * The actual computation of the (binary) arithmetic division of two real numbers
+   * @param l first argument of the binary operation
+   * @param r second argument of the binary operation
+   * @return The real number that is the result of the division
+   */
+  @Override
+  public BigDecimal op(BigDecimal l, BigDecimal r) {
+    return l.divide(r,mathContext);
+  }
+
+  /**
+   * The actual computation of the (binary) arithmetic division of two rational numbers
+   * @param l The first rational number
+   * @param r The second rational number that should divide the first
+   * @return The rational number that is the result of the division
+   */
+  @Override
+  public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+    return l.divide(r);
+  }
     @Override
     public MyTime op(MyTime l, MyTime r) {
         throw new RuntimeException("Sorry, you can't divide two dates.");
     }
 
     @Override
-    public MyTime op(MyTime l, MyNumber seconds) {
+    public MyTime op(MyTime l, MyRealNumber seconds) {
         throw new RuntimeException("Sorry, you can't divide a date and a number");
     }
 

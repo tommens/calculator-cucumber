@@ -98,7 +98,7 @@ public abstract class Operation implements Expression
 	 * @param seconds	second argument of the binary operation
 	 * @return	result of computing the binary operation
 	 */
-	public abstract MyTime op(MyTime l, MyNumber seconds);
+	public abstract MyTime op(MyTime l, MyRealNumber seconds);
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to compute between two real number
