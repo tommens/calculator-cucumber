@@ -40,6 +40,16 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     }
 
     /**
+     * Visit an expression
+     * @param ctx the parse tree
+     * @return An Expression object
+     */
+    @Override
+    public Expression visitExpr(ExprParser.ExprContext ctx) {
+        return visit(ctx.getChild(0));
+    }
+
+    /**
      * Visit a prefix operation (Grammar : Operation values)
      * @param ctx the parse tree
      * @return The Expression object corresponding to the prefix operation visited
@@ -411,6 +421,11 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
     @Override
     public Expression visitF(ExprParser.FContext ctx) {
         Expression e = visit(ctx.getChild(0));
+        if ( e == null){
+            // we don't visit a num
+            // we visit ( expr )
+            e = visit(ctx.getChild(1));
+        }
         stack.insertInLastArray(e);
         return e;
     }
