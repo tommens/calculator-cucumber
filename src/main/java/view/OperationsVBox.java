@@ -29,7 +29,7 @@ public class OperationsVBox extends CalculatorPart {
      * @return The HBox containing the buttons.
      */
     private Node getLastHBox() {
-        int nbButtons = 4;
+        int nbButtons = 5;
 
         setMaxHeightNbButtons();
         setMaxWidthNbButtons(nbButtons);
@@ -62,12 +62,18 @@ public class OperationsVBox extends CalculatorPart {
         clearButton.prefHeightProperty().bind(hbox.heightProperty());
 
         // Button for converting measurements
-        Button conversionButton = new Button("Unit converter");
+        Button conversionButton = new Button("Converter");
         conversionButton.setOnAction(actionEvent -> ConversionWindow.displayConversionWindow());
         conversionButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
         conversionButton.prefHeightProperty().bind(hbox.heightProperty());
 
-        hbox.getChildren().addAll(fracButton, resultButton, clearButton,conversionButton);
+        // Button for time calculations
+        Button timeButton = new Button("Time");
+        timeButton.setOnAction(actionEvent -> TimeWindow.displayTimeWindow());
+        timeButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
+        timeButton.prefHeightProperty().bind(hbox.heightProperty());
+
+        hbox.getChildren().addAll(fracButton, resultButton, clearButton,conversionButton,timeButton);
         hbox.prefHeightProperty().bind(heightProperty());
         hbox.prefWidthProperty().bind(widthProperty());
         return hbox;
