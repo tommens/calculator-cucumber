@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.TimeVisitor;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -39,39 +40,41 @@ public abstract class MyNumber implements Expression
      *
      * @param v	The visitor object
      */
-  public void accept(Visitor v) {
-      v.visit(this);
-  }
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
 
+    @Override
+    public void accept(TimeVisitor v) {}
 
     /** The depth of a number expression is always 0
      *
      * @return The depth of a number expression
      */
-  public int countDepth() {
-	  return 0;
-  }
+    public int countDepth() {
+        return 0;
+    }
 
     /** The number of operations contained in a number expression is always 0
      *
      * @return The number of operations contained in a number expression
      */
-  public int countOps() {
-	  return 0;
-  }
+    public int countOps() {
+        return 0;
+    }
 
     /** The number of numbers contained in a number expression is always 1
      *
      * @return The number of numbers contained in  a number expression
      */
-  public int countNbs() {
-	  return 1;
-  }
+    public int countNbs() {
+        return 1;
+    }
 
 
-  @Override
-  public abstract boolean equals(Object obj);
+    @Override
+    public abstract boolean equals(Object obj);
 
-  @Override
-  public abstract int hashCode();
+    @Override
+    public abstract int hashCode();
 }
