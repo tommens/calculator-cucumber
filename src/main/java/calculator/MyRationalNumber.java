@@ -27,7 +27,7 @@ public class MyRationalNumber extends MyNumber {
      * @param value The BigDecimal value to be converted to a rational number
      */
     private MyRationalNumber(BigDecimal value) {
-        this(value.unscaledValue().longValue(), pow(10L, value.scale()));
+        this(value.unscaledValue().longValue(), Utils.pow(10L, value.scale()));
 
     }
 
@@ -191,28 +191,8 @@ public class MyRationalNumber extends MyNumber {
         Long absNominator = Math.abs(nominator);
         Long absDenominator = Math.abs(denominator);
 
-        Long gcd = gcd(absNominator, absDenominator);
+        Long gcd = Utils.gcd(absNominator, absDenominator);
         return new MyRationalNumber(sign * absNominator / gcd, absDenominator / gcd);
-    }
-
-    /**
-     * Method that calculates the greatest common divisor of two integers
-     *
-     * @param a The first integer
-     * @param b The second integer
-     * @return The greatest common divisor of the two integers
-     */
-    private Long gcd(Long a, Long b) {
-        return b == 0 ? a : gcd(b, a % b);
-
-    }
-
-    private static long pow(long base, int exponent) {
-        long result = 1;
-        for (int i = 0; i < exponent; i++) {
-            result *= base;
-        }
-        return result;
     }
 
 }
