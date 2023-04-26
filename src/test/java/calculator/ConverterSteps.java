@@ -32,11 +32,11 @@ public class ConverterSteps {
     }
 
     @When("I provide a value {double}")
-    public void IProvideAValue() {
+    public void IProvideAValue(double d) {
     }
 
     @When("a second unit {string}")
-    public void ASecondUnit() {
+    public void ASecondUnit(String s) {
     }
 
     @Then("the conversion from {string} to {string} evaluates to {double}")
