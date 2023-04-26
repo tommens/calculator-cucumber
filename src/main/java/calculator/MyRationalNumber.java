@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class MyRationalNumber extends MyNumber {
-    private Long nominator;
-    private Long denominator;
+    private final Long nominator;
+    private final Long denominator;
 
     /**
      * Constructor method to create a rational number
@@ -15,7 +15,7 @@ public class MyRationalNumber extends MyNumber {
      * @param nominator   The integer value of the nominator
      * @param denominator The integer value of the denominator
      */
-    private MyRationalNumber(Long nominator, Long denominator) throws  IllegalArgumentException{
+    private MyRationalNumber(Long nominator, Long denominator) throws IllegalArgumentException {
         if (denominator == 0) throw new IllegalArgumentException("Denominator cannot be 0");
         this.nominator = nominator;
         this.denominator = denominator;
@@ -24,6 +24,7 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Constructor method to create a rational number from a BigDecimal value
+     *
      * @param value The BigDecimal value to be converted to a rational number
      */
     private MyRationalNumber(BigDecimal value) {
@@ -52,6 +53,7 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Factory method to create a rational number from a BigDecimal value
+     *
      * @param value The BigDecimal value to be converted to a rational number
      * @return The rational number created
      * @throws IllegalArgumentException
@@ -71,15 +73,17 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Method to convert the rational number to an integer
+     *
      * @return The integer value of the rational number
      */
     @Override
     public Integer getInteger() {
-        return (int)(nominator / denominator);
+        return (int) (nominator / denominator);
     }
 
     /**
      * Method to return the rational number itself
+     *
      * @return The rational number itself
      */
     @Override
@@ -89,6 +93,7 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Method to convert the rational number to a BigDecimal
+     *
      * @return The BigDecimal value of the rational number
      */
     public BigDecimal getRealNumber() {
@@ -186,7 +191,7 @@ public class MyRationalNumber extends MyNumber {
      *
      * @return The rational number in its simplest form
      */
-    private MyRationalNumber reduce() throws IllegalArgumentException{
+    private MyRationalNumber reduce() throws IllegalArgumentException {
         int sign = nominator >= 0L ? (denominator > 0L ? 1 : -1) : (denominator > 0L ? -1 : 1);
         Long absNominator = Math.abs(nominator);
         Long absDenominator = Math.abs(denominator);

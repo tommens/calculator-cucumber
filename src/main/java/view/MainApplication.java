@@ -12,22 +12,14 @@ import javafx.stage.WindowEvent;
  * This class is the main application of the calculator GUI
  */
 public class MainApplication extends Application {
+    private static final float HEIGHT_WIDTH_RATIO = .56f;
+    private static final int WINDOW_MINIMUM_WIDTH = 600;
     private static Stage primaryStage;
-
-    @Override
-    public void start(Stage primaryStage){
-        Platform.setImplicitExit(false);
-        System.setProperty("file.encoding", "UTF-8" );
-        this.primaryStage = primaryStage;
-
-        initialize();
-
-    }
 
     /**
      * Initialize the calculator view
      */
-    public static void initialize(){
+    public static void initialize() {
         primaryStage.setOnCloseRequest(event -> {
             if (!event.getEventType().equals(WindowEvent.WINDOW_CLOSE_REQUEST)) {
                 event.consume();
@@ -49,24 +41,22 @@ public class MainApplication extends Application {
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add("view/style.css");
 
-        primaryStage.setTitle("Calculator --- WALCARIUS -- MARCHELLI -- TULIPPE-HECQ -- VAN DRIESSCHE");
+        primaryStage.setTitle("Calculator - WALCARIUS & MARCHELLI & TULIPPE-HECQ & VAN DRIESSCHE");
 
         // Bind the calculatorView to the scene
         calculatorView.prefHeightProperty().bind(scene.heightProperty());
         calculatorView.prefWidthProperty().bind(scene.widthProperty());
 
-
         //make font size of calculatorView elements resize while resizing the window
         calculatorView.prefHeightProperty().addListener((observable, oldValue, newValue) -> calculatorView.setFontSize(newValue.doubleValue()));
 
-
         // Set the minimum size of the window
-        primaryStage.setMinWidth(600);
+        primaryStage.setMinWidth(WINDOW_MINIMUM_WIDTH);
 
+        primaryStage.setMinHeight(WINDOW_MINIMUM_WIDTH * HEIGHT_WIDTH_RATIO);
         // Keep the ratio of the window
-        primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(0.56));
-        primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(0.56));
-
+//        primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(HEIGHT_WIDTH_RATIO));
+//        primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(HEIGHT_WIDTH_RATIO));
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -75,5 +65,14 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         launch(args);
 
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        Platform.setImplicitExit(false);
+        System.setProperty("file.encoding", "UTF-8");
+        MainApplication.primaryStage = primaryStage;
+
+        initialize();
     }
 }

@@ -1,31 +1,33 @@
 package view;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
-public class ExpressionLabel extends Label {
+public class ExpressionTextField extends TextField {
 
-    private static ExpressionLabel instance;
+    private static ExpressionTextField instance;
 
-    private ExpressionLabel(){
+    private ExpressionTextField() {
+        setPrefWidth(Integer.MAX_VALUE);
         getStyleClass().add("expression-label");
     }
 
-    public static ExpressionLabel getInstance(){
+    public static ExpressionTextField getInstance() {
         if (instance == null)
-            instance = new ExpressionLabel();
+            instance = new ExpressionTextField();
         return instance;
     }
 
     /**
      * This method is used to modify the display of the calculator.
+     *
      * @param toAdd The string to add to the display.
      */
-    public void updateText(String toAdd){
+    public void updateText(String toAdd) {
         setText(getText() + toAdd);
     }
 
     public void shortenText(int nbCharToRemove) {
-        if(getText().length() > 0)
+        if (getText().length() > 0)
             setText(getText().substring(0, getText().length() - nbCharToRemove));
     }
 }

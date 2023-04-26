@@ -2,12 +2,12 @@ package calculator;
 
 import parser.MyParser;
 import visitor.Evaluator;
+import visitor.RationalNumberEvaluator;
 import visitor.RealNumberEvaluator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import visitor.RationalNumberEvaluator;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -34,17 +34,19 @@ public class Calculator {
 
     /**
      * Convert an input string into an arithmetic expression
+     *
      * @param s a string representing an arithmetic expression
      * @return the result of the conversion
      */
-    public Expression read(String s){
-        return MyParser.parse(s,mathContext);
+    public Expression read(String s) {
+        return MyParser.parse(s, mathContext);
     }
 
     /**
      * Prints an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
-     * @see #printExpressionDetails(Expression) 
+     * @see #printExpressionDetails(Expression)
      */
     public void print(Expression e) {
         System.out.println("The result of evaluating expression " + e);
@@ -54,6 +56,7 @@ public class Calculator {
 
     /**
      * Prints verbose details of an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
      * @see #print(Expression)
      */
@@ -67,6 +70,7 @@ public class Calculator {
 
     /**
      * Evaluates an arithmetic expression and returns its result
+     *
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
@@ -81,10 +85,11 @@ public class Calculator {
 
     /**
      * Evaluates an arithmetic expression and returns its result
+     *
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
-    public BigDecimal evalReal(Expression e){
+    public BigDecimal evalReal(Expression e) {
         // create a new visitor to evaluate expressions
         RealNumberEvaluator v = new RealNumberEvaluator();
         // and ask the expression to accept this visitor to start the evaluation process
@@ -95,10 +100,11 @@ public class Calculator {
 
     /**
      * Evaluates an arithmetic expression and returns its result as a rational number
+     *
      * @param e the arithmetic Expression to be evaluated
-     * @return  The result of the evaluation as a rational number
+     * @return The result of the evaluation as a rational number
      */
-    public MyRationalNumber evalRational(Expression e){
+    public MyRationalNumber evalRational(Expression e) {
         RationalNumberEvaluator v = new RationalNumberEvaluator();
         e.accept(v);
         return v.getResult();
@@ -106,9 +112,10 @@ public class Calculator {
 
     /**
      * Prints an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
      */
-    public void printReal(Expression e){
+    public void printReal(Expression e) {
         System.out.println("The result of evaluating expression " + e);
         System.out.println("is: " + evalReal(e) + ".");
         System.out.println();
@@ -116,31 +123,34 @@ public class Calculator {
 
     /**
      * Set the precision of real number (the number of digits encoded)
+     *
      * @param p A positive integer representing the precision of the real numbers
      */
-    public void setPrecision(int p){
-        if (p > 0){
+    public void setPrecision(int p) {
+        if (p > 0) {
             precision = p;
-            mathContext = new MathContext(precision,roundingMode);
+            mathContext = new MathContext(precision, roundingMode);
         }
     }
 
 
     /**
      * Set the rounding mode of real numbers
+     *
      * @param rd the rounding mode to be considered
      */
-    public void setRoundingMode(RoundingMode rd){
+    public void setRoundingMode(RoundingMode rd) {
         roundingMode = rd;
-        mathContext = new MathContext(precision,roundingMode);
+        mathContext = new MathContext(precision, roundingMode);
     }
 
 
     /**
      * Prints an arithmetic expression provided as input parameter using rational numbers
+     *
      * @param e the arithmetic Expression to be printed
      */
-    public void printRational(Expression e){
+    public void printRational(Expression e) {
         System.out.println("The result of evaluating expression " + e);
         System.out.println("is: " + evalRational(e) + ".");
         System.out.println();

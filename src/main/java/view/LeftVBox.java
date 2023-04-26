@@ -5,9 +5,8 @@ import calculator.Calculator;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * This class is used to create the VBox containing the numbers (0 to 9) of the calculator. Singleton Design Pattern.
@@ -15,27 +14,29 @@ import java.util.List;
 public class LeftVBox extends CalculatorPart {
     private static LeftVBox instance;
 
-    private LeftVBox(){
+    private LeftVBox() {
+        addHBox(new ButtonsHBox(Stream.of("7", "8", "9").map(GenericButton::new).toList(), "numeric-button"));
+        addHBox(new ButtonsHBox(Stream.of("4", "5", "6").map(GenericButton::new).toList(), "numeric-button"));
+        addHBox(new ButtonsHBox(Stream.of("1", "2", "3").map(GenericButton::new).toList(), "numeric-button"));
+        addHBox(getBottomHBox());
+    }
 
-        getChildren().addAll(
-                getGeneralHBox(new ArrayList<>(Arrays.asList("7","8","9")), "numeric-button"),
-                getGeneralHBox(new ArrayList<>(Arrays.asList("4","5","6")), "numeric-button"),
-                getGeneralHBox(new ArrayList<>(Arrays.asList("1","2","3")), "numeric-button"),
-                getBottomHBox());
-
-                //getSevenToNineHBox(), getFourToSixHBox(), getOneToThreeHBox(), getZeroHBox());
+    /**
+     * This method is used to get the instance of the IntNumbersVBox.
+     *
+     * @return
+     */
+    public static LeftVBox getInstance() {
+        instance = instance == null ? new LeftVBox() : instance;
+        return instance;
     }
 
     private HBox getBottomHBox() {
-
-        setMaxHeightNbButtons();
-        setMaxWidthNbButtons(3);
-
         // Button to evaluate the expression
         Button resultButton = new Button("=");
         resultButton.setOnAction(actionEvent -> {
-            Calculator calculator= new Calculator();
-            int x = calculator.eval(calculator.read(ExpressionLabel.getInstance().getText()));
+            Calculator calculator = new Calculator();
+            int x = calculator.eval(calculator.read(ExpressionTextField.getInstance().getText()));
             ResultLabel.getInstance().setText(String.valueOf(x));
         });
 
@@ -43,7 +44,7 @@ public class LeftVBox extends CalculatorPart {
         Button zeroButton = new Button("0");
         zeroButton.getStyleClass().add("numeric-button");
         zeroButton.setOnAction(actionEvent -> {
-            ExpressionLabel.getInstance().updateText("0");
+            ExpressionTextField.getInstance().updateText("0");
         });
 
         HBox hBox = new ButtonsHBox(List.of(ArithmeticSelectorButton.getInstance(), zeroButton, resultButton));
@@ -51,17 +52,4 @@ public class LeftVBox extends CalculatorPart {
         hBox.prefWidthProperty().bind(widthProperty());
         return hBox;
     }
-
-
-    /**
-     * This method is used to get the instance of the IntNumbersVBox.
-     * @return
-     */
-    public static LeftVBox getInstance(){
-        instance = instance == null ? new LeftVBox() : instance;
-        return instance;
-    }
-
-
-
 }
