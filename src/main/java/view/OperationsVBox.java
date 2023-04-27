@@ -15,10 +15,10 @@ public class OperationsVBox extends CalculatorPart {
     private static OperationsVBox instance;
 
     private OperationsVBox() {
-        addHBox(new ButtonsHBox(Stream.of("(", ",", ")").map(GenericButton::new).toList(), "operator-button"));
+        addHBox(new ButtonsHBox(Stream.of("(", ",", ")","π").map(GenericButton::new).toList(), "operator-button"));
         addHBox(getSecondHBox());
-        addHBox(new ButtonsHBox(Stream.of("*", "/", "gcd").map(GenericButton::new).toList(), "operator-button"));
-        addHBox(new ButtonsHBox(Stream.of("%", "^", "lcm").map(GenericButton::new).toList(), "operator-button"));
+        addHBox(new ButtonsHBox(Stream.of("*", "/", "gcd","E").map(GenericButton::new).toList(), "operator-button"));
+        addHBox(new ButtonsHBox(Stream.of("%", "^", "lcm","").map(GenericButton::new).toList(), "operator-button"));
         addHBox(getBottomHBox());
     }
 
@@ -39,7 +39,7 @@ public class OperationsVBox extends CalculatorPart {
         fracButton.setTooltip(new Tooltip("Use this button to create a rational number. Enter the nominator, press this button and enter the denominator."));
 
         HBox hBox = new ButtonsHBox(
-                List.of(new GenericButton("+"), new GenericButton("-"), fracButton),
+                List.of(new GenericButton("+"), new GenericButton("-"), fracButton, new GenericButton("e")),
                 "operator-button");
         hBox.prefHeightProperty().bind(heightProperty());
         hBox.prefWidthProperty().bind(widthProperty());
@@ -63,7 +63,7 @@ public class OperationsVBox extends CalculatorPart {
         Button backButton = new Button("<-");
         backButton.setOnAction(actionEvent -> ExpressionTextField.getInstance().shortenText(1));
 
-        HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton));
+        HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton,new GenericButton("")));
         hBox.prefHeightProperty().bind(heightProperty());
         hBox.prefWidthProperty().bind(widthProperty());
         return hBox;

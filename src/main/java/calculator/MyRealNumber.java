@@ -21,6 +21,14 @@ public class MyRealNumber extends MyNumber {
         value = new BigDecimal(v);
     }
 
+    /**
+     * Constructor method
+     * @param v The real number to be contained in the object
+     */
+    public MyRealNumber(double v){
+        value = new BigDecimal(v);
+    }
+
 
     /**
      * Constructor method

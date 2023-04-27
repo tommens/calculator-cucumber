@@ -49,13 +49,13 @@ public interface ExprListener extends ParseTreeListener {
 	void exitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnumnumnum}.
 	 * @param ctx the parse tree
 	 */
 	void enterValues(ExprParser.ValuesContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnumnumnum}.
 	 * @param ctx the parse tree
 	 */
 	void exitValues(ExprParser.ValuesContext ctx);
@@ -307,4 +307,28 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFraction(ExprParser.FractionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Pi}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void enterPi(ExprParser.PiContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Pi}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void exitPi(ExprParser.PiContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Euler}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void enterEuler(ExprParser.EulerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Euler}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void exitEuler(ExprParser.EulerContext ctx);
 }

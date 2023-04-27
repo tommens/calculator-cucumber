@@ -36,7 +36,7 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	T visitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnumnumnum}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -186,4 +186,18 @@ public interface ExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFraction(ExprParser.FractionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Pi}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPi(ExprParser.PiContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Euler}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEuler(ExprParser.EulerContext ctx);
 }

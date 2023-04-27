@@ -429,4 +429,24 @@ public class ExpressionVisitor extends ExprBaseVisitor<Expression>{
         stack.insertInLastArray(e);
         return e;
     }
+
+    /**
+     * Visit the number Pi
+     * @param ctx the parse tree
+     * @return An Expression object containing pi
+     */
+    @Override
+    public Expression visitPi(ExprParser.PiContext ctx) {
+        return new MyRealNumber(Math.PI);
+    }
+
+    /**
+     * Visit the Euler number
+     * @param ctx the parse tree
+     * @return An Expression object containing the euler number
+     */
+    @Override
+    public Expression visitEuler(ExprParser.EulerContext ctx) {
+        return new MyRealNumber(Math.E);
+    }
 }
