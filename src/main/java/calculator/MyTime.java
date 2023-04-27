@@ -138,7 +138,7 @@ public class MyTime implements Expression {
     }*/
     public MyTime add(MyRealNumber seconds) {
         long sumInSeconds = this.dateInSeconds + seconds.getRealNumber().longValue();
-        ZonedDateTime sumDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(sumInSeconds), ZoneId.systemDefault());
+        ZonedDateTime sumDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(sumInSeconds),ZoneId.of("UTC"));
         String sumDateStr = sumDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
         MyTime sum = new MyTime(sumDateStr);
         System.out.println("Adding " + seconds + " seconds to the date " + date + " corresponds to the following date: " + sum.getDate());
