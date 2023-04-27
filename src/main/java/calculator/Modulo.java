@@ -5,7 +5,7 @@ import visitor.TimeVisitor;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Modulo extends Operation{
+public class Modulo extends Operation {
     public Modulo(List<Expression> elist) throws IllegalConstruction {
         super(elist);
     }

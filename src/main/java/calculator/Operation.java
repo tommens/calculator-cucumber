@@ -22,7 +22,11 @@ public abstract class Operation implements Expression
 	 * The list of expressions passed as an argument to the arithmetic operation
 	 */
 	public List<Expression> args;
-
+	/**
+	 * The notation used to render operations as strings.
+	 * By default, the infix notation will be used.
+	 */
+	public Notation notation = Notation.INFIX;
 	/**
 	 * The character used to represent the arithmetic operation (e.g. "+", "*")
 	 */
@@ -32,12 +36,6 @@ public abstract class Operation implements Expression
 	 * The neutral element of the operation (e.g. 1 for *, 0 for +)
 	 */
 	protected int neutral;
-
-	/**
-	 * The notation used to render operations as strings.
-	 * By default, the infix notation will be used.
-	 */
-	public Notation notation = Notation.INFIX;
 
 	/**
 	 * MathContext object contain the precision and the rounding method to be used for real numbers

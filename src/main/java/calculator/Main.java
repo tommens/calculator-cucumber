@@ -2,10 +2,6 @@ package calculator;
 
 import view.MainApplication;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * A very simple calculator in Java
  * University of Mons - UMONS
@@ -16,15 +12,15 @@ import java.util.List;
  */
 public class Main {
 
-	/**
-	 * This is the main method of the application.
-	 * It provides examples of how to use it to construct and evaluate arithmetic expressions.
-	 *
-	 * @param args	Command-line parameters are not used in this version
-	 */
-	public static void main(String[] args) {
-		MainApplication.main(args);
+    /**
+     * This is the main method of the application.
+     * It provides examples of how to use it to construct and evaluate arithmetic expressions.
+     *
+     * @param args Command-line parameters are not used in this version
+     */
+    public static void main(String[] args) {
+        MainApplication.main(args);
 
-	}
+    }
 
 }

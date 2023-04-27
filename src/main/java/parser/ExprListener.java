@@ -38,16 +38,6 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitPrefixOperation(ExprParser.PrefixOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExprParser#infixOperation}.
-	 * @param ctx the parse tree
-	 */
-	void enterInfixOperation(ExprParser.InfixOperationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExprParser#infixOperation}.
-	 * @param ctx the parse tree
-	 */
-	void exitInfixOperation(ExprParser.InfixOperationContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ExprParser#postfixOperation}.
 	 * @param ctx the parse tree
 	 */
@@ -59,13 +49,13 @@ public interface ExprListener extends ParseTreeListener {
 	void exitPostfixOperation(ExprParser.PostfixOperationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatornumnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnumnumnum}.
 	 * @param ctx the parse tree
 	 */
 	void enterValues(ExprParser.ValuesContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code values}
-	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatornumnumnum}.
+	 * labeled alternative in {@link ExprParser#operatoroperatoroperatoroperatoroperatoroperatoroperatoroperatoree2e2e2tt2t2t2numnumnumnumnum}.
 	 * @param ctx the parse tree
 	 */
 	void exitValues(ExprParser.ValuesContext ctx);
@@ -166,6 +156,122 @@ public interface ExprListener extends ParseTreeListener {
 	 */
 	void exitLCM(ExprParser.LCMContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ExprParser#infixOperation}.
+	 * @param ctx the parse tree
+	 */
+	void enterInfixOperation(ExprParser.InfixOperationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#infixOperation}.
+	 * @param ctx the parse tree
+	 */
+	void exitInfixOperation(ExprParser.InfixOperationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StartValueInfix}
+	 * labeled alternative in {@link ExprParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterStartValueInfix(ExprParser.StartValueInfixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StartValueInfix}
+	 * labeled alternative in {@link ExprParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitStartValueInfix(ExprParser.StartValueInfixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code InfixPlus}
+	 * labeled alternative in {@link ExprParser#e2}.
+	 * @param ctx the parse tree
+	 */
+	void enterInfixPlus(ExprParser.InfixPlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code InfixPlus}
+	 * labeled alternative in {@link ExprParser#e2}.
+	 * @param ctx the parse tree
+	 */
+	void exitInfixPlus(ExprParser.InfixPlusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code InfixMinus}
+	 * labeled alternative in {@link ExprParser#e2}.
+	 * @param ctx the parse tree
+	 */
+	void enterInfixMinus(ExprParser.InfixMinusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code InfixMinus}
+	 * labeled alternative in {@link ExprParser#e2}.
+	 * @param ctx the parse tree
+	 */
+	void exitInfixMinus(ExprParser.InfixMinusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Void}
+	 * labeled alternative in {@link ExprParser#e2}.
+	 * @param ctx the parse tree
+	 */
+	void enterVoid(ExprParser.VoidContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Void}
+	 * labeled alternative in {@link ExprParser#e2}.
+	 * @param ctx the parse tree
+	 */
+	void exitVoid(ExprParser.VoidContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SecondValueInfix}
+	 * labeled alternative in {@link ExprParser#t}.
+	 * @param ctx the parse tree
+	 */
+	void enterSecondValueInfix(ExprParser.SecondValueInfixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SecondValueInfix}
+	 * labeled alternative in {@link ExprParser#t}.
+	 * @param ctx the parse tree
+	 */
+	void exitSecondValueInfix(ExprParser.SecondValueInfixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code InfixTimes}
+	 * labeled alternative in {@link ExprParser#t2}.
+	 * @param ctx the parse tree
+	 */
+	void enterInfixTimes(ExprParser.InfixTimesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code InfixTimes}
+	 * labeled alternative in {@link ExprParser#t2}.
+	 * @param ctx the parse tree
+	 */
+	void exitInfixTimes(ExprParser.InfixTimesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code InfixDivides}
+	 * labeled alternative in {@link ExprParser#t2}.
+	 * @param ctx the parse tree
+	 */
+	void enterInfixDivides(ExprParser.InfixDividesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code InfixDivides}
+	 * labeled alternative in {@link ExprParser#t2}.
+	 * @param ctx the parse tree
+	 */
+	void exitInfixDivides(ExprParser.InfixDividesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Void2}
+	 * labeled alternative in {@link ExprParser#t2}.
+	 * @param ctx the parse tree
+	 */
+	void enterVoid2(ExprParser.Void2Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Void2}
+	 * labeled alternative in {@link ExprParser#t2}.
+	 * @param ctx the parse tree
+	 */
+	void exitVoid2(ExprParser.Void2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#f}.
+	 * @param ctx the parse tree
+	 */
+	void enterF(ExprParser.FContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#f}.
+	 * @param ctx the parse tree
+	 */
+	void exitF(ExprParser.FContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Integer}
 	 * labeled alternative in {@link ExprParser#num}.
 	 * @param ctx the parse tree
@@ -201,4 +307,28 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFraction(ExprParser.FractionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Pi}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void enterPi(ExprParser.PiContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Pi}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void exitPi(ExprParser.PiContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Euler}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void enterEuler(ExprParser.EulerContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Euler}
+	 * labeled alternative in {@link ExprParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void exitEuler(ExprParser.EulerContext ctx);
 }

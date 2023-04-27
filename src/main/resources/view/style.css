@@ -21,7 +21,7 @@
 
 }
 .result-label{
-    -fx-background-color: orange;
+    -fx-background-color: lightgreen;
 }
 
 .time-number {
@@ -32,4 +32,7 @@
 .time-error {
     -fx-font-weight: bold;
     -fx-text-fill: red;
+}
+.numeric-button{
+    -fx-background-color: green;
 }

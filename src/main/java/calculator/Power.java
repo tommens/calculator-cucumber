@@ -5,7 +5,7 @@ import visitor.TimeVisitor;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Power extends Operation{
+public class Power extends Operation {
     public Power(List<Expression> elist) throws IllegalConstruction {
         super(elist);
     }
@@ -17,7 +17,7 @@ public class Power extends Operation{
 
     @Override
     public int op(int l, int r) {
-        return (int) Utils.pow(l,r);
+        return (int) Utils.pow(l, r);
     }
 
     @Override

@@ -5,7 +5,7 @@ import visitor.TimeVisitor;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class GreatestCommonDivisor extends Operation{
+public class GreatestCommonDivisor extends Operation {
     public GreatestCommonDivisor(List<Expression> elist) throws IllegalConstruction {
         super(elist);
     }
