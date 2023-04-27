@@ -11,22 +11,38 @@ import javafx.stage.Stage;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+/**
+ * This class implement the settings window
+ * The settings window allow to change the precision considered for real numbers
+ * and change the rounding method
+ */
 public class SettingsMenu {
 
-    private Stage window;
-    private GridPane layout;
+    private final Stage window;
+    private final GridPane layout;
 
-    private Calculator calculator;
+    /** Instance of the calculator */
+    private final Calculator calculator;
 
+    /** Combobox to choose between Unlimited and custom precision */
     private ComboBox<String> precisionBox;
+
+    /** Spinner used to get the input of the user for the precision */
     private Spinner<Integer> precision;
+    /** Label that is display when the user select custom precision */
     private Label precisionLabel;
+    /** Combobox to choose the rounding method */
     private ComboBox<RoundingMode> roundingBox;
 
 
+    /**
+     * Constructor
+     * @param c The instance of the calculator
+     */
     public SettingsMenu(Calculator c){
         calculator = c;
 
+        // create the window
         window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Settings");
@@ -34,23 +50,31 @@ public class SettingsMenu {
         window.setMinWidth(100);
         window.setResizable(false);
 
+        // create the layout
         layout = new GridPane();
         layout.setMinWidth(50);
         layout.setMinHeight(200);
         layout.setVgap(10);
         layout.setHgap(5);
         layout.setPadding(new Insets(5,5,5,5));
-        buildPrecisionChoice(layout);
-        buildRoundingChoice(layout);
-        buildBottomButton(layout);
 
+        // build the component
+        buildPrecisionChoice();
+        buildRoundingChoice();
+        buildBottomButton();
+
+        // set the scene
         Scene scene = new Scene(layout);
         window.setScene(scene);
         window.setAlwaysOnTop(true);
         window.showAndWait();
     }
 
-    private void buildPrecisionChoice(GridPane layout){
+
+    /**
+     * Build the first row containing the choice of the precision
+     */
+    private void buildPrecisionChoice(){
         layout.add(new Label("Precision of reals numbers"),0,0);
         precisionBox = new ComboBox<>();
         precisionBox.getItems().addAll("Unlimited","Custom");
@@ -60,6 +84,9 @@ public class SettingsMenu {
         layout.add(precisionBox,1,0);
     }
 
+    /**
+     * Display or not the row to get a custom precision from the user
+     */
     private void updatePrecisionView(){
         if (precisionBox.getSelectionModel().getSelectedItem().equals("Custom")){
             precisionLabel = new Label("Enter the precision");
@@ -72,6 +99,10 @@ public class SettingsMenu {
         }
     }
 
+    /**
+     * Get the string corresponding to the current precision of the calculator
+     * @return "Unlimited" if the precision is Unlimited, "Custom" otherwise
+     */
     private String convertPrecisionToString(){
         int p = calculator.getMathContext().getPrecision();
         if (p == MathContext.UNLIMITED.getPrecision()){
@@ -80,7 +111,10 @@ public class SettingsMenu {
         return "Custom";
     }
 
-    private void buildRoundingChoice(GridPane layout){
+    /**
+     * Build the third row which contain the choice of the rounding method
+     */
+    private void buildRoundingChoice(){
         layout.add(new Label("Rounding method"),0,2);
         roundingBox = new ComboBox<>();
         roundingBox.getItems().addAll(RoundingMode.UP,RoundingMode.DOWN,
@@ -92,7 +126,10 @@ public class SettingsMenu {
         layout.add(roundingBox,1,2);
     }
 
-    private void buildBottomButton(GridPane layout){
+    /**
+     * Build the last row which contains the save and quit buttons
+     */
+    private void buildBottomButton(){
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e->{
             savePrecision();
@@ -106,9 +143,12 @@ public class SettingsMenu {
 
     }
 
+    /**
+     * Save the precision
+     */
     private void savePrecision(){
         if (precisionBox.getSelectionModel().getSelectedItem().equals("Unlimited")){
-            calculator.setPrecision(0);
+            calculator.setPrecision(MathContext.UNLIMITED.getPrecision());
         }else{
             calculator.setPrecision(precision.getValue());
         }
