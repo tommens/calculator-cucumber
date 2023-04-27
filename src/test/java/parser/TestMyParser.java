@@ -29,7 +29,7 @@ public class TestMyParser {
         String testString = "1+2-3*4/6";
         String expected = "( 1 + ( 2 - ( 3 * ( 4 / 6 ) ) ) )";
         Expression e = MyParser.parse(testString);
-        assertEquals(expected,e.toString());
+        assertEquals(expected,e.printOperation());
     }
 
     @Test
@@ -45,16 +45,25 @@ public class TestMyParser {
         String testString = "+(1,2,(*(6,3,(-(7,3)))))";
         String expectedString = "+ (1, 2, * (6, 3, - (7, 3)))";
         Expression e = MyParser.parse(testString);
-        assertEquals(expectedString,e.toString());
+        assertEquals(expectedString,e.printOperation());
     }
 
     @Test
     void testMultipleTypeExpr(){
         String testString = "-(1,(1+2))";
+        String expectedString = "- (1, + (1, 2))";
+        Expression e = MyParser.parse(testString);
+        assertEquals(expectedString,e.printOperation());
+    }
+
+    @Test
+    void testMultipleTypeExprToString(){
+        String testString = "-(1,(1+2))";
         String expectedString = "- (1, ( 1 + 2 ))";
         Expression e = MyParser.parse(testString);
         assertEquals(expectedString,e.toString());
     }
+
 
     @Test
     void testInteger(){

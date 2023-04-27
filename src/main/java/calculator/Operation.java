@@ -131,9 +131,7 @@ public abstract class Operation implements Expression
   	v.visit(this);
   }
 
-  public String accept(NotationVisitor v) {
-  	return v.visit(this);
-  }
+
 
 	/**
 	 * Count the depth of an arithmetic expression recursively,
@@ -171,27 +169,32 @@ public abstract class Operation implements Expression
 			   .getAsInt();  
   }
 
+
+
+
+
+
   /**
    * Convert the arithmetic operation into a String to allow it to be printed,
    * using the default notation (prefix, infix or postfix) that is specified in some variable.
+   * This method doesn't imply using the same notation for all sub operations.
+   *
+   * @see Expression#printOperation()
    *
    * @return	The String that is the result of the conversion.
    */
   @Override
   public final String toString() {
-	  return accept(new Displayer());
+	  if(Displayer.getInstance()==null) {
+		  System.out.println("null");
+		  Displayer.createDisplayer(true);
+		  String result = accept(Displayer.getInstance());
+		  Displayer.deleteDisplayer();
+		  return result;
+	  }
+	  return accept(Displayer.getInstance());
   }
 
-  /**
-   * Convert the arithmetic operation into a String to allow it to be printed,
-   * using the notation n (prefix, infix or postfix) that is specified as a parameter.
-   *
-   * @param n	The notation to be used for representing the operation (prefix, infix or postfix)
-   * @return	The String that is the result of the conversion.
-   */
-  public final String toString(Notation n) {
-	   return accept(new Displayer(n));
-  }
 
 	/**
 	 * Two operation objects are equal if their list of arguments is equal and they correspond to the same operation.

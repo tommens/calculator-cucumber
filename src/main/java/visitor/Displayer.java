@@ -9,18 +9,32 @@ public class Displayer implements NotationVisitor {
 
     private Notation notation;
 
-    public Displayer(Notation notation) {
+    private static Displayer instance = null;
+
+    private boolean calledFromToString = false;
+
+    private Displayer(Notation notation) {
         this.notation = notation;
     }
 
-    public Displayer(){
+    private Displayer(){
 
     }
+
+    private Displayer(boolean calledFromToString){
+        this.calledFromToString = calledFromToString;
+    }
+
+    public static void deleteDisplayer() {
+        instance = null;
+    }
+
+
 
     @Override
 
     public String visit(Operation operation) {
-        notation = notation == null ? operation.notation : notation;
+        notation = calledFromToString ? operation.notation : (notation == null ? operation.notation : notation);
 
         Stream<String> s = operation.args.stream().map(Object::toString);
         return switch (notation) {
@@ -39,4 +53,22 @@ public class Displayer implements NotationVisitor {
         };
     }
 
+    public static Displayer createDisplayer(Notation notation){
+        instance = new Displayer(notation);
+        return instance;
+    }
+
+    public static Displayer createDisplayer(){
+        instance = new Displayer();
+        return instance;
+    }
+
+    public static Displayer createDisplayer(boolean calledFromToString){
+        instance = new Displayer(calledFromToString);
+        return instance;
+    }
+
+    public static Displayer getInstance(){
+        return instance;
+    }
 }

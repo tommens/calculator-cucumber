@@ -14,9 +14,9 @@ class TestNotation {
     /* This is an auxilary method to avoid code duplication.
      */
 	void testNotation(String s,Operation o,Notation n) {
-		assertEquals(s, o.toString(n));
+		assertEquals(s, o.printOperation(n));
 		o.notation = n;
-		assertEquals(s, o.toString());
+		assertEquals(s, o.printOperation());
 	}
 
 	/* This is an auxilary method to avoid code duplication.

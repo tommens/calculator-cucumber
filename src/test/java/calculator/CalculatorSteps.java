@@ -84,7 +84,7 @@ public class CalculatorSteps {
 	public void thenItsNotationIs(String notation, String s) {
 		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
 			op.notation = Notation.valueOf(notation);
-			assertEquals(s, op.toString());
+			assertEquals(s, op.printOperation());
 		}
 		else fail(notation + " is not a correct notation! ");
 	}
