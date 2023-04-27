@@ -34,6 +34,9 @@ public class SettingsMenu {
     /** Combobox to choose the rounding method */
     private ComboBox<RoundingMode> roundingBox;
 
+    private final double windowWidth = 150;
+    private final double windowHeight = 200;
+
 
     /**
      * Constructor
@@ -46,17 +49,17 @@ public class SettingsMenu {
         window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Settings");
-        window.setMinHeight(200);
-        window.setMinWidth(100);
+        window.setMinHeight(windowHeight);
+        window.setMinWidth(windowWidth);
         window.setResizable(false);
 
         // create the layout
         layout = new GridPane();
-        layout.setMinWidth(50);
-        layout.setMinHeight(200);
-        layout.setVgap(10);
-        layout.setHgap(5);
-        layout.setPadding(new Insets(5,5,5,5));
+        layout.setMinWidth(windowWidth);
+        layout.setMinHeight(windowHeight);
+        layout.setVgap(20);
+        layout.setHgap(10);
+        layout.setPadding(new Insets(10,10,10,10));
 
         // build the component
         buildPrecisionChoice();
@@ -91,7 +94,8 @@ public class SettingsMenu {
         if (precisionBox.getSelectionModel().getSelectedItem().equals("Custom")){
             precisionLabel = new Label("Enter the precision");
             layout.add(precisionLabel,0,1);
-            precision = new Spinner<>(0,128,calculator.getMathContext().getPrecision());
+            precision = new Spinner<>(1,128,calculator.getMathContext().getPrecision());
+            precision.setMaxWidth(windowWidth/2);
             layout.add(precision,1,1);
         }else{
             layout.getChildren().remove(precisionLabel);
@@ -131,6 +135,7 @@ public class SettingsMenu {
      */
     private void buildBottomButton(){
         Button saveButton = new Button("Save");
+        saveButton.setPrefSize( 150, 50);
         saveButton.setOnAction(e->{
             savePrecision();
             calculator.setRoundingMode(roundingBox.getValue());
@@ -138,6 +143,7 @@ public class SettingsMenu {
         });
         layout.add(saveButton,0,3);
         Button quitButton = new Button("Quit");
+        quitButton.setPrefSize(150,50);
         quitButton.setOnAction(e -> window.close());
         layout.add(quitButton,1,3);
 

@@ -131,7 +131,7 @@ public class Calculator {
      * @param p A positive integer representing the precision of the real numbers
      */
     public void setPrecision(int p) {
-        if (p > 0) {
+        if (p >= 0) {
             precision = p;
             mathContext = new MathContext(precision, roundingMode);
         }
