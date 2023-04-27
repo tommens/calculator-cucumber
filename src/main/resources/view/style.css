@@ -21,6 +21,9 @@
 
 }
 .result-label{
-    -fx-background-color: orange;
+    -fx-background-color: lightgreen;
 }
 
+.numeric-button{
+    -fx-background-color: green;
+}
