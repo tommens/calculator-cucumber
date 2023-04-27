@@ -1,6 +1,7 @@
 package calculator;
 
 import parser.MyParser;
+import visitor.Counter;
 import visitor.Evaluator;
 import visitor.RealNumberEvaluator;
 
@@ -58,10 +59,12 @@ public class Calculator {
      * @see #print(Expression)
      */
     public void printExpressionDetails(Expression e) {
+        Counter counter = new Counter();
+        e.accept(counter);
         print(e);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
-        System.out.println(" and " + e.countNbs() + " numbers.");
+        System.out.print("It contains " + counter.getCountDepth() + " levels of nested expressions, ");
+        System.out.print(counter.getCountOps() + " operations");
+        System.out.println(" and " + counter.getCountNbs() + " numbers.");
         System.out.println();
     }
 
