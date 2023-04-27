@@ -57,4 +57,25 @@ public class TestMyTime {
     public void testCountDepth() {
         assertEquals(1, myTime1.countDepth());
     }
+
+    @Test
+    public void testGetCurrentTime(){
+        assertEquals("03:00:05",myTime1.getCurrentTime());
+    }
+
+    @Test
+    public void testGetTimeFormat(){
+        assertEquals("PM",myTime1.getTimeFormat());
+    }
+
+    @Test
+    public void testSubtractGUI(){
+        assertEquals(27,myTime1.subtractGUI(myTime2)[0]);
+        assertEquals(11,myTime1.subtractGUI(myTime2)[1]);
+        assertEquals(0,myTime1.subtractGUI(myTime2)[2]);
+        assertEquals(5,myTime1.subtractGUI(myTime2)[3]);
+        assertEquals(659,myTime1.subtractGUI(myTime2)[4]);
+        assertEquals(39540,myTime1.subtractGUI(myTime2)[5]);
+        assertEquals(2372405,myTime1.subtractGUI(myTime2)[6]);
+    }
 }

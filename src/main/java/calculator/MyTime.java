@@ -33,7 +33,7 @@ public class MyTime implements Expression {
             if (part.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 currentDate = part;
             } //Checking if the part is a time (hh:mm:ss with ss being optional)
-            else if (part.matches("\\d{2}:\\d{2}(:\\d{2})?") && !part.startsWith("+") && !part.startsWith("-")) {
+            else if (part.matches("\\d{2}(:\\d{2}(:\\d{2}))?") && !part.startsWith("+") && !part.startsWith("-")) {
                 if (part.length() == 2) {
                     //We add :00:00 at the end of the String if no seconds nor minutes were provided
                     currentTime = part + ":00:00";
@@ -95,24 +95,36 @@ public class MyTime implements Expression {
     public void subtract(MyTime mt){
         long durationHours,durationMinutes,durationSeconds;
         Duration duration = Duration.between(mt.date, this.date);
-        if (duration.toDays() == 0) {
-            durationHours=duration.toHours() % 24;
-        }
-        else {durationHours=duration.toHours() % (24*duration.toDays());}
-        if (durationHours == 0) {
-            durationMinutes = duration.toMinutes() % 60;
-        }
-        else {durationMinutes = duration.toMinutes() % (60*durationHours);}
-        if (durationMinutes == 0) {
-            durationSeconds = duration.toSeconds() % 60;
-        }
-        else {durationSeconds = duration.toSeconds() % (60*durationMinutes);}
+        durationHours=duration.toHours() % 24;
+        durationMinutes = duration.toMinutes() % 60;
+        durationSeconds = duration.toSeconds() % 60;
+
         System.out.println("Duration from " + date + " to " + mt.date + " : ");
         System.out.println(duration.toDays()+" days, "+ durationHours +" hours, "+
                 durationMinutes +" minutes and "+ durationSeconds +" seconds;");
         System.out.println("Or " + duration.getSeconds() + " seconds;");
         System.out.println("Or " + duration.toMinutes() + " minutes;");
         System.out.println("Or " + duration.toHours() + " hours;");
+    }
+
+    //subtraction for the GUI
+    public long[] subtractGUI(MyTime mt){
+        long[] durations = new long[7];
+        long durationHours,durationMinutes,durationSeconds;
+        Duration duration = Duration.between(mt.date, this.date);
+
+        durationHours=duration.toHours() % 24;
+        durationMinutes = duration.toMinutes() % 60;
+        durationSeconds = duration.toSeconds() % 60;
+
+        durations[0] = duration.toDays();
+        durations[1] = durationHours;
+        durations[2] = durationMinutes;
+        durations[3] = durationSeconds;
+        durations[4] = duration.toHours();
+        durations[5] = duration.toMinutes();
+        durations[6] = duration.getSeconds();
+        return durations;
     }
 
     /*public MyTime add(MyTime mt){
@@ -144,4 +156,13 @@ public class MyTime implements Expression {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTime.format(formatter);
     }
+
+    //Methods used in the GUI
+   public String getCurrentTime(){
+        return currentTime;
+    }
+    public String getTimeFormat() {
+        return timeFormat;
+    }
+
 }

@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class TimeWindow {
@@ -74,17 +77,24 @@ public class TimeWindow {
         timeLabelsBox.getChildren().add(textLabel);
         root.getChildren().addAll(timeNumbersBox,timeLabelsBox);
 
+        //Label to put additional infos
+        Label additionalLabel = new Label("");
+        root.getChildren().add(additionalLabel);
+
         //Label to put text in case of errors
         Label errorLabel = new Label("");
         root.getChildren().add(errorLabel);
         errorLabel.getStyleClass().add("time-error");
 
+
         //Time computation
         durationButton.setOnAction(event -> {
-            String currentDate1,currentDate2 = LocalDate.now().toString();
-            String currentTime1, currentTime2 = new SimpleDateFormat("HH:mm:ss").format(new Date(System.currentTimeMillis()));
-            String timezone1,timezone2 = "+00:00";
-            String timeFormat1, timeFormat2 = null;
+            String time1String="",time2String="";//we will pass these strings as arguments for MyTime constructor
+            String currentDate1= LocalDate.now().toString(),currentDate2 = LocalDate.now().toString();
+            String currentTime1 = new SimpleDateFormat("HH:mm:ss").format(new Date(System.currentTimeMillis()));
+            String currentTime2 = new SimpleDateFormat("HH:mm:ss").format(new Date(System.currentTimeMillis()));
+            String timezone1= "+00:00",timezone2 = "+00:00";
+            String timeFormat1= null, timeFormat2 = null;
             errorLabel.setText(""); //clearing potential previous errors
             //Checking if we have at least one date (if we have just 1, the other is set to the current date)
             if (dp2.getValue()==null && dp1.getValue()==null) {
@@ -99,26 +109,76 @@ public class TimeWindow {
                     currentDate1 = dp1.getValue().toString();
                     currentDate2 = dp2.getValue().toString();
                 }
+                time1String+= " "+currentDate1;
+                time2String+= " "+currentDate2;
 
                 //evaluating the optional fields
-
-                MyTime time1 = new MyTime(optionalText1.getText());
-                MyTime time2 = new MyTime(optionalText2.getText());
-
-                /*
-                String timeProvided1 = optionalText1.getText();
-                String timeProvided2 = optionalText2.getText();
-                if (timeProvided1.matches("\\d{2}(:\\d{2}(:\\d{2}))?")) {
-                    if (timeProvided1.length() == 2) {
-                        //We add :00 at the end of the String if no seconds were provided
-                        currentTime1 = timeProvided1 + ":00:00";
-                    } else if (timeProvided1.length() == 2) {
-                        currentTime1 = timeProvided1 + ":00";
+                String[] inputParts1 = optionalText1.getText().split(" ");
+                for (String part : inputParts1) {
+                    if (part.matches("\\d{2}(:\\d{2}(:\\d{2}))?") && !part.startsWith("+") && !part.startsWith("-")) {
+                        if (part.length() == 2) {
+                            //We add :00:00 at the end of the String if no seconds nor minutes were provided
+                            currentTime1 = part + ":00:00";
+                        } else if (part.length() == 5) {
+                            //We add :00 at the end of the String if no seconds were provided
+                            currentTime1 = part + ":00";
+                        } else {
+                            currentTime1 = part;
+                        }
+                    }//Changing the time format depending on what was provided
+                    else if (part.matches("(?i)am|pm")) {
+                        timeFormat1 = part.toUpperCase();
                     }
-                    else {
-                        currentTime1 = timeProvided1;
+                }
+                String[] inputParts2 = optionalText2.getText().split(" ");
+                for (String part : inputParts2) {
+                    if (part.matches("\\d{2}(:\\d{2}(:\\d{2}))?") && !part.startsWith("+") && !part.startsWith("-")) {
+                        if (part.length() == 2) {
+                            //We add :00:00 at the end of the String if no seconds nor minutes were provided
+                            currentTime2 = part + ":00:00";
+                        } else if (part.length() == 5) {
+                            //We add :00 at the end of the String if no seconds were provided
+                            currentTime2 = part + ":00";
+                        } else {
+                            currentTime2 = part;
+                        }
+                    }//Changing the time format depending on what was provided
+                    else if (part.matches("(?i)am|pm")) {
+                        timeFormat2 = part.toUpperCase();
                     }
-                }*/
+                }
+
+                time1String+= " "+currentTime1 + " " + timeFormat1;
+                time2String+= " "+currentTime2 + " " + timeFormat2;
+
+                if (timezone1ComboBox.getValue()!=null){
+                    timezone1 = timezone1ComboBox.getValue();
+                }
+                if (timezone2ComboBox.getValue()!=null){
+                    timezone2 = timezone2ComboBox.getValue();
+                }
+
+                time1String+= " "+timezone1;
+                time2String+= " "+timezone2;
+
+                //Putting all together
+                MyTime myTime1 = null,myTime2=null;
+                try {
+                    myTime1 = new MyTime(time1String);
+                } catch(DateTimeParseException e) {
+                    errorLabel.setText("Please enter a valid first time");
+                }
+                try {
+                    myTime2 = new MyTime(time2String);
+                } catch(DateTimeParseException e) {
+                    errorLabel.setText("Please enter a valid second time");
+                }
+                if (myTime1!=null && myTime2!=null) {
+                    long[] durations = myTime1.subtractGUI(myTime2);
+                    numbersLabel.setText(durations[0] + "   " + durations[1] + "   " + durations[2] + "   " + durations[3]);
+                    additionalLabel.setText("Or "+durations[4]+" hours / "+durations[5]+" minutes / "+durations[6]
+                    + " seconds");
+                }
             }
         });
 
