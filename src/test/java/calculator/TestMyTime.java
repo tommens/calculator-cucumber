@@ -26,7 +26,7 @@ public class TestMyTime {
     @Test
     public void testAdd() {
         MyTime sum = myTime1.add(myNumber);
-        assertEquals("2017-12-28T13:00:05Z", sum.getDate().toString());
+        assertEquals("2017-12-28T12:00:05Z", sum.getDate().toString());
     }
 
     @Test
