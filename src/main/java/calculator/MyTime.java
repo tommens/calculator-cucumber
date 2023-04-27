@@ -12,9 +12,7 @@ import java.util.Date;
  * Time is a concrete class that represents time intervals for time computations
  */
 public class MyTime implements Expression {
-    private String currentDate = LocalDate.now().toString();
     private String currentTime = new SimpleDateFormat("HH:mm:ss").format(new Date(System.currentTimeMillis()));
-    private String timezone = "+00:00";
     private String timeFormat = null;
     private final ZonedDateTime date;
     private final long dateInSeconds;
@@ -28,6 +26,8 @@ public class MyTime implements Expression {
         //I split the input in parts to check which format is provided.
         //Each part represents a specification in the date given (date, time, timezone, format)
         String[] inputParts = input.split(" ");
+        String currentDate = LocalDate.now().toString();
+        String timezone = "+00:00";
         for (String part : inputParts) {
             //Checking if the part is in the format yyyy-MM-dd
             if (part.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -127,15 +127,6 @@ public class MyTime implements Expression {
         return durations;
     }
 
-    /*public MyTime add(MyTime mt){
-        long sumInSeconds = this.dateInSeconds + mt.dateInSeconds;
-        ZonedDateTime sumDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(sumInSeconds), ZoneId.systemDefault());
-        String sumDateStr = sumDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
-        MyTime sum = new MyTime(sumDateStr);
-        System.out.println("Addition of the dates " + date + " and " + mt.date +
-                " corresponds to the following date : " + sum.getDate());
-        return sum;
-    }*/
     public MyTime add(MyRealNumber seconds) {
         long sumInSeconds = this.dateInSeconds + seconds.getRealNumber().longValue();
         ZonedDateTime sumDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(sumInSeconds),ZoneId.of("UTC"));

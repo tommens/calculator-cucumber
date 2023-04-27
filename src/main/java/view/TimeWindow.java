@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
@@ -244,16 +243,14 @@ public class TimeWindow {
             MyRealNumber value = null;
             try {
                 value = new MyRealNumber(numberField.getText());
-            } catch (NumberFormatException e) {
-                errorLabelCopy.setText("Please provide a valid number");
-            }catch (NullPointerException e) {
+            } catch (NumberFormatException | NullPointerException e) {
                 errorLabelCopy.setText("Please provide a valid number");
             }
             String time1String="";//we will pass these strings as arguments for MyTime constructor
             String currentDate1= LocalDate.now().toString();
             String currentTime1 = new SimpleDateFormat("HH:mm:ss").format(new Date(System.currentTimeMillis()));
-            String timezone1= "+00:00",timezone2 = "+00:00";
-            String timeFormat1= null, timeFormat2 = null;
+            String timezone1= "+00:00";
+            String timeFormat1= null;
             errorLabelCopy.setText(""); //clearing potential previous errors
 
             if (dp1Copy.getValue() != null) {
@@ -295,20 +292,15 @@ public class TimeWindow {
             if (myTime1 != null) {
                 MyTime result;
                 try {
-                    switch (typeComboBox.getValue()) {
-                        default :
-                            result = myTime1.add(value);
-                            break;
-                        case "minutes" :
-                            result = myTime1.add(new MyRealNumber(value.getRealNumber().multiply(new BigDecimal(60.0)).toString()));
-                            break;
-                        case "hours" :
-                            result = myTime1.add(new MyRealNumber(value.getRealNumber().multiply(new BigDecimal(3600.0)).toString()));
-                            break;
-                        case "days" :
-                            result = myTime1.add(new MyRealNumber(value.getRealNumber().multiply(new BigDecimal(86400.0)).toString()));
-                            break;
-                    }
+                    result = switch (typeComboBox.getValue()) {
+                        default -> myTime1.add(value);
+                        case "minutes" ->
+                                myTime1.add(new MyRealNumber(value.getRealNumber().multiply(new BigDecimal("60.0")).toString()));
+                        case "hours" ->
+                                myTime1.add(new MyRealNumber(value.getRealNumber().multiply(new BigDecimal("3600.0")).toString()));
+                        case "days" ->
+                                myTime1.add(new MyRealNumber(value.getRealNumber().multiply(new BigDecimal("86400.0")).toString()));
+                    };
                     System.out.println(result.getDate());
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     resultLabel.setText(result.getDate().format(formatter));
