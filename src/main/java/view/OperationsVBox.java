@@ -59,12 +59,15 @@ public class OperationsVBox extends CalculatorPart {
             ResultLabel.getInstance().setText("");
         });
 
+        // back button
+        Button backButton = new Button("<-");
+        backButton.setOnAction(actionEvent -> ExpressionTextField.getInstance().shortenText(1));
+
+
 
         // Button for converting measurements
         Button conversionButton = new Button("Unit converter");
         conversionButton.setOnAction(actionEvent -> ConversionWindow.displayConversionWindow());
-        conversionButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
-        conversionButton.prefHeightProperty().bind(hbox.heightProperty());
 
         HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton,conversionButton));
         hBox.prefHeightProperty().bind(heightProperty());
