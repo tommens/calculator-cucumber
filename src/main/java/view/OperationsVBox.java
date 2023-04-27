@@ -72,8 +72,6 @@ public class OperationsVBox extends CalculatorPart {
         // Button for time calculations
         Button timeButton = new Button("Time");
         timeButton.setOnAction(actionEvent -> TimeWindow.displayTimeWindow());
-        timeButton.prefWidthProperty().bind(hbox.widthProperty().multiply(1./nbButtons));
-        timeButton.prefHeightProperty().bind(hbox.heightProperty());
         
         HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton,conversionButton,timeButton));
         hBox.prefHeightProperty().bind(heightProperty());
