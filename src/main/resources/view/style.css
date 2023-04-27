@@ -24,6 +24,15 @@
     -fx-background-color: lightgreen;
 }
 
+.time-number {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.time-error {
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
 .numeric-button{
     -fx-background-color: green;
 }

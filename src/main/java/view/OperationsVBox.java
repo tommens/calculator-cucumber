@@ -68,8 +68,12 @@ public class OperationsVBox extends CalculatorPart {
         // Button for converting measurements
         Button conversionButton = new Button("Unit converter");
         conversionButton.setOnAction(actionEvent -> ConversionWindow.displayConversionWindow());
-
-        HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton,conversionButton));
+        
+        // Button for time calculations
+        Button timeButton = new Button("Time");
+        timeButton.setOnAction(actionEvent -> TimeWindow.displayTimeWindow());
+        
+        HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton,conversionButton,timeButton));
         hBox.prefHeightProperty().bind(heightProperty());
         hBox.prefWidthProperty().bind(widthProperty());
         return hBox;
