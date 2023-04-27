@@ -34,7 +34,10 @@ public class MyTime implements Expression {
                 currentDate = part;
             } //Checking if the part is a time (hh:mm:ss with ss being optional)
             else if (part.matches("\\d{2}:\\d{2}(:\\d{2})?") && !part.startsWith("+") && !part.startsWith("-")) {
-                if (part.length() == 5) {
+                if (part.length() == 2) {
+                    //We add :00:00 at the end of the String if no seconds nor minutes were provided
+                    currentTime = part + ":00:00";
+                } else if (part.length() == 5) {
                     //We add :00 at the end of the String if no seconds were provided
                     currentTime = part + ":00";
                 } else {
