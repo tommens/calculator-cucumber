@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.Displayer;
 import visitor.Visitor;
 
 /**
@@ -38,4 +39,29 @@ public interface Expression {
     * @return The number of values contained in an arithmetic expression
     */
    int countNbs();
+
+   default String printOperation(){
+      String result = accept(Displayer.createDisplayer());
+      Displayer.deleteDisplayer();
+      return result;
+   }
+
+   default String printOperation(Notation notation){
+      String result = accept(Displayer.createDisplayer(notation));
+      Displayer.deleteDisplayer();
+      return result;
+   }
+
+   default String accept(Displayer displayer){
+      try {
+         return displayer.visit((Operation) this);
+      }
+     catch (ClassCastException e){
+        return "";
+     }
+   }
+
+
+
+
 }
