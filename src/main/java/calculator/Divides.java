@@ -1,6 +1,7 @@
 package calculator;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 
 /**
@@ -63,7 +64,12 @@ public final class Divides extends Operation {
      */
     @Override
     public BigDecimal op(BigDecimal l, BigDecimal r) {
-        return l.divide(r, mathContext);
+        try{
+            return l.divide(r, mathContext);
+        }catch (ArithmeticException exception){
+            return l.divide(r, MathContext.DECIMAL128);
+        }
+
     }
 
     /**
