@@ -10,8 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestRationalNumberEvaluator {
 
@@ -72,5 +71,27 @@ class TestRationalNumberEvaluator {
             fail();
         }
     }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {"*", "+", "/", "-"})
+    void testEvaluateRationalOperationsImplyingZero(String symbol) {
+        List<Expression> params = Arrays.asList(MyRationalNumber.create(nominator1, denominator1),MyRationalNumber.create(0, denominator2));
+        try {
+            //construct another type of operation depending on the input value
+            //of the parameterised test
+            switch (symbol) {
+                case "+"	->	assertEquals( MyRationalNumber.create(nominator1,denominator1), calc.evalRational(new Plus(params)));
+                case "-"	->	assertEquals( MyRationalNumber.create(nominator1, denominator1), calc.evalRational(new Minus(params)));
+                case "*"	->	assertEquals( MyRationalNumber.create(0, 1), calc.evalRational(new Times(params)));
+                case "/"	->	assertThrows( ArithmeticException.class, () -> calc.evalRational(new Divides(params)));
+                default		->	fail();
+            }
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+
 
 }

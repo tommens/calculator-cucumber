@@ -81,7 +81,7 @@ public class Calculator {
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
-    public int eval(Expression e) {
+    public int eval(Expression e) throws ArithmeticException{
         // create a new visitor to evaluate expressions
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
@@ -96,7 +96,7 @@ public class Calculator {
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
-    public BigDecimal evalReal(Expression e) {
+    public BigDecimal evalReal(Expression e) throws ArithmeticException{
         // create a new visitor to evaluate expressions
         RealNumberEvaluator v = new RealNumberEvaluator();
         // and ask the expression to accept this visitor to start the evaluation process
@@ -111,7 +111,7 @@ public class Calculator {
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation as a rational number
      */
-    public MyRationalNumber evalRational(Expression e) {
+    public MyRationalNumber evalRational(Expression e) throws ArithmeticException{
         RationalNumberEvaluator v = new RationalNumberEvaluator();
         e.accept(v);
         return v.getResult();

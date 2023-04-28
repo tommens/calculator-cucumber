@@ -45,16 +45,16 @@ public final class Divides extends Operation {
     neutral = 1;
   }
 
-  /**
-   * The actual computation of the (binary) arithmetic division of two integers
-   *
-   * @param l The first integer
-   * @param r The second integer that should divide the first
-   * @return The integer that is the result of the division
-   */
-  public int op(int l, int r) {
-    return (l / r);
-  }
+    /**
+     * The actual computation of the (binary) arithmetic division of two integers
+     * @param l The first integer
+     * @param r The second integer that should divide the first
+     * @return The integer that is the result of the division
+     */
+  public int op(int l, int r) throws ArithmeticException
+    { if(r==0) throw new ArithmeticException("Division by zero");
+      return (l/r); }
+
   @Override
   public MyTime op(MyTime l, MyTime r) {
     throw new RuntimeException("Sorry, you can't divide two dates.");
@@ -74,12 +74,23 @@ public final class Divides extends Operation {
      * @return The real number that is the result of the division
      */
     @Override
-    public BigDecimal op(BigDecimal l, BigDecimal r) {
+    public BigDecimal op(BigDecimal l, BigDecimal r)  throws ArithmeticException{
         try{
             return l.divide(r, mathContext);
         }catch (ArithmeticException exception){
             return l.divide(r, MathContext.DECIMAL128);
         }
+    }
+    
+    /**
+     * The actual computation of the (binary) arithmetic division of two rational numbers
+     * @param l The first rational number
+     * @param r The second rational number that should divide the first
+     * @return The rational number that is the result of the division
+     */
+    @Override
+    public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) throws ArithmeticException{
+        return l.divide(r);
 
     }
 

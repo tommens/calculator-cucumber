@@ -14,12 +14,12 @@ import visitor.Visitor;
  */
 public interface Expression {
 
-    /**
-     * accept is a method needed to implement the visitor design pattern
-     *
-     * @param v The visitor object being passed as a parameter
-     */
-    void accept(Visitor v);
+   /**
+    * accept is a method needed to implement the visitor design pattern
+    *
+    * @param v The visitor object being passed as a parameter
+    */
+   void accept(Visitor v) throws ArithmeticException;
 
     default String printOperation() {
         String result = accept(Displayer.createDisplayer());
@@ -46,6 +46,7 @@ public interface Expression {
     }
 
     void accept(TimeVisitor v);
+}
 
 }
 

@@ -33,7 +33,7 @@ class TestMyRationalNumber {
 
 	@Test
 	void testDenominatorZero() {
-		assertThrows(IllegalArgumentException.class, () -> MyRationalNumber.create(1, 0));
+		assertThrows(ArithmeticException.class, () -> MyRationalNumber.create(1, 0));
 	}
 
 	@Test
@@ -66,7 +66,7 @@ class TestMyRationalNumber {
 	@Test
 	void testDivide(){
 		assertEquals(MyRationalNumber.create(50, 28), MyRationalNumber.create(5, 4).divide(MyRationalNumber.create(7, 10)));
-		assertThrows(IllegalArgumentException.class, () -> MyRationalNumber.create(1, 4).divide(MyRationalNumber.create(0, 10)));
+		assertThrows(ArithmeticException.class, () -> MyRationalNumber.create(1, 4).divide(MyRationalNumber.create(0, 10)));
 		assertEquals(MyRationalNumber.create(0, 1), MyRationalNumber.create(0, 4).divide(MyRationalNumber.create(7, 10)));
 		assertEquals(MyRationalNumber.create(0, 1), MyRationalNumber.create(0, 4).divide(MyRationalNumber.create(6, 10)));
 		assertEquals(MyRationalNumber.create(3, 3), MyRationalNumber.create(-3, 1).divide(MyRationalNumber.create(-3, 1)));
