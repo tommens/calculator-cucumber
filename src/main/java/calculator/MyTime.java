@@ -79,18 +79,6 @@ public class MyTime implements Expression {
     public void accept(TimeVisitor v) {
         v.visit(this);
     }
-    @Override
-    public int countOps() {
-        return 0;
-    }
-    @Override
-    public int countNbs() {
-        return 1;
-    }
-    @Override
-    public int countDepth() {
-        return 1;
-    }
 
     public void subtract(MyTime mt){
         long durationHours,durationMinutes,durationSeconds;

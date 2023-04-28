@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import visitor.Counter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,11 +11,16 @@ public class TestMyTime {
     private MyTime myTime2;
     private MyRealNumber myNumber;
 
+    private Counter counter;
+
     @BeforeEach
     public void setUp() {
         myTime1 = new MyTime("2017-12-28 03:00:05 pm +04:00");
         myTime2 = new MyTime("2017-12-01 00:00:00 +00:00");
         myNumber = new MyRealNumber(String.valueOf(3600));
+
+        counter = new Counter();
+        myTime1.accept(counter);
     }
 
     @Test
@@ -45,17 +51,17 @@ public class TestMyTime {
     }
     @Test
     public void testCountOps() {
-        assertEquals(0, myTime1.countOps());
+        assertEquals(0, counter.getCountOps());
     }
 
     @Test
     public void testCountNbs() {
-        assertEquals(1, myTime1.countNbs());
+        assertEquals(1, counter.getCountNbs());
     }
 
     @Test
     public void testCountDepth() {
-        assertEquals(1, myTime1.countDepth());
+        assertEquals(0, counter.getCountDepth());
     }
 
     @Test
