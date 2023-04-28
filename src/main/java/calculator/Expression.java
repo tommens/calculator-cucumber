@@ -1,5 +1,7 @@
 package calculator;
 
+import visitor.Counter;
+import visitor.Displayer;
 import visitor.TimeVisitor;
 import visitor.Visitor;
 
@@ -19,26 +21,31 @@ public interface Expression {
      */
     void accept(Visitor v);
 
+   default String printOperation(){
+      String result = accept(Displayer.createDisplayer());
+      Displayer.deleteDisplayer();
+      return result;
+   }
+
+   default String printOperation(Notation notation){
+      String result = accept(Displayer.createDisplayer(notation));
+      Displayer.deleteDisplayer();
+      return result;
+   }
+
+   default String accept(Displayer displayer){
+      try {
+         return displayer.visit((Operation) this);
+      }
+     catch (ClassCastException e){
+        return "";
+     }
+   }
+
+   default void accept(Counter counter){
+        counter.visit(this);
+   }
+
     void accept(TimeVisitor v);
 
-    /**
-     * Counts the depth of nested expressions in an arithmetic expression
-     *
-     * @return The depth of an arithmetic expression
-     */
-    int countDepth();
 
-    /**
-     * Counts the number of operations recursively contained in an arithmetic expression
-     *
-     * @return The number of operations contained in an arithmetic expression
-     */
-    int countOps();
-
-    /**
-     * Counts the number of values recursively contained in an arithmetic expression
-     *
-     * @return The number of values contained in an arithmetic expression
-     */
-    int countNbs();
-}

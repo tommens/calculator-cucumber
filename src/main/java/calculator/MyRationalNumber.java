@@ -106,21 +106,6 @@ public class MyRationalNumber extends MyNumber {
     }
 
     @Override
-    public int countDepth() {
-        return 0;
-    }
-
-    @Override
-    public int countOps() {
-        return 0;
-    }
-
-    @Override
-    public int countNbs() {
-        return 1;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || !(o instanceof MyRationalNumber that)) return false;
@@ -199,6 +184,8 @@ public class MyRationalNumber extends MyNumber {
         Long gcd = Utils.gcd(absNominator, absDenominator);
         return new MyRationalNumber(sign * absNominator / gcd, absDenominator / gcd);
     }
+
+
 
 }
 
