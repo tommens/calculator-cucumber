@@ -27,7 +27,7 @@ public class TestMyParser {
     @Test
     void testMultipleInfix(){
         String testString = "1+2-3*4/6";
-        String expected = "( 1 + ( 2 - ( 3 * ( 4 / 6 ) ) ) )";
+        String expected = "( ( 1 + 2 ) - ( ( 3 * 4 ) / 6 ) )";
         Expression e = MyParser.parse(testString);
         assertEquals(expected,e.printOperation());
     }

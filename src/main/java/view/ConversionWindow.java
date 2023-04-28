@@ -63,8 +63,8 @@ public class ConversionWindow {
             // Getting the name of the class from the measurement String
             String measurementName = measurementComboBox.getValue();
             if (fromUnit==null || toUnit==null || Objects.equals(measurementName, "")){
-                conversionResultLabel.setText("Please select a measurement, an initial unit and " +
-                        "a final unit");
+                conversionResultLabel.setText("Please select a measurement, an initial unit, " +
+                        "a final unit and a value");
             }
             else {
                 BigDecimal conversionResult = null;

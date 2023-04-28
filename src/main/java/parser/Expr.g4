@@ -8,13 +8,11 @@ expr  : prefixOperation
       ;
 
 prefixOperation : operator values;
-infixOperation : values operator values
-               | values operator infixOperation;
 postfixOperation : values operator;
 
 values : num
-       | OPENBRACKET values CLOSEBRACKET
-       | OPENBRACKET expr CLOSEBRACKET
+       | '(' values ')'
+       | '(' expr ')'
        | values SEPARATOR values
        ;
 
@@ -29,15 +27,35 @@ operator: ('+')     #Plus
         | ('lcm')   #LCM
         ;
 
+
+/* Infix operation
+   Grammar from the compilation course
+*/
+infixOperation : e;
+e : t e2 #StartValueInfix;
+e2 : '+' t e2       #InfixPlus
+   | '-' t e2       #InfixMinus
+   | /* epsilon */  #Void
+   ;
+t : f t2    #SecondValueInfix;
+t2 : '*' f t2       #InfixTimes
+   | '/' f t2       #InfixDivides
+   | /* epsilon */  #Void2
+   ;
+f : num
+  | '(' expr ')'
+  ;
+
 num   : INT     #Integer
       | REAL    #Real
       | FRAC    #Fraction
+      | PI      #Pi
+      | EULER   #Euler
       ;
 
-
-OPENBRACKET : '(';
-CLOSEBRACKET : ')';
 SEPARATOR : ',';
 INT : [0-9]+;
 REAL  : [0-9]+[.][0-9]+('E'[+|-]?[0-9]+)?;
 FRAC  : [0-9]+[_][0-9]+;
+PI : 'π';
+EULER : 'e';

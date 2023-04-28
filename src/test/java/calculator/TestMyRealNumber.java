@@ -4,6 +4,7 @@ package calculator;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
+import java.math.BigDecimal;
 import java.math.MathContext;
 
 
@@ -60,6 +61,24 @@ public class TestMyRealNumber {
         MyRationalNumber r = MyRationalNumber.create(1,10);
 
         assertEquals(r,new MyRealNumber("0.1").getRational());
+    }
+
+    @Test
+    void testEquals(){
+        // Two distinct MyRealNumber have the same value
+        assertEquals(new MyRealNumber(value), number);
+        // Two MyNumbers containing a distinct value should not be equal:
+        assertNotEquals(new MyRealNumber("2.1"),number);
+        assertEquals(number, number); // Identity check
+        assertNotEquals(new MyInteger(2),new MyRealNumber(2));
+    }
+
+    @Test
+    void testInfiniteDecimal(){
+        Calculator calculator = new Calculator();
+        calculator.setPrecision(MathContext.UNLIMITED.getPrecision());
+        BigDecimal res = calculator.evalReal(calculator.read("1/3"));
+        assertEquals(MathContext.DECIMAL128.getPrecision(), res.precision());
     }
 
 

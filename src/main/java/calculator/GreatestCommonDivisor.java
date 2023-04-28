@@ -1,9 +1,11 @@
 package calculator;
 
+import visitor.TimeVisitor;
+
 import java.math.BigDecimal;
 import java.util.List;
 
-public class GreatestCommonDivisor extends Operation{
+public class GreatestCommonDivisor extends Operation {
     public GreatestCommonDivisor(List<Expression> elist) throws IllegalConstruction {
         super(elist);
     }
@@ -20,12 +22,27 @@ public class GreatestCommonDivisor extends Operation{
     }
 
     @Override
+    public MyTime op(MyTime l, MyTime r) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public MyTime op(MyTime l, MyRealNumber seconds) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public BigDecimal op(BigDecimal l, BigDecimal r) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void accept(TimeVisitor v) {
         throw new UnsupportedOperationException();
     }
 }
