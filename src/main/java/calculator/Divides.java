@@ -96,17 +96,5 @@ public final class Divides extends Operation {
 
   @Override
   public void accept(TimeVisitor v) {}
-  
 
-  /**
-   * The actual computation of the (binary) arithmetic division of two rational numbers
-   *
-   * @param l The first rational number
-   * @param r The second rational number that should divide the first
-   * @return The rational number that is the result of the division
-   */
-  @Override
-  public MyRationalNumber op(MyRationalNumber l, MyRationalNumber r) {
-    return l.divide(r);
-  }
 }

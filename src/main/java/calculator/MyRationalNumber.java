@@ -5,6 +5,8 @@ import visitor.Visitor;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import static calculator.Utils.pow;
+
 public class MyRationalNumber extends MyNumber {
     private final Long nominator;
     private final Long denominator;
