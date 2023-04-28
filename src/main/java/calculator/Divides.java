@@ -3,6 +3,7 @@ package calculator;
 import visitor.TimeVisitor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 
 /**
@@ -64,19 +65,27 @@ public final class Divides extends Operation {
     throw new RuntimeException("Sorry, you can't divide a date and a number");
   }
 
+
+    /**
+     * The actual computation of the (binary) arithmetic division of two real numbers
+     *
+     * @param l first argument of the binary operation
+     * @param r second argument of the binary operation
+     * @return The real number that is the result of the division
+     */
+    @Override
+    public BigDecimal op(BigDecimal l, BigDecimal r) {
+        try{
+            return l.divide(r, mathContext);
+        }catch (ArithmeticException exception){
+            return l.divide(r, MathContext.DECIMAL128);
+        }
+
+    }
+
   @Override
   public void accept(TimeVisitor v) {}
-  /**
-   * The actual computation of the (binary) arithmetic division of two real numbers
-   *
-   * @param l first argument of the binary operation
-   * @param r second argument of the binary operation
-   * @return The real number that is the result of the division
-   */
-  @Override
-  public BigDecimal op(BigDecimal l, BigDecimal r) {
-    return l.divide(r, mathContext);
-  }
+  
 
   /**
    * The actual computation of the (binary) arithmetic division of two rational numbers
