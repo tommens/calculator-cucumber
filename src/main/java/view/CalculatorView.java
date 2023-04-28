@@ -18,7 +18,7 @@ public class CalculatorView extends VBox {
     private static CalculatorView instance;
     private final List<CalculatorPart> calculatorParts;
     private ArithmeticType arithmeticType;
-    private double totalHeightRequired = 1., totalWidthRequired = 0.;
+    private double totalHeightRequired = 2., totalWidthRequired = 0.;
 
     private CalculatorView() {
 
@@ -29,7 +29,8 @@ public class CalculatorView extends VBox {
         addCalculatorPart(LeftVBox.getInstance());
         addCalculatorPart(OperationsVBox.getInstance());
 
-        getChildren().addAll(buildMenuBar(),ExpressionTextField.getInstance(), ResultLabel.getInstance(), buttonsHbox);
+        getChildren().addAll(buildMenuBar(), ExpressionTextField.getInstance(), ResultLabel.getInstance(), buttonsHbox);
+
         bindHeightAndWidth();
     }
 
@@ -67,7 +68,7 @@ public class CalculatorView extends VBox {
      * @param totalHeightRequired The total height required by a part of the calculator.
      */
     public void setTotalHeightRequired(double totalHeightRequired) {
-        this.totalHeightRequired = Math.max(totalHeightRequired + 1, this.totalHeightRequired);
+        this.totalHeightRequired = Math.max(totalHeightRequired + 2, this.totalHeightRequired);
     }
 
     /**
@@ -85,8 +86,12 @@ public class CalculatorView extends VBox {
     public void bindHeightAndWidth() {
         calculatorParts.forEach(calculatorPart -> {
             calculatorPart.prefWidthProperty().bind(widthProperty().multiply(calculatorPart.getMaxWidthNbButtons() / totalWidthRequired));
+            System.out.println(calculatorPart.getMaxWidthNbButtons());
             calculatorPart.prefHeightProperty().bind(heightProperty().multiply(calculatorPart.getChildren().size() / totalHeightRequired));
+            System.out.println(calculatorPart.getChildren().size());
         });
+        System.out.println("Total height required: " + totalHeightRequired);
+        System.out.println("Total width required: " + totalWidthRequired);
         ExpressionTextField.getInstance().prefHeightProperty().bind(heightProperty().multiply(1 / totalHeightRequired));
         ResultLabel.getInstance().prefHeightProperty().bind(heightProperty().multiply(1 / totalHeightRequired));
     }

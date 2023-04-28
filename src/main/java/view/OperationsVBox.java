@@ -15,10 +15,10 @@ public class OperationsVBox extends CalculatorPart {
     private static OperationsVBox instance;
 
     private OperationsVBox() {
-        addHBox(new ButtonsHBox(Stream.of("(", ",", ")","π").map(GenericButton::new).toList(), "operator-button"));
-        addHBox(getSecondHBox());
-        addHBox(new ButtonsHBox(Stream.of("*", "/", "gcd","E").map(GenericButton::new).toList(), "operator-button"));
-        addHBox(new ButtonsHBox(Stream.of("%", "^", "lcm","").map(GenericButton::new).toList(), "operator-button"));
+
+        addHBox(getFirstHBox());
+        addHBox(new ButtonsHBox(Stream.of("+", "-", "%", "e", "gcd").map(GenericButton::new).toList(), "operator-button"));
+        addHBox(new ButtonsHBox(Stream.of("*", "/", "^","E", "lcm").map(GenericButton::new).toList(), "operator-button"));
         addHBox(getBottomHBox());
     }
 
@@ -32,14 +32,14 @@ public class OperationsVBox extends CalculatorPart {
         return instance;
     }
 
-    private HBox getSecondHBox() {
+    private HBox getFirstHBox() {
         // Button to create a rational number
         Button fracButton = new Button("X/Y");
         fracButton.setOnAction(actionEvent -> ExpressionTextField.getInstance().updateText("_"));
         fracButton.setTooltip(new Tooltip("Use this button to create a rational number. Enter the nominator, press this button and enter the denominator."));
 
         HBox hBox = new ButtonsHBox(
-                List.of(new GenericButton("+"), new GenericButton("-"), fracButton, new GenericButton("e")),
+                List.of(new GenericButton("("), new GenericButton(")"), new GenericButton(".") , new GenericButton("π"),fracButton),
                 "operator-button");
         hBox.prefHeightProperty().bind(heightProperty());
         hBox.prefWidthProperty().bind(widthProperty());
@@ -73,7 +73,7 @@ public class OperationsVBox extends CalculatorPart {
         Button timeButton = new Button("Time");
         timeButton.setOnAction(actionEvent -> TimeWindow.displayTimeWindow());
         
-        HBox hBox = new ButtonsHBox(List.of(new GenericButton("."), backButton, clearButton,conversionButton,timeButton));
+        HBox hBox = new ButtonsHBox(List.of(backButton, clearButton,conversionButton,timeButton));
         hBox.prefHeightProperty().bind(heightProperty());
         hBox.prefWidthProperty().bind(widthProperty());
         return hBox;

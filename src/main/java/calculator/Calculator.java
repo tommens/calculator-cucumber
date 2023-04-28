@@ -176,13 +176,25 @@ public class Calculator {
         Expression e = read(expr);
         switch (currentType){
             case  INTEGER -> {
-                return Integer.toString(eval(e));
+                try {
+                    return Integer.toString(eval(e));
+                } catch (ArithmeticException ex) {
+                    return "NaN";
+                }
             }
             case  REAL -> {
-                return evalReal(e).toString();
+                try {
+                    return evalReal(e).toString();
+                } catch (ArithmeticException ex) {
+                    return "NaN";
+                }
             }
             case RATIONAL -> {
-                return evalRational(e).toString();
+                try{
+                    return evalRational(e).toString();
+                } catch (ArithmeticException ex) {
+                    return "NaN";
+                }
             }
         }
         return "Error";
