@@ -7,27 +7,37 @@ import java.math.MathContext;
  * This class represent a real number
  * The class extends an abstract class MyNumber
  */
-public class MyRealNumber extends MyNumber{
+public class MyRealNumber extends MyNumber {
 
     private final BigDecimal value;
 
 
     /**
      * Constructor method
+     *
      * @param v The real number to be contained in the object
      */
-    public MyRealNumber(String v){
+    public MyRealNumber(String v) {
+        value = new BigDecimal(v);
+    }
+
+    /**
+     * Constructor method
+     * @param v The real number to be contained in the object
+     */
+    public MyRealNumber(double v){
         value = new BigDecimal(v);
     }
 
 
     /**
      * Constructor method
-     * @param v The real number to be contained in the object
+     *
+     * @param v  The real number to be contained in the object
      * @param mc The MathContext containing the precision and the rounding mode to be used
      */
-    public MyRealNumber(String v, MathContext mc){
-        value = new BigDecimal(v,mc);
+    public MyRealNumber(String v, MathContext mc) {
+        value = new BigDecimal(v, mc);
     }
 
     public MyRealNumber(Long nominator, Long denominator) {
@@ -36,6 +46,7 @@ public class MyRealNumber extends MyNumber{
 
     /**
      * getter method to obtain the value contained in the object as an integer
+     *
      * @return The value contained in the object as an integer
      */
     @Override
@@ -45,6 +56,7 @@ public class MyRealNumber extends MyNumber{
 
     /**
      * getter method to obtain the real number contained in the object
+     *
      * @return The real number contained in the object
      */
     @Override
@@ -54,6 +66,7 @@ public class MyRealNumber extends MyNumber{
 
     /**
      * getter method to obtain the value contained in the object as a rational number
+     *
      * @return The value contained in the object as a rational number
      */
     @Override
@@ -64,7 +77,8 @@ public class MyRealNumber extends MyNumber{
 
     /**
      * Convert a number into a String to allow it to be printed.
-     * @return	The String that is the result of the conversion.
+     *
+     * @return The String that is the result of the conversion.
      */
     @Override
     public String toString() {
@@ -74,6 +88,7 @@ public class MyRealNumber extends MyNumber{
 
     /**
      * Two MyRealNumber expressions are equal if the values they contain are equal
+     *
      * @param o The object to compare to
      * @return A boolean representing the result of the equality test
      */
@@ -91,7 +106,7 @@ public class MyRealNumber extends MyNumber{
         if (!(o instanceof MyRealNumber)) {
             return false;
         }
-        return this.value.equals(((MyRealNumber)o).value);
+        return this.value.equals(((MyRealNumber) o).value);
     }
 
     //generate hashcode
@@ -101,12 +116,12 @@ public class MyRealNumber extends MyNumber{
     }
 
 
-
     /**
      * Return the value as a string in the classic decimal notation
+     *
      * @return A String representing the value in classic decimal notation
      */
-    public String toDecimalString(){
+    public String toDecimalString() {
         return value.toPlainString();
     }
 }

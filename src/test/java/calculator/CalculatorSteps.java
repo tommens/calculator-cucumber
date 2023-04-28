@@ -41,6 +41,10 @@ public class CalculatorSteps {
 				case "-"	->	op = new Minus(params);
 				case "*"	->	op = new Times(params);
 				case "/"	->	op = new Divides(params);
+				case "GCD"	->	op = new GreatestCommonDivisor(params);
+				case "LCM"	->	op = new LeastCommonMultiple(params);
+				case "%"	->	op = new Modulo(params);
+				case "^"	->	op = new Power(params);
 				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {
@@ -80,7 +84,7 @@ public class CalculatorSteps {
 	public void thenItsNotationIs(String notation, String s) {
 		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
 			op.notation = Notation.valueOf(notation);
-			assertEquals(s, op.toString());
+			assertEquals(s, op.printOperation());
 		}
 		else fail(notation + " is not a correct notation! ");
 	}

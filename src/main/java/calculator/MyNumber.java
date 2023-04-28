@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.TimeVisitor;
 import visitor.Visitor;
 
 import java.math.BigDecimal;
@@ -11,17 +12,18 @@ import java.math.BigDecimal;
  * @see Expression
  * @see Operation
  */
-public abstract class MyNumber implements Expression
-{
+public abstract class MyNumber implements Expression {
 
     /**
      * abstract method to obtain the integer value contain in the object
+     *
      * @return The integer number contain in the object
      */
     public abstract Integer getInteger();
 
     /**
      * abstract method to obtain the real number contain in the object
+     *
      * @return The real number contained in the object
      */
     public abstract BigDecimal getRealNumber();
@@ -29,6 +31,7 @@ public abstract class MyNumber implements Expression
 
     /**
      * abstract method to obtain the rational number corresponding to the value of the object
+     *
      * @return The rational number contain in the object
      */
     public abstract MyRationalNumber getRational() throws ArithmeticException;
@@ -44,34 +47,13 @@ public abstract class MyNumber implements Expression
   }
 
 
-    /** The depth of a number expression is always 0
-     *
-     * @return The depth of a number expression
-     */
-  public int countDepth() {
-	  return 0;
-  }
 
-    /** The number of operations contained in a number expression is always 0
-     *
-     * @return The number of operations contained in a number expression
-     */
-  public int countOps() {
-	  return 0;
-  }
+    @Override
+    public void accept(TimeVisitor v) {}
 
-    /** The number of numbers contained in a number expression is always 1
-     *
-     * @return The number of numbers contained in  a number expression
-     */
-  public int countNbs() {
-	  return 1;
-  }
+    @Override
+    public abstract boolean equals(Object obj);
 
-
-  @Override
-  public abstract boolean equals(Object obj);
-
-  @Override
-  public abstract int hashCode();
+    @Override
+    public abstract int hashCode();
 }

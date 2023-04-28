@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class MyRationalNumber extends MyNumber {
-    private Long nominator;
-    private Long denominator;
+    private final Long nominator;
+    private final Long denominator;
 
     /**
      * Constructor method to create a rational number
@@ -24,10 +24,12 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Constructor method to create a rational number from a BigDecimal value
+     *
      * @param value The BigDecimal value to be converted to a rational number
      */
     private MyRationalNumber(BigDecimal value) throws ArithmeticException{
         this(value.unscaledValue().longValue(), pow(10L, value.scale()));
+
 
     }
 
@@ -52,6 +54,7 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Factory method to create a rational number from a BigDecimal value
+     *
      * @param value The BigDecimal value to be converted to a rational number
      * @return The rational number created
      * @throws ArithmeticException
@@ -71,15 +74,17 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Method to convert the rational number to an integer
+     *
      * @return The integer value of the rational number
      */
     @Override
     public Integer getInteger() {
-        return (int)(nominator / denominator);
+        return (int) (nominator / denominator);
     }
 
     /**
      * Method to return the rational number itself
+     *
      * @return The rational number itself
      */
     @Override
@@ -89,6 +94,7 @@ public class MyRationalNumber extends MyNumber {
 
     /**
      * Method to convert the rational number to a BigDecimal
+     *
      * @return The BigDecimal value of the rational number
      */
     public BigDecimal getRealNumber() {
@@ -98,21 +104,6 @@ public class MyRationalNumber extends MyNumber {
     @Override
     public void accept(Visitor v) {
         v.visit(this);
-    }
-
-    @Override
-    public int countDepth() {
-        return 0;
-    }
-
-    @Override
-    public int countOps() {
-        return 0;
-    }
-
-    @Override
-    public int countNbs() {
-        return 1;
     }
 
     @Override
@@ -190,29 +181,11 @@ public class MyRationalNumber extends MyNumber {
         Long absNominator = Math.abs(nominator);
         Long absDenominator = Math.abs(denominator);
 
-        Long gcd = gcd(absNominator, absDenominator);
+        Long gcd = Utils.gcd(absNominator, absDenominator);
         return new MyRationalNumber(sign * absNominator / gcd, absDenominator / gcd);
     }
 
-    /**
-     * Method that calculates the greatest common divisor of two integers
-     *
-     * @param a The first integer
-     * @param b The second integer
-     * @return The greatest common divisor of the two integers
-     */
-    private Long gcd(Long a, Long b) {
-        return b == 0 ? a : gcd(b, a % b);
 
-    }
-
-    private static long pow(long base, int exponent) {
-        long result = 1;
-        for (int i = 0; i < exponent; i++) {
-            result *= base;
-        }
-        return result;
-    }
 
 }
 
