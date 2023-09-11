@@ -17,7 +17,7 @@
         <java.version>17</java.version>
         <junit-jupiter.version>5.9.3</junit-jupiter.version>
         <junit-platform-suite.version>1.9.3</junit-platform-suite.version>
-        <cucumber.version>7.13.0</cucumber.version>
+        <cucumber.version>7.14.0</cucumber.version>
         <jacoco.version>0.8.10</jacoco.version>
         <javadoc.version>3.5.0</javadoc.version>
         <sonar.organization>tommens</sonar.organization>
