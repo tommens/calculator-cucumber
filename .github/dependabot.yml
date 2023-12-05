@@ -14,10 +14,15 @@ updates:
     commit-message:
       # Prefix all commit messages with "maven: "
       prefix: "maven"
+    # Allow up to 10 open pull requests for maven dependencies (default is 5)
+    open-pull-requests-limit: 10
+
       
-  # Maintain dependencies for Maven
+  # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     # Workflow files stored in the default location of `.github/workflows`
     directory: "/"
     schedule:
       interval: "weekly"
+    # Allow up to 10 open pull requests for GHA dependencies (default is 5)
+    open-pull-requests-limit: 10
