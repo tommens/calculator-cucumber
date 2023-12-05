@@ -11,6 +11,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    # Prefix all commit messages with "maven: "
+    prefix: "maven"
       
   # Maintain dependencies for Maven
   - package-ecosystem: "github-actions"
