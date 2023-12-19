@@ -10,6 +10,12 @@ import visitor.Evaluator;
  */
 public class Calculator {
 
+    /**
+     * Default constructor of the class.
+     * Does nothing since the class does not have any variables that need to be initialised.
+     */
+    public Calculator() {}
+
     /*
      For the moment the calculator only contains a print method and an eval method
      It would be useful to complete this with a read method, so that we would be able
