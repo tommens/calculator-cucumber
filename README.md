@@ -9,7 +9,7 @@ Test coverage: ![Coverage](.github/badges/jacoco.svg)
 
 ## About
 
-This repository contains Java 17 code for computing arithmetic expressions. It is deliberately incomplete as it serves to be the basis of all kinds of extensions, such as a more sophisticated Calculator application. The code was written to be used for educational purposes at the University of Mons, Belgium in the context of the software evolution course.
+This repository contains Java code for computing arithmetic expressions. It is deliberately incomplete as it serves to be the basis of all kinds of extensions, such as a more sophisticated Calculator application. The code was written to be used for educational purposes at the University of Mons, Belgium in the context of the software evolution course.
 
 
 ### Unit testing and BDD
@@ -21,12 +21,12 @@ The BDD scenarios are specified as .feature files in the src\test\resources dire
 
 ### Prerequisites
 
-*  You will need to have a running version of Java 17 on your machine in order to be able to compile and execute this code.
-*  You will also need to have a running version of Maven, since this project is accompanied by a pom.xml file so that it can be installed, compiled, tested and run using Maven.
+*  You will need to have a running version of Java 21 on your machine in order to be able to compile and execute this code, although it is also backward compatible with earlier versions of Java.
+*  You will need to have a running version of Maven, since this project is accompanied by a pom.xml file so that it can be installed, compiled, tested and run using Maven.
 
 ### Installation and testing instructions
 
-*  Upon first use of the code in this repository, you will need to run "mvn install" to ensure that all required project dependencies (e.g. for Java, JUnit, Cucumber, and Maven) will be downloaded and installed locally.
+*  Upon first use of the code in this repository, you will need to run "mvn clean install" to ensure that all required project dependencies (e.g. for Java, JUnit, Cucumber, and Maven) will be downloaded and installed locally.
 *  Assuming you have a sufficiently recent version of Maven installed (the required versions are specified as properties in the POM file), you can compile the source code using "mvn compile"
 *  Once the code is compiled, you can execute the main class of the Java code using "mvn exec:java" 
 *  The tests and BDD scenarios are executable with Maven using "mvn test"
