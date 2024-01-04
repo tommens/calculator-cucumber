@@ -1,4 +1,4 @@
-name: Java CodeQL security analysis
+name: CodeQL security analysis for Java
 
 on:
   push:
@@ -49,8 +49,9 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
         
-    - name: Build with Maven (including running of all tests)
-      run: mvn -B package --file pom.xml
+    - name: Compile Java source code with Maven
+      run: mvn -B compile --file pom.xml
+      # unit tests are not run as part of this workflow, since they are not required for the CodeQL security analysis
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
