@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: build and analyse
+    name: compiling and security scanning
     runs-on: ubuntu-latest  
     # Runner size impacts CodeQL analysis time. To learn more, please see:
     #   - https://gh.io/recommended-hardware-resources-for-running-codeql
