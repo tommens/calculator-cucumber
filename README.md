@@ -5,7 +5,7 @@ Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/acti
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
 
-CodeQL analysis: [CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
+CodeQL analysis: ![CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
 
 # Calculating arithmetic expressions
 
