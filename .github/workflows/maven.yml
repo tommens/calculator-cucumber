@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: build and analyse
+    name: building, testing and quality analysis
     runs-on: ubuntu-latest
 
     steps:
