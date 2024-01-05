@@ -12,11 +12,6 @@ jobs:
   build:
     name: compiling and security scanning
     runs-on: ubuntu-latest  
-    # Runner size impacts CodeQL analysis time. To learn more, please see:
-    #   - https://gh.io/recommended-hardware-resources-for-running-codeql
-    #   - https://gh.io/supported-runners-and-hardware-resources
-    #   - https://gh.io/using-larger-runners
-    # Consider using larger runners for possible analysis time improvements.
     timeout-minutes: 360
     permissions:
       actions: read
@@ -38,16 +33,6 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: 'java-kotlin'
-        # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
-        # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-        #
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
-        #
-        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-        # queries: security-extended,security-and-quality
         
     - name: Compile Java source code with Maven
       run: mvn -B compile --file pom.xml
