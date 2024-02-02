@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: building, testing and quality analysis
-    runs-on: ubuntu-lates
+    runs-on: [ubuntu-latest,ubuntu-latest,ubuntu-lates]
 
     steps:
     - id: s1
