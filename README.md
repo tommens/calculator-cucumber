@@ -1,12 +1,15 @@
 [![](https://img.shields.io/github/v/release/tommens/calculator-cucumber?label=Latest%20Release)](https://github.com/tommens/calculator-cucumber/releases/latest)
 
 Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
-![CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6856a0f94d25446ca346cbc15a701d43)](https://www.codacy.com/gh/tommens/calculator-cucumber/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tommens/calculator-cucumber&amp;utm_campaign=Badge_Grade)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tommens_calculator-cucumber&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tommens_calculator-cucumber)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
+
+Security analysis:
+![CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/{owner}/{repo}/badge)](https://securityscorecards.dev/viewer/?uri=github.com/{owner}/{repo})
 
 
 # Calculating arithmetic expressions
