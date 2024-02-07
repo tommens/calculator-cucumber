@@ -16,6 +16,10 @@ jobs:
     name: building, testing and quality analysis
     runs-on: ubuntu-latest
 
+    permissions:
+      # need write permissions for publishing the test report
+      checks: write
+
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
@@ -40,7 +44,6 @@ jobs:
       
     - id: s4
       name: Publish Test Report
-      permissions: write-all
       if: ${{ always() }}
       uses: scacap/action-surefire-report@687f107f48aa55aff279cc5ce598fd9860871a81 # v1.7.3
       
