@@ -64,8 +64,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Licence
 
-This code is licensed as CC BY-SA 4.0 (Creative Commons Attribution-ShareAlike 4.0 International)
-https://creativecommons.org/licenses/by-sa/4.0/
+
+[This code is available under the GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/) (GPLv3)
 
 ## Acknowledgments
 
