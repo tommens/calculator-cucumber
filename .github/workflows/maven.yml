@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  
+
 jobs:
   build:
     name: building, testing and quality analysis
@@ -26,11 +26,11 @@ jobs:
       with:
         egress-policy: audit
 
-    - id: s1
+    - id: checkout
       name: checkout repository
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       
-    - id: s2
+    - id: setupjava
       name: Set up with Java 21
       uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
       with:
@@ -38,11 +38,11 @@ jobs:
         java-version: 21
         cache: 'maven'
         
-    - id: s3
+    - id: mvn
       name: Build with Maven (including running all tests)
       run: mvn -B package --file pom.xml
       
-    - id: s4
+    - id: testreport
       name: Publish Test Report
       if: ${{ always() }}
       uses: scacap/action-surefire-report@687f107f48aa55aff279cc5ce598fd9860871a81 # v1.7.3
