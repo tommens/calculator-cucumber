@@ -18,13 +18,13 @@ jobs:
 
     steps:
     - id: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
 
     - id: gensbom
-      uses: advanced-security/generate-sbom-action@v1
+      uses: advanced-security/generate-sbom-action@ded26bf491ccc4b8c43f6c7ac2e1ff35e960c0d0 # v1
 
     - id: upload
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
       with:
         name: sbom
         path: ${{ steps.gensbom.outputs.fileName }}
