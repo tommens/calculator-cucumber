@@ -37,7 +37,6 @@ jobs:
         distribution: 'temurin'
         java-version: 21
         cache: 'maven'
-        4: 21
         
     - id: mvn
       name: Build with Maven (including running all tests)
