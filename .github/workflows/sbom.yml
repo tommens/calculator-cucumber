@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - id: checkout
-      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+      uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b # v4.1.5
 
     - id: gensbom
       uses: advanced-security/generate-sbom-action@ded26bf491ccc4b8c43f6c7ac2e1ff35e960c0d0 # v1
