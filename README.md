@@ -1,4 +1,5 @@
 [![](https://img.shields.io/github/v/release/tommens/calculator-cucumber?label=Latest%20Release)](https://github.com/tommens/calculator-cucumber/releases/latest)
+[![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/tommens/calculator-cucumber/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/tommens/calculator-cucumber)
 
 Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6856a0f94d25446ca346cbc15a701d43)](https://www.codacy.com/gh/tommens/calculator-cucumber/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tommens/calculator-cucumber&amp;utm_campaign=Badge_Grade)
