@@ -8,6 +8,7 @@ Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/acti
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
 
+
 Security analysis:
 ![CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tommens/calculator-cucumber/badge)](https://securityscorecards.dev/viewer/?uri=github.com/tommens/calculator-cucumber)
