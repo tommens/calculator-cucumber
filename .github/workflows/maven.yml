@@ -19,6 +19,7 @@ jobs:
     permissions:
       # need write permissions for publishing the test report
       checks: write
+      contents: write
 
     steps:
     - name: Harden Runner
