@@ -51,6 +51,7 @@ jobs:
       checks: write
       contents: write
 
+    steps:
     - id: mvntest
       name: Test with Maven (compile and run tests)
       run: mvn -B test --file pom.xml
@@ -69,7 +70,8 @@ jobs:
       # need write permissions for publishing the test report
       checks: write
       contents: write
-    
+
+    steps:
     - name: Generate JaCoCo Badge
       id: jacoco
       uses: cicirello/jacoco-badge-generator@f33476a5a3fd5a4f77cb5eef2ebe728c1dd5b921 # v2.11.0
