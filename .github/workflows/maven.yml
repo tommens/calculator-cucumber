@@ -16,9 +16,14 @@ permissions:
 
 jobs:
   build:
-    name: compiling
+    name: compiling, testing and test coverage analysis
     runs-on: ubuntu-latest
 
+    permissions:
+      # need write permissions for publishing the test report
+      checks: write
+      contents: write
+      
     steps:
     - name: Harden Runner
       uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
@@ -41,17 +46,6 @@ jobs:
       name: Compile code with Maven
       run: mvn -B compile --file pom.xml
 
-  test:
-    name: testing
-    needs: build
-    runs-on: ubuntu-latest
-
-    permissions:
-      # need write permissions for publishing the test report
-      checks: write
-      contents: write
-
-    steps:
     - id: mvntest
       name: Test with Maven (compile and run tests)
       run: mvn -B test --file pom.xml
@@ -61,17 +55,6 @@ jobs:
       if: ${{ always() }}
       uses: scacap/action-surefire-report@a2911bd1a4412ec18dde2d93b1758b3e56d2a880 # v1.8.0
   
-  testcoverage:
-    name: test coverage analysis
-    needs: test
-    runs-on: ubuntu-latest
-
-    permissions:
-      # need write permissions for publishing the test report
-      checks: write
-      contents: write
-
-    steps:
     - name: Generate JaCoCo Badge
       id: jacoco
       uses: cicirello/jacoco-badge-generator@f33476a5a3fd5a4f77cb5eef2ebe728c1dd5b921 # v2.11.0
