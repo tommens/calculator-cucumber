@@ -16,13 +16,8 @@ permissions:
 
 jobs:
   build:
-    name: building, testing and quality analysis
+    name: compiling
     runs-on: ubuntu-latest
-
-    permissions:
-      # need write permissions for publishing the test report
-      checks: write
-      contents: write
 
     steps:
     - name: Harden Runner
@@ -42,15 +37,39 @@ jobs:
         java-version: 21
         cache: 'maven'
         
-    - id: mvn
-      name: Build with Maven (including running all tests)
-      run: mvn -B package --file pom.xml
-      
+    - id: mvncompile
+      name: Compile code with Maven
+      run: mvn -B compile --file pom.xml
+
+  test:
+    name: testing
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      # need write permissions for publishing the test report
+      checks: write
+      contents: write
+
+    - id: mvntest
+      name: Test with Maven (compile and run tests)
+      run: mvn -B test --file pom.xml
+
     - id: testreport
       name: Publish Test Report
       if: ${{ always() }}
       uses: scacap/action-surefire-report@a2911bd1a4412ec18dde2d93b1758b3e56d2a880 # v1.8.0
-      
+  
+  testcoverage:
+    name: test coverage analysis
+    needs: test
+    runs-on: ubuntu-latest
+
+    permissions:
+      # need write permissions for publishing the test report
+      checks: write
+      contents: write
+    
     - name: Generate JaCoCo Badge
       id: jacoco
       uses: cicirello/jacoco-badge-generator@f33476a5a3fd5a4f77cb5eef2ebe728c1dd5b921 # v2.11.0
