@@ -45,6 +45,45 @@ of the software evolution course.
   accompanied by a pom.xml file so that it can be installed, compiled, tested
   and run using Maven.
 
+### Development Environments
+
+There are several ways to set up your development environment. You can use
+DevContainer, Nix, or set up your environment manually.
+
+#### Using DevContainer (Container based)
+
+[DevContainer](https://containers.dev/) is a feature available for
+[VSCode](https://code.visualstudio.com/) and
+[Jetbrains](https://www.jetbrains.com/) IDEs that allows you to develop
+seamlessly in a containerised environment. This approach will setup your
+development environment using containers.
+
+1. Ensure you have Docker installed on your machine. It might work with Podman
+   too, but it is not tested yet.
+2. Install the DevContainer extension
+   1. For VSCode:
+      [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+      ([documentation](https://code.visualstudio.com/docs/devcontainers/containers))
+   2. For Jetbrains: nothing to do, it is supported by default
+      ([documentation](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html))
+3. Open the project in your IDE, and you should see a notification to reopen the
+   project in a container, click on it.
+4. Once the project is reopened in the container, you need to wait a bit for the
+   container to build and start, and then you can start developing, all the
+   tools and dependencies are already installed in the container.
+
+#### Using Nix
+
+This approach will setup a development environment using the
+[Nix](https://nixos.org) package manager. Unlike DevContainer, no
+containerisation is used, and the development environment will be installed on
+your local machine, in total isolation from your current system packages.
+
+1. Install Nix package manager: `curl -L https://nixos.org/nix/install | sh`
+2. Go to the project root folder
+3. Run `nix develop` to enter the development environment
+4. Once you are done, you can exit the environment by running `exit`
+
 ### Installation and testing instructions
 
 - Upon first use of the code in this repository, you will need to run "mvn clean
