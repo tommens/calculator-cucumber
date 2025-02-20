@@ -61,10 +61,10 @@ development environment using containers.
 1. Ensure you have Docker installed on your machine. It might work with Podman
    too, but it is not tested yet.
 2. Install the DevContainer extension
-   1. For VSCode:
+   1. For VS Code:
       [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
       ([documentation](https://code.visualstudio.com/docs/devcontainers/containers))
-   2. For Jetbrains: nothing to do, it is supported by default
+   2. For IntelliJ IDEA: nothing to do, it is supported by default
       ([documentation](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html))
 3. Open the project in your IDE, and you should see a notification to reopen the
    project in a container, click on it.
